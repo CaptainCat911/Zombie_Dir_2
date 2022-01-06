@@ -15,6 +15,7 @@ public class QuestRadio : MonoBehaviour
     public void Start()
     {
         dialogueTrig = GetComponent<DialogueTrigger>();
+        GameManager.instance.mission = "Найдите радио !";
     }
 
 
@@ -39,7 +40,8 @@ public class QuestRadio : MonoBehaviour
 
                 // написать цель и 3 состовляющие
 
-                questStart = true;                
+                questStart = true;
+                GameManager.instance.mission = " Найдите 3 предмета !";
             }
 
 
@@ -58,6 +60,7 @@ public class QuestRadio : MonoBehaviour
                 // написать цель и таймер 
 
                 questCompl = true;
+                GameManager.instance.mission = " Продержитесь : таймер !";
             }
         }        
     }

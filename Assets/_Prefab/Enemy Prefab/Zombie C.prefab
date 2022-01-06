@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 632260735}
   m_Layer: 0
   m_Name: Upper chest
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2170,7 +2170,7 @@ GameObject:
   - component: {fileID: 361542548}
   m_Layer: 0
   m_Name: Zombie C
-  m_TagString: Fighter
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2262,12 +2262,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
-  damage:
-    baseValue: 0
-  armor:
-    baseValue: 0
-  pushForce:
-    baseValue: 0
   pushRecoverySpeed: 0.2
   immuneTime: 0
   ySpeed: 7

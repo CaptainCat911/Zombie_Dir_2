@@ -7,6 +7,9 @@ TagManager:
   - Fighter
   - NPC
   - Arm
+  - SpawnSphere
+  - EnemySpawner
+  - Enemy
   layers:
   - Default
   - TransparentFX

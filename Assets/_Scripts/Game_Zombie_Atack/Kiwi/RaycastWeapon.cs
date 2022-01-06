@@ -49,6 +49,8 @@ public class RaycastWeapon : MonoBehaviour
     public TrailRenderer tracerEffect;  // трасер
     public Light lightEffect;     //вспышка света
 
+    LayerMask layerIgnore = 3;      // Слой Ignore Raycast, в списке второй почему-то
+
     RaycastHit hit;
     Ray ray;
     Quaternion qua1;
@@ -119,7 +121,7 @@ public class RaycastWeapon : MonoBehaviour
 
     public void AttackRange()
     {
-        if (ammoCount <= 0)
+        if (ammoCount <= 0)         // Если нет патронов
         {
             return;
         }
@@ -147,9 +149,9 @@ public class RaycastWeapon : MonoBehaviour
 
 
 
-        //----- Raycast стрельба и Эффекты -----\\        
-        float dist = Vector3.Distance(PROJECTILE_ANCHOR.position, player.pointer.position);         // ТУТ ПЕРЕДЕЛАТЬ !
-        if (dist > 2)
+            //----- Raycast стрельба и Эффекты -----\\        
+        float dist = Vector3.Distance(PROJECTILE_ANCHOR.position, player.pointer.position);         // ТУТ ПЕРЕДЕЛАТЬ !                                                                                                    
+        if (dist > 2)                                                                               // (меняет угол, если прицел близко)
         {
               // Поворачиваем якорь стрельбы, чтобы точно попадать рейкастами
             Vector3 lookDir = player.pointer.position - PROJECTILE_ANCHOR.position;
@@ -184,7 +186,7 @@ public class RaycastWeapon : MonoBehaviour
         ray.origin = PROJECTILE_ANCHOR.position;        // луч из позиции якоря
         ray.direction = PROJECTILE_ANCHOR.forward;      // луч с направлением вперед
         //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerIgnore))
         {
             //Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);
 

@@ -162,6 +162,7 @@ public class Enemy_old : Mover
 
     protected override void Death()
     {
+        GameManager.instance.enemyCount -= 1;
         anim.SetTrigger("Death");
         capsuleCollider.enabled = false;       
         capsuleColliderLeftARm.enabled = false;
@@ -177,5 +178,11 @@ public class Enemy_old : Mover
     public void NavMeshDisable()
     {
         agent.enabled = false;
+    }
+
+    public void Kill()
+    {
+        GameManager.instance.enemyCount -= 1;
+        Destroy(gameObject);
     }
 }

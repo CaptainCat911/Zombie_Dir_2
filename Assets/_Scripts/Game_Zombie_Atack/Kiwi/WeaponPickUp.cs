@@ -6,17 +6,20 @@ public class WeaponPickUp : MonoBehaviour
 
     public void OnTriggerStay(Collider collision)
     {
-        //Debug.Log("Trig!");
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-
-            ActiveWeapon activeWeapon = collision.gameObject.GetComponent<ActiveWeapon>();
-            if (activeWeapon)
+        if (collision.name == "Player_Soldier")
+        {      
+            //Debug.Log("Trig!");
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                RaycastWeapon newWeapon = Instantiate(weaponPrefab);
-                activeWeapon.GetWeaponUp(newWeapon);
+
+                ActiveWeapon activeWeapon = collision.gameObject.GetComponent<ActiveWeapon>();
+                if (activeWeapon)
+                {
+                    RaycastWeapon newWeapon = Instantiate(weaponPrefab);
+                    activeWeapon.GetWeaponUp(newWeapon);
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
     }
 }

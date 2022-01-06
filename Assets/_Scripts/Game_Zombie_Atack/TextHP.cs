@@ -8,6 +8,7 @@ public class TextHP : MonoBehaviour
     public Text allBulletsText;
     public Text currentBulletsText;
     public Text enemyCountText;
+    public Text currentMissionText;
     public ActiveWeapon activeWeapon;
     RaycastWeapon weapon;
     int enemyCount;
@@ -36,7 +37,10 @@ public class TextHP : MonoBehaviour
 
         // Всего зомбей
         enemyCount = GameManager.instance.enemyCount;
-        enemyCountText.text = enemyCount.ToString("0"); 
+        enemyCountText.text = enemyCount.ToString("0");
+
+        // Текущая миссия
+        currentMissionText.text = GameManager.instance.mission;
 
     }
 }

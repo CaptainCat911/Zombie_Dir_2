@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     // Диалог
     public DialogueTrigger dialogueTrig;
 
+    // Текущая миссия
+    public string mission;
+
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
