@@ -741,5 +741,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7bb2742c1aed5744a10cc50c944e3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 5718410196017201910, guid: 2bc1f7ab3a2ca184a92e25fb14851cad,
+  weaponPrefab: {fileID: 7143760499737723971, guid: bf9493f624005694aba5f4319a75317b,
     type: 3}
