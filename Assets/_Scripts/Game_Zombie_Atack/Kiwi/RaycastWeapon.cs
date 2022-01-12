@@ -62,28 +62,38 @@ public class RaycastWeapon : MonoBehaviour
     {
         player = GameManager.instance.player;
         playerAmmo = GameManager.instance.player.GetComponent<AmmoPack>();        
-        TakeAmmo();     // Берем патроны из АммоПак игрока
-        activeWeapon = GetComponentInParent<ActiveWeapon>();
-        
+        TakeAmmo();                                                            // Берем патроны из АммоПак игрока
+        activeWeapon = GetComponentInParent<ActiveWeapon>();        
     }
+
 
     public void Update()
     {
         
     }
 
+
     public void TakeAmmo()
     {
         switch (ammoType)
         {
-            case "9 mm":
-                allAmmo = playerAmmo.allAmmo_9mm;
+            case "9":
+                allAmmo = playerAmmo.allAmmo_9;
                 break;
-            case "7.62":
-                allAmmo = playerAmmo.allAmmo_762;
+            case "0.357":
+                allAmmo = playerAmmo.allAmmo_0_357;
+                break;
+            case "5.56":
+                allAmmo = playerAmmo.allAmmo_5_56;
                 break;
             case "0.12":
-                allAmmo = playerAmmo.allAmmo_012;
+                allAmmo = playerAmmo.allAmmo_0_12;
+                break;
+            case "7.62":
+                allAmmo = playerAmmo.allAmmo_7_62;
+                break;
+            case "0.50":
+                allAmmo = playerAmmo.allAmmo_0_50;
                 break;
         }
     }

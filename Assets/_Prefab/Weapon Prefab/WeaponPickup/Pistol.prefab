@@ -413,7 +413,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6939134270624553092}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -422,7 +422,7 @@ Transform:
   - {fileID: 1986963898412699702}
   m_Father: {fileID: 9176031231147728152}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &8454294929343325994
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,5 +741,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7bb2742c1aed5744a10cc50c944e3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 5718410196017201910, guid: 2bc1f7ab3a2ca184a92e25fb14851cad,
+  weaponPrefab: {fileID: 7143760499737723971, guid: bf9493f624005694aba5f4319a75317b,
     type: 3}

@@ -11,8 +11,9 @@ public class ActiveWeapon : MonoBehaviour
     public enum WeaponSlot
     {
         Pistol = 0,
-        Ak47 = 1,
-        Shotgun = 2
+        Rifle = 1,
+        Heavy = 2,
+        Melee = 3
     }
 
     public Rig animLayer;   // ссылка на риг рук (общий)
@@ -20,8 +21,10 @@ public class ActiveWeapon : MonoBehaviour
     //float animDuration = 0.3f;
 
     RaycastWeapon[] equiped_weapons = new RaycastWeapon[3];   // массив оружий 
-    public List<RaycastWeapon> listWeaponPistol;    // массив винтовок
-    public List<RaycastWeapon> listWeaponRifle;    // массив винтовок
+    public List<RaycastWeapon> listWeaponPistol;    // список пистолетов 
+    public List<RaycastWeapon> listWeaponRifle;    // список винтовок
+    public List<RaycastWeapon> listWeaponHeavy;    // список тяжелого оружия
+    public List<RaycastWeapon> listWeaponMelee;    // список ближнего оружия
 
 
     int activeWeaponIndex;
@@ -36,6 +39,8 @@ public class ActiveWeapon : MonoBehaviour
 
     int iPistol = -1;
     int iRifle = -1;
+    int iHeavy = -1;
+    int iMelee = -1;
 
 
     void Start()
@@ -125,7 +130,7 @@ public class ActiveWeapon : MonoBehaviour
             if (listWeaponPistol.Count > 1)         // Если больше 1-го пистолета
             {
                 listWeaponPistol[iPistol].gameObject.SetActive(false);      // Прячем действующее оружие 
-                if (activeWeaponIndex == 0)     // Если актиновое оружие не пистолет
+                if (activeWeaponIndex == 0)     // Если актиновое оружие пистолет
                     iPistol++;                  // Добавляем счетчик
                 if (iPistol >= listWeaponPistol.Count)      // Если пистолетов 2 - сбрасываем счетчик
                 {
@@ -145,22 +150,35 @@ public class ActiveWeapon : MonoBehaviour
                 listWeaponRifle[iRifle].gameObject.SetActive(false);
                 if (activeWeaponIndex == 1)
                     iRifle++;
-                if (iRifle >= listWeaponRifle.Count)                                           
+                if (iRifle >= listWeaponRifle.Count)
                 {
                     iRifle = 0;
-                }                
+                }
                 listWeaponRifle[iRifle].gameObject.SetActive(true);
                 Equip(listWeaponRifle[iRifle]);
             }
             if (listWeaponRifle.Count == 1)
                 Equip(listWeaponRifle[0]);
-            
+
             //Debug.Log(rifleCount);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SetActiveWeapon(WeaponSlot.Shotgun);
+            if (listWeaponHeavy.Count > 1)
+            {
+                listWeaponHeavy[iHeavy].gameObject.SetActive(false);
+                if (activeWeaponIndex == 2)
+                    iHeavy++;
+                if (iHeavy >= listWeaponHeavy.Count)
+                {
+                    iHeavy = 0;
+                }
+                listWeaponHeavy[iHeavy].gameObject.SetActive(true);
+                Equip(listWeaponHeavy[iHeavy]);
+            }
+            if (listWeaponHeavy.Count == 1)
+                Equip(listWeaponHeavy[0]);
         }
     }
 
@@ -180,27 +198,34 @@ public class ActiveWeapon : MonoBehaviour
             if (listWeaponPistol.Count >= 2)
                 listWeaponPistol[iPistol].gameObject.SetActive(false);
             iPistol++;
-            Equip(newWeapon);
-            
+            Equip(newWeapon);            
         }
 
-        if (newWeapon.indexNumberWeapon == 2)
-        {
-            
+        if (newWeapon.indexNumberWeapon == 2)       // Винтовка
+        {            
             listWeaponRifle.Add(newWeapon);
             if (listWeaponRifle.Count >= 2)
                 listWeaponRifle[iRifle].gameObject.SetActive(false);
             iRifle++;
             Equip(newWeapon);
         }
-        
+
+        if (newWeapon.indexNumberWeapon == 3)       // Тяжелое
+        {
+            listWeaponHeavy.Add(newWeapon);
+            if (listWeaponHeavy.Count >= 2)
+                listWeaponHeavy[iHeavy].gameObject.SetActive(false);
+            iHeavy++;
+            Equip(newWeapon);
+        }
     }
 
 
     public void Equip(RaycastWeapon newWeapon)
-    {        
-        int weaponSlotIndex = (int)newWeapon.weaponSlot;    // weaponSlot - это основное, дополнительное        
-        var weapon = GetWeapon(weaponSlotIndex);    //  получаем оружие с нашим индексом оружия, если такой тип оружия есть, уничтожаем его
+    {
+        //Debug.Log("Equip !");
+        int weaponSlotIndex = (int)newWeapon.weaponSlot;    // weaponSlot - это основное, дополнительное, тяжелое, мили 
+        var weapon = GetWeapon(weaponSlotIndex);    //  получаем оружие с нашим индексом оружия
 
 /*        if (weapon)
         {
@@ -265,9 +290,9 @@ public class ActiveWeapon : MonoBehaviour
     }
 
     IEnumerator HolsterWeapon (int index)       
-    {
-        isHolsted = true;
+    {        
         //Debug.Log("Holsted !");
+        isHolsted = true;
         var weapon = GetWeapon(index);
         if (weapon)
         {
@@ -284,7 +309,8 @@ public class ActiveWeapon : MonoBehaviour
     }
 
     IEnumerator ActivateWeapon(int index)
-    {   
+    {
+        Debug.Log("Active !");
         //isHolsted = true;
         var weapon = GetWeapon(index);
         if (weapon)
