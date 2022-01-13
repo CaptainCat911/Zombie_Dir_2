@@ -52098,7 +52098,7 @@ MonoBehaviour:
   indexNumberWeapon: 3
   cooldown: 0.1
   rayDamage: 50
-  allAmmo: 200
+  allAmmo: 0
   clipSize: 100
   ammoCount: 100
   PROJECTILE_ANCHOR: {fileID: 561328328154757415}

@@ -48014,7 +48014,7 @@ GameObject:
   - component: {fileID: 5718410196017201911}
   - component: {fileID: 5718410196017201910}
   m_Layer: 0
-  m_Name: Shotgun_Prefab
+  m_Name: Rifle_Shotgun_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48057,7 +48057,7 @@ MonoBehaviour:
   indexNumberWeapon: 2
   cooldown: 1
   rayDamage: 50
-  allAmmo: 26
+  allAmmo: 0
   clipSize: 12
   ammoCount: 12
   PROJECTILE_ANCHOR: {fileID: 561328328154757415}

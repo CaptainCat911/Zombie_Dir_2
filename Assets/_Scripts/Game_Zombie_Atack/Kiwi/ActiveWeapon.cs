@@ -18,6 +18,7 @@ public class ActiveWeapon : MonoBehaviour
 
     public Rig animLayer;   // ссылка на риг рук (общий)
     public Animator rigController;      // ссылка на аниматор риг
+    public Animator playerAnim;
     //float animDuration = 0.3f;
 
     RaycastWeapon[] equiped_weapons = new RaycastWeapon[3];   // массив оружий 
@@ -31,6 +32,7 @@ public class ActiveWeapon : MonoBehaviour
     public bool isHolsted = false;      // оружие спрятано
     public bool attackActive = false;       // активация атаки
     public bool reloaring = false;      // во время перезарядки нельзя сменить оружие или убрать его (потом исправить)
+    public bool switching = false;
 
 
     public Transform[] weaponSlots;     // слоты под оружие
@@ -50,6 +52,8 @@ public class ActiveWeapon : MonoBehaviour
             Equip(existingWeapon);
 
         listWeaponRifle = new List<RaycastWeapon>();
+
+        playerAnim = GetComponent<Animator>();
     }
 
 
@@ -155,6 +159,7 @@ public class ActiveWeapon : MonoBehaviour
                     iRifle = 0;
                 }
                 listWeaponRifle[iRifle].gameObject.SetActive(true);
+                //StartCoroutine(HolsterWeapon_2());
                 Equip(listWeaponRifle[iRifle]);
             }
             if (listWeaponRifle.Count == 1)
@@ -224,6 +229,7 @@ public class ActiveWeapon : MonoBehaviour
     public void Equip(RaycastWeapon newWeapon)
     {
         //Debug.Log("Equip !");
+        switching = true;
         int weaponSlotIndex = (int)newWeapon.weaponSlot;    // weaponSlot - это основное, дополнительное, тяжелое, мили 
         var weapon = GetWeapon(weaponSlotIndex);    //  получаем оружие с нашим индексом оружия
 
@@ -284,7 +290,7 @@ public class ActiveWeapon : MonoBehaviour
     IEnumerator SwitchWeapon(int holsterIndex, int activateIndex)
     {
         yield return StartCoroutine(HolsterWeapon(holsterIndex));
-        //yield return new WaitForSeconds(2);
+        //yield return new WaitForSeconds(1);
         yield return StartCoroutine(ActivateWeapon(activateIndex));
         activeWeaponIndex = activateIndex;
     }
@@ -293,14 +299,17 @@ public class ActiveWeapon : MonoBehaviour
     {        
         //Debug.Log("Holsted !");
         isHolsted = true;
-        var weapon = GetWeapon(index);
-        if (weapon)
+        RaycastWeapon weapon = GetWeapon(index);
+        if (true)
         {
+            //Debug.Log("Holsted2 !");
+            //weapon.gameObject.SetActive(false);
             rigController.SetBool("holster_weapon", true);
+            //playerAnim.SetTrigger("holster_trig");
             do
             {
                 yield return new WaitForEndOfFrame();
-                //yield return new WaitForSeconds(0.1f);      // ПЕРЕДЕЛАТЬ !
+                yield return new WaitForSeconds(0.2f);      // ПЕРЕДЕЛАТЬ !
                 //Debug.Log("Frame !");
                 //Debug.Log(rigController.GetCurrentAnimatorStateInfo(0).normalizedTime);
             }
@@ -308,11 +317,13 @@ public class ActiveWeapon : MonoBehaviour
         }
     }
 
+
+
     IEnumerator ActivateWeapon(int index)
     {
-        Debug.Log("Active !");
+        //Debug.Log("Active !");
         //isHolsted = true;
-        var weapon = GetWeapon(index);
+        RaycastWeapon weapon = GetWeapon(index);
         if (weapon)
         {
             rigController.SetBool("holster_weapon", false);
@@ -320,11 +331,12 @@ public class ActiveWeapon : MonoBehaviour
             do
             {
                 yield return new WaitForEndOfFrame();
-                //yield return new WaitForSeconds(0.1f);      // ПЕРЕДЕЛАТЬ !
+                yield return new WaitForSeconds(0.1f);      // ПЕРЕДЕЛАТЬ !
             }
             while (false);     // НЕ РАБОТАЕТ !
         }
         weapon.TakeAmmo();
         isHolsted = false;
+        switching = true;
     }
 }

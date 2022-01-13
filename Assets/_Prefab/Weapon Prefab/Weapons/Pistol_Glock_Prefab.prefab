@@ -38194,7 +38194,7 @@ GameObject:
   - component: {fileID: 7143760499737723970}
   - component: {fileID: 7143760499737723971}
   m_Layer: 0
-  m_Name: Pistol_Prefab
+  m_Name: Pistol_Glock_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38233,11 +38233,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: pistol
   weaponSlot: 0
-  ammoType: 9 mm
+  ammoType: 9
   indexNumberWeapon: 1
   cooldown: 0.2
   rayDamage: 21
-  allAmmo: 30
+  allAmmo: 0
   clipSize: 20
   ammoCount: 20
   PROJECTILE_ANCHOR: {fileID: 7143760499140954990}

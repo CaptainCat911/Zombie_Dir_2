@@ -9,7 +9,7 @@ public class ReloadWeapon : MonoBehaviour
     public ActiveWeapon activeWeapon;
     public Transform leftHand;
 
-    GameObject magazineHand; // временный магазин в руке при перезарядке
+    //GameObject magazineHand; // временный магазин в руке при перезарядке
 
 
     void Start()
@@ -22,17 +22,31 @@ public class ReloadWeapon : MonoBehaviour
     {
         RaycastWeapon weapon = activeWeapon.GetActiveWeapon();
         if (weapon && weapon.allAmmo > 0)       // перезаряжаемся только если есть оружие и всего патронов больше 0
-        {
-          
-            if (Input.GetKeyDown(KeyCode.R) || weapon.ammoCount <= 0)
+        {          
+            if (Input.GetKeyDown(KeyCode.R) && (weapon.ammoCount != weapon.clipSize))
             {
                 rigController.SetTrigger("reload_weapon");
+            }            
+            if ( weapon.ammoCount <= 0)
+            {
+                StartCoroutine(ReloadDelay());                
             }           
         }
     }
 
 
-    void OnAnimationEvent(string eventName)
+
+    IEnumerator ReloadDelay()
+    {        
+        yield return new WaitForSeconds(0.75f);
+        RaycastWeapon weapon = activeWeapon.GetActiveWeapon();
+        if (weapon.ammoCount <= 0 && !activeWeapon.isHolsted)
+            rigController.SetTrigger("reload_weapon");
+    }
+
+
+
+        void OnAnimationEvent(string eventName)
     {
         //Debug.Log(eventName);
         switch (eventName)
@@ -65,27 +79,27 @@ public class ReloadWeapon : MonoBehaviour
     void DetouchMagazine()
     {
         
-        RaycastWeapon weapon = activeWeapon.GetActiveWeapon();      // ссылка на активное оружие
-        magazineHand = Instantiate(weapon.magazine, leftHand, true);    // создаём новый временный магазин с родителем левая рука
-        weapon.magazine.SetActive(false);   // прячем оригинальный магазин на оружии
+        //RaycastWeapon weapon = activeWeapon.GetActiveWeapon();      // ссылка на активное оружие
+        //magazineHand = Instantiate(weapon.magazine, leftHand, true);    // создаём новый временный магазин с родителем левая рука
+        //weapon.magazine.SetActive(false);   // прячем оригинальный магазин на оружии
     }
             
 
     void DropMagazine()
     {
-        GameObject droppedMagazine = Instantiate(magazineHand, magazineHand.transform.position, magazineHand.transform.rotation);
+/*        GameObject droppedMagazine = Instantiate(magazineHand, magazineHand.transform.position, magazineHand.transform.rotation);
         droppedMagazine.AddComponent<Rigidbody>();
         droppedMagazine.AddComponent<BoxCollider>();
         droppedMagazine.GetComponent<BoxCollider>().size = new Vector3(0.001f, 0.002f, 0.001f);     // меш обоймы увеличен в 100 раз
         Destroy(droppedMagazine, 30);   // уничтожаем упавший магазин через 30 сек
-        magazineHand.SetActive(false);
+        magazineHand.SetActive(false);*/
     }
 
 
 
     void RefillMagazine()
     {
-        magazineHand.SetActive(true);
+        //magazineHand.SetActive(true);
     }
 
 
@@ -93,8 +107,8 @@ public class ReloadWeapon : MonoBehaviour
     void AttachMagazine()
     {
         RaycastWeapon weapon = activeWeapon.GetActiveWeapon();
-        weapon.magazine.SetActive(true);    // возвращаем магазин на оружии активным
-        Destroy(magazineHand);
+/*        weapon.magazine.SetActive(true);    // возвращаем магазин на оружии активным
+        Destroy(magazineHand);*/
 
             // Система патронов
         int ammoTaken = weapon.clipSize - weapon.ammoCount;
