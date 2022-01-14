@@ -48277,18 +48277,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d7e24cdd6c10547ba97b9466bcf8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: heavy
+  weaponName: sniper
   weaponSlot: 2
   ammoType: 0.50
   indexNumberWeapon: 3
-  cooldown: 1
+  cooldown: 0.5
   rayDamage: 200
   allAmmo: 0
-  clipSize: 7
-  ammoCount: 7
+  clipSize: 10
+  ammoCount: 10
   PROJECTILE_ANCHOR: {fileID: 561328328154757415}
   EFFECT_ANCHOR: {fileID: 5998230859401977317}
-  magazine: {fileID: 0}
   muzzleFlash:
   - {fileID: 4473978892112714316}
   - {fileID: 4473978892112714314}

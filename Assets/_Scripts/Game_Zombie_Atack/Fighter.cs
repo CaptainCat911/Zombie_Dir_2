@@ -29,9 +29,9 @@ public class Fighter : MonoBehaviour
     // All fighters can ReceiveDamage / Die
     protected virtual void ReceiveDamage(Damage dmg)
     {
-        if (Time.time - lastImmune > immuneTime)
+ /*       if (Time.time - lastImmune > immuneTime)
         {
-            lastImmune = Time.time;
+            lastImmune = Time.time;*/
 
                 // Damage             
             dmg.damageAmount = Mathf.Clamp(dmg.damageAmount, 0, int.MaxValue);
@@ -58,7 +58,7 @@ public class Fighter : MonoBehaviour
                 currentHealth = 0;
                 Death();
             }
-        }
+        /*}*/
     }
 
     protected virtual void Death()

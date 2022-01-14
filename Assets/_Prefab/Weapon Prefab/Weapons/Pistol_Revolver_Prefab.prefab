@@ -39937,7 +39937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d7e24cdd6c10547ba97b9466bcf8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: pistol
+  weaponName: revolver
   weaponSlot: 0
   ammoType: 0.357
   indexNumberWeapon: 1
@@ -69172,7 +69172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8734473015009393762}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: -0.055, z: -0.115}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3203362623264230695}

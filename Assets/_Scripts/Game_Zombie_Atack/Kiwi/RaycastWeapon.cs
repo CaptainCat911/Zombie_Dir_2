@@ -40,7 +40,7 @@ public class RaycastWeapon : MonoBehaviour
     //public GameObject projPrefab;   // префаб снаряда
     public Transform PROJECTILE_ANCHOR;   // якорь для оружия
     public Transform EFFECT_ANCHOR;   // якорь для оружия
-    public GameObject magazine;     // магазин
+    //public GameObject magazine;     // магазин
 
         // Эффекты
     public ParticleSystem[] muzzleFlash;    // вспышка оружия
@@ -54,6 +54,7 @@ public class RaycastWeapon : MonoBehaviour
     RaycastHit hit;
     Ray ray;
     Quaternion qua1;
+    Quaternion qua2;
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -69,7 +70,7 @@ public class RaycastWeapon : MonoBehaviour
 
     public void Update()
     {
-        
+        //Debug.Log(PROJECTILE_ANCHOR.forward);
     }
 
 
@@ -140,22 +141,12 @@ public class RaycastWeapon : MonoBehaviour
 
         lastSwing = Time.time;
 
-        //attackCooldown = 1f / attackSpeed;
-        //startAttack = false;
-        //attacking = true;
-
-        // Снаряды
-        //Projectile p;
-        //Vector3 vel = PROJECTILE_ANCHOR.forward * bulletSpeed; // скорость пули
-
         //switch (type)
         //{
         //case WeaponType.blaster:
         //p = MakeProjectile();
         //p.rigid.AddForce(vel, ForceMode.Impulse);
         //}
-
-
 
 
 
@@ -188,42 +179,60 @@ public class RaycastWeapon : MonoBehaviour
             // Свет
         StartCoroutine(LightDelay());   // делаем задержку для вспышек
 
-            // Настройки для трасеров
-        var tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);
+
+        if (weaponName == "shotgun")   // Shotgun
+        {
+
+            for (int i = 0; i < 5; i++)
+            {
+                // Рейкаст
+                //Vector3 vector3 = new Vector3(0f, 0, 0.2f - (0.1f * i));
+                //PROJECTILE_ANCHOR.position = new Vector3(0, 0, 1);
+                qua2 = Quaternion.Euler(0, 176 + (2 * i), 0);
+                PROJECTILE_ANCHOR.localRotation = Quaternion.Lerp(transform.rotation, qua2, 1);
+                MakeRayCast();
+                //yield return new WaitForSeconds(0.000f);
+            }
+        }
+
+        else
+        {
+            MakeRayCast();
+        }
+    }
+
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+    
+
+
+    public void MakeRayCast()
+    {
+        // Настройки для трасеров
+        TrailRenderer tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);
         tracer.AddPosition(EFFECT_ANCHOR.position);
 
-          // Рейкаст
+        // Рейкаст
         ray.origin = PROJECTILE_ANCHOR.position;        // луч из позиции якоря
         ray.direction = PROJECTILE_ANCHOR.forward;      // луч с направлением вперед
-        //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);
+                                                        //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerIgnore))
         {
-            //Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);
+            Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);
 
             tracer.transform.position = hit.point;   // трасеры пуль 
 
             Enemy_old enemy = hit.collider.GetComponentInParent<Enemy_old>();
             if (enemy)
             {
-/*                if (tag == "Arm")
+                Damage dmg = new Damage()
                 {
-                    Damage dmgArm = new Damage()
-                    {
-                        damageAmount = rayDamage/2,
-                        origin = transform.position,
-                        pushForce = 0
-                    };
-                    enemy.SendMessage("ReceiveDamage", dmgArm);
-                }*/
- 
-                    Damage dmg = new Damage()
-                    {
-                        damageAmount = rayDamage,
-                        origin = transform.position,
-                        pushForce = 0
-                    };
-                    enemy.SendMessage("ReceiveDamage", dmg);
-                               
+                    damageAmount = rayDamage,
+                    origin = transform.position,
+                    pushForce = 0
+                };
+                enemy.SendMessage("ReceiveDamage", dmg);
+
 
                 // Эффекты попадания (кровь)
                 hitEffectBlood.transform.position = hit.point;
@@ -240,13 +249,23 @@ public class RaycastWeapon : MonoBehaviour
                 hitEffect.Emit(1);
             }
         }
-
     }
 
+/*    IEnumerator ShotDelay()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            // Рейкаст
+            //Vector3 vector3 = new Vector3(0f, 0, 0.2f - (0.1f * i));
+            //PROJECTILE_ANCHOR.position = new Vector3(0, 0, 1);
+            qua2 = Quaternion.Euler(0, 176 + (2 * i), 0);
+            PROJECTILE_ANCHOR.localRotation = Quaternion.Lerp(transform.rotation, qua2, 1);
+            MakeRayCast();
+            yield return new WaitForSeconds(0.000f);            
+        }
+    }
+*/
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
-    
-    
     IEnumerator LightDelay()
     {
         lightEffect.enabled = true;

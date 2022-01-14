@@ -48051,18 +48051,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d7e24cdd6c10547ba97b9466bcf8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: rifle
+  weaponName: shotgun
   weaponSlot: 1
   ammoType: 0.12
   indexNumberWeapon: 2
-  cooldown: 1
-  rayDamage: 50
+  cooldown: 0.15
+  rayDamage: 25
   allAmmo: 0
-  clipSize: 12
-  ammoCount: 12
+  clipSize: 8
+  ammoCount: 8
   PROJECTILE_ANCHOR: {fileID: 561328328154757415}
   EFFECT_ANCHOR: {fileID: 5998230859401977317}
-  magazine: {fileID: 0}
   muzzleFlash:
   - {fileID: 4473978892112714316}
   - {fileID: 4473978892112714314}
