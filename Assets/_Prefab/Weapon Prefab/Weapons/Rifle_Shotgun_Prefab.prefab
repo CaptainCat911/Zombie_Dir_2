@@ -48058,8 +48058,8 @@ MonoBehaviour:
   cooldown: 0.3
   rayDamage: 25
   allAmmo: 0
-  clipSize: 15
-  ammoCount: 15
+  clipSize: 26
+  ammoCount: 26
   PROJECTILE_ANCHOR: {fileID: 561328328154757415}
   EFFECT_ANCHOR: {fileID: 5998230859401977317}
   muzzleFlash:

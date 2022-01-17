@@ -3,23 +3,39 @@
 public class WeaponPickUp : MonoBehaviour
 {
     public RaycastWeapon weaponPrefab;
+    bool triggerEnter = false;
+    ActiveWeapon activeWeapon;
 
-    public void OnTriggerStay(Collider collision)
+
+    void Start()
+    {
+        activeWeapon = GameManager.instance.player.GetComponent<ActiveWeapon>();
+    }
+
+
+
+    public void OnTriggerEnter(Collider collision)
     {
         if (collision.name == "Player_Soldier")
-        {      
-            //Debug.Log("Trig!");
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-
-                ActiveWeapon activeWeapon = collision.gameObject.GetComponent<ActiveWeapon>();
-                if (activeWeapon)
-                {
-                    RaycastWeapon newWeapon = Instantiate(weaponPrefab);
-                    activeWeapon.GetWeaponUp(newWeapon);
-                }
-                Destroy(gameObject);
-            }
-        }
+            triggerEnter = true;
     }
+
+    public void OnTriggerExit(Collider collision)
+    {
+        if (collision.name == "Player_Soldier")
+            triggerEnter = false;
+    }
+
+
+
+
+    private void Update()
+    {                
+        if (Input.GetKeyDown(KeyCode.E) && triggerEnter)
+        {           
+            RaycastWeapon newWeapon = Instantiate(weaponPrefab);
+            activeWeapon.GetWeaponUp(newWeapon);                
+            Destroy(gameObject);
+        }
+    }    
 }

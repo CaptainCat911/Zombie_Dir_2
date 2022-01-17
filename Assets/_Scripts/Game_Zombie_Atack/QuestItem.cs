@@ -1,19 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestItem : MonoBehaviour
 {
     public int questNumber;
     bool triggerEnter = false;
-    public void OnTriggerEnter(Collider collision)
+    private DialogueTrigger dialogueTrig;
+    public GameObject image1;
+
+    void Start()
     {
-        triggerEnter = true;
+        dialogueTrig = GetComponent<DialogueTrigger>();
     }
 
-    public void OnTriggerExit(Collider other)
+
+
+    public void OnTriggerEnter(Collider collision)
     {
-        triggerEnter = false;
+        if (collision.name == "Player_Soldier")
+            triggerEnter = true;
+    }
+
+    public void OnTriggerExit(Collider collision)
+    {
+        if (collision.name == "Player_Soldier")
+            triggerEnter = false;
     }
 
     private void Update()
@@ -23,20 +36,18 @@ public class QuestItem : MonoBehaviour
             switch (questNumber)
             {
                 case 1:
-                    GameManager.instance.quest1 = true;
-                    Debug.Log("Вы подняли квестовый предмет №1");
+                    GameManager.instance.quest1 = true;                    
                     break;
                 case 2:
-                    GameManager.instance.quest2 = true;
-                    Debug.Log("Вы подняли квестовый предмет №2");
+                    GameManager.instance.quest2 = true;                    
                     break;
                 case 3:
-                    GameManager.instance.quest3 = true;
-                    Debug.Log("Вы подняли квестовый предмет №3");
+                    GameManager.instance.quest3 = true;                    
                     break;
 
             }
-
+            image1.SetActive(true);
+            dialogueTrig.TriggerDialogue(0);
             Destroy(gameObject);
         }
     }

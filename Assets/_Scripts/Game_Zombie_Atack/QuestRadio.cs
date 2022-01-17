@@ -7,60 +7,65 @@ public class QuestRadio : MonoBehaviour
     bool questStart = false;
     bool questCompl = false;
     bool enterTrigger = false;
-    int nCount = 0;
+    int nCount = 0;    
 
-    private DialogueTrigger dialogueTrig;
+    private DialogueTrigger dialogueTrig;   // ссылка на диалог 
+
+    public GameObject[] images;
+
 
 
     public void Start()
     {
         dialogueTrig = GetComponent<DialogueTrigger>();
-        GameManager.instance.mission = "Найдите радио !";
+        GameManager.instance.mission = "Найдите радио";     // пишем текст миссии
     }
 
 
     public void OnTriggerEnter(Collider collision)
     {
-        enterTrigger = true;   
+        if (collision.name == "Player_Soldier")
+            enterTrigger = true;   
     }
 
     public void OnTriggerExit(Collider collision)
     {
-        enterTrigger = false;
+        if (collision.name == "Player_Soldier")
+            enterTrigger = false;
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !questCompl && enterTrigger)
+        if (Input.GetKeyDown(KeyCode.E) && !questCompl && enterTrigger)     // если квест не начат и игрок зашёл в триггер и нажал "е"
         {
             nCount++;
-            if (!questStart && !GameManager.instance.questFinish)
+            if (!questStart && !GameManager.instance.questFinish)   
             {                                              
-                dialogueTrig.TriggerDialogue(0);
-
-                // написать цель и 3 состовляющие
+                dialogueTrig.TriggerDialogue(0);                
 
                 questStart = true;
-                GameManager.instance.mission = " Найдите 3 предмета !";
+                GameManager.instance.mission = "Найдите инструменты, транзисторы и бензин, чтобы починить радио";
             }
 
 
             if (questStart && !GameManager.instance.questFinish && nCount > 1)
-            {
-                
-                Debug.Log("Не все предметы найдены !");
-                // написать, что нет квестовых предметов
+            {                                
+                // игнорировать, если нет квестовых предметов
             }
 
 
             if (GameManager.instance.questFinish)
             {                
-                dialogueTrig.TriggerDialogue(1);
+                dialogueTrig.TriggerDialogue(1);        // запускаем второй диалог
+                foreach (GameObject image in images)    // деактивируем иконки предметовы
+                {
+                    image.SetActive(false);
+                }
 
-                // написать цель и таймер 
+                // запустить таймер
 
                 questCompl = true;
-                GameManager.instance.mission = " Продержитесь : таймер !";
+                GameManager.instance.mission = "Продержитесь : таймер";
             }
         }        
     }
