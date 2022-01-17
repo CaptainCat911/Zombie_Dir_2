@@ -52097,13 +52097,12 @@ MonoBehaviour:
   ammoType: 7.62
   indexNumberWeapon: 3
   cooldown: 0.1
-  rayDamage: 50
+  rayDamage: 40
   allAmmo: 0
   clipSize: 100
   ammoCount: 100
   PROJECTILE_ANCHOR: {fileID: 561328328154757415}
   EFFECT_ANCHOR: {fileID: 5998230859401977317}
-  magazine: {fileID: 0}
   muzzleFlash:
   - {fileID: 4473978892112714316}
   - {fileID: 4473978892112714314}

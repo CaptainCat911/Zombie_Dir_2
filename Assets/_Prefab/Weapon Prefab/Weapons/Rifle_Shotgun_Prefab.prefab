@@ -48055,11 +48055,11 @@ MonoBehaviour:
   weaponSlot: 1
   ammoType: 0.12
   indexNumberWeapon: 2
-  cooldown: 0.15
+  cooldown: 0.3
   rayDamage: 25
   allAmmo: 0
-  clipSize: 8
-  ammoCount: 8
+  clipSize: 15
+  ammoCount: 15
   PROJECTILE_ANCHOR: {fileID: 561328328154757415}
   EFFECT_ANCHOR: {fileID: 5998230859401977317}
   muzzleFlash:
