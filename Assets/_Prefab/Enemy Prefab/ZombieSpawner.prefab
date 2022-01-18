@@ -48,7 +48,7 @@ MonoBehaviour:
   prefabEnemy: {fileID: 2447642059113811411, guid: 5d8223bb34f416b45b1aa1a902b35bb7,
     type: 3}
   active: 0
-  cooldown: 10
+  cooldown: 3
   radius: 17
 --- !u!65 &7129848210179332589
 BoxCollider:
@@ -80,7 +80,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5152516634731809044
 Transform:
   m_ObjectHideFlags: 0

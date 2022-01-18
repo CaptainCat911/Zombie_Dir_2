@@ -63,7 +63,7 @@ public class EnemyHitbox : Collidable
             }
             collidersHitbox = null;
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
         attacking = false;
     }
 

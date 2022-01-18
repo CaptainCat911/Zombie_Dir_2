@@ -5,30 +5,30 @@ using UnityEngine.AI;
 
 public class Enemy_old : Mover
 {
-
     // Logic
-    public float triggerLenght = 5;   // радиус приследования (в пределах игрок)
-    public float chaseLenght = 10;   // радиус приследования (вся зона)
-    public float findPlayerRange = 1;  // на каком расстоянии остановится перед целью
+    public float triggerLenght = 5f;   // радиус приследования (в пределах игрок)
+    public float chaseLenght = 10f;   // радиус приследования (вся зона)
+    public float findPlayerRange = 1f;  // на каком расстоянии остановится перед целью
     public float faceingTargetSpeed = 5f;   // скорость поворота возле цели
     public float timeAfterDeath = 10f;
+    private float maxSpeed = 4f;
+    //private float speed;
     private bool chasing;
     //private bool returning = false;
     private bool collidingWithPlayer;
 
     private Transform playerTransform;
-    private Vector3 startingPosition;   
+    private Vector3 startingPosition;
     public LayerMask layerPlayer;
-    
 
     public Animator anim;
-    public NavMeshAgent agent;    
+    public NavMeshAgent agent;
     public EnemyHitbox hitbox;      // ссылка на хитбокс
     public CapsuleCollider capsuleCollider;
     public CapsuleCollider capsuleColliderLeftARm;
     public CapsuleCollider capsuleColliderRightArm;
     //CapsuleCollider[] allCapsCol;
-    private Enemy_old selfScript;
+    private Enemy_old selfScript;    
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -46,7 +46,23 @@ public class Enemy_old : Mover
         hitbox = GetComponentInChildren<EnemyHitbox>();
         //capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         selfScript = GetComponent<Enemy_old>();
-        
+        int random = Random.Range(1, 100);
+        if (random <= 85)
+        {
+            agent.speed = 0.5f;
+            int random2 = Random.Range(1,4);
+            //Debug.Log(random2);
+            if (random2 == 1)            
+                anim.SetFloat("Walk_number", 0);
+            if (random2 == 2)
+                anim.SetFloat("Walk_number", 0.5f);
+            if (random2 == 3)
+                anim.SetFloat("Walk_number", 1);
+        }
+        if (random >= 86 && random <= 100)
+            agent.speed = 2f;      
+        if (random > 100)
+            agent.speed = 4f;
     }    
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -131,17 +147,20 @@ public class Enemy_old : Mover
                                 //LookAtPlayer(); не нужен тут
         }
 
-/*        else
-        {
-            Vector3 lookDir = startingPosition - transform.position;
-            float angle = Mathf.Atan2(lookDir.x, lookDir.z) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, angle, 0);
-        }*/
+        /*        else
+                {
+                    Vector3 lookDir = startingPosition - transform.position;
+                    float angle = Mathf.Atan2(lookDir.x, lookDir.z) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(0, angle, 0);
+                }*/
 
-        if (agent.velocity.magnitude > 0.05)
-            anim.SetBool("Run", true);
-        else
-            anim.SetBool("Run", false);
+        //if (agent.velocity.magnitude > 0.05)
+        //anim.SetBool("Run", true);
+        //else
+        //anim.SetBool("Run", false);
+        anim.SetFloat("Speed", agent.velocity.magnitude / maxSpeed);
+
+        //Debug.Log(agent.velocity.magnitude);
 
         //-------------------ПушДирекшн---------------------\\
 
