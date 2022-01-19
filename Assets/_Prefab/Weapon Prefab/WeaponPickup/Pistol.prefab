@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5675279917687984087}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glock18_rnag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2978915980401341169}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glock18_root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2728785235635409836}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glock18_reload_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2083733459709972791}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glock18_rnag_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7303326533487609660}
   - component: {fileID: 3347500190520165774}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pistol_mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4320413179350043441}
   - component: {fileID: 5664279193273489017}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pistol_bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2698228907054160211}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glock18_fire_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7718421827525235354}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glock18_fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5604687264685194357}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: glock18_reload
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4463008647315768400}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pistol_fbx (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1986963898412699702}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pistol_rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2183727180034772369}
   - component: {fileID: 4200949741825077101}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pistol_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 9176031230608050338}
   - component: {fileID: 9176031230608050339}
   - component: {fileID: 9176031230608050348}
-  m_Layer: 11
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 9176031231147728154}
   - component: {fileID: 9176031231147728155}
   - component: {fileID: 9176031231147728132}
-  m_Layer: 12
+  m_Layer: 2
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}

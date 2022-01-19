@@ -17,11 +17,14 @@ public class Fighter : MonoBehaviour
 
     //Push
     protected Vector3 pushDirection;
-       
+
+    Enemy_old enemy;
+
+
 
     void Awake()
     {
-        currentHealth = maxHealth;
+        currentHealth = maxHealth;        
     }
 
 
@@ -41,6 +44,10 @@ public class Fighter : MonoBehaviour
                 // Push
             pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
+        
+
+
+
 
              /*   // Text 
             if (this.gameObject.name == "Player")
@@ -52,8 +59,8 @@ public class Fighter : MonoBehaviour
                 GameManager.instance.ShowText(dmg.damageAmount.ToString(), 15, Color.white, transform.position, Vector3.up * 30, 0.5f);
             }*/
 
-                //Death
-            if (currentHealth <= 0)
+        //Death
+        if (currentHealth <= 0)
             {
                 currentHealth = 0;
                 Death();

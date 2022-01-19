@@ -38,7 +38,7 @@ public class ReloadWeapon : MonoBehaviour
 
     IEnumerator ReloadDelay()
     {        
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.5f);
         RaycastWeapon weapon = activeWeapon.GetActiveWeapon();
         if (weapon.ammoCount <= 0 && !activeWeapon.isHolsted)
             rigController.SetTrigger("reload_weapon");

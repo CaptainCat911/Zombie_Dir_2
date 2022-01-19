@@ -23,6 +23,7 @@ public class RaycastWeapon : MonoBehaviour
     public float cooldown = 0.1f;  // 600 выстрелов в секунду 
     //public float bulletSpeed = 30f;     // скорость пули (не используется)
     public int rayDamage = 1;   // урон рейкаста
+    public float pushForce; 
 
     private float lastSwing;        // для кд
     //public bool startAttack = false;
@@ -49,7 +50,7 @@ public class RaycastWeapon : MonoBehaviour
     public TrailRenderer tracerEffect;  // трасер
     public Light lightEffect;     //вспышка света
 
-    LayerMask layerIgnore = 3;      // Слой Ignore Raycast, в списке второй почему-то
+    LayerMask layerIgnore = 0;      // Слой Ignore Raycast, в списке второй почему-то
 
     RaycastHit hit;
     Ray ray;
@@ -215,8 +216,8 @@ public class RaycastWeapon : MonoBehaviour
         // Рейкаст
         ray.origin = PROJECTILE_ANCHOR.position;        // луч из позиции якоря
         ray.direction = PROJECTILE_ANCHOR.forward;      // луч с направлением вперед
-                                                        //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerIgnore))
+        //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);
 
@@ -229,7 +230,7 @@ public class RaycastWeapon : MonoBehaviour
                 {
                     damageAmount = rayDamage,
                     origin = transform.position,
-                    pushForce = 0
+                    pushForce = pushForce
                 };
                 enemy.SendMessage("ReceiveDamage", dmg);
 

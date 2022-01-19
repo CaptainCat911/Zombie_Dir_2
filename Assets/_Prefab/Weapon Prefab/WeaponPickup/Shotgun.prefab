@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8629537969314614401}
   - component: {fileID: 8629537969314614400}
   - component: {fileID: 8629537969314614415}
-  m_Layer: 11
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 8629537969847769401}
   - component: {fileID: 8629537969847769400}
   - component: {fileID: 8629537969847769383}
-  m_Layer: 12
+  m_Layer: 2
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,10 +210,55 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8629537969847769403}
     m_Modifications:
+    - target: {fileID: 84190142343482790, guid: ddc022cd6b3fa454da1f48186f3e4356,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 168812319784758745, guid: ddc022cd6b3fa454da1f48186f3e4356,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 617528107556915969, guid: ddc022cd6b3fa454da1f48186f3e4356,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525249215322485486, guid: ddc022cd6b3fa454da1f48186f3e4356,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967477635363518609, guid: ddc022cd6b3fa454da1f48186f3e4356,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907022082012870436, guid: ddc022cd6b3fa454da1f48186f3e4356,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386554041635676308, guid: ddc022cd6b3fa454da1f48186f3e4356,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3823143099526206548, guid: ddc022cd6b3fa454da1f48186f3e4356,
         type: 3}
       propertyPath: m_Name
       value: Shotgun3_prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3823143099526206548, guid: ddc022cd6b3fa454da1f48186f3e4356,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671711539458533690, guid: ddc022cd6b3fa454da1f48186f3e4356,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5374785046538817083, guid: ddc022cd6b3fa454da1f48186f3e4356,
         type: 3}

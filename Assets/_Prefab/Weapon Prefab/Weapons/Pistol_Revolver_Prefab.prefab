@@ -39942,13 +39942,13 @@ MonoBehaviour:
   ammoType: 0.357
   indexNumberWeapon: 1
   cooldown: 0.4
-  rayDamage: 50
+  rayDamage: 100
+  pushForce: 0
   allAmmo: 0
-  clipSize: 6
-  ammoCount: 6
+  clipSize: 8
+  ammoCount: 8
   PROJECTILE_ANCHOR: {fileID: 7143760499140954990}
   EFFECT_ANCHOR: {fileID: 7143760499492832140}
-  magazine: {fileID: 0}
   muzzleFlash:
   - {fileID: 7143760500518137645}
   - {fileID: 7143760499032838246}

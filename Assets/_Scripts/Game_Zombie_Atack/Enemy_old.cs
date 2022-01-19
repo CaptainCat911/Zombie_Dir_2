@@ -11,6 +11,8 @@ public class Enemy_old : Mover
     public float findPlayerRange = 1f;  // на каком расстоянии остановится перед целью
     public float faceingTargetSpeed = 5f;   // скорость поворота возле цели
     public float timeAfterDeath = 10f;
+    public bool strong = false;
+
     private float maxSpeed = 4f;
     //private float speed;
     private bool chasing;
@@ -46,8 +48,9 @@ public class Enemy_old : Mover
         hitbox = GetComponentInChildren<EnemyHitbox>();
         //capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         selfScript = GetComponent<Enemy_old>();
-        int random = Random.Range(1, 100);
-        if (random <= 85)
+
+        int random = Random.Range(0, 100);
+        if (random <= 79)
         {
             agent.speed = 0.5f;
             int random2 = Random.Range(1,4);
@@ -59,10 +62,22 @@ public class Enemy_old : Mover
             if (random2 == 3)
                 anim.SetFloat("Walk_number", 1);
         }
-        if (random >= 86 && random <= 100)
-            agent.speed = 2f;      
-        if (random > 100)
+
+        if (random >= 80 && random < 90)
+        {            
+            agent.speed = 2f;
+            maxHealth = 150;
+            currentHealth = maxHealth;
+        }
+
+        if (random >= 90)
+        {
+            strong = true;
             agent.speed = 4f;
+            maxHealth = 250;
+            currentHealth = maxHealth;            
+            triggerLenght = 6;
+        }
     }    
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -116,6 +131,12 @@ public class Enemy_old : Mover
                 agent.SetDestination(startingPosition);
                 chasing = false;
             }
+        }
+
+
+        if (currentHealth < maxHealth)
+        {
+            triggerLenght = 1000;
         }
 
 

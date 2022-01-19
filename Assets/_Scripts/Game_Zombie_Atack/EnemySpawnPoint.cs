@@ -10,6 +10,7 @@ public class EnemySpawnPoint : MonoBehaviour
     public GameObject prefabEnemy;
     NavMeshAgent agent;
     public bool active = false;
+    public int maxZombie = 50;
 
     public float cooldown = 1f;
     private float lastSwing;
@@ -33,7 +34,7 @@ public class EnemySpawnPoint : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        if (GameManager.instance.enemyCount >= 50)
+        if (GameManager.instance.enemyCount >= maxZombie)
         {
             return;
         }
