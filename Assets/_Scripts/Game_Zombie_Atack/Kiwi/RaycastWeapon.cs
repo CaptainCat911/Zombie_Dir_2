@@ -57,6 +57,8 @@ public class RaycastWeapon : MonoBehaviour
     Quaternion qua1;
     Quaternion qua2;
 
+    public RaycastHit[] m_Results = new RaycastHit[2];      // Для прострелов 
+
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
@@ -252,20 +254,79 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
 
-/*    IEnumerator ShotDelay()
+    public void MakeRayCastAll()
     {
-        for (int i = 0; i < 5; i++)
+        // Настройки для трасеров
+        TrailRenderer tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);
+        tracer.AddPosition(EFFECT_ANCHOR.position);
+
+        // Рейкаст
+        ray.origin = PROJECTILE_ANCHOR.position;        // луч из позиции якоря
+        ray.direction = PROJECTILE_ANCHOR.forward;      // луч с направлением вперед
+        //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);
+        //Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);
+        int hits = Physics.RaycastNonAlloc(ray, m_Results, Mathf.Infinity);
+        for (int i = 0; i < hits; i++)
         {
-            // Рейкаст
-            //Vector3 vector3 = new Vector3(0f, 0, 0.2f - (0.1f * i));
-            //PROJECTILE_ANCHOR.position = new Vector3(0, 0, 1);
-            qua2 = Quaternion.Euler(0, 176 + (2 * i), 0);
-            PROJECTILE_ANCHOR.localRotation = Quaternion.Lerp(transform.rotation, qua2, 1);
-            MakeRayCast();
-            yield return new WaitForSeconds(0.000f);            
+            tracer.transform.position = m_Results[i].point;   // трасеры пуль             
+
+            Enemy_old enemy = m_Results[i].collider.GetComponentInParent<Enemy_old>();
+            if (enemy)
+            {
+                Damage dmg = new Damage()
+                {
+                    damageAmount = rayDamage,
+                    origin = transform.position,
+                    pushForce = pushForce
+                };
+                enemy.SendMessage("ReceiveDamage", dmg);
+
+
+                // Эффекты попадания (кровь)
+                hitEffectBlood.transform.position = m_Results[i].point;
+                hitEffectBlood.transform.forward = m_Results[i].normal;
+                hitEffectBlood.Emit(1);
+
+
+            }
+            else
+            {
+                // Эффекты попадания (искры)
+                hitEffect.transform.position = m_Results[i].point;
+                hitEffect.transform.forward = m_Results[i].normal;
+                hitEffect.Emit(1);
+            }
+        }
+    
+        if (hits == 0)
+        {
+            Debug.Log("Did not hit");
         }
     }
-*/
+
+
+/*        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            
+
+            
+    }*/
+
+
+    /*    IEnumerator ShotDelay()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                // Рейкаст
+                //Vector3 vector3 = new Vector3(0f, 0, 0.2f - (0.1f * i));
+                //PROJECTILE_ANCHOR.position = new Vector3(0, 0, 1);
+                qua2 = Quaternion.Euler(0, 176 + (2 * i), 0);
+                PROJECTILE_ANCHOR.localRotation = Quaternion.Lerp(transform.rotation, qua2, 1);
+                MakeRayCast();
+                yield return new WaitForSeconds(0.000f);            
+            }
+        }
+    */
 
     IEnumerator LightDelay()
     {
