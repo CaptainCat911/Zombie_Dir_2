@@ -6,31 +6,35 @@ using UnityEngine.AI;
 public class Enemy_old : Mover
 {
     // Logic
-    public float triggerLenght = 5f;   // радиус приследования (в пределах игрок)
-    public float chaseLenght = 10f;   // радиус приследования (вся зона)
+    public float triggerLenght = 5f;   // радиус тригера преследования (в пределах игрок)
+    public float chaseLenght = 10f;   // радиус преследования (вся зона)
     public float findPlayerRange = 1f;  // на каком расстоянии остановится перед целью
+    public float grabPlayerRange = 2f;  // на каком расстоянии начать хватать
     public float faceingTargetSpeed = 5f;   // скорость поворота возле цели
-    public float timeAfterDeath = 10f;
+    public float timeAfterDeath = 10f;      // сколько лежит труп
     public bool strong = false;
+    public bool test = false;       // режим тестового зомби
 
-    private float maxSpeed = 4f;
+    private float maxSpeed = 4f;        // максимальная скорость (не нужна наверное)
     //private float speed;
-    private bool chasing;
+    private bool chasing;           // преследование
     //private bool returning = false;
-    private bool collidingWithPlayer;
+    private bool collidingWithPlayer;   // столкновение с игроком
 
-    private Transform playerTransform;
-    private Vector3 startingPosition;
-    public LayerMask layerPlayer;
+    private Transform playerTransform;  // ссылка на трансформ игрока
+    private Vector3 startingPosition;   // стартовая позиция
+    public LayerMask layerPlayer;       // маска для игрока
 
     public Animator anim;
     public NavMeshAgent agent;
     public EnemyHitbox hitbox;      // ссылка на хитбокс
-    public CapsuleCollider capsuleCollider;
+    public CapsuleCollider capsuleCollider;         // коллайдеры для попадания
     public CapsuleCollider capsuleColliderLeftARm;
     public CapsuleCollider capsuleColliderRightArm;
     //CapsuleCollider[] allCapsCol;
-    private Enemy_old selfScript;    
+    private Enemy_old selfScript;    // ссылка на свой скрипт (вроде можно убрать)
+
+    
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -48,6 +52,8 @@ public class Enemy_old : Mover
         hitbox = GetComponentInChildren<EnemyHitbox>();
         //capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         selfScript = GetComponent<Enemy_old>();
+        if (test)
+            return;
 
         int random = Random.Range(0, 100);
         if (random <= 79)
@@ -78,9 +84,22 @@ public class Enemy_old : Mover
             currentHealth = maxHealth;            
             triggerLenght = 6;
         }
-    }    
+    }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            anim.SetTrigger("Bite");
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
     private void FixedUpdate()
@@ -141,13 +160,16 @@ public class Enemy_old : Mover
 
 
         //---------------------------- Проверяем столкновение с игроком ----------------------------\\
-
+        
         collidingWithPlayer = false;
         Collider[] colliders = Physics.OverlapSphere(transform.position, findPlayerRange, layerPlayer);
+        
         foreach (Collider enObject in colliders)
-        {            
-            if (enObject == null)
-            {                
+        {
+            //Debug.Log(enObject);
+            if (enObject == null)                   // НЕ РАБОТАЕТ !
+            {
+                Debug.Log("NULL");
                 collidingWithPlayer = false;
                 continue;
             }      
@@ -158,10 +180,29 @@ public class Enemy_old : Mover
             }
             colliders = null;
         }
+        
+        
+        Collider[] collidersToGrab = Physics.OverlapSphere(transform.position, grabPlayerRange, layerPlayer);
+        foreach (Collider enObject in collidersToGrab)
+        {
+            if (enObject == null)
+            {
+                hitbox.grabReady = false;
+                hitbox.grabChardge = true;
+                continue;
+            }
+
+            if (enObject.tag == "Fighter")
+            {
+                hitbox.grabReady = true;
+                //Debug.Log("GrabTrue !");
+            }
+            colliders = null;
+        }
         //Debug.Log(collidingWithPlayer);
 
 
-    //------------------ Смотреть в сторону игрока ------------------------\\
+        //------------------ Смотреть в сторону игрока ------------------------\\
 
         if (chasing == true)
         {

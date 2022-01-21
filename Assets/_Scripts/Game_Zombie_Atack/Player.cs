@@ -24,7 +24,8 @@ public class Player : Mover
 
     // Передвижение
     const float locomationAnimationSmoothTime = .1f; // сглаживание бега
-    Vector3 motorVect;
+    public Vector3 motorVect;
+    public bool walking = false;    // для замедления от зомби
 
         // Animation Info    
     private Animator anim;
@@ -137,7 +138,7 @@ public class Player : Mover
 
         if (isAlive)
         {              
-            if ((activeWeapon.attackActive == true && !activeWeapon.isHolsted) || Input.GetKey(KeyCode.LeftControl))
+            if ((activeWeapon.attackActive == true && !activeWeapon.isHolsted) || Input.GetKey(KeyCode.LeftControl) || walking)
             {
                 motorVect.x = motorVect.x * 0.3f;
                 motorVect.z = motorVect.z * 0.3f;

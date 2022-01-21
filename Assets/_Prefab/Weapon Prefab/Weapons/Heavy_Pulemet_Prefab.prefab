@@ -52100,8 +52100,8 @@ MonoBehaviour:
   rayDamage: 40
   pushForce: 0
   allAmmo: 0
-  clipSize: 100
-  ammoCount: 100
+  clipSize: 150
+  ammoCount: 150
   PROJECTILE_ANCHOR: {fileID: 561328328154757415}
   EFFECT_ANCHOR: {fileID: 5998230859401977317}
   muzzleFlash:

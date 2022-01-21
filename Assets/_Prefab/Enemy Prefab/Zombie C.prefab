@@ -46,10 +46,13 @@ MonoBehaviour:
   damage: 23
   pushForce: 0
   cooldown: 2
-  hitBoxDelay: 1.05
+  attackSpeed: 1
   attackRadiusHitBox: 0.6
+  grabChardge: 1
   attacking: 0
+  grabReady: 0
   enemy: {fileID: 0}
+  animationEvents: {fileID: 926434207}
 --- !u!1 &2445470038730296225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,6 +2171,7 @@ GameObject:
   - component: {fileID: 2447642059113811415}
   - component: {fileID: 2447642059113811414}
   - component: {fileID: 361542548}
+  - component: {fileID: 926434207}
   m_Layer: 10
   m_Name: Zombie C
   m_TagString: Enemy
@@ -2236,7 +2240,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0
+  m_Speed: 0.5
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 1000
@@ -2260,8 +2264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc908499b5402d746937d9152f914ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
+  currentHealth: 1
+  maxHealth: 10000
   pushRecoverySpeed: 0.2
   immuneTime: 0
   ySpeed: 7
@@ -2269,9 +2273,11 @@ MonoBehaviour:
   triggerLenght: 1000
   chaseLenght: 1000
   findPlayerRange: 1.1
+  grabPlayerRange: 2
   faceingTargetSpeed: 3
   timeAfterDeath: 30
   strong: 0
+  test: 1
   layerPlayer:
     serializedVersion: 2
     m_Bits: 256
@@ -2353,6 +2359,18 @@ MonoBehaviour:
   - {fileID: 2442106323052069091}
   - {fileID: 2442211398196173503}
   - {fileID: 2448447616007045639}
+--- !u!114 &926434207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2447642059113811411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f54a6ad861edb4aacf335733cd2224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2447651114771669819
 GameObject:
   m_ObjectHideFlags: 0

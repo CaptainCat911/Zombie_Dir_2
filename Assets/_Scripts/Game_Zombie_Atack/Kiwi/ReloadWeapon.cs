@@ -46,7 +46,7 @@ public class ReloadWeapon : MonoBehaviour
 
 
 
-        void OnAnimationEvent(string eventName)
+    void OnAnimationEvent(string eventName)
     {
         //Debug.Log(eventName);
         switch (eventName)
