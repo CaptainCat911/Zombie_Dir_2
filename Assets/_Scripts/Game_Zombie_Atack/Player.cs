@@ -6,13 +6,6 @@ using UnityEngine.AI;
 
 public class Player : Mover
 {
-        // Делегат
-    /*    public delegate void DamageTaken();
-        public DamageTaken damageTakeCallback;*/
-
-
-
-
     private bool isAlive = true;
 
         // Для прицела
@@ -31,9 +24,8 @@ public class Player : Mover
     private Animator anim;
 
         // Оружие
-    ActiveWeapon activeWeapon;      // ссылка на активное оружие    
+    ActiveWeapon activeWeapon;      // ссылка на активное оружие   
 
-    //Renderer rend = null;
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -48,46 +40,9 @@ public class Player : Mover
         activeWeapon = GetComponent<ActiveWeapon>();
         //layerMask = ~layerMask;
         //layerMaskCam = ~ layerMaskCam;
-
-/*        damageTakeCallback += weapon.AttackRange;
-        damageTakeCallback += TakeHit;   */
-
-
-        //EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
     }
 
 
-
-
-//-------------------------------------------------------------------------------------------------------------------------------------\\
-
-    /*
-    void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
-    {
-        // Add new modifiers
-        if (newItem != null)
-        {
-            armor.AddModifier(newItem.armorModifier);
-            damage.AddModifier(newItem.damageModifier);
-            pushForce.AddModifier(newItem.pushForceModifier);
-            //weaponTypePlayer = newItem.weaponType.
-            weaponTypePlayer = newItem.wTypeTest;
-            //weaponPrefabPlayer = newItem.prefab;
-            weapon.CreateWeapon(newItem.prefab);
-        }
-
-        // Remove old modifiers
-        if (oldItem != null)
-        {
-            armor.RemoveModifier(oldItem.armorModifier);
-            damage.RemoveModifier(oldItem.damageModifier);
-            pushForce.RemoveModifier(oldItem.pushForceModifier);
-        }
-
-    }
-    */
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
     protected override void ReceiveDamage(Damage dmg)

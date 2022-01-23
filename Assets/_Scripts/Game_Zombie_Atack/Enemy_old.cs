@@ -12,8 +12,9 @@ public class Enemy_old : Mover
     public float grabPlayerRange = 2f;  // на каком расстоянии начать хватать
     public float faceingTargetSpeed = 5f;   // скорость поворота возле цели
     public float timeAfterDeath = 10f;      // сколько лежит труп
-    public bool strong = false;
+    public bool strong = false; 
     public bool test = false;       // режим тестового зомби
+    public bool biting = false;
 
     private float maxSpeed = 4f;        // максимальная скорость (не нужна наверное)
     //private float speed;
@@ -33,6 +34,8 @@ public class Enemy_old : Mover
     public CapsuleCollider capsuleColliderRightArm;
     //CapsuleCollider[] allCapsCol;
     private Enemy_old selfScript;    // ссылка на свой скрипт (вроде можно убрать)
+
+    public GameObject tempCapColl;
 
     
 
@@ -55,9 +58,12 @@ public class Enemy_old : Mover
         if (test)
             return;
 
-        int random = Random.Range(0, 100);
+        int random = Random.Range(0, 100);          // разные типы зомби
         if (random <= 79)
         {
+            hitbox.grabChardge = true;
+            hitbox.cooldown = 2.5f;
+            hitbox.attackSpeed = 1.3f;
             agent.speed = 0.5f;
             int random2 = Random.Range(1,4);
             //Debug.Log(random2);
@@ -67,22 +73,32 @@ public class Enemy_old : Mover
                 anim.SetFloat("Walk_number", 0.5f);
             if (random2 == 3)
                 anim.SetFloat("Walk_number", 1);
+            tempCapColl.SetActive(false);
         }
 
         if (random >= 80 && random < 90)
-        {            
+        {
+            hitbox.grabChardge = false;
+            hitbox.cooldown = 2f;
+            hitbox.attackSpeed = 1.6f;
             agent.speed = 2f;
             maxHealth = 150;
             currentHealth = maxHealth;
+            tempCapColl.SetActive(false);
         }
 
         if (random >= 90)
         {
             strong = true;
-            agent.speed = 4f;
+            hitbox.grabChardge = false;
+            hitbox.cooldown = 1.5f;            
+            hitbox.attackSpeed = 2f;
+            agent.speed = 6f;
             maxHealth = 250;
             currentHealth = maxHealth;            
             triggerLenght = 6;
+            anim.SetTrigger("Biting");
+            biting = true;
         }
     }
 
@@ -91,7 +107,7 @@ public class Enemy_old : Mover
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            anim.SetTrigger("Bite");
+            
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -115,7 +131,28 @@ public class Enemy_old : Mover
             if (Vector3.Distance(playerTransform.position, startingPosition) < chaseLenght)
             {
                 if (Vector3.Distance(playerTransform.position, startingPosition) < triggerLenght)
+                {
+                    FaceTarget();
                     chasing = true;
+                    if (strong && biting)
+                    {                       
+                        anim.SetTrigger("Stop_biting");
+                        if (currentHealth == maxHealth)
+                        {
+                            StartCoroutine(ScreamDelay());
+                            biting = false;
+                            tempCapColl.SetActive(false);
+                        }
+                        if (currentHealth != maxHealth)
+                        {                            
+                            biting = false;
+                            tempCapColl.SetActive(false);
+                            anim.SetTrigger("Bite_Go");
+                        }
+
+                    }
+                }
+                
 
                 if (chasing == true)
                 {
@@ -231,7 +268,21 @@ public class Enemy_old : Mover
     }
 
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+
+    IEnumerator ScreamDelay()
+    {
+        float tempSpeed = agent.speed;
+        agent.speed = 0;           
+        yield return new WaitForSeconds(2f);       
+        agent.speed = tempSpeed;
+        anim.SetTrigger("Bite_Go");
+    }
+
+
+
+
+
+
     void FaceTarget()
     {
         Vector3 direction = (playerTransform.position - transform.position).normalized;
@@ -239,18 +290,25 @@ public class Enemy_old : Mover
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.fixedDeltaTime * faceingTargetSpeed);
     }
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+
+
+
+
+
 
     protected override void Death()
     {
         GameManager.instance.enemyCount -= 1;
+        int random = Random.Range(0, 2);
+        if (random == 1)
+            anim.SetFloat("Death_type", 1);
         anim.SetTrigger("Death");
         capsuleCollider.enabled = false;       
         capsuleColliderLeftARm.enabled = false;
         capsuleColliderRightArm.enabled = false;
         selfScript.enabled = false;
         agent.ResetPath();
-        Invoke("NavMeshDisable", 1);
+        Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);        
 
         // Добавить шанс выпадение предмета

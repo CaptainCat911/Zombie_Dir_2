@@ -5,23 +5,25 @@ using UnityEngine;
 public class EnemyHitbox : Collidable
 {  
     // Damage
-    public int damage = 1;  
-    public float pushForce = 2;
-    public float cooldown = 0.5f;
-    public float attackSpeed = 1;
-    //public float hitBoxDelay = 1;  // задержка перед атакой (для совпадения с анимацией), переделать на ивент анимации     
+    public int damage = 1;          // Урон
+    public float pushForce = 0;     // отталкивание (не используется)
+    public float cooldown = 0.5f;   // перезардяка атаки
+    public float attackSpeed = 1;   // скорость атаки       
     public float attackRadiusHitBox = 1;    // радиус хитбокса
 
-    private float lastSwing;
-    private float lastGrab;
-    public bool grabChardge = true;
-    public bool attacking = false;
-    public bool grabReady = false;
+    private float lastSwing;    // время последнего удара (для перезарядки удара)
+    private float lastGrab;     // для перезарядки захвата
+    public bool grabChardge = false;    // заряд захвата
+    public bool attacking = false;  // состояние атаки (чтобы стоял на месте, когда бьет)
+    public bool grabReady = false;  // готовность сделать захват (когда игрок в радиусе)
 
+    // для замедления
+    public float cooldownSlow = 2f;   
+    private float lastSlow;    
+
+    // Ссылки
     public Enemy_old enemy;
-
     public WeaponAnimationEvents animationEvents;
-
     Player player;
 
 
@@ -30,7 +32,6 @@ public class EnemyHitbox : Collidable
         base.Start();
 
         player = GameManager.instance.player;
-
         enemy = GetComponentInParent<Enemy_old>();
 
         animationEvents.ZombieAnimationEvent.AddListener(EventsZombieAttack);     // получаем ивенты от анимации атаки              
@@ -42,11 +43,18 @@ public class EnemyHitbox : Collidable
     {
         //Debug.Log("Ready" + grabReady);
         //Debug.Log("Chardge" + grabChardge);
-        if (grabReady && grabChardge)
+            // Перезарядка захвата (пока что не работает)
+        if (grabReady && grabChardge)       // если готов делать захват и есть заряд
         {
             lastGrab = Time.time;
             //Debug.Log("GrabUpdate !");
             Grab();
+        }
+            
+            // Перезарядка замедления
+        if (Time.time - lastSlow > cooldownSlow)
+        {
+            player.walking = false;
         }
     }
 
@@ -58,38 +66,46 @@ public class EnemyHitbox : Collidable
             attacking = true;
             lastSwing = Time.time;
             //StartCoroutine(AttackWithDelay(hitBoxDelay));
-            enemy.anim.SetFloat("AttackSpeed", attackSpeed);
-            enemy.anim.SetTrigger("Swing");
+            enemy.anim.SetFloat("AttackSpeed", attackSpeed);    // ставим скорость атаки
+            int random = Random.Range(0, 2);                    // меняем тип атаки (анимацию)
+            if (random == 0)
+                enemy.anim.SetFloat("Attack_type", 0);
+            if (random == 1)
+                enemy.anim.SetFloat("Attack_type", 1);
+/*            if (random == 2)
+                enemy.anim.SetFloat("Attack_type", 2);
+            if (random == 3)
+                enemy.anim.SetFloat("Attack_type", 3);*/
+            enemy.anim.SetTrigger("Swing");                     // бьем
         }
     }
 
     public void Grab()      // захват зомби 
     {
         //Debug.Log("GrabF !");
+        int random = Random.Range(0, 2);        // захват левой или правой рукой
+        if (random == 1)
+            enemy.anim.SetFloat("Grab_side", 1);
         enemy.anim.SetTrigger("Grab");
         StartCoroutine(GrabCor());
-        grabChardge = false;        // заряд захвата зомби
+        grabChardge = false;                    // заряд захвата зомби
     }
 
 
     IEnumerator GrabCor()       // ускорение при захвате зомби 
     {
-        enemy.agent.speed = 3;
+        enemy.agent.speed = 4.5f;
         //do
         //{
             //yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(1f);
         //}
         //while (enemy.anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
-        enemy.agent.speed = 0.5f;
-
-
-        //yield return new WaitForSeconds(delay_1);
-
+        enemy.agent.speed = 0.5f;       
     }
 
 
-    void EventsZombieAttack(string eventName)       // по ивенту атакукем
+    void EventsZombieAttack(string eventName)       // по ивенту атакукем (ивент в анимации атаки)
     {
         //Debug.Log(eventName);
         switch (eventName)
@@ -97,8 +113,7 @@ public class EnemyHitbox : Collidable
             case "hit":
                 Collider[] collidersHitbox = Physics.OverlapSphere(this.transform.position, attackRadiusHitBox, enemy.layerPlayer);
                 foreach (Collider enObjectBox in collidersHitbox)
-                {
-                    //Debug.Log(enObject.name);
+                {                    
                     if (enObjectBox == null)
                     {
                         continue;
@@ -108,7 +123,7 @@ public class EnemyHitbox : Collidable
                     {
                         if (player)
                         {
-                            StartCoroutine(GrabPlayerWalk());
+                            GrabPlayerWalk();           // замедление игрока
                         }
 
                         Damage dmg = new Damage()
@@ -145,7 +160,7 @@ public class EnemyHitbox : Collidable
                     {                        
                         if (player)
                         {
-                            StartCoroutine(GrabPlayerWalk());                            
+                            GrabPlayerWalk();         // замедление игрока                   
                         }
 
                         Damage dmg = new Damage()
@@ -162,12 +177,13 @@ public class EnemyHitbox : Collidable
         }
     }
 
-    IEnumerator GrabPlayerWalk()
+    public void GrabPlayerWalk()        // замедление игрока
     {
+        lastSlow = Time.time;
         player.walking = true;
-        yield return new WaitForSeconds(2f);
-        player.walking = false;
     }
+
+
 
         /*
         void OnTriggerEnter(Collider coll)
@@ -189,6 +205,8 @@ public class EnemyHitbox : Collidable
             }
         }
         */
+
+
 
         void OnDrawGizmosSelected()
     {

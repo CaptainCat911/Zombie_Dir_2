@@ -48,7 +48,7 @@ MonoBehaviour:
   prefabEnemy: {fileID: 2447642059113811411, guid: 5d8223bb34f416b45b1aa1a902b35bb7,
     type: 3}
   active: 0
-  maxZombie: 0
+  maxZombie: 50
   cooldown: 5
   radius: 17
 --- !u!65 &7129848210179332589

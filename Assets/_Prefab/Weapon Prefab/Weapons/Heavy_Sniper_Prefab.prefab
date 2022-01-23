@@ -48281,7 +48281,7 @@ MonoBehaviour:
   weaponSlot: 2
   ammoType: 0.50
   indexNumberWeapon: 3
-  cooldown: 0.5
+  cooldown: 0.3
   rayDamage: 200
   pushForce: 0
   allAmmo: 0

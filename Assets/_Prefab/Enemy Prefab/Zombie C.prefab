@@ -45,13 +45,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 23
   pushForce: 0
-  cooldown: 2
-  attackSpeed: 1
-  attackRadiusHitBox: 0.6
+  cooldown: 1
+  attackSpeed: 1.3
+  attackRadiusHitBox: 0.8
   grabChardge: 1
   attacking: 0
   grabReady: 0
-  enemy: {fileID: 0}
+  enemy: {fileID: 2447642059113811414}
   animationEvents: {fileID: 926434207}
 --- !u!1 &2445470038730296225
 GameObject:
@@ -2192,6 +2192,7 @@ Transform:
   m_Children:
   - {fileID: 2448372738909333797}
   - {fileID: 1075504858290531329}
+  - {fileID: 8882731070745119623}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 112.03001, z: 0}
@@ -2241,7 +2242,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 0.5
-  m_Acceleration: 5
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 1000
   m_StoppingDistance: 1.05
@@ -2265,7 +2266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 1
-  maxHealth: 10000
+  maxHealth: 100
   pushRecoverySpeed: 0.2
   immuneTime: 0
   ySpeed: 7
@@ -2273,11 +2274,12 @@ MonoBehaviour:
   triggerLenght: 1000
   chaseLenght: 1000
   findPlayerRange: 1.1
-  grabPlayerRange: 2
-  faceingTargetSpeed: 3
+  grabPlayerRange: 3
+  faceingTargetSpeed: 20
   timeAfterDeath: 30
   strong: 0
-  test: 1
+  test: 0
+  biting: 0
   layerPlayer:
     serializedVersion: 2
     m_Bits: 256
@@ -2287,6 +2289,7 @@ MonoBehaviour:
   capsuleCollider: {fileID: 632260735}
   capsuleColliderLeftARm: {fileID: 6110045527160046294}
   capsuleColliderRightArm: {fileID: 7184383275469015053}
+  tempCapColl: {fileID: 6050872750376892019}
 --- !u!114 &361542548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2546,3 +2549,48 @@ Transform:
   m_Father: {fileID: 2448596689968630679}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6050872750376892019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8882731070745119623}
+  - component: {fileID: 59084442693446459}
+  m_Layer: 10
+  m_Name: TempCapsulCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8882731070745119623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050872750376892019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.244, y: 0.697, z: 0.152}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2442458950213549099}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &59084442693446459
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050872750376892019}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.18
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
