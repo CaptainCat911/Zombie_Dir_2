@@ -12,9 +12,14 @@ public class Enemy_old : Mover
     public float grabPlayerRange = 2f;  // на каком расстоянии начать хватать
     public float faceingTargetSpeed = 5f;   // скорость поворота возле цели
     public float timeAfterDeath = 10f;      // сколько лежит труп
-    public bool strong = false; 
-    public bool test = false;       // режим тестового зомби
+    public bool weak = false;               // слабый зомби 
+    public bool strong = false;             // сильный зомби
+    public bool test = false;               // режим тестового зомби
     public bool biting = false;
+
+    public float cooldownSlow = 0.5f;     // кулдаун замедления
+    public float lastSlow;              // для замедления
+    public bool slowed = false;
 
     private float maxSpeed = 4f;        // максимальная скорость (не нужна наверное)
     //private float speed;
@@ -37,6 +42,8 @@ public class Enemy_old : Mover
 
     public GameObject tempCapColl;
 
+    public float tempAgentSpeed = 6;
+
     
 
 
@@ -46,6 +53,8 @@ public class Enemy_old : Mover
     protected override void Start()
     {
         base.Start();
+
+        
 
         //hitbox = transform.GetChild(18).GetComponent<BoxCollider>();
         playerTransform = GameManager.instance.player.transform;
@@ -61,6 +70,7 @@ public class Enemy_old : Mover
         int random = Random.Range(0, 100);          // разные типы зомби
         if (random <= 79)
         {
+            weak = true;
             hitbox.grabChardge = true;
             hitbox.cooldown = 2.5f;
             hitbox.attackSpeed = 1.3f;
@@ -91,7 +101,7 @@ public class Enemy_old : Mover
         {
             strong = true;
             hitbox.grabChardge = false;
-            hitbox.cooldown = 1.5f;            
+            hitbox.cooldown = 1.5f;
             hitbox.attackSpeed = 2f;
             agent.speed = 6f;
             maxHealth = 250;
@@ -100,7 +110,14 @@ public class Enemy_old : Mover
             anim.SetTrigger("Biting");
             biting = true;
         }
+
+        tempAgentSpeed = agent.speed;
     }
+
+
+
+
+
 
 
     public void Update()
@@ -115,7 +132,16 @@ public class Enemy_old : Mover
         }
     }
 
+
+
+
+
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+
+
+
+
 
 
     private void FixedUpdate()
@@ -163,9 +189,11 @@ public class Enemy_old : Mover
                             agent.ResetPath();
                             FaceTarget();
                         }
-                     
+
                         else
+                        {
                             agent.SetDestination(playerTransform.position);
+                        }
                         
                     }
                     else
@@ -264,7 +292,49 @@ public class Enemy_old : Mover
         //-------------------ПушДирекшн---------------------\\
 
         pushDirection = Vector3.Lerp(pushDirection, Vector3.zero, pushRecoverySpeed);
-        transform.Translate(pushDirection * Time.deltaTime, Space.World);      
+        transform.Translate(pushDirection * Time.deltaTime, Space.World);
+
+
+
+        
+        // Перезарядка замедления
+        if (Time.time - lastSlow > cooldownSlow)
+        {
+            slowed = false;
+        }
+
+        if (slowed)
+        {
+            agent.speed *= 0.98f;
+        }
+
+        if (!slowed)
+        {
+            if (agent.speed < tempAgentSpeed)
+            {
+                agent.speed *= 1.01f;
+            }
+            
+            //agent.speed = tempAgentSpeed;
+        }
+        
+    }
+
+
+
+    protected override void ReceiveDamage(Damage dmg)
+    {
+        base.ReceiveDamage(dmg);
+        TakeHit();
+    }
+
+
+
+    public void TakeHit()
+    {
+        anim.SetTrigger("Take_Hit");
+        lastSlow = Time.time;        
+        slowed = true;
     }
 
 

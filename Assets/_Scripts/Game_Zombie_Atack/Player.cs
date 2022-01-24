@@ -18,9 +18,12 @@ public class Player : Mover
     // Передвижение
     const float locomationAnimationSmoothTime = .1f; // сглаживание бега
     public Vector3 motorVect;
-    public bool walking = false;    // для замедления от зомби
+    public bool slowed = false;    // для замедления от зомби
+                                    // для замедления
+    public float cooldownSlow = 2f;
+    public float lastSlow;
 
-        // Animation Info    
+    // Animation Info    
     private Animator anim;
 
         // Оружие
@@ -91,23 +94,30 @@ public class Player : Mover
         if (motorVect.magnitude > 1f)
             motorVect.Normalize();
 
-        if (isAlive)
-        {              
-            if ((activeWeapon.attackActive == true && !activeWeapon.isHolsted) || Input.GetKey(KeyCode.LeftControl) || walking)
-            {
-                motorVect.x = motorVect.x * 0.3f;
-                motorVect.z = motorVect.z * 0.3f;
+          
+             
 
-                anim.SetBool("Walk", true);
-                UpdateMotor(motorVect);
-            }
-            else
-            {
-                anim.SetBool("Walk", false);
-                UpdateMotor(motorVect);
-            }
+        if ((activeWeapon.attackActive == true && !activeWeapon.isHolsted) || Input.GetKey(KeyCode.LeftControl) || slowed)
+        {
+            motorVect.x = motorVect.x * 0.3f;
+            motorVect.z = motorVect.z * 0.3f;
+
+            anim.SetBool("Walk", true);
+            UpdateMotor(motorVect);
         }
 
+        else
+        {
+            anim.SetBool("Walk", false);
+            UpdateMotor(motorVect);
+        }
+
+
+        // Перезарядка замедления
+        if (Time.time - lastSlow > cooldownSlow)
+        {
+            slowed = false;            
+        }
 
 
 
@@ -184,45 +194,46 @@ public class Player : Mover
 
 
 
+
         //-------------------------- Скрывать объекты мешающие камере -----------------------\\
         //Vector3 playerPos = new Vector3(0, transform.position.x, transform.position.z);
         //Ray rayCam = Camera.main.ScreenPointToRay(playerPos);
         //Ray rayCam1 = Camera.main.ScreenToWorldPoint (transform.position);
-       // RaycastHit hitCam;
+        // RaycastHit hitCam;
 
 
- /*       bool rayBool = Physics.Linecast(Camera.main.transform.position, this.transform.position, out hitCam, layerMaskCam);
-        if (rayBool)
-        *//*        {
-                    MeshRenderer meshRenderer = hitCam.collider.gameObject.GetComponent<MeshRenderer>();
-                    Material[] materials = meshRenderer.materials;
-                    foreach (Material mat in materials)
-                    {
-                        Color tempColor = mat.color;
-                        tempColor.a = 0.5f;
-                        mat.color = tempColor;
-                    }
-                }
+        /*       bool rayBool = Physics.Linecast(Camera.main.transform.position, this.transform.position, out hitCam, layerMaskCam);
+               if (rayBool)
+               *//*        {
+                           MeshRenderer meshRenderer = hitCam.collider.gameObject.GetComponent<MeshRenderer>();
+                           Material[] materials = meshRenderer.materials;
+                           foreach (Material mat in materials)
+                           {
+                               Color tempColor = mat.color;
+                               tempColor.a = 0.5f;
+                               mat.color = tempColor;
+                           }
+                       }
 
-                if (rayBool == false)
-                {
+                       if (rayBool == false)
+                       {
 
-                }*//*
+                       }*//*
 
 
 
-        {
-            rend = hitCam.collider.gameObject.GetComponent<Renderer>();
-            rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
-        }
+               {
+                   rend = hitCam.collider.gameObject.GetComponent<Renderer>();
+                   rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+               }
 
-        if (rayBool == false)
-        {
-            if (rend == null)
-                return;
-            rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-        }
-*/
+               if (rayBool == false)
+               {
+                   if (rend == null)
+                       return;
+                   rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+               }
+       */
 
     }
 

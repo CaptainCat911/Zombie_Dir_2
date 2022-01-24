@@ -45,8 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0253bda521928b64191ae3c653a4c2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabEnemy: {fileID: 2447642059113811411, guid: 5d8223bb34f416b45b1aa1a902b35bb7,
-    type: 3}
+  prefabEnemies:
+  - {fileID: 2447642059113811411, guid: fad19a57910232444832a5114128fee0, type: 3}
+  - {fileID: 2447642059113811411, guid: 5b49bc872227fa54684a27271a482cb3, type: 3}
+  - {fileID: 2447642059113811411, guid: 2b5cc20266879344bae9f5828be9774c, type: 3}
+  - {fileID: 2447642059113811411, guid: 0035655b31978ae45aa9291389f6f746, type: 3}
+  - {fileID: 2447642059113811411, guid: 90f7f743725ec564fbea1130ca843f99, type: 3}
+  - {fileID: 2447642059113811411, guid: e769f65701231d544899d2ec3cd00fcf, type: 3}
+  - {fileID: 2447642059113811411, guid: 0e6b7e9d673d4d148bd91e4939e3f4e8, type: 3}
+  - {fileID: 2447642059113811411, guid: 5d8223bb34f416b45b1aa1a902b35bb7, type: 3}
   active: 0
   maxZombie: 50
   cooldown: 5

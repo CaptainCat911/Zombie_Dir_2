@@ -48282,7 +48282,7 @@ MonoBehaviour:
   ammoType: 0.50
   indexNumberWeapon: 3
   cooldown: 0.3
-  rayDamage: 200
+  rayDamage: 278
   pushForce: 0
   allAmmo: 0
   clipSize: 20

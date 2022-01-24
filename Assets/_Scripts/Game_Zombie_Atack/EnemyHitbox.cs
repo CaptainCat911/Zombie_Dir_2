@@ -17,9 +17,7 @@ public class EnemyHitbox : Collidable
     public bool attacking = false;  // состояние атаки (чтобы стоял на месте, когда бьет)
     public bool grabReady = false;  // готовность сделать захват (когда игрок в радиусе)
 
-    // для замедления
-    public float cooldownSlow = 2f;   
-    private float lastSlow;    
+
 
     // Ссылки
     public Enemy_old enemy;
@@ -51,11 +49,7 @@ public class EnemyHitbox : Collidable
             Grab();
         }
             
-            // Перезарядка замедления
-        if (Time.time - lastSlow > cooldownSlow)
-        {
-            player.walking = false;
-        }
+
     }
 
 
@@ -179,8 +173,8 @@ public class EnemyHitbox : Collidable
 
     public void GrabPlayerWalk()        // замедление игрока
     {
-        lastSlow = Time.time;
-        player.walking = true;
+        player.lastSlow = Time.time;
+        player.slowed = true;
     }
 
 
