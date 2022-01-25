@@ -186,12 +186,12 @@ public class RaycastWeapon : MonoBehaviour
         if (weaponName == "shotgun")   // Shotgun
         {
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
                 // Рейкаст
                 //Vector3 vector3 = new Vector3(0f, 0, 0.2f - (0.1f * i));
                 //PROJECTILE_ANCHOR.position = new Vector3(0, 0, 1);
-                qua2 = Quaternion.Euler(0, 176 + (2 * i), 0);
+                qua2 = Quaternion.Euler(0, 175 + (1.5f * i), 0);
                 PROJECTILE_ANCHOR.localRotation = Quaternion.Lerp(transform.rotation, qua2, 1);
                 MakeRayCast();
                 //yield return new WaitForSeconds(0.000f);
@@ -254,7 +254,9 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
 
-    public void MakeRayCastAll()
+
+
+    public void MakeRayCastAll()        // для прострелов (пока не смог сделать)
     {
         // Настройки для трасеров
         TrailRenderer tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);

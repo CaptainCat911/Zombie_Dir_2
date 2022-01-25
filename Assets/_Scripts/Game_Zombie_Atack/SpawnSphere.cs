@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class SpawnSphere : MonoBehaviour
 {
-
-    public int enemyNumberSpawn;
+     
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("CollideEnter !");
         if (other.tag == "EnemySpawner")
         {
             EnemySpawnPoint sp = other.GetComponent<EnemySpawnPoint>();
-            sp.active = true;
-            for (int i = 0; i < enemyNumberSpawn; i++)
-            {
-                sp.SpawnEnemy();
-            }                       
-            
+            sp.active = true;                   
         }
         
 

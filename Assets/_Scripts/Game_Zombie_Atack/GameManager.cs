@@ -21,15 +21,20 @@ public class GameManager : MonoBehaviour
 
     // Quest
     public bool quest1 = false;
+    public bool quest1Compl = false;
     public bool quest2 = false;
     public bool quest3 = false;
     public bool questFinish = false;
+
+    public int weakZombiesChanse;           
 
     // Диалог
     public DialogueTrigger dialogueTrig;
 
     // Текущая миссия
     public string mission;
+
+    public EnemySpawnPoint spawnPoint;
 
 
 
@@ -80,8 +85,10 @@ public class GameManager : MonoBehaviour
         }
 
         // Квест
-        if (quest1 == true)
+        if (quest1 && !quest1Compl)
         {
+            SetDifficulty();
+            quest1Compl = false;
             // в целях поменать на +
         }
         if (quest2 == true)
@@ -97,11 +104,21 @@ public class GameManager : MonoBehaviour
         {
             questFinish = true;
         }
-
-
     }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+
+
+
+    public void SetDifficulty()
+    {
+        spawnPoint.maxZombie += 5;
+        spawnPoint.enemyNumberSpawn += 1;
+        spawnPoint.cooldown -= 2;
+    }
+
+
+
 
     // Floating text
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)

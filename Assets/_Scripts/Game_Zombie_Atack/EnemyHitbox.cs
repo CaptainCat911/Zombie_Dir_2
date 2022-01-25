@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHitbox : Collidable
-{  
+{
     // Damage
-    public int damage = 1;          // Урон
-    public float pushForce = 0;     // отталкивание (не используется)
-    public float cooldown = 0.5f;   // перезардяка атаки
-    public float attackSpeed = 1;   // скорость атаки       
+    private int damage = 7;              // Урон
+    private float pushForce = 0.98f;    // замедление
+    public float cooldown = 0.5f;       // перезардяка атаки
+    public float attackSpeed = 1;       // скорость атаки       
     public float attackRadiusHitBox = 1;    // радиус хитбокса
+    float grabSpeed = 5f;          // скорость передвижения при захвате
 
     private float lastSwing;    // время последнего удара (для перезарядки удара)
     private float lastGrab;     // для перезарядки захвата
@@ -88,7 +89,7 @@ public class EnemyHitbox : Collidable
 
     IEnumerator GrabCor()       // ускорение при захвате зомби 
     {
-        enemy.agent.speed = 4.5f;
+        enemy.agent.speed = grabSpeed;
         //do
         //{
             //yield return new WaitForEndOfFrame();
@@ -159,7 +160,7 @@ public class EnemyHitbox : Collidable
 
                         Damage dmg = new Damage()
                         {
-                            damageAmount = 7,
+                            damageAmount = 3,
                             origin = transform.position,
                             pushForce = pushForce
                         };

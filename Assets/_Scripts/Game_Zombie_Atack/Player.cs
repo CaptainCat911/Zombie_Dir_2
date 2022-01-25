@@ -18,7 +18,7 @@ public class Player : Mover
     // Передвижение
     const float locomationAnimationSmoothTime = .1f; // сглаживание бега
     public Vector3 motorVect;
-    public bool slowed = false;    // для замедления от зомби
+    public bool slowed = false;     // для замедления от зомби
                                     // для замедления
     public float cooldownSlow = 2f;
     public float lastSlow;
@@ -28,6 +28,10 @@ public class Player : Mover
 
         // Оружие
     ActiveWeapon activeWeapon;      // ссылка на активное оружие   
+
+    float stopForce = 0;            // сила замедления от зомби
+
+    public float maxSpeed = 6;
 
 
 
@@ -47,6 +51,22 @@ public class Player : Mover
 
 
 
+    protected override void UpdateMotor(Vector3 input)
+    {
+        // Вектор для движения
+        moveDelta = new Vector3(input.x * xSpeed, 0, input.z * ySpeed);
+
+
+        //Add push vector, if any
+        //moveDelta += pushDirection;
+
+        // Reduce push force enery frame, based off recovery speed
+        //pushDirection = Vector3.Lerp(pushDirection, Vector3.zero, pushRecoverySpeed);
+
+        transform.Translate(moveDelta.x * Time.deltaTime, 0, moveDelta.z * Time.deltaTime, Space.World);
+
+    }
+
 
     protected override void ReceiveDamage(Damage dmg)
     {
@@ -54,10 +74,12 @@ public class Player : Mover
             return;
 
         base.ReceiveDamage(dmg);
+        stopForce = dmg.pushForce;
         TakeHit();
 
         /*GameManager.instance.OnHitpointChange();*/
     }
+
 
     public void TakeHit()
     {
@@ -117,6 +139,27 @@ public class Player : Mover
         if (Time.time - lastSlow > cooldownSlow)
         {
             slowed = false;            
+        }
+
+        if (slowed)
+        {
+            xSpeed *= stopForce;           // скорость замедления 
+            ySpeed *= stopForce;
+        }
+
+        if (!slowed)
+        {
+            if (xSpeed < maxSpeed)
+            {
+                xSpeed *= 1.01f;           // скорость восстановления после замедления
+                ySpeed *= 1.01f;
+            }            
+        }
+
+        if (xSpeed < 2f)
+        {
+            xSpeed = 2f;            // минимальная скорость
+            ySpeed = 2f;
         }
 
 
@@ -297,7 +340,7 @@ public class Player : Mover
     {
         Heal(maxHealth);
         isAlive = true;
-        lastImmune = Time.time;
+        //lastImmune = Time.time;
         pushDirection = Vector3.zero;
     }
 

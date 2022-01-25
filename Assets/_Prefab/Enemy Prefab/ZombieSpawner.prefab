@@ -55,8 +55,10 @@ MonoBehaviour:
   - {fileID: 2447642059113811411, guid: 0e6b7e9d673d4d148bd91e4939e3f4e8, type: 3}
   - {fileID: 2447642059113811411, guid: 5d8223bb34f416b45b1aa1a902b35bb7, type: 3}
   active: 0
-  maxZombie: 50
-  cooldown: 5
+  maxZombie: 30
+  fewZombiesReady: 1
+  enemyNumberSpawn: 1
+  cooldown: 10
   radius: 17
 --- !u!65 &7129848210179332589
 BoxCollider:

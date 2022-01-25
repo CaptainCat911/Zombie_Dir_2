@@ -12,8 +12,8 @@ public class Fighter : MonoBehaviour
     public float pushRecoverySpeed = 0.2f;
 
     //Immunity
-    public float immuneTime = 0f;
-    protected float lastImmune;
+    //public float immuneTime = 0f;
+    //protected float lastImmune;
 
     //Push
     protected Vector3 pushDirection;
@@ -41,8 +41,8 @@ public class Fighter : MonoBehaviour
             //Debug.Log(dmg.damageAmount);
             currentHealth -= dmg.damageAmount;
 
-                // Push
-            pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
+                // Push (убрал пока что (заменил))
+            //pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
         
 

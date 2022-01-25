@@ -28873,7 +28873,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.4
+      scalar: 0.5
       minScalar: 0.3
       maxCurve:
         serializedVersion: 2
@@ -38237,7 +38237,7 @@ MonoBehaviour:
   indexNumberWeapon: 1
   cooldown: 0.2
   rayDamage: 21
-  pushForce: 0
+  pushForce: 0.99
   allAmmo: 0
   clipSize: 20
   ammoCount: 20

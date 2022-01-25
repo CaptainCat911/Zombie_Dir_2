@@ -43,8 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3c50692ca0c7b47879d3c82ff8232f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 23
-  pushForce: 0
   cooldown: 1
   attackSpeed: 1.3
   attackRadiusHitBox: 0.8
@@ -2173,7 +2171,7 @@ GameObject:
   - component: {fileID: 361542548}
   - component: {fileID: 926434207}
   m_Layer: 10
-  m_Name: Zombie O 2
+  m_Name: Zombie D1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2268,13 +2266,12 @@ MonoBehaviour:
   currentHealth: 1
   maxHealth: 100
   pushRecoverySpeed: 0.2
-  immuneTime: 0
   ySpeed: 7
   xSpeed: 7
   triggerLenght: 1000
   chaseLenght: 1000
   findPlayerRange: 1.1
-  grabPlayerRange: 3
+  grabPlayerRange: 4
   faceingTargetSpeed: 20
   timeAfterDeath: 30
   weak: 0

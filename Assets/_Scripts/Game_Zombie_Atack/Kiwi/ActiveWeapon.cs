@@ -36,7 +36,7 @@ public class ActiveWeapon : MonoBehaviour
 
 
     public Transform[] weaponSlots;     // слоты под оружие
-    public Transform weaponLeftGrip;
+    public Transform weaponLeftGrip;    // риг левой руки
     public Transform weaponRightGrip;
 
     int iPistol = -1;
@@ -127,7 +127,12 @@ public class ActiveWeapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             //ToggleActiveWeapon();
-        }        
+        }
+
+        if (reloaring)
+        {
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

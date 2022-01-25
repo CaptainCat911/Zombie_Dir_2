@@ -7,21 +7,36 @@ public class EnemySpawnPoint : MonoBehaviour
     
 {
     //public float enemySpawnPerSecond;
-    public GameObject[] prefabEnemies;
+    public GameObject[] prefabEnemies;      // массив префабов с зомби
     NavMeshAgent agent;
-    public bool active = false;
-    public int maxZombie = 50;
+    public bool active = false;             // активация этого спавнера
+    public int maxZombie = 50;              // максимальное кол-во зомби 
+    public bool fewZombiesReady = true;     // для вызова нескольких зомби при активации
+    public int enemyNumberSpawn = 1;            // кол-во зомби при активации
+    public float cooldown = 1f;             // перезарядка спауна
+    private float lastSpawn;
 
-    public float cooldown = 1f;
-    private float lastSwing;
+    public float radius;                    // радиус для спавна зомби за пределеами видимости игрока
 
-    public float radius;
+
 
 
 
     private void Update()
     {
-        if (active && Time.time - lastSwing > cooldown)
+        if (active && fewZombiesReady)
+        {
+            for (int i = 0; i < enemyNumberSpawn; i++)
+            {
+                SpawnEnemy();
+            }
+            fewZombiesReady = false;
+        }
+
+        if (!active)
+            fewZombiesReady = true;
+
+        if (active && Time.time - lastSpawn > cooldown)
         {
             float dist = Vector3.Distance(transform.position, GameManager.instance.player.transform.position);  
             if (dist > radius)
@@ -32,6 +47,8 @@ public class EnemySpawnPoint : MonoBehaviour
     }
 
 
+
+
     public void SpawnEnemy()
     {
         if (GameManager.instance.enemyCount >= maxZombie)
@@ -39,7 +56,7 @@ public class EnemySpawnPoint : MonoBehaviour
             return;
         }
 
-        lastSwing = Time.time;
+        lastSpawn = Time.time;
 
         //Debug.Log(GameManager.instance.enemyCount);        
         int ndx = Random.Range(0, prefabEnemies.Length);
@@ -55,6 +72,7 @@ public class EnemySpawnPoint : MonoBehaviour
 /*        if (active)
             Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);*/ 
     }
+
 
 
     void OnDrawGizmosSelected()

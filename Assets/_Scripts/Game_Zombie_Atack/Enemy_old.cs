@@ -35,14 +35,15 @@ public class Enemy_old : Mover
     public NavMeshAgent agent;
     public EnemyHitbox hitbox;      // ссылка на хитбокс
     public CapsuleCollider capsuleCollider;         // коллайдеры для попадания
-    public CapsuleCollider capsuleColliderLeftARm;
-    public CapsuleCollider capsuleColliderRightArm;
+    public CapsuleCollider capsuleColliderLeftARm;  // коллайдеры рук
+    public CapsuleCollider capsuleColliderRightArm; //
     //CapsuleCollider[] allCapsCol;
     private Enemy_old selfScript;    // ссылка на свой скрипт (вроде можно убрать)
 
-    public GameObject tempCapColl;
+    public GameObject tempCapColl;      // временный коллайдер для жрущих зомби
 
-    public float tempAgentSpeed = 6;
+    public float tempAgentSpeed = 6;    // скорость к которой вернуться после замедления 
+    float stopForce = 0;                // сила замедления
 
     
 
@@ -52,9 +53,7 @@ public class Enemy_old : Mover
 
     protected override void Start()
     {
-        base.Start();
-
-        
+        base.Start();        
 
         //hitbox = transform.GetChild(18).GetComponent<BoxCollider>();
         playerTransform = GameManager.instance.player.transform;
@@ -71,7 +70,12 @@ public class Enemy_old : Mover
         if (random <= 79)
         {
             weak = true;
-            hitbox.grabChardge = true;
+            int random3 = Random.Range(0, 3);
+            if (random3 == 0)
+                hitbox.grabChardge = false;
+            if (random3 == 1 || random3 == 2)
+                hitbox.grabChardge = true;
+
             hitbox.cooldown = 2.5f;
             hitbox.attackSpeed = 1.3f;
             agent.speed = 0.5f;
@@ -88,7 +92,12 @@ public class Enemy_old : Mover
 
         if (random >= 80 && random < 90)
         {
-            hitbox.grabChardge = false;
+            int random3 = Random.Range(0, 3);
+            if (random3 == 0 || random3 == 2)
+                hitbox.grabChardge = false;
+            if (random3 == 1)
+                hitbox.grabChardge = true;
+
             hitbox.cooldown = 2f;
             hitbox.attackSpeed = 1.6f;
             agent.speed = 2f;
@@ -135,11 +144,7 @@ public class Enemy_old : Mover
 
 
 
-
-
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
-
-
 
 
 
@@ -291,8 +296,8 @@ public class Enemy_old : Mover
 
         //-------------------ПушДирекшн---------------------\\
 
-        pushDirection = Vector3.Lerp(pushDirection, Vector3.zero, pushRecoverySpeed);
-        transform.Translate(pushDirection * Time.deltaTime, Space.World);
+        //pushDirection = Vector3.Lerp(pushDirection, Vector3.zero, pushRecoverySpeed);
+        //transform.Translate(pushDirection * Time.deltaTime, Space.World);
 
 
 
@@ -303,21 +308,24 @@ public class Enemy_old : Mover
             slowed = false;
         }
 
-        if (slowed)
+        if (slowed)         
         {
-            agent.speed *= 0.98f;
+            agent.speed *= stopForce;           // скорость замедления 
         }
 
-        if (!slowed)
+        if (!slowed)        
         {
             if (agent.speed < tempAgentSpeed)
             {
-                agent.speed *= 1.01f;
-            }
-            
+                agent.speed *= 1.01f;           // скорость восстановления после замедления
+            }            
             //agent.speed = tempAgentSpeed;
         }
-        
+
+        if (agent.speed < 0.2f)        
+        {
+            agent.speed = 0.2f;            // минимальная скорость
+        }        
     }
 
 
@@ -325,6 +333,7 @@ public class Enemy_old : Mover
     protected override void ReceiveDamage(Damage dmg)
     {
         base.ReceiveDamage(dmg);
+        stopForce = dmg.pushForce;
         TakeHit();
     }
 
@@ -333,7 +342,7 @@ public class Enemy_old : Mover
     public void TakeHit()
     {
         anim.SetTrigger("Take_Hit");
-        lastSlow = Time.time;        
+        lastSlow = Time.time;
         slowed = true;
     }
 

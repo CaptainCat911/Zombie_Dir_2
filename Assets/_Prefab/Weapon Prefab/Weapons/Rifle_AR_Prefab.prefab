@@ -2397,8 +2397,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.55
-      minScalar: 0.45
+      scalar: 0.7
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7190,8 +7190,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.55
-      minScalar: 0.45
+      scalar: 0.7
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -12075,8 +12075,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.45
-      minScalar: 0.45
+      scalar: 0.8
+      minScalar: 0.6
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -26460,8 +26460,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.55
-      minScalar: 0.45
+      scalar: 0.7
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -50560,7 +50560,7 @@ MonoBehaviour:
   indexNumberWeapon: 2
   cooldown: 0.1
   rayDamage: 29
-  pushForce: 0
+  pushForce: 0.98
   allAmmo: 0
   clipSize: 50
   ammoCount: 50
@@ -71204,7 +71204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9222881883199714421}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.1, y: -0.3, z: -0.35}
+  m_LocalPosition: {x: 0.1, y: -0.3, z: -0.056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5718410196017201911}
