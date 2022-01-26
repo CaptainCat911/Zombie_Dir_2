@@ -20,10 +20,12 @@ public class GameManager : MonoBehaviour
     public bool inBuilding = false;
 
     // Quest
-    public bool quest1 = false;
-    public bool quest1Compl = false;
+    public bool quest1 = false;   
     public bool quest2 = false;
     public bool quest3 = false;
+    public bool quest1Compl = false;
+    public bool quest2Compl = false;
+    public bool quest3Compl = false;    
     public bool questFinish = false;
 
     public int weakZombiesChanse;           
@@ -34,7 +36,8 @@ public class GameManager : MonoBehaviour
     // Текущая миссия
     public string mission;
 
-    public EnemySpawnPoint spawnPoint;
+    public GameObject spawnPointsGameobject;
+    private EnemySpawnPoint[] spawnPoints;
 
 
 
@@ -65,7 +68,8 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        dialogueTrig = GetComponent<DialogueTrigger>();     // Ссылка на диалог        
+        dialogueTrig = GetComponent<DialogueTrigger>();     // Ссылка на диалог
+        spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>();        
     }
 
 
@@ -83,26 +87,38 @@ public class GameManager : MonoBehaviour
         {
             dialogueTrig.TriggerDialogue(0);            
         }
+        
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            SetDifficulty();
+        }
 
-        // Квест
+            // Квест
         if (quest1 && !quest1Compl)
         {
             SetDifficulty();
-            quest1Compl = false;
+            quest1Compl = true;
+
             // в целях поменать на +
         }
-        if (quest2 == true)
+        if (quest2 && !quest2Compl)
         {
+            SetDifficulty();
+            quest2Compl = true;
+
             // в целях поменать на +
         }
-        if (quest3 == true)
+        if (quest3 && !quest3Compl)
         {
-            // в целях поменать на +
+            SetDifficulty();
+            quest3Compl = true;
         }
 
         if (quest1 && quest2 && quest3)
         {
-            questFinish = true;
+            //SetDifficulty();
+            questFinish = true;         // собраны 3 предмета 
+            
         }
     }
 
@@ -112,9 +128,16 @@ public class GameManager : MonoBehaviour
 
     public void SetDifficulty()
     {
-        spawnPoint.maxZombie += 5;
-        spawnPoint.enemyNumberSpawn += 1;
-        spawnPoint.cooldown -= 2;
+        Debug.Log("Set!");
+        foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+        {
+            if (spawnPoint.maxZombie < 50)
+                spawnPoint.maxZombie += 5;
+            if (spawnPoint.enemyNumberSpawn < 3)
+                spawnPoint.enemyNumberSpawn += 1;
+            if (spawnPoint.cooldown > 2)
+                spawnPoint.cooldown -= 1;
+        }
     }
 
 

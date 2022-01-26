@@ -10,15 +10,21 @@ public class FloorCollide : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //roof.SetActive(false);
-        GameManager.instance.inBuilding = true;
-        //Debug.Log("Enter !");
+        if (other.name == "Player_Soldier")
+        { 
+            //roof.SetActive(false);
+            GameManager.instance.inBuilding = true;
+            Debug.Log("Enter !");
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        //roof.SetActive(true);
-        GameManager.instance.inBuilding = false;
-        //Debug.Log("Exit !");
+        if (other.name == "Player_Soldier")
+        {
+            //roof.SetActive(true);
+            GameManager.instance.inBuilding = false;
+            Debug.Log("Exit !");
+        }
     }
 
 /*    private void OnTriggerStay(Collider other)

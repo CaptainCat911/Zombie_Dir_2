@@ -28,6 +28,8 @@ public class MaskControl : MonoBehaviour
         }
         maskScale = new Vector3(maskSize, maskSize, maskSize);
 
+        //Debug.Log(GameManager.instance.inBuilding);
+
 
         if (Physics.Linecast(Camera.main.transform.position, player.position, out raycastHit, ~playerMask))
         {

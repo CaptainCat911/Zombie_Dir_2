@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class QuestRadio : MonoBehaviour
 {
-    bool questStart = false;
-    bool questCompl = false;
-    bool enterTrigger = false;
+    bool questStart = false;            // первое взаимодействие с квестом
+    bool questCompl = false;            // тру когда полностью выполнен квест
+    bool enterTrigger = false;          // вход игрока в триггер
     int nCount = 0;    
 
     private DialogueTrigger dialogueTrig;   // ссылка на диалог 
 
-    public GameObject[] images;
+    public GameObject[] images;             // для предметов 
 
 
 
@@ -39,11 +39,11 @@ public class QuestRadio : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && !questCompl && enterTrigger)     // если квест не начат и игрок зашёл в триггер и нажал "е"
         {
             nCount++;
-            if (!questStart && !GameManager.instance.questFinish)   
+            if (!questStart && !GameManager.instance.questFinish)           // если квест не начат и не закончен
             {                                              
                 dialogueTrig.TriggerDialogue(0);                
 
-                questStart = true;
+                questStart = true;                                          // квест начат
                 GameManager.instance.mission = "Найдите инструменты, транзисторы и бензин, чтобы починить радио";
             }
 
@@ -54,7 +54,7 @@ public class QuestRadio : MonoBehaviour
             }
 
 
-            if (GameManager.instance.questFinish)
+            if (GameManager.instance.questFinish)       // если квест закончен (собраны 3 предмета)
             {                
                 dialogueTrig.TriggerDialogue(1);        // запускаем второй диалог
                 foreach (GameObject image in images)    // деактивируем иконки предметовы
@@ -64,7 +64,8 @@ public class QuestRadio : MonoBehaviour
 
                 // запустить таймер
 
-                questCompl = true;
+                questCompl = true;                      // квест выполнен (больше не можем взаимодействовать)
+                GameManager.instance.SetDifficulty();      // повышаем сложность
                 GameManager.instance.mission = "Продержитесь : таймер";
             }
         }        

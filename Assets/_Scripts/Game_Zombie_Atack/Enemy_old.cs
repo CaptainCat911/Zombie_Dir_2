@@ -163,11 +163,12 @@ public class Enemy_old : Mover
             {
                 if (Vector3.Distance(playerTransform.position, startingPosition) < triggerLenght)
                 {
-                    FaceTarget();
+                    
                     chasing = true;
                     if (strong && biting)
                     {                       
                         anim.SetTrigger("Stop_biting");
+                        FaceTarget();
                         if (currentHealth == maxHealth)
                         {
                             StartCoroutine(ScreamDelay());
@@ -322,7 +323,7 @@ public class Enemy_old : Mover
             //agent.speed = tempAgentSpeed;
         }
 
-        if (agent.speed < 0.2f)        
+        if (agent.speed < 0.2f && !test)        
         {
             agent.speed = 0.2f;            // минимальная скорость
         }        
