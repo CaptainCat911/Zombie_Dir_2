@@ -121,16 +121,19 @@ public class Player : Mover
 
         if ((activeWeapon.attackActive == true && !activeWeapon.isHolsted) || Input.GetKey(KeyCode.LeftControl) || slowed)
         {
-            motorVect.x = motorVect.x * 0.3f;
-            motorVect.z = motorVect.z * 0.3f;
+            if (xSpeed > 2.5f)
+            {
+                xSpeed *= 0.93f;
+                ySpeed *= 0.93f;
+            }
 
-            anim.SetBool("Walk", true);
+            //anim.SetBool("Walk", true);
             UpdateMotor(motorVect);
         }
 
         else
         {
-            anim.SetBool("Walk", false);
+            //anim.SetBool("Walk", false);
             UpdateMotor(motorVect);
         }
 
@@ -151,18 +154,19 @@ public class Player : Mover
         {
             if (xSpeed < maxSpeed)
             {
-                xSpeed *= 1.01f;           // скорость восстановления после замедления
-                ySpeed *= 1.01f;
+                xSpeed *= 1.03f;           // скорость восстановления после замедления
+                ySpeed *= 1.03f;
             }            
         }
 
-        if (xSpeed < 2f)
+        if (xSpeed < 1f)
         {
-            xSpeed = 2f;            // минимальная скорость
-            ySpeed = 2f;
+            xSpeed = 1f;            // минимальная скорость
+            ySpeed = 1f;
         }
 
-
+        anim.SetFloat("Speed", xSpeed, locomationAnimationSmoothTime, Time.deltaTime);
+        //Debug.Log(xSpeed);
 
 
         /*
