@@ -16,7 +16,7 @@ public class MaterialControl : MonoBehaviour
 
     public void SetMask(bool value)
     {
-        if (value)
+/*        if (value)
         {
             foreach (Material mat in materials)
             {
@@ -26,6 +26,6 @@ public class MaterialControl : MonoBehaviour
         else
         {
             //meshRenderer.materials = materials;
-        }
+        }*/
     }
 }

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public bool inBuilding = false;
 
     // Quest
-    public bool quest1 = false;   
+    public bool quest1 = false;
     public bool quest2 = false;
     public bool quest3 = false;
     public bool quest1Compl = false;
