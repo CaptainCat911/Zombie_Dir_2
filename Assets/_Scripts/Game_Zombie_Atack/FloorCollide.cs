@@ -14,7 +14,7 @@ public class FloorCollide : MonoBehaviour
         { 
             //roof.SetActive(false);
             GameManager.instance.inBuilding = true;
-            Debug.Log("Enter !");
+            //Debug.Log("Enter !");
         }
     }
     private void OnTriggerExit(Collider other)
@@ -23,7 +23,7 @@ public class FloorCollide : MonoBehaviour
         {
             //roof.SetActive(true);
             GameManager.instance.inBuilding = false;
-            Debug.Log("Exit !");
+            //Debug.Log("Exit !");
         }
     }
 

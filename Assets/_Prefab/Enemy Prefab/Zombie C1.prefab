@@ -2238,7 +2238,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2447642059113811411}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 0.5
   m_Acceleration: 10
   avoidancePriority: 50
@@ -2274,6 +2274,8 @@ MonoBehaviour:
   grabPlayerRange: 4
   faceingTargetSpeed: 20
   timeAfterDeath: 30
+  weakZombie: 0
+  strongZombie: 0
   weak: 0
   strong: 0
   test: 0

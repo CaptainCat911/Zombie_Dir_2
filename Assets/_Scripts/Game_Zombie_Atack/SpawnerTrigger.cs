@@ -7,11 +7,22 @@ public class SpawnerTrigger : MonoBehaviour
 {   
     public GameObject[] spawners;      // массив префабов с спавнерами
     bool triggerEnter = false;
+    public bool trigDiffReady = true;
 
     public void OnTriggerEnter(Collider collision)
     {
         if (collision.name == "Player_Soldier")
+        {
             triggerEnter = true;
+            if (trigDiffReady)
+            {
+                GameManager.instance.MaxDifficulty();
+                trigDiffReady = false;
+            }
+        }
+            
+
+
     }
 
     public void OnTriggerExit(Collider collision)

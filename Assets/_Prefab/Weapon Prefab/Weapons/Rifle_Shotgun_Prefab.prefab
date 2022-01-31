@@ -48772,7 +48772,7 @@ GameObject:
   m_Layer: 0
   m_Name: Rifle_Shotgun_Prefab
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -48813,7 +48813,7 @@ MonoBehaviour:
   ammoType: 0.12
   indexNumberWeapon: 2
   cooldown: 0.3
-  rayDamage: 35
+  rayDamage: 26
   pushForce: 0.94
   allAmmo: 0
   clipSize: 26
@@ -48829,7 +48829,7 @@ MonoBehaviour:
   - {fileID: 4473978892112714312}
   hitEffect: {fileID: 9081731006676405133}
   hitEffectBlood: {fileID: 4459799154045676820}
-  tracerEffect: {fileID: 2665097644371149589, guid: ae83976c12df04e43af3b831e860cb2d,
+  tracerEffect: {fileID: 2665097644371149589, guid: f786cfd8eefbd034fa10090faa5cb6b5,
     type: 3}
   lightEffect: {fileID: 4473978892120722954}
 --- !u!1 &5770682396188158199

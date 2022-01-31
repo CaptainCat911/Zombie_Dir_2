@@ -191,7 +191,7 @@ public class RaycastWeapon : MonoBehaviour
                 // Рейкаст
                 //Vector3 vector3 = new Vector3(0f, 0, 0.2f - (0.1f * i));
                 //PROJECTILE_ANCHOR.position = new Vector3(0, 0, 1);
-                qua2 = Quaternion.Euler(0, 175 + (1.5f * i), 0);
+                qua2 = Quaternion.Euler(0, 178f + (1.5f * i), 0);
                 PROJECTILE_ANCHOR.localRotation = Quaternion.Lerp(transform.rotation, qua2, 1);
                 MakeRayCast();
                 //yield return new WaitForSeconds(0.000f);

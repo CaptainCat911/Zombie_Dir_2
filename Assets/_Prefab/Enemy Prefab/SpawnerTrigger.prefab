@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4575415947647573998}
   - component: {fileID: 3460660825381034040}
   - component: {fileID: 3958568495003062158}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnerTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,12 +7,13 @@ public class EnemySpawnPointTrigger : MonoBehaviour
 
 {
     //public float enemySpawnPerSecond;
-    public GameObject[] prefabEnemies;      // массив префабов с зомби
+    public GameObject[] prefabEnemies;      // массив префабов с зомби    
     NavMeshAgent agent;
     public bool active = false;             // активация этого спавнера
     public int maxZombie = 50;              // максимальное кол-во зомби 
     public int enemyCount;
-
+    public bool makeWeak = false;
+    public bool makeStrong = false;
     //public bool fewZombiesReady = true;     // для вызова нескольких зомби при активации
     //public int enemyNumberSpawn = 1;            // кол-во зомби при активации
 
@@ -20,9 +21,6 @@ public class EnemySpawnPointTrigger : MonoBehaviour
     private float lastSpawn;
 
     public float radius;                    // радиус для спавна зомби за пределеами видимости игрока
-
-
-
 
 
     private void Update()
@@ -38,32 +36,43 @@ public class EnemySpawnPointTrigger : MonoBehaviour
     }
 
 
-
-
     public void SpawnEnemy()
     {
         if (enemyCount >= maxZombie)
         {
+            foreach (GameObject enemy in prefabEnemies)
+            {
+                Enemy_old enemy_Old = enemy.GetComponent<Enemy_old>();
+                if (makeWeak)
+                    enemy_Old.weakZombie = false;
+                if (makeStrong)
+                    enemy_Old.strongZombie = false;
+            }
             return;
         }
 
         lastSpawn = Time.time;
 
-        //Debug.Log(GameManager.instance.enemyCount);        
+        //Debug.Log(GameManager.instance.enemyCount);
         int ndx = Random.Range(0, prefabEnemies.Length);
         foreach (GameObject enemy in prefabEnemies)
         {
             Enemy_old enemy_Old = enemy.GetComponent<Enemy_old>();
-            enemy_Old.weak = true;
+            if (makeWeak)
+                enemy_Old.weakZombie = true;
+            if (makeStrong)
+                enemy_Old.strongZombie = true;
+
         }
 
-        GameObject go = Instantiate(prefabEnemies[ndx]);// Создаём префаб   
+        GameObject go = Instantiate(prefabEnemies[ndx]);    // Создаём префаб   
 
         go.transform.SetParent(transform, false);           // Назначаем этот спавнер родителем
         agent = go.GetComponent<NavMeshAgent>();            // Находим НавМешАгент
         agent.Warp(transform.position);                     // Перемещаем префаб к спавнеру
 
         enemyCount++;
+        GameManager.instance.enemyCount += 1;
 
         // Снова вызвать SpawnEnemy
         /*        if (active)

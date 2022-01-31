@@ -12,8 +12,12 @@ public class Enemy_old : Mover
     public float grabPlayerRange = 2f;  // на каком расстоянии начать хватать
     public float faceingTargetSpeed = 5f;   // скорость поворота возле цели
     public float timeAfterDeath = 10f;      // сколько лежит труп
-    public bool weak = false;               // слабый зомби 
-    public bool strong = false;             // сильный зомби
+    public bool weakZombie = false;               // слабый зомби 
+    public bool strongZombie = false;             // сильный зомби
+
+    public bool weak = false;
+    public bool strong = false;
+
     public bool test = false;               // режим тестового зомби
     public bool biting = false;
 
@@ -67,7 +71,7 @@ public class Enemy_old : Mover
             return;
 
         int random = Random.Range(0, 100);          // разные типы зомби
-        if (random <= 79 || weak)
+        if (random <= 79 || weakZombie)
         {
             random = 0;
             int random3 = Random.Range(0, 3);
@@ -106,8 +110,9 @@ public class Enemy_old : Mover
             tempCapColl.SetActive(false);
         }
 
-        if (random >= 90 || strong)
-        {            
+        if (random >= 90 || strongZombie)
+        {
+            strong = true;
             hitbox.grabChardge = false;
             hitbox.cooldown = 1.5f;
             hitbox.attackSpeed = 2f;
@@ -385,11 +390,11 @@ public class Enemy_old : Mover
         anim.SetTrigger("Death");
         capsuleCollider.enabled = false;       
         capsuleColliderLeftARm.enabled = false;
-        capsuleColliderRightArm.enabled = false;
-        selfScript.enabled = false;
+        capsuleColliderRightArm.enabled = false;        
         agent.ResetPath();
         Invoke("NavMeshDisable", 2);
-        Destroy(gameObject, timeAfterDeath);        
+        Destroy(gameObject, timeAfterDeath);
+        selfScript.enabled = false;
 
         // Добавить шанс выпадение предмета
     }

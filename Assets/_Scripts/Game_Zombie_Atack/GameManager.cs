@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
 
     public void SetDifficulty()
     {
-        Debug.Log("Set!");
+        //Debug.Log("Set!");
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
             if (spawnPoint.maxZombie < 50)
@@ -140,6 +140,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void MaxDifficulty()
+    {
+        foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+        {
+            spawnPoint.maxZombie += 15;
+            spawnPoint.enemyNumberSpawn += 2;
+            spawnPoint.cooldown -= 2;
+        }
+        StartCoroutine(MaxDiff());
+    }
+
+    IEnumerator MaxDiff()
+    {
+        yield return new WaitForSeconds(60);
+        foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+        {
+
+            spawnPoint.maxZombie -= 15;
+            spawnPoint.enemyNumberSpawn -= 2;
+            spawnPoint.cooldown += 2;
+        }
+    }
 
 
 
