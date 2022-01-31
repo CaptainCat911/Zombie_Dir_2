@@ -67,9 +67,9 @@ public class Enemy_old : Mover
             return;
 
         int random = Random.Range(0, 100);          // разные типы зомби
-        if (random <= 79)
+        if (random <= 79 || weak)
         {
-            weak = true;
+            random = 0;
             int random3 = Random.Range(0, 3);
             if (random3 == 0)
                 hitbox.grabChardge = false;
@@ -106,9 +106,8 @@ public class Enemy_old : Mover
             tempCapColl.SetActive(false);
         }
 
-        if (random >= 90)
-        {
-            strong = true;
+        if (random >= 90 || strong)
+        {            
             hitbox.grabChardge = false;
             hitbox.cooldown = 1.5f;
             hitbox.attackSpeed = 2f;
@@ -118,6 +117,7 @@ public class Enemy_old : Mover
             triggerLenght = 6;
             anim.SetTrigger("Biting");
             biting = true;
+            tempCapColl.SetActive(true);
         }
 
         tempAgentSpeed = agent.speed;

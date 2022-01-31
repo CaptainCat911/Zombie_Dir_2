@@ -20,7 +20,7 @@ public class MaskControl : MonoBehaviour
         RaycastHit raycastHit;
         if (GameManager.instance.inBuilding)
         {
-            maskSize = 23;
+            maskSize = 10;
         }
         else
         {
