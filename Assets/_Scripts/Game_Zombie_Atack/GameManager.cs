@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public bool quest2Compl = false;
     public bool quest3Compl = false;    
     public bool questFinish = false;
+    public bool final = false;          // для финального ивента
 
     public int weakZombiesChanse;           
 

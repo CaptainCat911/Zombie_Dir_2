@@ -32,6 +32,8 @@ public class Player : Mover
     float stopForce = 0;            // сила замедления от зомби
 
     public float maxSpeed = 6;
+       
+    public Animator finalSphereAnim;
 
 
 
@@ -43,6 +45,9 @@ public class Player : Mover
         base.Start();
         
         pointer = transform.Find("Sphere_Aim").gameObject.GetComponent<Transform>();
+        //finalSphere = transform.Find("Final Sphere").gameObject.GetComponent<FinalSphere>();
+        
+
         anim = GetComponent<Animator>();        
         activeWeapon = GetComponent<ActiveWeapon>();
         //layerMask = ~layerMask;
@@ -202,7 +207,16 @@ public class Player : Mover
                 aiming = false;
         }
 
-          //-------------------------- Прицел -----------------------\\
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            finalSphereAnim.SetTrigger("Final");
+        }
+
+
+            
+
+        //-------------------------- Прицел -----------------------\\
         //Ray ray1 = new Ray(transform.position, transform.forward);
         Ray ray1 = Camera.main.ScreenPointToRay(Input.mousePosition);
         //Debug.DrawRay(transform.position, transform.forward * 100f, Color.yellow);

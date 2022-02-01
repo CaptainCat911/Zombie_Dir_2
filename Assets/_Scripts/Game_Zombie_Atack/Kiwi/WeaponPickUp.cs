@@ -30,12 +30,19 @@ public class WeaponPickUp : MonoBehaviour
 
 
     private void Update()
-    {                
+    {
         if (Input.GetKeyDown(KeyCode.E) && triggerEnter)
-        {           
+        {
             RaycastWeapon newWeapon = Instantiate(weaponPrefab);
-            activeWeapon.GetWeaponUp(newWeapon);                
+            activeWeapon.GetWeaponUp(newWeapon);
             Destroy(gameObject);
         }
-    }    
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            RaycastWeapon newWeapon = Instantiate(weaponPrefab);
+            activeWeapon.GetWeaponUp(newWeapon);
+            Destroy(gameObject);
+        }
+    }
 }

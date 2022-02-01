@@ -49,7 +49,9 @@ public class Enemy_old : Mover
     public float tempAgentSpeed = 6;    // скорость к которой вернуться после замедления 
     float stopForce = 0;                // сила замедления
 
-    
+    public ParticleSystem hitEffectBlood;   // кровь для финала
+    public GameObject chest;                // для крови
+
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -67,6 +69,7 @@ public class Enemy_old : Mover
         hitbox = GetComponentInChildren<EnemyHitbox>();
         //capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         selfScript = GetComponent<Enemy_old>();
+        
         if (test)
             return;
 
@@ -136,9 +139,9 @@ public class Enemy_old : Mover
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            
+            DeathFinal();
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -377,10 +380,6 @@ public class Enemy_old : Mover
 
 
 
-
-
-
-
     protected override void Death()
     {
         GameManager.instance.enemyCount -= 1;
@@ -408,5 +407,28 @@ public class Enemy_old : Mover
     {
         GameManager.instance.enemyCount -= 1;
         Destroy(gameObject);
+    }
+
+    public void DeathFinal()
+    {
+        GameManager.instance.enemyCount -= 1;
+
+        hitEffectBlood.transform.position = chest.transform.position;
+        hitEffectBlood.transform.forward = transform.forward;
+        hitEffectBlood.Emit(1);
+
+        int random = Random.Range(0, 2);
+        if (random == 1)
+            anim.SetFloat("Death_type", 1);
+        anim.SetTrigger("Death");
+        capsuleCollider.enabled = false;
+        capsuleColliderLeftARm.enabled = false;
+        capsuleColliderRightArm.enabled = false;
+        agent.ResetPath();
+        Invoke("NavMeshDisable", 2);
+        Destroy(gameObject, timeAfterDeath);
+        selfScript.enabled = false;
+
+        // Добавить шанс выпадение предмета
     }
 }

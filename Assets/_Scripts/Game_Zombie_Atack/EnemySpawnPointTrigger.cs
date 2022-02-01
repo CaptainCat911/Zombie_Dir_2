@@ -38,6 +38,10 @@ public class EnemySpawnPointTrigger : MonoBehaviour
 
     public void SpawnEnemy()
     {
+        if (GameManager.instance.enemyCount >= maxZombie && GameManager.instance.final)
+        {
+            return;
+        }
         if (enemyCount >= maxZombie)
         {
             foreach (GameObject enemy in prefabEnemies)
