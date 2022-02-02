@@ -10,6 +10,7 @@ public class WeaponPickUp : MonoBehaviour
     void Start()
     {
         activeWeapon = GameManager.instance.player.GetComponent<ActiveWeapon>();
+
     }
 
 

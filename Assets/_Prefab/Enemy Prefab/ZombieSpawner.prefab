@@ -57,7 +57,7 @@ MonoBehaviour:
   active: 0
   maxZombie: 50
   fewZombiesReady: 1
-  enemyNumberSpawn: 3
+  enemyNumberSpawn: 0
   cooldown: 4
   radius: 17
 --- !u!65 &7129848210179332589

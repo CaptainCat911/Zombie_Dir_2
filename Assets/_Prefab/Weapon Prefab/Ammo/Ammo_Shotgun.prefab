@@ -107,5 +107,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoType: 0.12
-  ammoSize: 300
+  ammoSize: 1000
   activeWeapon: {fileID: 0}

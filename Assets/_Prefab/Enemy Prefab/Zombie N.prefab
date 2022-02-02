@@ -2297,6 +2297,10 @@ MonoBehaviour:
   tempAgentSpeed: 6
   hitEffectBlood: {fileID: 5118589885165289887}
   chest: {fileID: 2445738619677373653}
+  ammos:
+  - {fileID: 4329375587580981941, guid: 51b0915720b548a418f7a3b2b81b8ab5, type: 3}
+  - {fileID: 6664425891551898570, guid: 72de9602e337637429f951604441d18c, type: 3}
+  - {fileID: 3830094218283718560, guid: 0b8704f309328ac4aa2dd20313e70412, type: 3}
 --- !u!114 &361542548
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,8 +8,8 @@ public class ReloadWeapon : MonoBehaviour
     public WeaponAnimationEvents animationEvents;
     public ActiveWeapon activeWeapon;
     public Transform leftHand;
-
-    //GameObject magazineHand; // временный магазин в руке при перезарядке
+    public AmmoPack ammoPack;
+    //GameObject magazineHand;              // временный магазин в руке при перезарядке
 
 
     void Start()
@@ -111,19 +111,42 @@ public class ReloadWeapon : MonoBehaviour
         Destroy(magazineHand);*/
 
             // Система патронов
-        int ammoTaken = weapon.clipSize - weapon.ammoCount;
-        if (ammoTaken > weapon.allAmmo)
+        int ammoTaken = weapon.clipSize - weapon.ammoCount;         // сколько патронов взято (размер магазина - патроны(счетчик) в обойме)
+        if (ammoTaken > weapon.allAmmo)                             // если оставшихся патронов всего меньше, чем нам нужно зарядить
         {
             ammoTaken = weapon.allAmmo;
         }
-        weapon.ammoCount += ammoTaken;
-        weapon.allAmmo -= ammoTaken;        
+        weapon.ammoCount += ammoTaken;                              // счетчик + сколько патронов взяли
+        weapon.allAmmo -= ammoTaken;                                // из всех патронов вычитаем сколько взяли
+
 
         if (weapon.allAmmo < 0)
         {
             weapon.allAmmo = 0;
         }
-        
+                
+        switch (weapon.ammoType)
+        {
+            case "9":
+                ammoPack.allAmmo_9 = weapon.allAmmo;                
+                break;
+            case "0.357":
+                ammoPack.allAmmo_0_357 = weapon.allAmmo;                
+                break;
+            case "5.56":
+                ammoPack.allAmmo_5_56 = weapon.allAmmo;
+                break;
+            case "0.12":
+                ammoPack.allAmmo_0_12 = weapon.allAmmo;
+                break;
+            case "7.62":
+                ammoPack.allAmmo_7_62 = weapon.allAmmo;                
+                break;
+            case "0.50":
+                ammoPack.allAmmo_0_50 = weapon.allAmmo;                
+                break;
+        }        
+
         rigController.ResetTrigger("reload_weapon");
     }
 }

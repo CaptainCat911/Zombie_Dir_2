@@ -51,6 +51,7 @@ public class Enemy_old : Mover
 
     public ParticleSystem hitEffectBlood;   // кровь для финала
     public GameObject chest;                // для крови
+    public GameObject[] ammos; 
 
 
 
@@ -383,31 +384,52 @@ public class Enemy_old : Mover
     protected override void Death()
     {
         GameManager.instance.enemyCount -= 1;
+
+            // выпадение патронов
+        int randomAmmo = Random.Range(0, 100);
+        if (randomAmmo > 90)
+        {
+            int ndx = Random.Range(0, ammos.Length);
+            GameObject go = Instantiate(ammos[ndx]);        // Создаём префаб патронов
+            //go.transform.SetParent(transform, false);     // Назначаем этот спавнер родителем
+            go.transform.position = new Vector3(transform.position.x, 0.3f, transform.position.z);
+        }
+
+        
+
+
         int random = Random.Range(0, 2);
         if (random == 1)
             anim.SetFloat("Death_type", 1);
         anim.SetTrigger("Death");
+        tempCapColl.SetActive(false);
         capsuleCollider.enabled = false;       
         capsuleColliderLeftARm.enabled = false;
         capsuleColliderRightArm.enabled = false;        
         agent.ResetPath();
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);
-        selfScript.enabled = false;
-
-        // Добавить шанс выпадение предмета
+        selfScript.enabled = false;        
     }
+
+
 
     public void NavMeshDisable()
     {
         agent.enabled = false;
     }
 
+
+
+
     public void Kill()
     {
         GameManager.instance.enemyCount -= 1;
         Destroy(gameObject);
     }
+
+
+
 
     public void DeathFinal()
     {
@@ -421,14 +443,13 @@ public class Enemy_old : Mover
         if (random == 1)
             anim.SetFloat("Death_type", 1);
         anim.SetTrigger("Death");
+        tempCapColl.SetActive(false);
         capsuleCollider.enabled = false;
         capsuleColliderLeftARm.enabled = false;
         capsuleColliderRightArm.enabled = false;
         agent.ResetPath();
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);
-        selfScript.enabled = false;
-
-        // Добавить шанс выпадение предмета
+        selfScript.enabled = false;        
     }
 }

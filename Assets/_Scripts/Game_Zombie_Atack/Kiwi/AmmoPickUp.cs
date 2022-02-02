@@ -1,11 +1,12 @@
 ﻿
 using UnityEngine;
+/// <summary>
+/// Скрипт для коробки патронов
+/// </summary>
 
 public class AmmoPickUp : MonoBehaviour
 {
-    /// <summary>
-    /// Скрипт для коробки патронов
-    /// </summary>
+
     
 
     //public GameObject ammo;
