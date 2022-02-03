@@ -106,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3387564549686147426}
   - component: {fileID: 3354536401201173786}
+  - component: {fileID: 4504869159576082958}
   m_Layer: 0
   m_Name: light
   m_TagString: Untagged
@@ -188,6 +189,25 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!95 &4504869159576082958
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3389192997578461440}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 64a90c3095a1c13468f7e22579263183, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3389310912788461252
 GameObject:
   m_ObjectHideFlags: 0
