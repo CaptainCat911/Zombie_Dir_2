@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 5629930635005085926}
   - component: {fileID: 5742256620733205900}
   - component: {fileID: 1616303706581909632}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: baked light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5629930635005085926
 Transform:
@@ -44,10 +44,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.994929, b: 0.8161765, a: 1}
-  m_Intensity: 10
+  m_Intensity: 30
   m_Range: 10
-  m_SpotAngle: 104.815155
-  m_InnerSpotAngle: 86.064705
+  m_SpotAngle: 156.25455
+  m_InnerSpotAngle: 137.50409
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -124,12 +124,12 @@ GameObject:
   - component: {fileID: 5640285085285047830}
   - component: {fileID: 5648223769571388752}
   - component: {fileID: 5680627526761073138}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: street lamp 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5629875031081403532
 Transform:
@@ -218,12 +218,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5638422664466620532}
   - component: {fileID: 1094739421411372416}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: street lamp woods prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5638422664466620532
 Transform:
@@ -254,3 +254,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1616303706581909632}
   lightDamaged: 0
+  lightGood: 0
