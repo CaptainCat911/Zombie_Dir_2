@@ -33,7 +33,9 @@ public class Player : Mover
 
     public float maxSpeed = 6;
        
-    public Animator finalSphereAnim;
+    public Animator finalSphereAnim;    // сфера, убивающая зомби, для финального ивента (типо их с пулемета расстреляли)
+
+    public Light lightF;                 // для управления фонари
 
 
 
@@ -213,8 +215,13 @@ public class Player : Mover
             finalSphereAnim.SetTrigger("Final");
         }
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            lightF.enabled = !lightF.enabled;
+        }
 
-            
+
+
 
         //-------------------------- Прицел -----------------------\\
         //Ray ray1 = new Ray(transform.position, transform.forward);

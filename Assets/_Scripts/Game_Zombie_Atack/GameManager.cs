@@ -5,40 +5,43 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;    
+    public static GameManager instance;         // инстанс (объект одиночка ?)
 
     // References
-    public Player player;
+    public Player player;                       // ссылка на игрока
 
     // Logic
     public int pesos;
     public int experience;
 
     // Enemy spawner
-    public int enemyCount = 0;
+    public int enemyCount = 0;                  // счетчик зомби
 
-    public bool inBuilding = false;
+    public bool inBuilding = false;             // для изменения сферы прозрачности в здании 
 
-    // Quest
-    public bool quest1 = false;
+    // Quest    
+    public bool quest1 = false;                 // для выполненых квестов 
     public bool quest2 = false;
     public bool quest3 = false;
     public bool quest1Compl = false;
     public bool quest2Compl = false;
     public bool quest3Compl = false;    
     public bool questFinish = false;
-    public bool final = false;          // для финального ивента
+    public bool final = false;                  // для финального ивента
 
-    public int weakZombiesChanse;           
+    public int weakZombiesChanse;               // для изменения процента появления слабых зомби (пока не используется)
 
     // Диалог
-    public DialogueTrigger dialogueTrig;
+    public DialogueTrigger dialogueTrig;        // диалог (для текста в начале)
 
     // Текущая миссия
-    public string mission;
+    public string mission;                      // текст миссии на экране
 
-    public GameObject spawnPointsGameobject;
-    private EnemySpawnPoint[] spawnPoints;
+    public GameObject spawnPointsGameobject;    // для управления спавнерами (ссылка на группу спавнеров)
+    private EnemySpawnPoint[] spawnPoints;      // тоже 
+
+    public int startDiffDelay;                  // начальная задержка перед спауном зомби
+    
 
 
 
@@ -70,7 +73,8 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         dialogueTrig = GetComponent<DialogueTrigger>();     // Ссылка на диалог
-        spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>();        
+        spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>(); 
+        StartCoroutine(StartDiffCor());
     }
 
 
@@ -95,10 +99,10 @@ public class GameManager : MonoBehaviour
         }
 
             // Квест
-        if (quest1 && !quest1Compl)
+        if (quest1 && !quest1Compl)             // после выполнения квеста
         {
-            SetDifficulty();
-            quest1Compl = true;
+            SetDifficulty();                    // добавляем сложность
+            quest1Compl = true;                 // этот квест выполнен
 
             // в целях поменать на +
         }
@@ -118,16 +122,39 @@ public class GameManager : MonoBehaviour
         if (quest1 && quest2 && quest3)
         {
             //SetDifficulty();
-            questFinish = true;         // собраны 3 предмета 
-            
+            questFinish = true;         // собраны 3 предмета             
         }
     }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
 
-    public void SetDifficulty()
+    IEnumerator StartDiffCor()
+    {
+        Debug.Log("Cor!");
+        yield return new WaitForSeconds(startDiffDelay);
+        SetDifficultyStart();
+    }
+
+
+    public void SetDifficultyStart()             // установление начальной сложности 
+    {
+        Debug.Log("Set!");
+        foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+        {
+            
+                spawnPoint.maxZombie = 30;
+            
+                spawnPoint.enemyNumberSpawn = 1;
+            
+                spawnPoint.cooldown = 8;
+        }
+    }
+
+
+
+    public void SetDifficulty()             // увеличение сложности 
     {
         //Debug.Log("Set!");
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
@@ -141,24 +168,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void MaxDifficulty()
+    public void MaxDifficulty()             // временное увеличение сложности на ивентах
     {
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
-            spawnPoint.maxZombie += 15;
+            spawnPoint.maxZombie += 10;
             spawnPoint.enemyNumberSpawn += 2;
             spawnPoint.cooldown -= 2;
         }
         StartCoroutine(MaxDiff());
     }
 
-    IEnumerator MaxDiff()
+    IEnumerator MaxDiff()           // отключаем повышение сложности через .. секунд
     {
         yield return new WaitForSeconds(60);
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
 
-            spawnPoint.maxZombie -= 15;
+            spawnPoint.maxZombie -= 10;
             spawnPoint.enemyNumberSpawn -= 2;
             spawnPoint.cooldown += 2;
         }

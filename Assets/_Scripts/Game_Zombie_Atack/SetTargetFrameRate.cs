@@ -2,11 +2,11 @@
 
 public class SetTargetFrameRate : MonoBehaviour
 {
-    public int targetFrameRate = 60;
+    public int targetFrameRate;
 
     private void Start()
     {
-        //QualitySettings.vSyncCount = 0;
+        QualitySettings.vSyncCount = 1;
         Application.targetFrameRate = targetFrameRate;
     }
 }

@@ -152,7 +152,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.91
+    m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -254,4 +254,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 4504869159576082958}
   lightDamaged: 0
-  lightGood: 0
+  lightGood: 1
