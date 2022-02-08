@@ -212,7 +212,7 @@ public class Player : Mover
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            finalSphereAnim.SetTrigger("Final");
+            FinalWave();
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -309,6 +309,13 @@ public class Player : Mover
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
+
+    public void FinalWave()
+    {
+        finalSphereAnim.SetTrigger("Final");
+    }
+
+
     
 /*    public void ChangeAlpha(Material mat, float alphaValue)
     {
@@ -317,6 +324,8 @@ public class Player : Mover
         mat.SetColor("_Color", newColor);
     }*/
 
+
+    
 
     public void SwapSprite(int skinId)
     {

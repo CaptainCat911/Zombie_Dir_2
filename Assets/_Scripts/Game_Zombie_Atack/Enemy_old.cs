@@ -7,7 +7,7 @@ public class Enemy_old : Mover
 {
     // Logic
     public float triggerLenght = 5f;   // радиус тригера преследования (в пределах игрок)
-    public float chaseLenght = 10f;   // радиус преследования (вся зона)
+    //public float chaseLenght = 10f;   // радиус преследования (вся зона)
     public float findPlayerRange = 1f;  // на каком расстоянии остановится перед целью
     public float grabPlayerRange = 2f;  // на каком расстоянии начать хватать
     public float faceingTargetSpeed = 5f;   // скорость поворота возле цели
@@ -75,7 +75,7 @@ public class Enemy_old : Mover
             return;
 
         int random = Random.Range(0, 100);          // разные типы зомби
-        if (random <= 79 || weakZombie)
+        if (random <= 84 || weakZombie)
         {
             random = 0;
             int random3 = Random.Range(0, 3);
@@ -98,7 +98,7 @@ public class Enemy_old : Mover
             tempCapColl.SetActive(false);
         }
 
-        if (random >= 80 && random < 90)
+        if (random >= 85 && random < 90)
         {
             int random3 = Random.Range(0, 3);
             if (random3 == 0 || random3 == 2)
@@ -167,21 +167,19 @@ public class Enemy_old : Mover
         }
 
         else
-        {
-            if (Vector3.Distance(playerTransform.position, startingPosition) < chaseLenght)
-            {
-                if (Vector3.Distance(playerTransform.position, startingPosition) < triggerLenght)
+        {           
+                if (Vector3.Distance(playerTransform.position, startingPosition) < triggerLenght)       // если дистанция до игрока < тригер дистанции
                 {
                     
-                    chasing = true;
-                    if (strong && biting)
+                    chasing = true;             // преследование включено 
+                    if (biting)
                     {                       
                         anim.SetTrigger("Stop_biting");
                         FaceTarget();
                         if (currentHealth == maxHealth)
                         {
                             StartCoroutine(ScreamDelay());
-                            biting = false;
+                            
                             tempCapColl.SetActive(false);
                         }
                         if (currentHealth != maxHealth)
@@ -217,13 +215,7 @@ public class Enemy_old : Mover
                         FaceTarget();
                         hitbox.Attack();
                     }
-                }
-
-                else
-                {
-
-                }
-            }
+                }           
 
             else
             {
@@ -332,7 +324,7 @@ public class Enemy_old : Mover
             //agent.speed = tempAgentSpeed;
         }
 
-        if (agent.speed < 0.2f && !test)        
+        if (agent.speed < 0.2f && !test && !biting)        
         {
             agent.speed = 0.2f;            // минимальная скорость
         }        
@@ -361,9 +353,10 @@ public class Enemy_old : Mover
     IEnumerator ScreamDelay()
     {
         float tempSpeed = agent.speed;
-        agent.speed = 0;           
-        yield return new WaitForSeconds(2f);       
+        agent.speed = 0;        
+        yield return new WaitForSeconds(2f);
         agent.speed = tempSpeed;
+        biting = false;
         anim.SetTrigger("Bite_Go");
     }
 
@@ -387,7 +380,7 @@ public class Enemy_old : Mover
 
             // выпадение патронов
         int randomAmmo = Random.Range(0, 100);
-        if (randomAmmo > 90)
+        if (randomAmmo > 95)
         {
             int ndx = Random.Range(0, ammos.Length);
             GameObject go = Instantiate(ammos[ndx]);        // Создаём префаб патронов

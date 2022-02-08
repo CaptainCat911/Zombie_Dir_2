@@ -254,4 +254,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1616303706581909632}
   lightDamaged: 0
-  lightGood: 1
+  lightGood: 0

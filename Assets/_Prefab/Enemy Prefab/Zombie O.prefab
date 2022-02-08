@@ -2270,7 +2270,6 @@ MonoBehaviour:
   ySpeed: 7
   xSpeed: 7
   triggerLenght: 1000
-  chaseLenght: 1000
   findPlayerRange: 1.1
   grabPlayerRange: 4
   faceingTargetSpeed: 20
@@ -2298,12 +2297,7 @@ MonoBehaviour:
   hitEffectBlood: {fileID: 4581884050777641983}
   chest: {fileID: 2445738619677373653}
   ammos:
-  - {fileID: 4329375587580981941, guid: 51b0915720b548a418f7a3b2b81b8ab5, type: 3}
-  - {fileID: 6664425891551898570, guid: 72de9602e337637429f951604441d18c, type: 3}
-  - {fileID: 3830094218283718560, guid: 0b8704f309328ac4aa2dd20313e70412, type: 3}
-  - {fileID: 6664425891551898570, guid: b436de98ef3285e4ead991fc343cef39, type: 3}
-  - {fileID: 4329375587580981941, guid: a4d811967ed955343bcb6cb6c3db9c69, type: 3}
-  - {fileID: 3830094218283718560, guid: 6485f3ba6a14526428347a59d10fde8e, type: 3}
+  - {fileID: 4329375587580981941, guid: 13e83658a59020246876c59019320816, type: 3}
 --- !u!114 &361542548
 MonoBehaviour:
   m_ObjectHideFlags: 0

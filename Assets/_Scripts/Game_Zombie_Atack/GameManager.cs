@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public bool quest2Compl = false;
     public bool quest3Compl = false;    
     public bool questFinish = false;
-    public bool final = false;                  // для финального ивента
+    public bool final = false;                  // для финального ивента (обычные спавнеры останавливаются)
 
     public int weakZombiesChanse;               // для изменения процента появления слабых зомби (пока не используется)
 
@@ -41,7 +41,12 @@ public class GameManager : MonoBehaviour
     private EnemySpawnPoint[] spawnPoints;      // тоже 
 
     public int startDiffDelay;                  // начальная задержка перед спауном зомби
-    
+    public int finalDelay = 60;                  // начальная задержка перед завершением финального ивента
+    public bool pultActive = false;              // активация пульта
+
+    public GameObject finalSpotLamp;        // прожектор вертолёта 
+
+
 
 
 
@@ -130,9 +135,26 @@ public class GameManager : MonoBehaviour
 
 
 
+    public void FinalWave()
+    {        
+        StartCoroutine(FinalDelay());
+    }
+
+    IEnumerator FinalDelay()
+    {
+        yield return new WaitForSeconds(finalDelay);
+        Debug.Log("Wave!");
+        finalSpotLamp.SetActive(true);
+        yield return new WaitForSeconds(2);
+        player.FinalWave();
+    }
+
+
+
+
     IEnumerator StartDiffCor()
     {
-        Debug.Log("Cor!");
+        //Debug.Log("Cor!");
         yield return new WaitForSeconds(startDiffDelay);
         SetDifficultyStart();
     }
@@ -140,7 +162,7 @@ public class GameManager : MonoBehaviour
 
     public void SetDifficultyStart()             // установление начальной сложности 
     {
-        Debug.Log("Set!");
+        //Debug.Log("Set!");
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
             
@@ -188,6 +210,19 @@ public class GameManager : MonoBehaviour
             spawnPoint.maxZombie -= 10;
             spawnPoint.enemyNumberSpawn -= 2;
             spawnPoint.cooldown += 2;
+        }
+    }
+
+    public void SetFinalDifficulty()
+    {
+        foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+        {
+
+            spawnPoint.maxZombie = 30;
+
+            spawnPoint.enemyNumberSpawn = 4;
+
+            spawnPoint.cooldown = 1000;
         }
     }
 

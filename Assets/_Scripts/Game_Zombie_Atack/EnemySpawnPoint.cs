@@ -51,7 +51,7 @@ public class EnemySpawnPoint : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        if (GameManager.instance.enemyCount >= maxZombie || GameManager.instance.final)
+        if (GameManager.instance.enemyCount >= maxZombie)
         {
             return;
         }

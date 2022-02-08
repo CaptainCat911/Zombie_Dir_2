@@ -7,7 +7,9 @@ public class LampControl : MonoBehaviour
     public Animator anim;
     public bool lightDamaged = false;
     public bool lightGood;
-    
+    public bool finalLamp = false;
+
+
 
     void Start()
     {
@@ -27,7 +29,9 @@ public class LampControl : MonoBehaviour
             anim.SetBool("LightOff", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.N))
+
+
+        if (Input.GetKeyDown(KeyCode.N) || GameManager.instance.final && !finalLamp)
         {
             anim.SetBool("LightOff", true);
         }
