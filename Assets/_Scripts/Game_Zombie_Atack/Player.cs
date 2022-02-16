@@ -189,13 +189,6 @@ public class Player : Mover
             currentHealth = 100;
         }
 
-        if (!boostSpeed)
-        {
-            xSpeed = 6f;
-            ySpeed = 6f;
-            maxSpeed = 6f;
-            //currentHealth = 100;
-        }
 
         /*
        // Для разворота без прицеливания
