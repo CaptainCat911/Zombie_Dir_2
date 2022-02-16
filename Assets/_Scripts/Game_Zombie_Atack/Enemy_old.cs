@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,6 +11,7 @@ public class Enemy_old : Mover
     public float grabPlayerRange = 2f;  // на каком расстоянии начать хватать
     public float faceingTargetSpeed = 5f;   // скорость поворота возле цели
     public float timeAfterDeath = 10f;      // сколько лежит труп
+
     public bool weakZombie = false;               // слабый зомби 
     public bool strongZombie = false;             // сильный зомби
 
@@ -19,11 +19,14 @@ public class Enemy_old : Mover
     public bool strong = false;
 
     public bool test = false;               // режим тестового зомби
+
+    public bool dontCount = false;
+
     public bool biting = false;
 
     public float cooldownSlow = 0.5f;     // кулдаун замедления
     public float lastSlow;              // для замедления
-    public bool slowed = false;
+    public bool slowed = false;         // замедлен
 
     private float maxSpeed = 4f;        // максимальная скорость (не нужна наверное)
     //private float speed;
@@ -51,7 +54,8 @@ public class Enemy_old : Mover
 
     public ParticleSystem hitEffectBlood;   // кровь для финала
     public GameObject chest;                // для крови
-    public GameObject[] ammos; 
+    public GameObject[] ammos;              // выпадение патронов, массив
+    public GameObject medHP;                // выпадение аптечки
 
 
 
@@ -70,24 +74,25 @@ public class Enemy_old : Mover
         hitbox = GetComponentInChildren<EnemyHitbox>();
         //capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         selfScript = GetComponent<Enemy_old>();
-        
+        currentHealth = maxHealth;
         if (test)
             return;
 
         int random = Random.Range(0, 100);          // разные типы зомби
-        if (random <= 84 || weakZombie)
+        if (random <= 84 || weakZombie)             // шанс на слабого зомби или сами устанавливаем слабого зомби
         {
             random = 0;
-            int random3 = Random.Range(0, 3);
+
+            int random3 = Random.Range(0, 3);       // 66% шанс на то, что зомби будет с захватом
             if (random3 == 0)
                 hitbox.grabChardge = false;
             if (random3 == 1 || random3 == 2)
                 hitbox.grabChardge = true;
 
-            hitbox.cooldown = 2.5f;
-            hitbox.attackSpeed = 1.3f;
-            agent.speed = 0.5f;
-            int random2 = Random.Range(1,4);
+            hitbox.cooldown = 2.5f;                 // кд атаки
+            hitbox.attackSpeed = 1.3f;              // скорость атаки
+            agent.speed = 0.5f;                     // скорость передвижения
+            int random2 = Random.Range(1,4);        // случайный выбор типа передвижения зомби
             //Debug.Log(random2);
             if (random2 == 1)            
                 anim.SetFloat("Walk_number", 0);
@@ -95,11 +100,13 @@ public class Enemy_old : Mover
                 anim.SetFloat("Walk_number", 0.5f);
             if (random2 == 3)
                 anim.SetFloat("Walk_number", 1);
-            tempCapColl.SetActive(false);
+            tempCapColl.SetActive(false);           // временный коллайдер для жрущих зомби (отключаем)
         }
 
-        if (random >= 85 && random < 90)
+        if ((random >= 85 && random < 90))
         {
+            if (weakZombie || strongZombie)
+                return;
             int random3 = Random.Range(0, 3);
             if (random3 == 0 || random3 == 2)
                 hitbox.grabChardge = false;
@@ -114,7 +121,7 @@ public class Enemy_old : Mover
             tempCapColl.SetActive(false);
         }
 
-        if (random >= 90 || strongZombie)
+        if ((random >= 90 || strongZombie) && !GameManager.instance.final)
         {
             strong = true;
             hitbox.grabChardge = false;
@@ -123,10 +130,17 @@ public class Enemy_old : Mover
             agent.speed = 6f;
             maxHealth = 250;
             currentHealth = maxHealth;            
-            triggerLenght = 6;
-            anim.SetTrigger("Biting");
-            biting = true;
-            tempCapColl.SetActive(true);
+            if (true)        //  они жрут
+            {
+                triggerLenght = 6;
+                anim.SetTrigger("Biting");          // чтобы жрал 
+                biting = true;
+                tempCapColl.SetActive(true);
+            }
+/*            if (false)
+            {
+                tempCapColl.SetActive(false);
+            }*/
         }
 
         tempAgentSpeed = agent.speed;
@@ -172,19 +186,18 @@ public class Enemy_old : Mover
                 {
                     
                     chasing = true;             // преследование включено 
-                    if (biting)
+                    if (biting && GameManager.instance.player.isAlive)
                     {                       
                         anim.SetTrigger("Stop_biting");
                         FaceTarget();
                         if (currentHealth == maxHealth)
                         {
-                            StartCoroutine(ScreamDelay());
-                            
+                            biting = false;
+                            StartCoroutine(ScreamDelay());                            
                             tempCapColl.SetActive(false);
                         }
                         if (currentHealth != maxHealth)
-                        {                            
-                            biting = false;
+                        {                                                        
                             tempCapColl.SetActive(false);
                             anim.SetTrigger("Bite_Go");
                         }
@@ -213,7 +226,11 @@ public class Enemy_old : Mover
                     {                                                   
                         agent.ResetPath();
                         FaceTarget();
-                        hitbox.Attack();
+                        if (GameManager.instance.player.isAlive)
+                            hitbox.Attack();
+                        if (!GameManager.instance.player.isAlive)
+                            StartCoroutine(BitingDelay());
+                            
                     }
                 }           
 
@@ -324,12 +341,18 @@ public class Enemy_old : Mover
             //agent.speed = tempAgentSpeed;
         }
 
-        if (agent.speed < 0.2f && !test && !biting)        
+        if (agent.speed < 0.2f && !test)        
         {
             agent.speed = 0.2f;            // минимальная скорость
         }        
     }
 
+
+    IEnumerator BitingDelay()
+    {
+        yield return new WaitForSeconds(2);
+        anim.SetTrigger("Biting");
+    }
 
 
     protected override void ReceiveDamage(Damage dmg)
@@ -351,12 +374,11 @@ public class Enemy_old : Mover
 
 
     IEnumerator ScreamDelay()
-    {
+    {        
         float tempSpeed = agent.speed;
         agent.speed = 0;        
         yield return new WaitForSeconds(2f);
-        agent.speed = tempSpeed;
-        biting = false;
+        agent.speed = tempSpeed;        
         anim.SetTrigger("Bite_Go");
     }
 
@@ -376,11 +398,13 @@ public class Enemy_old : Mover
 
     protected override void Death()
     {
-        GameManager.instance.enemyCount -= 1;
+        if (!dontCount)
+            GameManager.instance.enemyCount -= 1;
 
             // выпадение патронов
         int randomAmmo = Random.Range(0, 100);
-        if (randomAmmo > 95)
+        
+        if (randomAmmo == 99)
         {
             int ndx = Random.Range(0, ammos.Length);
             GameObject go = Instantiate(ammos[ndx]);        // Создаём префаб патронов
@@ -388,7 +412,14 @@ public class Enemy_old : Mover
             go.transform.position = new Vector3(transform.position.x, 0.3f, transform.position.z);
         }
 
-        
+        if (randomAmmo == 98)
+        {
+            GameObject go = Instantiate(medHP);             // Создаём префаб аптечки
+            //go.transform.SetParent(transform, false);     // Назначаем этот спавнер родителем
+            go.transform.position = new Vector3(transform.position.x, 0.3f, transform.position.z);
+        }
+
+
 
 
         int random = Random.Range(0, 2);
@@ -417,7 +448,8 @@ public class Enemy_old : Mover
 
     public void Kill()
     {
-        GameManager.instance.enemyCount -= 1;
+        if (!dontCount)
+            GameManager.instance.enemyCount -= 1;
         Destroy(gameObject);
     }
 
@@ -426,7 +458,8 @@ public class Enemy_old : Mover
 
     public void DeathFinal()
     {
-        GameManager.instance.enemyCount -= 1;
+        if (!dontCount)
+            GameManager.instance.enemyCount -= 1;
 
         hitEffectBlood.transform.position = chest.transform.position;
         hitEffectBlood.transform.forward = transform.forward;

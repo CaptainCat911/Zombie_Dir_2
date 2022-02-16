@@ -113,7 +113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3387564549686147426
 Transform:
   m_ObjectHideFlags: 0
@@ -218,9 +218,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3394689334677839044}
   - component: {fileID: -4709132835234088545}
+  - component: {fileID: 7102840308984890161}
   m_Layer: 0
   m_Name: street_lamp 1 prefab
-  m_TagString: Untagged
+  m_TagString: Lamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -255,3 +256,18 @@ MonoBehaviour:
   anim: {fileID: 4504869159576082958}
   lightDamaged: 0
   lightGood: 0
+  finalLamp: 0
+  lamp: {fileID: 3389192997578461440}
+--- !u!65 &7102840308984890161
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3389310912788461252}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0.04, y: 3.86, z: -2.22}

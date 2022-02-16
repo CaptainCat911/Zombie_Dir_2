@@ -10,6 +10,7 @@ TagManager:
   - SpawnSphere
   - EnemySpawner
   - Enemy
+  - Lamp
   layers:
   - Default
   - TransparentFX

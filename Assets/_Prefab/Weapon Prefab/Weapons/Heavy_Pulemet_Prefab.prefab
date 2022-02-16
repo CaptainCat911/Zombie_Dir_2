@@ -52093,6 +52093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: heavy
+  textNameWeapon: "\u041F\u0443\u043B\u0435\u043C\u0435\u0442 \u041C249"
   weaponSlot: 2
   ammoType: 7.62
   indexNumberWeapon: 3

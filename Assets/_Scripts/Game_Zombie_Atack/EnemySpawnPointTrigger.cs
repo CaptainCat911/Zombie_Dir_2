@@ -38,7 +38,7 @@ public class EnemySpawnPointTrigger : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        if (GameManager.instance.enemyCount >= maxZombie && GameManager.instance.final)
+        if (GameManager.instance.enemyCount >= maxZombie)
         {
             return;
         }
@@ -59,7 +59,7 @@ public class EnemySpawnPointTrigger : MonoBehaviour
 
         //Debug.Log(GameManager.instance.enemyCount);
         int ndx = Random.Range(0, prefabEnemies.Length);
-        foreach (GameObject enemy in prefabEnemies)
+/*        foreach (GameObject enemy in prefabEnemies)
         {
             Enemy_old enemy_Old = enemy.GetComponent<Enemy_old>();
             if (makeWeak)
@@ -67,7 +67,7 @@ public class EnemySpawnPointTrigger : MonoBehaviour
             if (makeStrong)
                 enemy_Old.strongZombie = true;
 
-        }
+        }*/
 
         GameObject go = Instantiate(prefabEnemies[ndx]);    // Создаём префаб   
 

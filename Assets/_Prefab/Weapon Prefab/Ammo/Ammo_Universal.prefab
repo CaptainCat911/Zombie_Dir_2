@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4329375587580981941}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.3, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.71, y: 0.35241002, z: 0.265098}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -92,7 +92,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 1, z: 3}
+  m_Size: {x: 4, y: 1, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4329375587580981940
 MonoBehaviour:
@@ -106,6 +106,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4dea303202f434bb6e74bece1dfbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoType: 5.56
   ammoSizeMag: 1
   activeWeapon: {fileID: 0}

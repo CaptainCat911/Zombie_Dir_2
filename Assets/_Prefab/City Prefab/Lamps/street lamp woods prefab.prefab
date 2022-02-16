@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5629930635005085926
 Transform:
   m_ObjectHideFlags: 0
@@ -218,9 +218,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5638422664466620532}
   - component: {fileID: 1094739421411372416}
+  - component: {fileID: 164371308964152972}
   m_Layer: 0
   m_Name: street lamp woods prefab
-  m_TagString: Untagged
+  m_TagString: Lamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -255,3 +256,18 @@ MonoBehaviour:
   anim: {fileID: 1616303706581909632}
   lightDamaged: 0
   lightGood: 0
+  finalLamp: 0
+  lamp: {fileID: 5635196658672975172}
+--- !u!65 &164371308964152972
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636141459475285072}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 2.91, z: 0}

@@ -50555,6 +50555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: rifle
+  textNameWeapon: "\u0412\u0438\u043D\u0442\u043E\u0432\u043A\u0430 H416"
   weaponSlot: 1
   ammoType: 5.56
   indexNumberWeapon: 2

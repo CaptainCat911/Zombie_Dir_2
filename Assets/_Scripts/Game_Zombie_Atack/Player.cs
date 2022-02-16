@@ -6,11 +6,11 @@ using UnityEngine.AI;
 
 public class Player : Mover
 {
-    private bool isAlive = true;
+    public bool isAlive = true;
 
         // Для прицела
     public Transform pointer;          // прицел       
-    bool aiming = true;    // прицеливание
+    public bool aiming = true;    // прицеливание
     //Quaternion qua1;       // поворот
     int layerMask = 1 << 10;     // маска для прицела, игнорирует всё кроме 10 слоя
     //int layerMaskCam = 1 << 11;     // маска для прицела, игнорирует всё кроме 11 слоя
@@ -37,6 +37,11 @@ public class Player : Mover
 
     public Light lightF;                 // для управления фонари
 
+    public GameObject playerChest;      // для зомби
+
+    bool boostSpeed = false;
+    
+
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -60,6 +65,8 @@ public class Player : Mover
 
     protected override void UpdateMotor(Vector3 input)
     {
+        if (!isAlive || GameManager.instance.playerStop)
+            return;
         // Вектор для движения
         moveDelta = new Vector3(input.x * xSpeed, 0, input.z * ySpeed);
 
@@ -82,16 +89,11 @@ public class Player : Mover
 
         base.ReceiveDamage(dmg);
         stopForce = dmg.pushForce;
-        TakeHit();
+        anim.SetTrigger("Take_Hit");
 
         /*GameManager.instance.OnHitpointChange();*/
     }
 
-
-    public void TakeHit()
-    {
-        anim.SetTrigger("Take_Hit");
-    }
 
 
 
@@ -101,6 +103,9 @@ public class Player : Mover
 
     private void FixedUpdate()
     {
+        if (!isAlive || GameManager.instance.playerStop)
+            return;
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -176,6 +181,22 @@ public class Player : Mover
         //Debug.Log(xSpeed);
 
 
+        if (boostSpeed)
+        {
+            xSpeed = 20f;
+            ySpeed = 20f;
+            maxSpeed = 20f;
+            currentHealth = 100;
+        }
+
+        if (!boostSpeed)
+        {
+            xSpeed = 6f;
+            ySpeed = 6f;
+            maxSpeed = 6f;
+            //currentHealth = 100;
+        }
+
         /*
        // Для разворота без прицеливания
 
@@ -212,15 +233,28 @@ public class Player : Mover
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            FinalWave();
+            boostSpeed = !boostSpeed;
         }
 
         if (Input.GetKeyDown(KeyCode.F))
         {
+            if (!isAlive || GameManager.instance.playerStop)
+            {                
+                return;
+            }
+
             lightF.enabled = !lightF.enabled;
         }
 
 
+        if (!isAlive || GameManager.instance.playerStop)
+        {
+            lightF.enabled = false;
+            return;
+        }
+
+       
+            
 
 
         //-------------------------- Прицел -----------------------\\
@@ -382,7 +416,8 @@ public class Player : Mover
     protected override void Death()
     {
         isAlive = false;
-        Destroy(this.gameObject);
+        anim.SetTrigger("Death");
+        //Destroy(this.gameObject);
         //GameManager.instance.deathMenuAnim.SetTrigger("Show");
     }
 

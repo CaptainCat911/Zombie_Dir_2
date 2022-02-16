@@ -45,19 +45,24 @@ public class QuestItem : MonoBehaviour
                     GameManager.instance.quest3 = true;                    
                     break;
                 case 4:
-                    GameManager.instance.pultActive = true;
+                    if (GameManager.instance.questCompl)
+                    {
+                        GameManager.instance.pultActive = true;
+                        dialogueTrig.TriggerDialogue(0);
+                        GameManager.instance.Pause();
+                        Destroy(this);
+                    }
                     break;
-
             }
             
-            dialogueTrig.TriggerDialogue(0);
+            
             if (questNumber != 4)
             {
                 image1.SetActive(true);
                 Destroy(gameObject);
-            }
-            if (questNumber == 4)
-                Destroy(this);
+                dialogueTrig.TriggerDialogue(0);
+            }          
+                
 
         }
     }

@@ -9,6 +9,7 @@ public class TextHP : MonoBehaviour
     public Text currentBulletsText;
     public Text enemyCountText;
     public Text currentMissionText;
+    public Text currentWeaponText;
     public ActiveWeapon activeWeapon;
     RaycastWeapon weapon;
     int enemyCount;
@@ -31,7 +32,8 @@ public class TextHP : MonoBehaviour
         if (weapon)
         {
             allBulletsText.text = weapon.allAmmo.ToString("0");     // Все патроны
-            currentBulletsText.text = weapon.ammoCount.ToString("0");       // Патронов в обойме    
+            currentBulletsText.text = weapon.ammoCount.ToString("0");       // Патронов в обойме
+            currentWeaponText.text = weapon.textNameWeapon;                 // оружие в руках
         }
 
 

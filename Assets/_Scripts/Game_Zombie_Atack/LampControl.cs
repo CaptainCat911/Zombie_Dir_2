@@ -5,21 +5,24 @@ using UnityEngine;
 public class LampControl : MonoBehaviour
 {
     public Animator anim;
-    public bool lightDamaged = false;
-    public bool lightGood;
-    public bool finalLamp = false;
-
+    public bool lightDamaged = false;       // мигающий свет
+    public bool lightGood;                  // хороший свет
+    public bool finalLamp = false;          // финальная лампа
+    public GameObject lamp;
+        
 
 
     void Start()
     {
         if (lightGood)
             return;
-        int random = Random.Range(0, 100);
-        if (random > 95 || lightDamaged)
+        if (lightDamaged)
         {
+            lamp.SetActive(true);
             anim.SetBool("LightDamaged", true);
+            lamp.SetActive(false);
         }
+        
     }
 
     private void Update()
@@ -31,9 +34,10 @@ public class LampControl : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.N) || GameManager.instance.final && !finalLamp)
+        if (Input.GetKeyDown(KeyCode.N) || GameManager.instance.lightsOff && !finalLamp)
         {
-            anim.SetBool("LightOff", true);
+            //anim.SetBool("LightOff", true);
+            lamp.SetActive(false);
         }
     }
 }

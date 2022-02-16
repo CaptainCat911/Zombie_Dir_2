@@ -5,7 +5,7 @@ using UnityEngine;
 public class QuestRadio : MonoBehaviour
 {
     bool questStart = false;            // первое взаимодействие с квестом
-    bool questCompl = false;            // тру когда полностью выполнен квест
+    
     bool enterTrigger = false;          // вход игрока в триггер
     int nCount = 0;    
 
@@ -18,7 +18,7 @@ public class QuestRadio : MonoBehaviour
     public void Start()
     {
         dialogueTrig = GetComponent<DialogueTrigger>();
-        GameManager.instance.mission = "Найдите радио";     // пишем текст миссии
+        GameManager.instance.mission = "Найдите радиостанцию в юго-западной части города";     // пишем текст миссии
     }
 
 
@@ -36,15 +36,16 @@ public class QuestRadio : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !questCompl && enterTrigger)     // если квест не начат и игрок зашёл в триггер и нажал "е"
+        if (Input.GetKeyDown(KeyCode.E) && !GameManager.instance.questCompl && enterTrigger)     // если квест не начат и игрок зашёл в триггер и нажал "е"
         {
             nCount++;
             if (!questStart && !GameManager.instance.questFinish)           // если квест не начат и не закончен
             {                                              
-                dialogueTrig.TriggerDialogue(0);                
+                dialogueTrig.TriggerDialogue(0);
+                GameManager.instance.Pause();
 
                 questStart = true;                                          // квест начат
-                GameManager.instance.mission = "Найдите инструменты, транзисторы и бензин, чтобы починить радио";
+                GameManager.instance.mission = "- Найдите инструменты                      - Найдите детали                                     - Найдите термоядерный реактор";
             }
 
 
@@ -57,6 +58,7 @@ public class QuestRadio : MonoBehaviour
             if (GameManager.instance.questFinish)       // если квест закончен (собраны 3 предмета)
             {                
                 dialogueTrig.TriggerDialogue(1);        // запускаем второй диалог
+                GameManager.instance.Pause();
                 foreach (GameObject image in images)    // деактивируем иконки предметовы
                 {
                     image.SetActive(false);
@@ -64,9 +66,9 @@ public class QuestRadio : MonoBehaviour
 
                 // запустить таймер
 
-                questCompl = true;                      // квест выполнен (больше не можем взаимодействовать)
+                GameManager.instance.questCompl = true;                      // квест выполнен (больше не можем взаимодействовать)
                 GameManager.instance.SetDifficulty();      // повышаем сложность
-                GameManager.instance.mission = "Продержитесь : таймер";
+                GameManager.instance.mission = "Найдите вертолётную площадку в северо-западной части города и зажгите прожекторы";
             }
         }        
     }

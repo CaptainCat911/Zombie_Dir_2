@@ -15,10 +15,11 @@ public class RaycastWeapon : MonoBehaviour
         // Rig
     public string weaponName; // название оружия для анимаций 
 
-        // Damage struct
+    // Damage struct
+    public string textNameWeapon;                   // название оружия для GUI
     public ActiveWeapon.WeaponSlot weaponSlot;  // внутри перечисление слотов (основное, вторичное оружия) и выбирается в инспекторе префаба
     public string ammoType;     // тип патронов, указать в инспекторе (потом поменять на список)
-    public int indexNumberWeapon;   // Индекс оружия для переключения между оружиями (Потом поменять на список или использовать weaponSlot[index]
+    public int indexNumberWeapon;   // Индекс оружия для переключения между оружиями (Потом поменять на список или использовать weaponSlot[index])
 
     public float cooldown = 0.1f;  // 600 выстрелов в секунду 
     //public float bulletSpeed = 30f;     // скорость пули (не используется)
@@ -205,25 +206,26 @@ public class RaycastWeapon : MonoBehaviour
     }
 
 
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
     
 
 
     public void MakeRayCast()
     {
-        // Настройки для трасеров
-        TrailRenderer tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);
-        tracer.AddPosition(EFFECT_ANCHOR.position);
+            // Настройки для трасеров
+        TrailRenderer tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);          // создаем трасер
+        tracer.AddPosition(EFFECT_ANCHOR.position);                                                             // начальная позиция 
 
-        // Рейкаст
+            // Рейкаст
         ray.origin = PROJECTILE_ANCHOR.position;        // луч из позиции якоря
         ray.direction = PROJECTILE_ANCHOR.forward;      // луч с направлением вперед
         //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);
+            //Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);                                   // дебаг, красные линии
 
-            tracer.transform.position = hit.point;   // трасеры пуль 
+            tracer.transform.position = hit.point;                                                      // конечная позиция трасера пули 
 
             Enemy_old enemy = hit.collider.GetComponentInParent<Enemy_old>();
             if (enemy)
@@ -256,7 +258,7 @@ public class RaycastWeapon : MonoBehaviour
 
 
 
-    public void MakeRayCastAll()        // для прострелов (пока не смог сделать)
+    public void MakeRayCastAll()                // для прострелов (пока не смог сделать)
     {
         // Настройки для трасеров
         TrailRenderer tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);

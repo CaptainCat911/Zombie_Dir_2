@@ -24,7 +24,7 @@ public class Fighter : MonoBehaviour
 
     void Awake()
     {
-        currentHealth = maxHealth;        
+        //currentHealth = maxHealth;        
     }
 
 

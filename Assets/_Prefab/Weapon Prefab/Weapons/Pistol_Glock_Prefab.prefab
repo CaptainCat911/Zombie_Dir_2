@@ -38232,6 +38232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: pistol
+  textNameWeapon: "\u041F\u0438\u0441\u0442\u043E\u043B\u0435\u0442 Glock"
   weaponSlot: 0
   ammoType: 9
   indexNumberWeapon: 1

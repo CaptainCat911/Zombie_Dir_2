@@ -2279,6 +2279,7 @@ MonoBehaviour:
   weak: 0
   strong: 0
   test: 0
+  dontCount: 0
   biting: 0
   cooldownSlow: 0.5
   lastSlow: 0
@@ -2299,6 +2300,7 @@ MonoBehaviour:
   chest: {fileID: 2445738619677373653}
   ammos:
   - {fileID: 4329375587580981941, guid: 13e83658a59020246876c59019320816, type: 3}
+  medHP: {fileID: 6312526296165264628, guid: 9567402a43bcb1448affe41b2a2d9c0b, type: 3}
 --- !u!114 &361542548
 MonoBehaviour:
   m_ObjectHideFlags: 0

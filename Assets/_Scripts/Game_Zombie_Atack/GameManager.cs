@@ -21,13 +21,15 @@ public class GameManager : MonoBehaviour
 
     // Quest    
     public bool quest1 = false;                 // для выполненых квестов 
-    public bool quest2 = false;
+    public bool quest2 = false;                 
     public bool quest3 = false;
     public bool quest1Compl = false;
     public bool quest2Compl = false;
     public bool quest3Compl = false;    
-    public bool questFinish = false;
+    public bool questFinish = false;            // собраны 3 предмета
+    public bool questCompl = false;             // тру когда полностью выполнен квест и вызван вертолёт
     public bool final = false;                  // для финального ивента (обычные спавнеры останавливаются)
+    public bool lightsOff = false;              // для выключения света в городе 
 
     public int weakZombiesChanse;               // для изменения процента появления слабых зомби (пока не используется)
 
@@ -41,10 +43,23 @@ public class GameManager : MonoBehaviour
     private EnemySpawnPoint[] spawnPoints;      // тоже 
 
     public int startDiffDelay;                  // начальная задержка перед спауном зомби
-    public int finalDelay = 60;                  // начальная задержка перед завершением финального ивента
+    public int finalDelay = 60;                  // задержка перед завершением финального ивента
     public bool pultActive = false;              // активация пульта
 
     public GameObject finalSpotLamp;        // прожектор вертолёта 
+
+    int i = 0;                                  // счетчик для сложности
+
+    bool pause = true;                     // для паузы
+    bool slowMo = false;                     // для слоумоушен
+        
+    bool playerDead = false;                // заряд для диалога при поражении
+
+    public bool playerStop = true;                // для обездвижевания
+
+    public GameObject bars;                     // для включения баров
+
+    public bool postProcessFinal = false;
 
 
 
@@ -80,6 +95,8 @@ public class GameManager : MonoBehaviour
         dialogueTrig = GetComponent<DialogueTrigger>();     // Ссылка на диалог
         spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>(); 
         StartCoroutine(StartDiffCor());
+        StartCoroutine(DialogePause());
+        playerStop = true;
     }
 
 
@@ -90,20 +107,35 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            SaveState();
+            //SaveState();
         }
 
         if (Input.GetKeyDown(KeyCode.U))
         {
-            dialogueTrig.TriggerDialogue(0);            
+            slowMo = !slowMo;
+            if (slowMo)
+                Time.timeScale = 0.3f;
+            if (!slowMo)
+                Time.timeScale = 1f;
         }
         
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            SetDifficulty();
+            //SetDifficulty();
         }
 
-            // Квест
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {            
+            pause = !pause;
+            if (pause)
+               Time.timeScale = 1f;
+            if (!pause)
+                Time.timeScale = 0f;
+        }
+
+
+
+        // Квест
         if (quest1 && !quest1Compl)             // после выполнения квеста
         {
             SetDifficulty();                    // добавляем сложность
@@ -129,6 +161,13 @@ public class GameManager : MonoBehaviour
             //SetDifficulty();
             questFinish = true;         // собраны 3 предмета             
         }
+
+
+        if (!player.isAlive && !playerDead)
+        {
+            StartCoroutine(DialogePauseDeath());
+            playerDead = true;
+        }
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -142,12 +181,17 @@ public class GameManager : MonoBehaviour
 
     IEnumerator FinalDelay()
     {
-        yield return new WaitForSeconds(finalDelay);
-        Debug.Log("Wave!");
-        finalSpotLamp.SetActive(true);
-        yield return new WaitForSeconds(2);
-        player.FinalWave();
-    }
+        yield return new WaitForSeconds(finalDelay);            // сколько длится финальный ивент        
+
+        //Debug.Log("Wave!");
+        finalSpotLamp.SetActive(true);                          // включаем прожектор вертолёта 
+        yield return new WaitForSeconds(0.5f);                 
+        player.FinalWave();                                     // запускаем волну, убивающую зомби (стрельба из вертолёта)
+        yield return new WaitForSeconds(10f);
+        dialogueTrig.TriggerDialogue(1);
+        Pause();
+        postProcessFinal = true;
+    }   
 
 
 
@@ -178,15 +222,16 @@ public class GameManager : MonoBehaviour
 
     public void SetDifficulty()             // увеличение сложности 
     {
+        i++;
         //Debug.Log("Set!");
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
-        {
-            if (spawnPoint.maxZombie < 50)
-                spawnPoint.maxZombie += 5;
-            if (spawnPoint.enemyNumberSpawn < 3)
+        {            
+            spawnPoint.maxZombie += 5;
+
+            if (i < 2)
                 spawnPoint.enemyNumberSpawn += 1;
-            if (spawnPoint.cooldown > 2)
-                spawnPoint.cooldown -= 1;
+            
+            spawnPoint.cooldown -= 1;
         }
     }
 
@@ -206,7 +251,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(60);
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
-
             spawnPoint.maxZombie -= 10;
             spawnPoint.enemyNumberSpawn -= 2;
             spawnPoint.cooldown += 2;
@@ -218,13 +262,73 @@ public class GameManager : MonoBehaviour
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
 
-            spawnPoint.maxZombie = 30;
+            spawnPoint.maxZombie = 70;
 
-            spawnPoint.enemyNumberSpawn = 4;
+            spawnPoint.enemyNumberSpawn = 2;
+
+            spawnPoint.cooldown = 8;
+        }
+    }
+
+    public void SetNullDifficulty()
+    {
+        foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+        {
+
+            spawnPoint.maxZombie = 0;
+
+            spawnPoint.enemyNumberSpawn = 0;
 
             spawnPoint.cooldown = 1000;
         }
     }
+
+
+    IEnumerator DialogePause()
+    {
+        //playerStop = true;     
+                
+        yield return new WaitForSeconds(9f);               
+        dialogueTrig.TriggerDialogue(0);        
+        Pause();
+        yield return new WaitForSeconds(1f);
+        playerStop = false;
+        bars.SetActive(true);
+    }
+
+    IEnumerator DialogePauseDeath()
+    {
+        yield return new WaitForSeconds(4f);
+        dialogueTrig.TriggerDialogue(2);
+        Pause();
+        
+    }
+
+
+    public void Pause()
+    {
+        StartCoroutine(PauseDelay());
+    }
+
+    IEnumerator PauseDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        player.aiming = true;
+        Time.timeScale = 0f;
+    }
+
+
+    public void UnPause()
+    {
+        Time.timeScale = 1f;
+    }
+
+
+
+
+
+
+
 
 
 

@@ -88,6 +88,17 @@ public class ActiveWeapon : MonoBehaviour
 
      void Update()
     {
+        if (GameManager.instance.playerStop)
+        {            
+            return;
+        }
+
+        if (!GameManager.instance.player.isAlive)
+        {
+            rigController.SetBool("Death_rig", true);
+            return;
+        }
+
         RaycastWeapon weapon = GetWeapon(activeWeaponIndex);
         if (weapon && !isHolsted)
         {
