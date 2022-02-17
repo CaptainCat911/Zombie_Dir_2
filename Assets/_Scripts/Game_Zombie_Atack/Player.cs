@@ -39,8 +39,10 @@ public class Player : Mover
 
     public GameObject playerChest;      // для зомби
 
-    bool boostSpeed = false;
-    
+    bool boostSpeed = false;            // Для тестового режима 
+
+    public GameObject canvasMap;
+    bool mapActive = false;
 
 
 
@@ -239,12 +241,31 @@ public class Player : Mover
             lightF.enabled = !lightF.enabled;
         }
 
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (!isAlive || GameManager.instance.playerStop)
+            {
+                return;
+            }
+            mapActive = !mapActive;
+            if (mapActive)
+            {
+                canvasMap.SetActive(true);
+                Time.timeScale = 0f;
+            }
+            if (!mapActive)
+            {
+                canvasMap.SetActive(false);
+                Time.timeScale = 1f;
+            }
+        }
 
         if (!isAlive || GameManager.instance.playerStop)
         {
             lightF.enabled = false;
             return;
         }
+
 
        
             

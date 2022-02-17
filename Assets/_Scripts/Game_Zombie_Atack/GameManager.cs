@@ -42,7 +42,12 @@ public class GameManager : MonoBehaviour
     public GameObject spawnPointsGameobject;    // для управления спавнерами (ссылка на группу спавнеров)
     private EnemySpawnPoint[] spawnPoints;      // тоже 
 
-    public int startDiffDelay;                  // начальная задержка перед спауном зомби
+    public int startDiffDelay_1;                  // начальная задержка перед спауном зомби
+    public int startDiffDelay_2;                  // начальная задержка перед спауном зомби
+    public int startDiffDelay_3;                  // начальная задержка перед спауном зомби
+
+
+
     public int finalDelay = 60;                  // задержка перед завершением финального ивента
     public bool pultActive = false;              // активация пульта
 
@@ -199,8 +204,12 @@ public class GameManager : MonoBehaviour
     IEnumerator StartDiffCor()
     {
         //Debug.Log("Cor!");
-        yield return new WaitForSeconds(startDiffDelay);
+        yield return new WaitForSeconds(startDiffDelay_1);
         SetDifficultyStart();
+        yield return new WaitForSeconds(startDiffDelay_2);
+        SetDifficulty();
+        yield return new WaitForSeconds(startDiffDelay_3);
+        SetDifficulty();
     }
 
 
@@ -210,11 +219,11 @@ public class GameManager : MonoBehaviour
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
             
-                spawnPoint.maxZombie = 30;
+                spawnPoint.maxZombie = 9;
             
-                spawnPoint.enemyNumberSpawn = 1;
+                spawnPoint.enemyNumberSpawn = -1;
             
-                spawnPoint.cooldown = 8;
+                spawnPoint.cooldown = 12;
         }
     }
 
@@ -226,7 +235,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log("Set!");
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {            
-            spawnPoint.maxZombie += 5;
+            spawnPoint.maxZombie += 7;
 
             if (i < 2)
                 spawnPoint.enemyNumberSpawn += 1;

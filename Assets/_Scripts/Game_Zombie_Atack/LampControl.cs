@@ -29,7 +29,7 @@ public class LampControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            anim.SetBool("LightOff", false);
+            //anim.SetBool("LightOff", false);
         }
 
 
@@ -37,7 +37,7 @@ public class LampControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N) || GameManager.instance.lightsOff && !finalLamp)
         {
             //anim.SetBool("LightOff", true);
-            lamp.SetActive(false);
+            //lamp.SetActive(false);
         }
     }
 }

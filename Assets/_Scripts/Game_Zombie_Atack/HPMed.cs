@@ -8,12 +8,6 @@ public class HPMed : MonoBehaviour
 
     bool triggerEnter = false;
 
-    public void Start()
-    {
-
-    }
-
-
     public void OnTriggerEnter(Collider collision)
     {
         if (collision.name == "Player_Soldier")
@@ -27,11 +21,9 @@ public class HPMed : MonoBehaviour
     }
 
 
-
-
     public void Update()
     {        
-        if (Input.GetKeyDown(KeyCode.E) && triggerEnter)  
+        if (triggerEnter)  
         {
             if (GameManager.instance.player.currentHealth != GameManager.instance.player.maxHealth)
             {

@@ -41,7 +41,7 @@ public class AmmoPickUp : MonoBehaviour
     public void Update()
     {
         //Debug.Log("Trig!");
-        if (Input.GetKeyDown(KeyCode.E) && triggerEnter)  // ТУТ ПОМЕНЯТЬ
+        if (triggerEnter)  
         {
             RaycastWeapon weapon = activeWeapon.GetActiveWeapon();
 
