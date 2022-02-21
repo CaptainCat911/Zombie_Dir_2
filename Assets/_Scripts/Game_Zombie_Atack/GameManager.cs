@@ -46,25 +46,23 @@ public class GameManager : MonoBehaviour
     public int startDiffDelay_2;                  // начальная задержка перед спауном зомби
     public int startDiffDelay_3;                  // начальная задержка перед спауном зомби
 
-
-
     public int finalDelay = 60;                  // задержка перед завершением финального ивента
     public bool pultActive = false;              // активация пульта
 
-    public GameObject finalSpotLamp;        // прожектор вертолёта 
+    public GameObject finalSpotLamp;            // прожектор вертолёта 
 
     int i = 0;                                  // счетчик для сложности
 
-    bool pause = true;                     // для паузы
-    bool slowMo = false;                     // для слоумоушен
+    bool pause = true;                          // для паузы
+    bool slowMo = false;                         // для слоумоушен
         
-    bool playerDead = false;                // заряд для диалога при поражении
+    bool playerDead = false;                    // заряд для диалога при поражении
 
-    public bool playerStop = true;                // для обездвижевания
+    public bool playerStop = false;                // для обездвижевания
 
     public GameObject bars;                     // для включения баров
 
-    public bool postProcessFinal = false;
+    public bool postProcessFinal = false;       // для "засветления" в финале
 
 
 
@@ -100,8 +98,8 @@ public class GameManager : MonoBehaviour
         dialogueTrig = GetComponent<DialogueTrigger>();     // Ссылка на диалог
         spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>(); 
         StartCoroutine(StartDiffCor());
-        StartCoroutine(DialogePause());
-        playerStop = true;
+        //StartCoroutine(DialogePause());                       // ПОТОМ ВКЛЮЧИТЬ
+        //playerStop = true;
     }
 
 
@@ -192,16 +190,17 @@ public class GameManager : MonoBehaviour
         finalSpotLamp.SetActive(true);                          // включаем прожектор вертолёта 
         yield return new WaitForSeconds(0.5f);                 
         player.FinalWave();                                     // запускаем волну, убивающую зомби (стрельба из вертолёта)
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(15f);
         dialogueTrig.TriggerDialogue(1);
         Pause();
         postProcessFinal = true;
-    }   
+    }
 
 
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
-    IEnumerator StartDiffCor()
+    IEnumerator StartDiffCor()      // постепенное увеличение сложности
     {
         //Debug.Log("Cor!");
         yield return new WaitForSeconds(startDiffDelay_1);
@@ -266,7 +265,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetFinalDifficulty()
+    public void SetFinalDifficulty()            // финальная сложность
     {
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {

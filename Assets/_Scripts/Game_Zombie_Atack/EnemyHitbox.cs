@@ -6,7 +6,7 @@ public class EnemyHitbox : Collidable
 {
     // Damage
     private int damage = 11;              // Урон
-    private float pushForce = 0.97f;    // замедление
+    private float pushForce = 0.95f;    // замедление
     public float cooldown = 0.5f;       // перезардяка атаки
     public float attackSpeed = 1;       // скорость атаки       
     public float attackRadiusHitBox = 1;    // радиус хитбокса

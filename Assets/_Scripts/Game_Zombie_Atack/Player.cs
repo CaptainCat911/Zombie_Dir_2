@@ -231,6 +231,12 @@ public class Player : Mover
             boostSpeed = !boostSpeed;
         }
 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            currentHealth += 100;            
+        }
+
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (!isAlive || GameManager.instance.playerStop)

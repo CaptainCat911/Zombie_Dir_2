@@ -12,11 +12,11 @@ public class FinalSpawnerTrigger : MonoBehaviour
     public bool finalTrigStart = false;     // "заряд" для старта 
 
     public GameObject objectLamps;          // объек с лампами
-    public Animator[] lamps;                // извлекаем аниматоры ламп
+    private Animator[] lamps;                // извлекаем аниматоры ламп
 
     public GameObject spawnPointsFinalGameObject;     // финальные спавнеры
     public GameObject spawnPointsGameobject;          // обычные спавнеры, которые надо вырубить в финале
-    public EnemySpawnPoint[] spawnPoints;
+    private EnemySpawnPoint[] spawnPoints;
     public EnemySpawnPoint[] spawnPointsFinal;
 
     /*    bool triggerEnter = false;              // вход в триггер
