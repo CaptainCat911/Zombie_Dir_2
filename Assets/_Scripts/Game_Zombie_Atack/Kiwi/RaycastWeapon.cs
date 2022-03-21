@@ -51,7 +51,7 @@ public class RaycastWeapon : MonoBehaviour
     public TrailRenderer tracerEffect;  // трасер
     public Light lightEffect;     //вспышка света
 
-    LayerMask layerIgnore = 0;      // Слой Ignore Raycast, в списке второй почему-то
+    public LayerMask layerIgnore;      // Слой Ignore Raycast, в списке второй почему-то
 
     RaycastHit hit;
     Ray ray;
@@ -68,7 +68,8 @@ public class RaycastWeapon : MonoBehaviour
         player = GameManager.instance.player;
         playerAmmo = GameManager.instance.player.GetComponent<AmmoPack>();        
         TakeAmmo();                                                            // Берем патроны из АммоПак игрока
-        activeWeapon = GetComponentInParent<ActiveWeapon>();        
+        activeWeapon = GetComponentInParent<ActiveWeapon>();
+        layerIgnore = ~layerIgnore;
     }
 
 
@@ -221,7 +222,7 @@ public class RaycastWeapon : MonoBehaviour
         ray.origin = PROJECTILE_ANCHOR.position;        // луч из позиции якоря
         ray.direction = PROJECTILE_ANCHOR.forward;      // луч с направлением вперед
         //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerIgnore))
         {
             //Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);                                   // дебаг, красные линии
 

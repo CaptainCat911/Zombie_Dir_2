@@ -53,14 +53,23 @@ public class Tooltip : MonoBehaviour {
 
 		if(tooltipMode == ProjectMode.Tooltip3D)
 		{
+			GameObject tempHit;
 			RaycastHit hit;
-			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-			if(Physics.Raycast(ray, out hit))
+			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);       //  GameManager.instance.player.pointer.position
+			//Debug.Log(GameManager.instance.player.pointer.position);
+			if (Physics.Raycast(ray, out hit))
 			{
-				if(hit.transform.GetComponent<TooltipText>())
+				if (hit.transform.GetComponent<TooltipText>())
 				{
 					text = hit.transform.GetComponent<TooltipText>().text;
 					show = true;
+				}
+
+				// если есть подсветка
+				if (hit.transform.GetComponent<Outline>())
+				{
+					tempHit = hit.transform.gameObject;
+					tempHit.GetComponent<Outline>().OutlineWidth = 2f;
 				}
 			}
 		}

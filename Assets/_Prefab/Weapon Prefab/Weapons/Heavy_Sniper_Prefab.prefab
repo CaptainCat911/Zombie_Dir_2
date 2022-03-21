@@ -48302,6 +48302,9 @@ MonoBehaviour:
   tracerEffect: {fileID: 2665097644371149589, guid: ae83976c12df04e43af3b831e860cb2d,
     type: 3}
   lightEffect: {fileID: 4473978892120722954}
+  layerIgnore:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &5907705018366120306
 GameObject:
   m_ObjectHideFlags: 0

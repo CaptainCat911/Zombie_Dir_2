@@ -440,6 +440,4 @@ public class Player : Mover
         //Destroy(this.gameObject);
         //GameManager.instance.deathMenuAnim.SetTrigger("Show");
     }
-
-
 }
