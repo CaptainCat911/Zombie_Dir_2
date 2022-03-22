@@ -27,6 +27,10 @@ public class Tooltip : MonoBehaviour {
 	private Color BGColorFade;
 	private Color textColorFade;
 
+	private Outline previousOutline;		// предыдущая подсветка
+
+	[SerializeField]	private LayerMask layerMask;				// маска 
+
 	void Awake()
 	{
 		img = new Image[2];
@@ -44,6 +48,8 @@ public class Tooltip : MonoBehaviour {
 		}
 		boxText.color = textColorFade;
 		boxText.alignment = TextAnchor.MiddleCenter;
+
+		//layerMask = ~layerMask;
 	}
 
 	void LateUpdate()
@@ -53,23 +59,32 @@ public class Tooltip : MonoBehaviour {
 
 		if(tooltipMode == ProjectMode.Tooltip3D)
 		{
-			GameObject tempHit;
+			
 			RaycastHit hit;
-			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);       //  GameManager.instance.player.pointer.position
+			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);			//  GameManager.instance.player.pointer.position
 			//Debug.Log(GameManager.instance.player.pointer.position);
-			if (Physics.Raycast(ray, out hit))
+			if (Physics.Raycast(ray, out hit, 100, layerMask))
 			{
-				if (hit.transform.GetComponent<TooltipText>())
+				if (hit.transform.GetComponent<TooltipText>())					// если есть подсказка
 				{
 					text = hit.transform.GetComponent<TooltipText>().text;
 					show = true;
 				}
 
-				// если есть подсветка
-				if (hit.transform.GetComponent<Outline>())
+				
+				Outline outline = hit.transform.GetComponent<Outline>();		// если есть подсветка
+				if (outline != null)
 				{
-					tempHit = hit.transform.gameObject;
-					tempHit.GetComponent<Outline>().OutlineWidth = 2f;
+					if (outline != previousOutline)
+                    {
+						outline.OutlineWidth = 2f;								// даём ширину линии
+						previousOutline = outline;
+                    }
+				}
+				else if (previousOutline != null)                               // если рей уходит в пустоту 
+				{
+					previousOutline.OutlineWidth = 0f;
+					previousOutline = null;
 				}
 			}
 		}

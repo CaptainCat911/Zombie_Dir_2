@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 8598102392319993675}
   - component: {fileID: 1842210109}
   - component: {fileID: 1842210108}
+  - component: {fileID: 1842210104}
   m_Layer: 13
   m_Name: HP_Pack
   m_TagString: Untagged
@@ -362,3 +363,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: "\u0410\u043F\u0442\u0435\u0447\u043A\u0430"
+--- !u!114 &1842210104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6312526296165264628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.06151801, g: 0.9811321, b: 0.041651815, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

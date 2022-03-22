@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         
     bool playerDead = false;                    // заряд для диалога при поражении
 
-    public bool playerStop = false;                // для обездвижевания
+    public bool playerStop = false;             // для обездвижевания
 
     public GameObject bars;                     // для включения баров
 

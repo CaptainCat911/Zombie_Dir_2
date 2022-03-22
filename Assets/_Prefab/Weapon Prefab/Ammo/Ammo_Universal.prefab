@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 4329375587580981940}
   - component: {fileID: 1450022589}
   - component: {fileID: 1450022593}
+  - component: {fileID: 1792138373}
   m_Layer: 13
   m_Name: Ammo_Universal
   m_TagString: Untagged
@@ -364,3 +365,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: "\u041F\u0430\u0442\u0440\u043E\u043D\u044B"
+--- !u!114 &1792138373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4329375587580981941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.80241597, b: 0, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
