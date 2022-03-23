@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     public Player player;                       // ссылка на игрока
 
     // Logic
-    public int pesos;
-    public int experience;
+/*    public int pesos;
+    public int experience;*/
 
     // Enemy spawner
     public int enemyCount = 0;                  // счетчик зомби
@@ -297,7 +297,7 @@ public class GameManager : MonoBehaviour
     {
         //playerStop = true;     
                 
-        yield return new WaitForSeconds(9f);               
+        yield return new WaitForSeconds(12.5f);               
         dialogueTrig.TriggerDialogue(0);        
         Pause();
         yield return new WaitForSeconds(1f);

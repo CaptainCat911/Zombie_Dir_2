@@ -42,7 +42,11 @@ public class FinalSpawnerTrigger : MonoBehaviour
     {
         spawners = spawnerObject.GetComponentsInChildren<EnemySpawnPointTrigger>();         // извлекаем из него спавнеры
         lamps = objectLamps.GetComponentsInChildren<Animator>();                            // извлекаем аниматоры ламп
-        objectLamps.SetActive(false);
+        foreach (Animator lamp in lamps)
+        {
+            lamp.SetBool("LightOff", true);         // отключаем
+        }
+        //objectLamps.SetActive(false);
 
         spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>();
 
@@ -68,22 +72,23 @@ public class FinalSpawnerTrigger : MonoBehaviour
                 StartCoroutine(finalTrigDelay());           // запускаем коронтин
                 finalTrigStart = true;                      // запускаем квест
         }
-
-
     }
 
     
     IEnumerator finalTrigDelay()
     {
         spawnPointsFinalGameObject.SetActive(true);
-        objectLamps.SetActive(true);                 // включаем лампы        
+        //objectLamps.SetActive(true);                 // включаем лампы
+        foreach (Animator lamp in lamps)
+        {
+            lamp.SetBool("LightOff", false);         // включаем лампы
+        }
+
         GameManager.instance.SetNullDifficulty();   // ставим сложность 0, чтобы остальные зомби не спавнились (только инстант)     
         GameManager.instance.final = true;          // чтобы спавнились только обычные зомби
         GameManager.instance.mission = "Продержитесь до прибытия вертолёта";
 
         yield return new WaitForSeconds(30);            // начальная задержка (передышка)
-       
-
 
         GameManager.instance.lightsOff = true;          // вырубаем в городе лампы
         GameManager.instance.SetFinalDifficulty();      // делаем финальную сложность

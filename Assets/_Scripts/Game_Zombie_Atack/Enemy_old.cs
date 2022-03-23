@@ -79,7 +79,8 @@ public class Enemy_old : Mover
             return;
 
         int random = Random.Range(0, 100);          // разные типы зомби
-        if (random <= 84 || weakZombie)             // шанс на слабого зомби или сами устанавливаем слабого зомби
+
+        if ((random <= 84 || weakZombie) && !strongZombie)             // шанс на слабого зомби или сами устанавливаем слабого зомби
         {
             random = 0;
 
@@ -103,10 +104,8 @@ public class Enemy_old : Mover
             tempCapColl.SetActive(false);           // временный коллайдер для жрущих зомби (отключаем)
         }
 
-        if ((random >= 85 && random < 90))
+        else if ((random >= 85 && random < 90) && !strongZombie && !weakZombie)
         {
-            if (weakZombie || strongZombie)
-                return;
             int random3 = Random.Range(0, 3);
             if (random3 == 0 || random3 == 2)
                 hitbox.grabChardge = false;
@@ -121,7 +120,7 @@ public class Enemy_old : Mover
             tempCapColl.SetActive(false);
         }
 
-        if ((random >= 90 || strongZombie) && !GameManager.instance.final)
+        else if ((random >= 90 || strongZombie) && !GameManager.instance.final)
         {
             strong = true;
             hitbox.grabChardge = false;
@@ -145,10 +144,6 @@ public class Enemy_old : Mover
 
         tempAgentSpeed = agent.speed;
     }
-
-
-
-
 
 
 
