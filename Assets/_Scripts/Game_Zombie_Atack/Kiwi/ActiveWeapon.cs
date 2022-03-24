@@ -15,27 +15,27 @@ public class ActiveWeapon : MonoBehaviour
         Melee = 3
     }
 
-    public Rig animLayer;   // ссылка на риг рук (общий)
+    public Rig animLayer;               // ссылка на риг рук (общий)
     public Animator rigController;      // ссылка на аниматор риг
     public Animator playerAnim;
     //float animDuration = 0.3f;
 
-    RaycastWeapon[] equiped_weapons = new RaycastWeapon[3];   // массив оружий 
-    public List<RaycastWeapon> listWeaponPistol;    // список пистолетов 
-    public List<RaycastWeapon> listWeaponRifle;    // список винтовок
-    public List<RaycastWeapon> listWeaponHeavy;    // список тяжелого оружия
-    public List<RaycastWeapon> listWeaponMelee;    // список ближнего оружия
+    RaycastWeapon[] equiped_weapons = new RaycastWeapon[3];     // массив оружий 
+    public List<RaycastWeapon> listWeaponPistol;                // список пистолетов 
+    public List<RaycastWeapon> listWeaponRifle;                 // список винтовок
+    public List<RaycastWeapon> listWeaponHeavy;                 // список тяжелого оружия
+    public List<RaycastWeapon> listWeaponMelee;                 // список ближнего оружия
 
 
     int activeWeaponIndex;
-    public bool isHolsted = false;      // оружие спрятано
-    public bool attackActive = false;       // активация атаки
-    public bool reloaring = false;      // во время перезарядки нельзя сменить оружие или убрать его (потом исправить)
-    public bool switching = false;
+    public bool isHolsted = false;              // оружие спрятано
+    public bool attackActive = false;           // активация атаки
+    public bool reloaring = false;              // во время перезарядки нельзя сменить оружие или убрать его (потом исправить)
+    public bool switching = false;              // во время смены оружия нельзя чё-то делать?
 
 
-    public Transform[] weaponSlots;     // слоты под оружие
-    public Transform weaponLeftGrip;    // риг левой руки
+    public Transform[] weaponSlots;             // слоты под оружие
+    public Transform weaponLeftGrip;            // риг левой руки
     public Transform weaponRightGrip;
 
     int iPistol = -1;
@@ -77,12 +77,10 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-
     void FixedUpdate()
     {
 
     }
-
 
 
 
@@ -117,7 +115,7 @@ public class ActiveWeapon : MonoBehaviour
             }
         }
 
-        if (activeWeaponIndex == 0)     // СДЕЛАТЬ ПРАВИЛЬНЫЕ ВЫСТРЕЛЫ ПИСТОЛЕТОМ ! (Пистолеты)
+        if (activeWeaponIndex == 0)                             // СДЕЛАТЬ ПРАВИЛЬНЫЕ ВЫСТРЕЛЫ ПИСТОЛЕТОМ ! (Пистолеты)
         {            
             if (Input.GetMouseButtonDown(0))
             {
@@ -142,23 +140,25 @@ public class ActiveWeapon : MonoBehaviour
         if (reloaring)
         {
             return;
-        }
+        }        
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+
+        // Смена оружия
+        if (Input.GetKeyDown(KeyCode.Alpha1))                               // || (Input.GetAxis("Mouse ScrollWheel") > 0 && activeWeaponIndex == 1) || (Input.GetAxis("Mouse ScrollWheel") < 0 && activeWeaponIndex == 2)
         {
-            if (listWeaponPistol.Count > 1)         // Если больше 1-го пистолета
+            if (listWeaponPistol.Count > 1)                                 // Если больше 1-го пистолета
             {
-                listWeaponPistol[iPistol].gameObject.SetActive(false);      // Прячем действующее оружие 
-                if (activeWeaponIndex == 0)     // Если актиновое оружие пистолет
-                    iPistol++;                  // Добавляем счетчик
-                if (iPistol >= listWeaponPistol.Count)      // Если пистолетов 2 - сбрасываем счетчик
+                listWeaponPistol[iPistol].gameObject.SetActive(false);      // Прячем действующее оружие
+                if (activeWeaponIndex == 0)                                 // Если актиновое оружие пистолет
+                    iPistol++;                                              // Добавляем счетчик
+                if (iPistol >= listWeaponPistol.Count)                      // Если пистолетов 2 - сбрасываем счетчик
                 {
                     iPistol = 0;
                 }
-                listWeaponPistol[iPistol].gameObject.SetActive(true);   // Делаем оружие активным 
-                Equip(listWeaponPistol[iPistol]);       // Экипируем его 
+                listWeaponPistol[iPistol].gameObject.SetActive(true);       // Делаем оружие активным 
+                Equip(listWeaponPistol[iPistol]);                           // Экипируем его 
             }
-            if (listWeaponPistol.Count == 1)        // Если пистолет только один
+            if (listWeaponPistol.Count == 1)                                // Если пистолет только один
                 Equip(listWeaponPistol[0]);
         }
 
@@ -213,7 +213,6 @@ public class ActiveWeapon : MonoBehaviour
     {
         if (newWeapon.indexNumberWeapon == 1)       // Если подобранное оружие - пистолет
         {
-
             listWeaponPistol.Add(newWeapon);
             if (listWeaponPistol.Count >= 2)
                 listWeaponPistol[iPistol].gameObject.SetActive(false);
