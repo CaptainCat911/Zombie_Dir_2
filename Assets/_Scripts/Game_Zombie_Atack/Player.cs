@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
 
 public class Player : Mover
@@ -33,7 +30,7 @@ public class Player : Mover
 
     public float maxSpeed = 6;
        
-    public Animator finalSphereAnim;    // сфера, убивающая зомби, для финального ивента (типо их с пулемета расстреляли)
+    public Animator finalSphereAnim;    // сфера, убивающая зомби, для финального ивента (типо их с пулемета вертолёта расстреляли)
 
     public Light lightF;                 // для управления фонари
 
