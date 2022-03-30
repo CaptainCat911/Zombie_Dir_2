@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 4492547568762938}
   - component: {fileID: 33745259745205440}
   - component: {fileID: 23990223321369574}
+  - component: {fileID: 3858636760751599281}
   m_Layer: 0
   m_Name: Taxi B
   m_TagString: Untagged
@@ -303,6 +304,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &3858636760751599281
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522885230745538}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300040, guid: e9d96ffec57c82c4face56ee1063eb87, type: 3}
 --- !u!1 &1535215230766536
 GameObject:
   m_ObjectHideFlags: 0
