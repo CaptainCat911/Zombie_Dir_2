@@ -26,8 +26,8 @@ TagManager:
   - City
   - Weapons
   - NavMeshIgnore
-  - 
-  - 
+  - MapObjects
+  - Fogs
   - 
   - 
   - 

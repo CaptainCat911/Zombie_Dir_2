@@ -20,7 +20,7 @@ public class ActiveWeapon : MonoBehaviour
     public Animator playerAnim;
     //float animDuration = 0.3f;
 
-    RaycastWeapon[] equiped_weapons = new RaycastWeapon[3];     // массив оружий 
+    RaycastWeapon[] equiped_weapons = new RaycastWeapon[4];     // массив оружий 
     public List<RaycastWeapon> listWeaponPistol;                // список пистолетов 
     public List<RaycastWeapon> listWeaponRifle;                 // список винтовок
     public List<RaycastWeapon> listWeaponHeavy;                 // список тяжелого оружия
@@ -200,6 +200,11 @@ public class ActiveWeapon : MonoBehaviour
             if (listWeaponHeavy.Count == 1)
                 Equip(listWeaponHeavy[0]);
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Equip(listWeaponMelee[0]);
+        }
     }
 
 
@@ -235,6 +240,12 @@ public class ActiveWeapon : MonoBehaviour
             if (listWeaponHeavy.Count >= 2)
                 listWeaponHeavy[iHeavy].gameObject.SetActive(false);
             iHeavy++;
+            Equip(newWeapon);
+        }
+
+        if (newWeapon.indexNumberWeapon == 4)       // Топор
+        {
+            listWeaponMelee.Add(newWeapon);
             Equip(newWeapon);
         }
     }
