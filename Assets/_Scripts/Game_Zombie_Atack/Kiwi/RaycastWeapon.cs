@@ -27,8 +27,6 @@ public class RaycastWeapon : MonoBehaviour
     public float pushForce; 
 
     private float lastSwing;        // для кд
-    //public bool startAttack = false;
-    //public bool attacking = false;
 
         // Перезарядка
     public int allAmmo;     // всего патронов
@@ -124,15 +122,7 @@ public class RaycastWeapon : MonoBehaviour
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
-    /*    public void AttackMeele()
-        {
-            lastSwing = Time.time;
-            //attackCooldown = 1f / attackSpeed;
-            startAttack = false;
-            //attacking = true;
-            //Swing();
-            StartCoroutine(AttackStartCor(hitBoxDelay, hitBoxTimeExist));
-        }*/
+
 
 
     public void AttackRange()

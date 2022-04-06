@@ -43,6 +43,26 @@ public class ActiveWeapon : MonoBehaviour
     int iHeavy = -1;
     int iMelee = -1;
 
+    public bool startAttack = false;
+    public bool attacking = false;
+    private float lastSwing;        // для кд
+    public float cooldown = 2f;  // кд ударов
+
+    public WeaponAnimationEvents animationEvents;
+
+    public float attackRadiusHitBox = 1;    // радиус хитбокса
+    public LayerMask layerEnemy;       // маска для зомби
+    public int damage;                // урон
+    public float pushForce;           // замедление
+
+    public Transform hitBox;        // хитбокс (где будет создаваться сфера для урона)
+
+    public GameObject axeBack;
+    public GameObject axeHand;
+
+
+
+
 
     void Start()
     {
@@ -53,6 +73,8 @@ public class ActiveWeapon : MonoBehaviour
         listWeaponRifle = new List<RaycastWeapon>();
 
         playerAnim = GetComponent<Animator>();
+
+        animationEvents.MeleeAnimationEvent.AddListener(OnAnimationEventAttack);     // получаем ивенты от анимации атаки
     }
 
 
@@ -127,6 +149,21 @@ public class ActiveWeapon : MonoBehaviour
             }
         }
 
+
+        // Удар топором
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (Time.time - lastSwing > cooldown)
+            {
+               
+                lastSwing = Time.time;
+                playerAnim.SetTrigger("axe_attack");
+            }
+        }
+
+
+
+
         //Debug.Log(isHolsted);
         //Debug.Log(activeWeaponIndex);
 
@@ -134,7 +171,7 @@ public class ActiveWeapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            //ToggleActiveWeapon();
+            ToggleActiveWeapon();
         }
 
         if (reloaring)
@@ -208,6 +245,71 @@ public class ActiveWeapon : MonoBehaviour
     }
 
 
+    void OnAnimationEventAttack(string eventName)
+    {
+        //Debug.Log(eventName);
+        switch (eventName)
+        {
+            case "axe_start":
+                //Debug.Log("Start !");
+                ToggleActiveWeapon();
+                axeBack.SetActive(false);
+                axeHand.SetActive(true);
+                reloaring = true;
+                GameManager.instance.playerStop = true;
+                break;
+
+            case "axe_hit":
+                //Debug.Log("Hit !");
+                Collider[] collidersHitbox = Physics.OverlapSphere(hitBox.position, attackRadiusHitBox, layerEnemy);
+                foreach (Collider enObjectBox in collidersHitbox)
+                {
+                    if (enObjectBox == null)
+                    {
+                        continue;
+                    }
+
+                    if (enObjectBox.tag == "Enemy")
+                    {
+                        Enemy_old enemy = enObjectBox.GetComponentInParent<Enemy_old>();
+                        Damage dmg = new Damage()
+                        {
+                            damageAmount = damage,
+                            origin = transform.position,
+                            pushForce = pushForce
+                        };
+                        enemy.SendMessage("ReceiveDamage", dmg);
+                        enemy.TakeHitAxeBlood();
+                    }
+                    collidersHitbox = null;
+                }
+
+
+
+                //attacking = false;
+                break;
+
+            case "axe_stop":
+                //Debug.Log("Stop");
+                reloaring = false;
+                GameManager.instance.playerStop = false;
+                axeBack.SetActive(true);
+                axeHand.SetActive(false);
+                ToggleActiveWeapon();
+                break;
+        }
+    }
+
+
+    public void AttackMeele()
+    {
+        
+        //attackCooldown = 1f / attackSpeed;
+        //startAttack = false;
+        //attacking = true;
+        //Swing();
+        
+    }
 
 
     // weaponSlotIndex - номер типа оружия 0 - пистолеты , 1 - винотвки
@@ -363,5 +465,11 @@ public class ActiveWeapon : MonoBehaviour
         weapon.TakeAmmo();
         isHolsted = false;
         switching = true;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(hitBox.position, attackRadiusHitBox);
     }
 }

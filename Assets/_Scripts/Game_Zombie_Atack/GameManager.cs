@@ -98,8 +98,8 @@ public class GameManager : MonoBehaviour
         dialogueTrig = GetComponent<DialogueTrigger>();     // Ссылка на диалог
         spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>(); 
         StartCoroutine(StartDiffCor());
-        StartCoroutine(DialogePause());                       // ПОТОМ ВКЛЮЧИТЬ
-        playerStop = true;
+        //StartCoroutine(DialogePause());                       // ПОТОМ ВКЛЮЧИТЬ
+        //playerStop = true;                                    // ПОТОМ ВКЛЮЧИТЬ
     }
 
 

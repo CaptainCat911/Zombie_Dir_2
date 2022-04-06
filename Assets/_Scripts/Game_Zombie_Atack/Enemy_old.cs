@@ -366,6 +366,12 @@ public class Enemy_old : Mover
         slowed = true;
     }
 
+    public void TakeHitAxeBlood()
+    {
+        hitEffectBlood.transform.position = chest.transform.position;
+        hitEffectBlood.transform.forward = transform.forward;
+        hitEffectBlood.Emit(1);
+    }
 
 
     IEnumerator ScreamDelay()

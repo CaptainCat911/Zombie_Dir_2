@@ -10,10 +10,16 @@ public class AnimationEvent : UnityEvent<string>
 
 public class WeaponAnimationEvents : MonoBehaviour
 {
-    public AnimationEvent WeaponAnimationEvent = new AnimationEvent();
-    public AnimationEvent ZombieAnimationEvent = new AnimationEvent();
-    public AnimationEvent ZombieAnimationGrabEvent = new AnimationEvent();
+    public AnimationEvent MeleeAnimationEvent = new AnimationEvent();           // Для атаки топором
+    public AnimationEvent WeaponAnimationEvent = new AnimationEvent();          // Для перезарядки
+    public AnimationEvent ZombieAnimationEvent = new AnimationEvent();          // Для атаки зомби
+    public AnimationEvent ZombieAnimationGrabEvent = new AnimationEvent();      // Для захвата зомби
 
+
+    public void OnMeleeAnimationEvents(string eventName)
+    {
+        MeleeAnimationEvent.Invoke(eventName);
+    }
 
     public void OnAnimationEvents(string eventName)
     {
@@ -23,8 +29,6 @@ public class WeaponAnimationEvents : MonoBehaviour
     public void OnAnimationEventsZombie(string eventName)
     {
         ZombieAnimationEvent.Invoke(eventName);
-
-
     }   
     
     
