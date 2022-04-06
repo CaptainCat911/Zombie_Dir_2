@@ -278,8 +278,8 @@ public class ActiveWeapon : MonoBehaviour
                             origin = transform.position,
                             pushForce = pushForce
                         };
-                        enemy.SendMessage("ReceiveDamage", dmg);
                         enemy.TakeHitAxeBlood();
+                        enemy.SendMessage("ReceiveDamage", dmg);
                     }
                     collidersHitbox = null;
                 }
