@@ -263,13 +263,16 @@ public class Player : Mover
             }
         }
 
-        if (!isAlive || GameManager.instance.playerStop)
+        if (!isAlive)
         {
             lightF.enabled = false;
             return;
         }
 
-
+        if (GameManager.instance.playerStop)
+        {
+            return;
+        }
        
             
 

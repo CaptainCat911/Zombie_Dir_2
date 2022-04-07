@@ -20,11 +20,11 @@ public class ActiveWeapon : MonoBehaviour
     public Animator playerAnim;
     //float animDuration = 0.3f;
 
-    RaycastWeapon[] equiped_weapons = new RaycastWeapon[4];     // массив оружий 
+    RaycastWeapon[] equiped_weapons = new RaycastWeapon[3];     // массив оружий 
     public List<RaycastWeapon> listWeaponPistol;                // список пистолетов 
     public List<RaycastWeapon> listWeaponRifle;                 // список винтовок
     public List<RaycastWeapon> listWeaponHeavy;                 // список тяжелого оружия
-    public List<RaycastWeapon> listWeaponMelee;                 // список ближнего оружия
+    //public List<RaycastWeapon> listWeaponMelee;                 // список ближнего оружия
 
 
     int activeWeaponIndex;
@@ -41,7 +41,7 @@ public class ActiveWeapon : MonoBehaviour
     int iPistol = -1;
     int iRifle = -1;
     int iHeavy = -1;
-    int iMelee = -1;
+    //int iMelee = -1;
 
     public bool startAttack = false;
     public bool attacking = false;
@@ -57,8 +57,8 @@ public class ActiveWeapon : MonoBehaviour
 
     public Transform hitBox;        // хитбокс (где будет создаваться сфера для урона)
 
-    public GameObject axeBack;
-    public GameObject axeHand;
+    public GameObject axeBack;      // топор за спиной
+    public GameObject axeHand;      // топор в руках
 
 
 
@@ -70,7 +70,7 @@ public class ActiveWeapon : MonoBehaviour
         if (existingWeapon)
             Equip(existingWeapon);
 
-        listWeaponRifle = new List<RaycastWeapon>();
+        //listWeaponRifle = new List<RaycastWeapon>();
 
         playerAnim = GetComponent<Animator>();
 
@@ -151,11 +151,10 @@ public class ActiveWeapon : MonoBehaviour
 
 
         // Удар топором
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !reloaring)
         {
             if (Time.time - lastSwing > cooldown)
-            {
-               
+            {               
                 lastSwing = Time.time;
                 playerAnim.SetTrigger("axe_attack");
             }
@@ -171,7 +170,7 @@ public class ActiveWeapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            ToggleActiveWeapon();
+            //ToggleActiveWeapon();
         }
 
         if (reloaring)
@@ -238,10 +237,10 @@ public class ActiveWeapon : MonoBehaviour
                 Equip(listWeaponHeavy[0]);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+/*        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             Equip(listWeaponMelee[0]);
-        }
+        }*/
     }
 
 
@@ -251,7 +250,7 @@ public class ActiveWeapon : MonoBehaviour
         switch (eventName)
         {
             case "axe_start":
-                //Debug.Log("Start !");
+                Debug.Log("Start !");
                 ToggleActiveWeapon();
                 axeBack.SetActive(false);
                 axeHand.SetActive(true);
@@ -260,7 +259,7 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "axe_hit":
-                //Debug.Log("Hit !");
+                Debug.Log("Hit !");
                 Collider[] collidersHitbox = Physics.OverlapSphere(hitBox.position, attackRadiusHitBox, layerEnemy);
                 foreach (Collider enObjectBox in collidersHitbox)
                 {
@@ -290,7 +289,7 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "axe_stop":
-                //Debug.Log("Stop");
+                Debug.Log("Stop");
                 reloaring = false;
                 GameManager.instance.playerStop = false;
                 axeBack.SetActive(true);
@@ -345,11 +344,11 @@ public class ActiveWeapon : MonoBehaviour
             Equip(newWeapon);
         }
 
-        if (newWeapon.indexNumberWeapon == 4)       // Топор
+/*        if (newWeapon.indexNumberWeapon == 4)       // Топор
         {
             listWeaponMelee.Add(newWeapon);
             Equip(newWeapon);
-        }
+        }*/
     }
 
 

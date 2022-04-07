@@ -160,7 +160,7 @@ public class EnemyHitbox : Collidable
 
                         Damage dmg = new Damage()
                         {
-                            damageAmount = 5,
+                            damageAmount = 6,
                             origin = transform.position,
                             pushForce = pushForce
                         };

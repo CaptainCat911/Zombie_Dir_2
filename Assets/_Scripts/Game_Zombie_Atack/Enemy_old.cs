@@ -80,14 +80,14 @@ public class Enemy_old : Mover
 
         int random = Random.Range(0, 100);          // разные типы зомби
 
-        if ((random <= 84 || weakZombie) && !strongZombie)             // шанс на слабого зомби или сами устанавливаем слабого зомби
+        if ((random <= 84 || weakZombie) && !strongZombie)          // шанс на слабого зомби или сами устанавливаем слабого зомби
         {
             random = 0;
 
-            int random3 = Random.Range(0, 3);       // 66% шанс на то, что зомби будет с захватом
+            int random3 = Random.Range(0, 2);       // 50% шанс на то, что зомби будет с захватом
             if (random3 == 0)
                 hitbox.grabChardge = false;
-            if (random3 == 1 || random3 == 2)
+            if (random3 == 1)                       // || random3 == 2
                 hitbox.grabChardge = true;
 
             hitbox.cooldown = 2.5f;                 // кд атаки
@@ -156,6 +156,11 @@ public class Enemy_old : Mover
         if (Input.GetKeyDown(KeyCode.J))
         {
             
+        }
+
+        if (currentHealth < 50)
+        {
+            hitbox.grabChardge = false;
         }
     }
 
