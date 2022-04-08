@@ -45,6 +45,7 @@ public class QuestRadio : MonoBehaviour
                 GameManager.instance.Pause();
 
                 questStart = true;                                          // квест начат
+                GameManager.instance.questAmmo = true;
                 GameManager.instance.mission = "- Найдите инструменты (супермаркет)"+ "\n- Найдите детали (военная часть)" +"\n- Найдите кабель (промышленный склад)";
             }
 

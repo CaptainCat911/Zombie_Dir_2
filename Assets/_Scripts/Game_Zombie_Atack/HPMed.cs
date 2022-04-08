@@ -7,6 +7,7 @@ public class HPMed : MonoBehaviour
 {
 
     bool triggerEnter = false;
+    public int hpHeal;
 
     public void OnTriggerEnter(Collider collision)
     {
@@ -27,7 +28,7 @@ public class HPMed : MonoBehaviour
         {
             if (GameManager.instance.player.currentHealth != GameManager.instance.player.maxHealth)
             {
-                GameManager.instance.player.Heal(25);
+                GameManager.instance.player.Heal(hpHeal);
                 Destroy(gameObject);
             }            
         }

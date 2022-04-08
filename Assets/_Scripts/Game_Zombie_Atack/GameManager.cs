@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public bool inBuilding = false;             // для изменения сферы прозрачности в здании 
 
     // Quest    
+    public bool questAmmo = false;              // для выпадения патронов на все оружия
     public bool quest1 = false;                 // для выполненых квестов 
     public bool quest2 = false;                 
     public bool quest3 = false;

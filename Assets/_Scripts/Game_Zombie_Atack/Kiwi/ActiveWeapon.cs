@@ -250,7 +250,7 @@ public class ActiveWeapon : MonoBehaviour
         switch (eventName)
         {
             case "axe_start":
-                Debug.Log("Start !");
+                //Debug.Log("Start !");
                 ToggleActiveWeapon();
                 axeBack.SetActive(false);
                 axeHand.SetActive(true);
@@ -259,7 +259,7 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "axe_hit":
-                Debug.Log("Hit !");
+                //Debug.Log("Hit !");
                 Collider[] collidersHitbox = Physics.OverlapSphere(hitBox.position, attackRadiusHitBox, layerEnemy);
                 foreach (Collider enObjectBox in collidersHitbox)
                 {
@@ -289,7 +289,7 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "axe_stop":
-                Debug.Log("Stop");
+                //Debug.Log("Stop");
                 reloaring = false;
                 GameManager.instance.playerStop = false;
                 axeBack.SetActive(true);

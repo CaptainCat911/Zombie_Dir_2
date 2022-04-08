@@ -57,6 +57,13 @@ public class Enemy_old : Mover
     public GameObject[] ammos;              // выпадение патронов, массив
     public GameObject medHP;                // выпадение аптечки
 
+    public GameObject ammoBack;             // патроны за спиной
+    public GameObject medhpBack;            // аптечка за спиной
+    private int randomAmmo;                 // для вероятности выпадения патронов и аптечек
+    int ndx;                                // индекс для выбора типа патронов
+
+    public int ammoChanse = 98;             // шанс выпадения патронов
+
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -143,6 +150,17 @@ public class Enemy_old : Mover
         }
 
         tempAgentSpeed = agent.speed;
+
+        // выпадение патронов
+        randomAmmo = Random.Range(0, 100);
+        if (randomAmmo >= ammoChanse)
+        {
+            ammoBack.SetActive(true);
+        }
+        if (randomAmmo == 0)
+        {
+            medhpBack.SetActive(true);
+        }
     }
 
 
@@ -404,25 +422,35 @@ public class Enemy_old : Mover
 
     protected override void Death()
     {
+        
         if (!dontCount)
             GameManager.instance.enemyCount -= 1;
 
-            // выпадение патронов
-        int randomAmmo = Random.Range(0, 100);
-        
-        if (randomAmmo == 99)
-        {
-            int ndx = Random.Range(0, ammos.Length);
+            // выпадение патронов        
+        if (randomAmmo >= ammoChanse)
+        {            
+            if (!GameManager.instance.questAmmo)
+            {
+                ndx = Random.Range(0, 2);
+            }
+
+            if (GameManager.instance.questAmmo)
+            {
+                ndx = Random.Range(0, ammos.Length);
+            }
+
             GameObject go = Instantiate(ammos[ndx]);        // Создаём префаб патронов
             //go.transform.SetParent(transform, false);     // Назначаем этот спавнер родителем
-            go.transform.position = new Vector3(transform.position.x, 0.3f, transform.position.z);
+            go.transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+            ammoBack.SetActive(false);
         }
 
-        if (randomAmmo == 98)
+        if (randomAmmo == 0)
         {
             GameObject go = Instantiate(medHP);             // Создаём префаб аптечки
             //go.transform.SetParent(transform, false);     // Назначаем этот спавнер родителем
-            go.transform.position = new Vector3(transform.position.x, 0.3f, transform.position.z);
+            go.transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+            medhpBack.SetActive(false);
         }
 
 
