@@ -11,7 +11,7 @@ public class Granate : MonoBehaviour
     public int damageBig = 76;              // дополнительный урон
     public float pushForce = 0.95f;         // останавливающая сила
     public LayerMask layerEnemy;            // маска для нанесения урона
-    public ParticleSystem explEffect;       // эффект взрыва
+    public GameObject explEffect;           // эффект взрыва
 
     //public float force = 700f;
 
@@ -125,11 +125,12 @@ public class Granate : MonoBehaviour
             colliders = null;
         }
 
-        explEffect.transform.position = transform.position;
-        //explEffect.transform.forward = transform.forward;
-        explEffect.Emit(1);
+        Instantiate(explEffect, transform.position, transform.rotation);
+/*        explEffect.transform.position = transform.position;
+        explEffect.transform.forward = transform.forward;
+        explEffect.Emit(2);*/
 
-        Destroy(gameObject, 2);
+        Destroy(gameObject);
 
 
 
