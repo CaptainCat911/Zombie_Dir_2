@@ -70,6 +70,8 @@ public class ActiveWeapon : MonoBehaviour
     public Transform rightHand;         // трансформ правой руки для броска гранаты
     public int granateForce;            // сила броска гранаты
 
+    AmmoPack ammoPack;                  // ссылка на скрипт патронов (инвентарь)
+
 
 
     void Start()
@@ -84,6 +86,8 @@ public class ActiveWeapon : MonoBehaviour
 
         animationEvents.MeleeAnimationEvent.AddListener(OnAnimationEventAttack);     // получаем ивенты от анимации атаки
         animationEvents.GranateAnimationEvent.AddListener(OnAnimationEventThrow);    // получаем ивенты от анимации броска гранаты
+
+        ammoPack = player.GetComponent<AmmoPack>();
     }
 
 
@@ -136,7 +140,7 @@ public class ActiveWeapon : MonoBehaviour
         
         if (activeWeaponIndex == 1 || activeWeaponIndex == 2)       // тут индекс оружия из которого стрелять (ПОМЕНЯТЬ ПОТОМ)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
                 attackActive = true;
             }
@@ -148,7 +152,7 @@ public class ActiveWeapon : MonoBehaviour
 
         if (activeWeaponIndex == 0)                             // СДЕЛАТЬ ПРАВИЛЬНЫЕ ВЫСТРЕЛЫ ПИСТОЛЕТОМ ! (Пистолеты)
         {            
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
                 attackActive = true;
             }
@@ -166,8 +170,9 @@ public class ActiveWeapon : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.G) && !reloaring)
+        if (Input.GetKeyDown(KeyCode.G) && !reloaring && ammoPack.granate > 0)
         {
+            ammoPack.granate -= 1;
             playerAnim.SetTrigger("Throw");            
         }
 
@@ -533,7 +538,8 @@ public class ActiveWeapon : MonoBehaviour
             }
             while (false);     // НЕ РАБОТАЕТ !
         }
-        weapon.TakeAmmo();
+        if (weapon)
+            weapon.TakeAmmo();
         isHolsted = false;
         switching = true;
     }

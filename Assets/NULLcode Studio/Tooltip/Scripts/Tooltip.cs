@@ -83,7 +83,7 @@ public class Tooltip : MonoBehaviour {
 				}
 				else if (previousOutline != null)                               // если рей уходит в пустоту 
 				{
-					//previousOutline.OutlineWidth = 0f;						// пока что выключил отключение подсветки
+					previousOutline.OutlineWidth = 0f;						
 					previousOutline = null;
 				}
 			}

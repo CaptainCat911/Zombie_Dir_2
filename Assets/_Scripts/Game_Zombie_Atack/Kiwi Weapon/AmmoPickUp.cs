@@ -5,9 +5,7 @@ using UnityEngine;
 /// </summary>
 
 public class AmmoPickUp : MonoBehaviour
-{
-
-    
+{ 
 
     //public GameObject ammo;
     public string ammoType;     // Тип патронов, называю в инспекторе
@@ -73,9 +71,13 @@ public class AmmoPickUp : MonoBehaviour
                 case "0.50":
                     playerAmmo.allAmmo_0_50 += ammoSize;
                     break;
+                case "granate":
+                    playerAmmo.granate += ammoSize;
+                    break;
 
             }
-            weapon.TakeAmmo();
+            if (ammoType != "granate")
+                weapon.TakeAmmo();
 
             Destroy(gameObject);
         }
