@@ -64,6 +64,8 @@ public class Enemy_old : Mover
 
     public int ammoChanse = 98;             // шанс выпадения патронов
 
+    public bool dead = false;
+
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -374,7 +376,7 @@ public class Enemy_old : Mover
 
 
     protected override void ReceiveDamage(Damage dmg)
-    {
+    {        
         base.ReceiveDamage(dmg);
         stopForce = dmg.pushForce;
         TakeHit();
@@ -384,7 +386,10 @@ public class Enemy_old : Mover
 
     public void TakeHit()
     {
-        anim.SetTrigger("Take_Hit");
+        if (!dead)
+            anim.SetTrigger("Take_Hit");
+        if (dead)
+            anim.SetTrigger("Take_Hit_Dead");
         lastSlow = Time.time;
         slowed = true;
     }
@@ -422,7 +427,9 @@ public class Enemy_old : Mover
 
     protected override void Death()
     {
-        
+        if (dead)
+            return;
+
         if (!dontCount)
             GameManager.instance.enemyCount -= 1;
 
@@ -461,13 +468,12 @@ public class Enemy_old : Mover
             anim.SetFloat("Death_type", 1);
         anim.SetTrigger("Death");
         tempCapColl.SetActive(false);
-        capsuleCollider.enabled = false;       
-        capsuleColliderLeftARm.enabled = false;
-        capsuleColliderRightArm.enabled = false;        
+       
         agent.ResetPath();
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);
-        selfScript.enabled = false;        
+        selfScript.enabled = false;
+        dead = true;
     }
 
 
@@ -475,6 +481,9 @@ public class Enemy_old : Mover
     public void NavMeshDisable()
     {
         agent.enabled = false;
+        capsuleCollider.enabled = false;
+        capsuleColliderLeftARm.enabled = false;
+        capsuleColliderRightArm.enabled = false;
     }
 
 

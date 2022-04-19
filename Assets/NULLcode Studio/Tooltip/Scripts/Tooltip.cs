@@ -83,7 +83,7 @@ public class Tooltip : MonoBehaviour {
 				}
 				else if (previousOutline != null)                               // если рей уходит в пустоту 
 				{
-					previousOutline.OutlineWidth = 0f;						
+					//previousOutline.OutlineWidth = 0f;						// убрал пока не починю
 					previousOutline = null;
 				}
 			}

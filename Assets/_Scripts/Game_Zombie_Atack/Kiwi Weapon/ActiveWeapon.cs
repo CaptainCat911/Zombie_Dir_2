@@ -335,6 +335,7 @@ public class ActiveWeapon : MonoBehaviour
     void OnAnimationEventThrow(string eventName)               // ивенты броска гранаты
     {
         //Debug.Log(eventName);
+        
         switch (eventName)
         {
             case "start_granate":
@@ -355,8 +356,11 @@ public class ActiveWeapon : MonoBehaviour
                 Rigidbody rb = go.GetComponent<Rigidbody>();
 
                 float dist = Vector3.Distance(transform.position, player.pointer.position);
-
-                rb.AddForce(transform.forward * dist, ForceMode.Impulse);             // бросаем её
+                if (dist > 7.5f)
+                    dist = 7.5f;
+                //Debug.Log(dist);
+                Vector3 vec3 = new Vector3(0, 0.3f, 0) + transform.forward;         // чтобы летела вперед и чуть вверх
+                rb.AddForce(vec3 * dist, ForceMode.Impulse);                        // бросаем её с учетом дистанции до прицела
 
                 break;
 
@@ -372,11 +376,6 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-
-
-
-
-
         public void AttackMeele()
     {
         
@@ -388,11 +387,15 @@ public class ActiveWeapon : MonoBehaviour
     }
 
 
+
+
+
+
+
+
     // weaponSlotIndex - номер типа оружия 0 - пистолеты , 1 - винотвки
-
-
-
-    public void GetWeaponUp(RaycastWeapon newWeapon)
+    
+    public void GetWeaponUp(RaycastWeapon newWeapon)            // подобрать оружие
     {
         if (newWeapon.indexNumberWeapon == 1)       // Если подобранное оружие - пистолет
         {

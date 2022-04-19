@@ -437,6 +437,7 @@ public class Player : Mover
     {
         isAlive = false;
         anim.SetTrigger("Death");
+
         //Destroy(this.gameObject);
         //GameManager.instance.deathMenuAnim.SetTrigger("Show");
     }
