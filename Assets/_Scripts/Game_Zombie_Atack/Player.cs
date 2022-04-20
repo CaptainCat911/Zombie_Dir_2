@@ -254,12 +254,12 @@ public class Player : Mover
             if (mapActive)
             {
                 canvasMap.SetActive(true);
-                Time.timeScale = 0f;
+                //Time.timeScale = 0f;
             }
             if (!mapActive)
             {
                 canvasMap.SetActive(false);
-                Time.timeScale = 1f;
+                //Time.timeScale = 1f;
             }
         }
 
