@@ -1,4 +1,5 @@
 ﻿using UnityEngine.Audio;
+using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -15,12 +16,15 @@ public class AudioManager : MonoBehaviour
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+            s.source.spatialBlend = s.spaceEff;
         }
     }
 
  
-    void Update()
+    public void Play (string name)
     {
-        
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.Play();
     }
 }

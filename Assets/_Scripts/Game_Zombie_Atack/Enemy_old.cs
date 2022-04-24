@@ -473,6 +473,9 @@ public class Enemy_old : Mover
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);
         selfScript.enabled = false;
+
+        FindObjectOfType<AudioManager>().Play("Craw");
+
         dead = true;
     }
 
