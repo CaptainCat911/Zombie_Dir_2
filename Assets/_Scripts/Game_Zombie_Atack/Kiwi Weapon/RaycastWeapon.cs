@@ -34,8 +34,8 @@ public class RaycastWeapon : MonoBehaviour
     public int ammoCount;   // счетчик в магазине
 
         // Ссылки 
-    Player player;          //ссылка на игрока
-    AmmoPack playerAmmo;    //ссылка на патроны игрока
+    Player player;          // ссылка на игрока
+    AmmoPack playerAmmo;    // ссылка на патроны игрока
     ActiveWeapon activeWeapon;
     //public GameObject projPrefab;   // префаб снаряда
     public Transform PROJECTILE_ANCHOR;   // якорь для оружия
@@ -46,10 +46,10 @@ public class RaycastWeapon : MonoBehaviour
     public ParticleSystem[] muzzleFlash;    // вспышка оружия
     public ParticleSystem hitEffect;        // попадание в стену
     public ParticleSystem hitEffectBlood;   // попадание в зомби
-    public TrailRenderer tracerEffect;  // трасер
-    public Light lightEffect;     //вспышка света
+    public TrailRenderer tracerEffect;      // трасер
+    public Light lightEffect;               // вспышка света
 
-    public LayerMask layerIgnore;      // Слой Ignore Raycast, в списке второй почему-то
+    public LayerMask layerIgnore;           // маска 
 
     RaycastHit hit;
     Ray ray;
@@ -57,6 +57,8 @@ public class RaycastWeapon : MonoBehaviour
     Quaternion qua2;
 
     public RaycastHit[] m_Results = new RaycastHit[2];      // Для прострелов 
+
+    AudioSource audioSource;
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -68,6 +70,8 @@ public class RaycastWeapon : MonoBehaviour
         TakeAmmo();                                                            // Берем патроны из АммоПак игрока
         activeWeapon = GetComponentInParent<ActiveWeapon>();
         layerIgnore = ~layerIgnore;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -204,6 +208,10 @@ public class RaycastWeapon : MonoBehaviour
 
     public void MakeRayCast()
     {
+        // Звуки
+        audioSource.Play();
+
+
             // Настройки для трасеров
         TrailRenderer tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);          // создаем трасер
         tracer.AddPosition(EFFECT_ANCHOR.position);                                                             // начальная позиция 

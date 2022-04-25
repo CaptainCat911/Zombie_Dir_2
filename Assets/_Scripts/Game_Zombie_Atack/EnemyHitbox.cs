@@ -106,6 +106,9 @@ public class EnemyHitbox : Collidable
         switch (eventName)
         {
             case "hit":
+
+                enemy.audioSourses.attack.Play();           // звук атаки
+
                 Collider[] collidersHitbox = Physics.OverlapSphere(this.transform.position, attackRadiusHitBox, enemy.layerPlayer);
                 foreach (Collider enObjectBox in collidersHitbox)
                 {                    

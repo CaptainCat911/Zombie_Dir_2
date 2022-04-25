@@ -38,8 +38,10 @@ public class Player : Mover
 
     bool boostSpeed = false;            // Для тестового режима 
 
-    public GameObject canvasMap;
-    bool mapActive = false;
+    public GameObject canvasMap;        // Карта
+    bool mapActive = false;             // вкл/выкл карту
+
+    //public AudioManager audioManager;
 
 
 

@@ -45,7 +45,7 @@ public class Enemy_old : Mover
     public CapsuleCollider capsuleColliderLeftARm;  // коллайдеры рук
     public CapsuleCollider capsuleColliderRightArm; //
     //CapsuleCollider[] allCapsCol;
-    private Enemy_old selfScript;    // ссылка на свой скрипт (вроде можно убрать)
+    private Enemy_old selfScript;       // ссылка на свой скрипт (вроде можно убрать)
 
     public GameObject tempCapColl;      // временный коллайдер для жрущих зомби
 
@@ -64,7 +64,9 @@ public class Enemy_old : Mover
 
     public int ammoChanse = 98;             // шанс выпадения патронов
 
-    public bool dead = false;
+    public bool dead = false;               // если убили
+
+    public AudioSourses audioSourses;         // ссылка на объект с аудиоисточниками
 
 
 
@@ -474,7 +476,7 @@ public class Enemy_old : Mover
         Destroy(gameObject, timeAfterDeath);
         selfScript.enabled = false;
 
-        FindObjectOfType<AudioManager>().Play("Craw");
+        audioSourses.death.Play();
 
         dead = true;
     }
