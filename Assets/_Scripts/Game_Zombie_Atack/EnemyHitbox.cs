@@ -5,22 +5,22 @@ using UnityEngine;
 public class EnemyHitbox : Collidable
 {
     // Damage
-    private int damage = 11;              // Урон
-    private float pushForce = 0.95f;    // замедление
-    public float cooldown = 0.5f;       // перезардяка атаки
-    public float attackSpeed = 1;       // скорость атаки       
+    private int damage = 11;                // Урон
+    private float pushForce = 0.95f;        // замедление
+    public float cooldown = 0.5f;           // перезардяка атаки
+    public float attackSpeed = 1;           // скорость атаки       
     public float attackRadiusHitBox = 1;    // радиус хитбокса
-    float grabSpeed = 5f;          // скорость передвижения при захвате
+    float grabSpeed = 5f;                   // скорость передвижения при захвате
 
-    private float lastSwing;    // время последнего удара (для перезарядки удара)
-    private float lastGrab;     // для перезарядки захвата
-    public bool grabChardge = false;    // заряд захвата
-    public bool attacking = false;  // состояние атаки (чтобы стоял на месте, когда бьет)
-    public bool grabReady = false;  // готовность сделать захват (когда игрок в радиусе)
+    private float lastSwing;                // время последнего удара (для перезарядки удара)
+    private float lastGrab;                 // для перезарядки захвата
+    public bool grabChardge = false;        // заряд захвата
+    public bool attacking = false;          // состояние атаки (чтобы стоял на месте, когда бьет)
+    public bool grabReady = false;          // готовность сделать захват (когда игрок в радиусе)
 
 
 
-    // Ссылки
+        // Ссылки
     public Enemy_old enemy;
     public WeaponAnimationEvents animationEvents;
     Player player;
@@ -33,7 +33,7 @@ public class EnemyHitbox : Collidable
         player = GameManager.instance.player;
         enemy = GetComponentInParent<Enemy_old>();
 
-        animationEvents.ZombieAnimationEvent.AddListener(EventsZombieAttack);     // получаем ивенты от анимации атаки              
+        animationEvents.ZombieAnimationEvent.AddListener(EventsZombieAttack);       // получаем ивенты от анимации атаки              
         animationEvents.ZombieAnimationGrabEvent.AddListener(EventsZombieGrab);     // получаем ивенты от анимации захвата                
     }
 
@@ -72,10 +72,12 @@ public class EnemyHitbox : Collidable
             if (random == 3)
                 enemy.anim.SetFloat("Attack_type", 3);*/
             enemy.anim.SetTrigger("Swing");                     // бьем
+
+            enemy.audioSourses.attack.Play();                   // звук атаки
         }
     }
 
-    public void Grab()      // захват зомби 
+    public void Grab()                          // захват зомби 
     {
         //Debug.Log("GrabF !");
         int random = Random.Range(0, 2);        // захват левой или правой рукой
@@ -87,7 +89,7 @@ public class EnemyHitbox : Collidable
     }
 
 
-    IEnumerator GrabCor()       // ускорение при захвате зомби 
+    IEnumerator GrabCor()                       // ускорение при захвате зомби 
     {
         enemy.agent.speed = grabSpeed;
         //do
@@ -106,8 +108,8 @@ public class EnemyHitbox : Collidable
         switch (eventName)
         {
             case "hit":
-
-                enemy.audioSourses.attack.Play();           // звук атаки
+                
+                
 
                 Collider[] collidersHitbox = Physics.OverlapSphere(this.transform.position, attackRadiusHitBox, enemy.layerPlayer);
                 foreach (Collider enObjectBox in collidersHitbox)
@@ -121,6 +123,9 @@ public class EnemyHitbox : Collidable
                     {
                         if (player)
                         {
+
+                            // тут звук удара по игроку
+
                             GrabPlayerWalk();           // замедление игрока
                         }
 
@@ -175,7 +180,7 @@ public class EnemyHitbox : Collidable
         }
     }
 
-    public void GrabPlayerWalk()        // замедление игрока
+    public void GrabPlayerWalk()                // замедление игрока
     {
         player.lastSlow = Time.time;
         player.slowed = true;
