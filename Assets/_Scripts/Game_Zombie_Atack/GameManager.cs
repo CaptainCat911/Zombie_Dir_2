@@ -15,23 +15,36 @@ public class GameManager : MonoBehaviour
     public int experience;*/
 
     // Enemy spawner
+    [HideInInspector]
     public int enemyCount = 0;                  // счетчик зомби
 
     public bool inBuilding = false;             // для изменения сферы прозрачности в здании 
 
     // Quest    
+    [HideInInspector]
     public bool questAmmo = false;              // для выпадения патронов на все оружия
+    [HideInInspector]
     public bool quest1 = false;                 // для выполненых квестов 
-    public bool quest2 = false;                 
+    [HideInInspector]
+    public bool quest2 = false;
+    [HideInInspector]
     public bool quest3 = false;
+    [HideInInspector]
     public bool quest1Compl = false;
+    [HideInInspector]
     public bool quest2Compl = false;
-    public bool quest3Compl = false;    
+    [HideInInspector]
+    public bool quest3Compl = false;
+    [HideInInspector]
     public bool questFinish = false;            // собраны 3 предмета
+    [HideInInspector]
     public bool questCompl = false;             // тру когда полностью выполнен квест и вызван вертолёт
+    [HideInInspector]
     public bool final = false;                  // для финального ивента (обычные спавнеры останавливаются)
+    [HideInInspector]
     public bool lightsOff = false;              // для выключения света в городе 
 
+    [HideInInspector]
     public int weakZombiesChanse;               // для изменения процента появления слабых зомби (пока не используется)
 
     // Диалог
@@ -60,10 +73,15 @@ public class GameManager : MonoBehaviour
     bool playerDead = false;                    // заряд для диалога при поражении
 
     public bool playerStop = false;             // для обездвижевания
-
+        
     public GameObject bars;                     // для включения баров
 
+    [Header("Засветление")]
+    [Tooltip("Начинает засветлять экран")]
     public bool postProcessFinal = false;       // для "засветления" в финале
+
+    public GameObject tempCam;                  // камера при старте для карты
+    public GameObject tempLight;                // свет при старте для карты
 
 
 
@@ -101,6 +119,9 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartDiffCor());
         //StartCoroutine(DialogePause());                       // ПОТОМ ВКЛЮЧИТЬ
         //playerStop = true;                                    // ПОТОМ ВКЛЮЧИТЬ
+        tempCam.SetActive(true);
+        tempLight.SetActive(true);
+        StartCoroutine(TempCamDelay());
     }
 
 
@@ -176,6 +197,16 @@ public class GameManager : MonoBehaviour
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+
+
+    IEnumerator TempCamDelay()
+    {
+        yield return new WaitForSeconds(0.1f);            // задержка для выключения камеры карты
+        tempCam.SetActive(false);
+        tempLight.SetActive(false);
+    }
+
+
 
 
 
