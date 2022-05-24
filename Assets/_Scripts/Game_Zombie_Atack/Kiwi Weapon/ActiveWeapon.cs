@@ -44,10 +44,6 @@ public class ActiveWeapon : MonoBehaviour
     int iHeavy = -1;
     //int iMelee = -1;
 
-    //public bool startAttack = false;
-    //public bool attacking = false;
-    private float lastSwing;        // для кд топора
-    //public float cooldown = 2f;  // кд ударов
 
     private float lastThrow;        // для кд топора
     //public float cooldownGranate = 2f;  // кд ударов
@@ -74,6 +70,8 @@ public class ActiveWeapon : MonoBehaviour
 
     public AudioSourses audioSourses;         // ссылка на объект с аудиоисточниками
 
+    bool granateInAction;               // для правильного броска гранаты
+            
 
 
     void Start()
@@ -93,7 +91,7 @@ public class ActiveWeapon : MonoBehaviour
     }
 
 
-      // для перезарядки 
+    // Для перезарядки 
     public RaycastWeapon GetActiveWeapon()
     {
         return GetWeapon(activeWeaponIndex);
@@ -102,7 +100,7 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-    // для поиска активного оружия
+    // Для поиска активного оружия
     public RaycastWeapon GetWeapon (int index)
     {
         if (index < 0 || index >= equiped_weapons.Length)
@@ -133,6 +131,13 @@ public class ActiveWeapon : MonoBehaviour
             //rigController.SetBool("Death_rig", true);                     // добавил чтобы руки правильно анимировались при поражении, но это можно убрать
             return;
         }
+
+
+
+
+
+
+
 
         RaycastWeapon weapon = GetWeapon(activeWeaponIndex);        // находим активное оружие и если оно не спрятано - постоянно обновляем 
         if (weapon && !isHolsted)
@@ -165,28 +170,37 @@ public class ActiveWeapon : MonoBehaviour
         }
 
 
+
+
+
+
         // Удар топором
         if (Input.GetMouseButtonDown(1) && !reloaring)
         {
             playerAnim.SetTrigger("axe_attack");            
         }
 
+
+
+
+
         // Бросок гранаты
-        if (Input.GetKeyDown(KeyCode.G) && !reloaring && ammoPack.granate > 0)
+        if (Input.GetKeyDown(KeyCode.G) && !reloaring && !granateInAction && ammoPack.granate > 0)
         {
             ammoPack.granate -= 1;
             float dist = Vector3.Distance(transform.position, player.pointer.position);
             if (dist > 5f)
             {
-                playerAnim.SetFloat("Throw_type", 1);
+                playerAnim.SetTrigger("Throw");
             }
             else
             {
-                playerAnim.SetFloat("Throw_type", 0);
+                playerAnim.SetTrigger("Throw_2");
             }
 
-            playerAnim.SetTrigger("Throw");            
+                       
         }
+
 
 
 
@@ -195,10 +209,15 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
+
         if (Input.GetKeyDown(KeyCode.X))
         {
             ToggleActiveWeapon();
         }
+
+
+
+
 
         if (reloaring)
         {
@@ -348,8 +367,8 @@ public class ActiveWeapon : MonoBehaviour
         switch (eventName)
         {
             case "start_granate":
-                //Debug.Log("Start Granate !");
-                ToggleActiveWeapon();
+                Debug.Log("Start Granate !");
+                ToggleActiveWeapon();                
                 //granateBack.SetActive(false);
                 granateHand.SetActive(true);
                 reloaring = true;
@@ -357,7 +376,7 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "throw_granate":
-                //Debug.Log("Throw !");
+                Debug.Log("Throw !");
                 granateHand.SetActive(false);
                 GameObject go = Instantiate(granateThrow);                                    // Создаём префаб гранаты
                 //go.transform.SetParent(transform, false);                                   // Назначаем этот спавнер родителем
@@ -374,11 +393,12 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "end_granate":
-                //Debug.Log("End Granate");
+                Debug.Log("End Granate");
                 reloaring = false;
                 GameManager.instance.playerStop = false;
                 ToggleActiveWeapon();
                 break;
+
         }
     }
 
@@ -387,26 +407,13 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-        public void AttackMeele()
-    {
-        
-        //attackCooldown = 1f / attackSpeed;
-        //startAttack = false;
-        //attacking = true;
-        //Swing();
-        
-    }
-
-
-
-
-
-
-
-
     // weaponSlotIndex - номер типа оружия 0 - пистолеты , 1 - винотвки
-    
-    public void GetWeaponUp(RaycastWeapon newWeapon)            // подобрать оружие
+
+
+
+
+    // Подобрать оружие
+    public void GetWeaponUp(RaycastWeapon newWeapon)            
     {
         if (newWeapon.indexNumberWeapon == 1)       // Если подобранное оружие - пистолет
         {
@@ -443,6 +450,10 @@ public class ActiveWeapon : MonoBehaviour
     }
 
 
+
+
+    // Часть кода из ютуба Kiwi
+    // Экипировать оружие
     public void Equip(RaycastWeapon newWeapon)
     {
         //Debug.Log("Equip !");
@@ -465,8 +476,7 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-
-
+    // Спрятать оружие
     public void ToggleActiveWeapon()
     {
         if (reloaring)
@@ -483,6 +493,7 @@ public class ActiveWeapon : MonoBehaviour
             StartCoroutine(HolsterWeapon(activeWeaponIndex));
         }
     }
+
 
 
 
@@ -533,7 +544,6 @@ public class ActiveWeapon : MonoBehaviour
             while (false);       // НЕ РАБОТАЕТ ! rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f
         }
     }
-
 
 
     IEnumerator ActivateWeapon(int index)
