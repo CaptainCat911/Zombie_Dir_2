@@ -56,9 +56,9 @@ public class RaycastWeapon : MonoBehaviour
     Quaternion qua1;
     Quaternion qua2;
 
-    public RaycastHit[] m_Results = new RaycastHit[2];      // Для прострелов 
+    public RaycastHit[] m_Results = new RaycastHit[2];      // для прострелов 
 
-    AudioSource audioSource;
+    AudioSource audioSource;                              // аудио источник
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\

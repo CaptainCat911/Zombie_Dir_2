@@ -18,8 +18,6 @@ public class EnemyHitbox : Collidable
     public bool attacking = false;          // состояние атаки (чтобы стоял на месте, когда бьет)
     public bool grabReady = false;          // готовность сделать захват (когда игрок в радиусе)
 
-
-
         // Ссылки
     public Enemy_old enemy;
     public WeaponAnimationEvents animationEvents;

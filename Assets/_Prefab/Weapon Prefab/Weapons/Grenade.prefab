@@ -151,6 +151,7 @@ MonoBehaviour:
     m_Bits: 1280
   explEffect: {fileID: 4314291641531362931, guid: d31674e5c11b99a42bb0d06d59c97aa2,
     type: 3}
+  activeWeapon: {fileID: 0}
 --- !u!1001 &2332737381937142495
 PrefabInstance:
   m_ObjectHideFlags: 0

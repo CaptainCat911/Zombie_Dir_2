@@ -47,7 +47,7 @@ public class Enemy_old : Mover
     //CapsuleCollider[] allCapsCol;
     private Enemy_old selfScript;       // ссылка на свой скрипт (вроде можно убрать)
 
-    public GameObject tempCapColl;      // временный коллайдер для жрущих зомби
+    public GameObject tempCapColl;      // временный коллайдер для жрущих зомби (пока что отключил)
 
     public float tempAgentSpeed = 6;    // скорость к которой вернуться после замедления 
     float stopForce = 0;                // сила замедления
@@ -66,6 +66,7 @@ public class Enemy_old : Mover
 
     public bool dead = false;               // если убили
 
+    [HideInInspector]
     public AudioSourses audioSourses;         // ссылка на объект с аудиоисточниками
 
 
@@ -75,7 +76,10 @@ public class Enemy_old : Mover
 
     protected override void Start()
     {
-        base.Start();        
+        base.Start();
+
+        audioSourses = FindObjectOfType<AudioSourses>();
+
 
         //hitbox = transform.GetChild(18).GetComponent<BoxCollider>();
         playerTransform = GameManager.instance.player.transform;
@@ -112,7 +116,7 @@ public class Enemy_old : Mover
                 anim.SetFloat("Walk_number", 0.5f);
             if (random2 == 3)
                 anim.SetFloat("Walk_number", 1);
-            tempCapColl.SetActive(false);           // временный коллайдер для жрущих зомби (отключаем)
+            //tempCapColl.SetActive(false);           // временный коллайдер для жрущих зомби (отключаем)
         }
 
         else if ((random >= 85 && random < 90) && !strongZombie && !weakZombie)
@@ -128,7 +132,7 @@ public class Enemy_old : Mover
             agent.speed = 2f;
             maxHealth = 150;
             currentHealth = maxHealth;
-            tempCapColl.SetActive(false);
+            //tempCapColl.SetActive(false);
         }
 
         else if ((random >= 90 || strongZombie) && !GameManager.instance.final)
@@ -140,12 +144,18 @@ public class Enemy_old : Mover
             agent.speed = 6f;
             maxHealth = 250;
             currentHealth = maxHealth;            
-            if (true)        //  они жрут
+            if (true)        //  они агонируют?
             {
                 triggerLenght = 6;
-                anim.SetTrigger("Biting");          // чтобы жрал 
+                anim.SetTrigger("Agony");          // агония
                 biting = true;
-                tempCapColl.SetActive(true);
+
+                int randomAgony = Random.Range(0, 2);                    // меняем тип агонии (анимацию)
+                if (randomAgony == 0)
+                    anim.SetFloat("Agony_type", 0);
+                if (randomAgony == 1)
+                    anim.SetFloat("Agony_type", 1);
+                //tempCapColl.SetActive(true);
             }
 /*            if (false)
             {
@@ -165,6 +175,8 @@ public class Enemy_old : Mover
         {
             medhpBack.SetActive(true);
         }
+
+        tempCapColl.SetActive(false);
     }
 
 
@@ -216,11 +228,11 @@ public class Enemy_old : Mover
                         {
                             biting = false;
                             StartCoroutine(ScreamDelay());                            
-                            tempCapColl.SetActive(false);
+                            //tempCapColl.SetActive(false);
                         }
                         if (currentHealth != maxHealth)
                         {                                                        
-                            tempCapColl.SetActive(false);
+                            //tempCapColl.SetActive(false);
                             anim.SetTrigger("Bite_Go");
                         }
 
@@ -251,8 +263,7 @@ public class Enemy_old : Mover
                         if (GameManager.instance.player.isAlive)
                             hitbox.Attack();
                         if (!GameManager.instance.player.isAlive)
-                            StartCoroutine(BitingDelay());
-                            
+                            StartCoroutine(BitingDelay());                            
                     }
                 }           
 
@@ -372,7 +383,7 @@ public class Enemy_old : Mover
 
     IEnumerator BitingDelay()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         anim.SetTrigger("Biting");
     }
 
@@ -469,14 +480,14 @@ public class Enemy_old : Mover
         if (random == 1)
             anim.SetFloat("Death_type", 1);
         anim.SetTrigger("Death");
-        tempCapColl.SetActive(false);
+        //tempCapColl.SetActive(false);
        
         agent.ResetPath();
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);
         selfScript.enabled = false;
 
-        audioSourses.death.Play();
+        audioSourses.death.Play();                  // звук
 
         dead = true;
     }
@@ -517,7 +528,7 @@ public class Enemy_old : Mover
         if (random == 1)
             anim.SetFloat("Death_type", 1);
         anim.SetTrigger("Death");
-        tempCapColl.SetActive(false);
+        //tempCapColl.SetActive(false);
         capsuleCollider.enabled = false;
         capsuleColliderLeftARm.enabled = false;
         capsuleColliderRightArm.enabled = false;

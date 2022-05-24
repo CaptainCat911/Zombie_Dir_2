@@ -72,6 +72,8 @@ public class ActiveWeapon : MonoBehaviour
 
     AmmoPack ammoPack;                  // ссылка на скрипт патронов (инвентарь)
 
+    public AudioSourses audioSourses;         // ссылка на объект с аудиоисточниками
+
 
 
     void Start()
@@ -128,7 +130,7 @@ public class ActiveWeapon : MonoBehaviour
 
         if (!GameManager.instance.player.isAlive)       // если убили 
         {
-            rigController.SetBool("Death_rig", true);
+            //rigController.SetBool("Death_rig", true);                     // добавил чтобы руки правильно анимировались при поражении, но это можно убрать
             return;
         }
 
@@ -169,10 +171,20 @@ public class ActiveWeapon : MonoBehaviour
             playerAnim.SetTrigger("axe_attack");            
         }
 
-
+        // Бросок гранаты
         if (Input.GetKeyDown(KeyCode.G) && !reloaring && ammoPack.granate > 0)
         {
             ammoPack.granate -= 1;
+            float dist = Vector3.Distance(transform.position, player.pointer.position);
+            if (dist > 5f)
+            {
+                playerAnim.SetFloat("Throw_type", 1);
+            }
+            else
+            {
+                playerAnim.SetFloat("Throw_type", 0);
+            }
+
             playerAnim.SetTrigger("Throw");            
         }
 
@@ -185,7 +197,7 @@ public class ActiveWeapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            //ToggleActiveWeapon();
+            ToggleActiveWeapon();
         }
 
         if (reloaring)
@@ -266,21 +278,19 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-
-
-
-    void OnAnimationEventAttack(string eventName)               // ивенты удара топора
+    // Ивенты удара топора
+    void OnAnimationEventAttack(string eventName)              
     {
         //Debug.Log(eventName);
         switch (eventName)
         {
             case "axe_start":
                 //Debug.Log("Start !");
-                ToggleActiveWeapon();
-                axeBack.SetActive(false);
-                axeHand.SetActive(true);
-                reloaring = true;
-                GameManager.instance.playerStop = true;
+                ToggleActiveWeapon();                           // убираем основное оружие
+                axeBack.SetActive(false);                       // прячем топор за спиной
+                axeHand.SetActive(true);                        // активируем топор в руках
+                reloaring = true;                               // перезарядка (для запрета других действий)
+                GameManager.instance.playerStop = true;         // останавливаем игрока
                 break;
 
             case "axe_hit":
@@ -288,13 +298,16 @@ public class ActiveWeapon : MonoBehaviour
                 Collider[] collidersHitbox = Physics.OverlapSphere(hitBox.position, attackRadiusHitBox, layerEnemy);
                 foreach (Collider enObjectBox in collidersHitbox)
                 {
-                    if (enObjectBox == null)
+                    if (enObjectBox.tag != "Enemy")
                     {
+                        //Debug.Log(enObjectBox.name);
+                        audioSourses.axeMiss.Play();
                         continue;
                     }
 
                     if (enObjectBox.tag == "Enemy")
                     {
+                        audioSourses.axeAttack.Play();
                         Enemy_old enemy = enObjectBox.GetComponentInParent<Enemy_old>();
                         Damage dmg = new Damage()
                         {
@@ -302,15 +315,12 @@ public class ActiveWeapon : MonoBehaviour
                             origin = transform.position,
                             pushForce = pushForce
                         };
-                        enemy.TakeHitAxeBlood();
+                        enemy.TakeHitAxeBlood();                            // эффект крови
                         enemy.SendMessage("ReceiveDamage", dmg);
                     }
                     collidersHitbox = null;
                 }
-
-
-
-                //attacking = false;
+                
                 break;
 
             case "axe_stop":
@@ -330,9 +340,8 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-
-
-    void OnAnimationEventThrow(string eventName)               // ивенты броска гранаты
+    // Ивенты броска гранаты
+    void OnAnimationEventThrow(string eventName)               
     {
         //Debug.Log(eventName);
         
@@ -372,6 +381,8 @@ public class ActiveWeapon : MonoBehaviour
                 break;
         }
     }
+
+
 
 
 
@@ -456,7 +467,7 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-    void ToggleActiveWeapon()
+    public void ToggleActiveWeapon()
     {
         if (reloaring)
         {

@@ -12,6 +12,7 @@ public class Granate : MonoBehaviour
     public float pushForce = 0.95f;         // останавливающая сила
     public LayerMask layerEnemy;            // маска для нанесения урона
     public GameObject explEffect;           // эффект взрыва
+    public ActiveWeapon activeWeapon;       // ссылка на скрипт (для звука)
 
     //public float force = 700f;
 
@@ -21,6 +22,8 @@ public class Granate : MonoBehaviour
     void Start()
     {
         countdown = delay;
+
+        activeWeapon = GameManager.instance.player.GetComponent<ActiveWeapon>();
 
 /*        explEffect.transform.position = transform.position;
         explEffect.transform.forward = transform.forward;
@@ -47,6 +50,8 @@ public class Granate : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius, layerEnemy);
         foreach (Collider nearbyObject in colliders)
         {
+            activeWeapon.audioSourses.explosion.Play();                 // хлопок 
+
             if (nearbyObject == null)
             {
                 continue;

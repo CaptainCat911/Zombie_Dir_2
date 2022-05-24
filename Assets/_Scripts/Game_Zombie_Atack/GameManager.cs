@@ -10,10 +10,6 @@ public class GameManager : MonoBehaviour
     // References
     public Player player;                       // ссылка на игрока
 
-    // Logic
-/*    public int pesos;
-    public int experience;*/
-
     // Enemy spawner
     [HideInInspector]
     public int enemyCount = 0;                  // счетчик зомби
@@ -67,10 +63,10 @@ public class GameManager : MonoBehaviour
 
     int i = 0;                                  // счетчик для сложности
 
-    bool pause = true;                          // для паузы
-    bool slowMo = false;                         // для слоумоушен
+    bool pause = false;                          // для паузы
+    bool slowMo = false;                        // для слоумоушен
         
-    bool playerDead = false;                    // заряд для диалога при поражении
+    public bool playerDead = false;             // заряд для диалога при поражении
 
     public bool playerStop = false;             // для обездвижевания
         
@@ -82,6 +78,17 @@ public class GameManager : MonoBehaviour
 
     public GameObject tempCam;                  // камера при старте для карты
     public GameObject tempLight;                // свет при старте для карты
+
+    public GameObject canvasMap;                // Карта
+    bool mapActive = false;                     // вкл/выкл карту
+
+    public GameObject deathMenu;                // меню при поражении
+
+    public GameObject pauseMenu;                // меню паузы
+
+    bool startCinema = true;                    // для начального ролика
+
+    public GameObject blackScreen;              // черный экран для начала игры
 
 
 
@@ -116,16 +123,17 @@ public class GameManager : MonoBehaviour
     {
         dialogueTrig = GetComponent<DialogueTrigger>();     // Ссылка на диалог
         spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>(); 
-        StartCoroutine(StartDiffCor());
+        StartCoroutine(StartDiffCor());                         // начальная сложность, задержка
         //StartCoroutine(DialogePause());                       // ПОТОМ ВКЛЮЧИТЬ
         //playerStop = true;                                    // ПОТОМ ВКЛЮЧИТЬ
-        tempCam.SetActive(true);
-        tempLight.SetActive(true);
+        tempCam.SetActive(true);                                // для карты
+        tempLight.SetActive(true);                              // для карты
         StartCoroutine(TempCamDelay());
     }
 
-
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+
+
 
 
     private void Update()
@@ -135,6 +143,7 @@ public class GameManager : MonoBehaviour
             //SaveState();
         }
 
+
         if (Input.GetKeyDown(KeyCode.U))
         {
             slowMo = !slowMo;
@@ -142,22 +151,57 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0.3f;
             if (!slowMo)
                 Time.timeScale = 1f;
+        }        
+
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerDead && !startCinema)
+        {            
+            if (pause)
+            {
+                Time.timeScale = 1f;
+                pauseMenu.SetActive(false);
+                playerStop = false;
+                pause = false;
+            }
+                
+            else
+            {
+                Time.timeScale = 0f;
+                pauseMenu.SetActive(true);
+                playerStop = true;
+                pause = true;
+            }
         }
-        
-        if (Input.GetKeyDown(KeyCode.Y))
+      
+
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            //SetDifficulty();
-            player.Heal(50);
+            if (!player.isAlive || playerStop || startCinema)
+            {
+                return;
+            }
+
+            mapActive = !mapActive;
+
+            if (mapActive)
+            {
+                canvasMap.SetActive(true);
+                //Time.timeScale = 0f;
+            }
+            if (!mapActive)
+            {
+                canvasMap.SetActive(false);
+                //Time.timeScale = 1f;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {            
-            pause = !pause;
-            if (pause)
-               Time.timeScale = 1f;
-            if (!pause)
-                Time.timeScale = 0f;
+
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+
         }
+
 
 
 
@@ -196,7 +240,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+
+
+
+    public void HidePauseMenu()
+    {
+        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
+        playerStop = false;
+        pause = false;
+    }
+
+
+
+
+
+
+
 
 
     IEnumerator TempCamDelay()
@@ -205,8 +268,6 @@ public class GameManager : MonoBehaviour
         tempCam.SetActive(false);
         tempLight.SetActive(false);
     }
-
-
 
 
 
@@ -327,22 +388,22 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DialogePause()
     {
-        //playerStop = true;     
-                
-        yield return new WaitForSeconds(12.5f);               
-        dialogueTrig.TriggerDialogue(0);        
-        Pause();
         yield return new WaitForSeconds(1f);
-        playerStop = false;
-        bars.SetActive(true);
+        blackScreen.SetActive(false);
+        yield return new WaitForSeconds(11.5f);                 // задержка пока персонаж встаёт     
+        dialogueTrig.TriggerDialogue(0);                        // показываем диалог
+        Pause();                                                // паузу, чтобы было время почитать
+        yield return new WaitForSeconds(1f);
+        playerStop = false;                                     // отдаём контроль
+        bars.SetActive(true);                                   // показываем бары
+        startCinema = false;                                    // ролик завершён
     }
 
     IEnumerator DialogePauseDeath()
     {
-        yield return new WaitForSeconds(4f);
-        dialogueTrig.TriggerDialogue(2);
-        Pause();
-        
+        yield return new WaitForSeconds(4f);        
+        deathMenu.SetActive(true);
+        //Pause();        
     }
 
 
@@ -370,15 +431,9 @@ public class GameManager : MonoBehaviour
 
 
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
-
-    // Floating text
-    public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
-    {
-       
-    }
- 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
@@ -387,29 +442,13 @@ public class GameManager : MonoBehaviour
 //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
-    // HitpointBar
-    public void OnHitpointChange()
-    {
-
-    }
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
 
 
-
-
 //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
-
-
-    public void OnLevelUp()
-    {
-        //player.OnLevelUp();
-    }
-
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
     /*
      * 

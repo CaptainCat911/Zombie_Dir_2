@@ -8,7 +8,7 @@ public class Player : Mover
         // Для прицела
     public Transform pointer;          // прицел       
     public bool aiming = true;    // прицеливание
-    //Quaternion qua1;       // поворот
+   
     int layerMask = 1 << 10;     // маска для прицела, игнорирует всё кроме 10 слоя
     //int layerMaskCam = 1 << 11;     // маска для прицела, игнорирует всё кроме 11 слоя
 
@@ -38,8 +38,11 @@ public class Player : Mover
 
     bool boostSpeed = false;            // Для тестового режима 
 
-    public GameObject canvasMap;        // Карта
-    bool mapActive = false;             // вкл/выкл карту
+    public GameObject rigWeapon;        // вкл/выкл оружия при поражении
+
+    
+
+
 
     //public AudioManager audioManager;
 
@@ -246,24 +249,7 @@ public class Player : Mover
             lightF.enabled = !lightF.enabled;
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (!isAlive || GameManager.instance.playerStop)
-            {
-                return;
-            }
-            mapActive = !mapActive;
-            if (mapActive)
-            {
-                canvasMap.SetActive(true);
-                //Time.timeScale = 0f;
-            }
-            if (!mapActive)
-            {
-                canvasMap.SetActive(false);
-                //Time.timeScale = 1f;
-            }
-        }
+
 
         if (!isAlive)
         {
@@ -438,9 +424,25 @@ public class Player : Mover
     protected override void Death()
     {
         isAlive = false;
-        anim.SetTrigger("Death");
+        activeWeapon.ToggleActiveWeapon();
+        anim.SetTrigger("Death");                                       // вкл анимацию поражения          
+    }
 
-        //Destroy(this.gameObject);
-        //GameManager.instance.deathMenuAnim.SetTrigger("Show");
+    public void Arise()
+    {
+        isAlive = true;
+        //activeWeapon.rigController.SetBool("Death_rig", false);       // риг рук возвращаем 
+        currentHealth = 50;
+        anim.SetTrigger("Arise");                                       // вкл анимацию обычную
+        GameManager.instance.playerDead = false;
+        GameManager.instance.playerStop = false;
+
+        activeWeapon.axeBack.SetActive(true);                           // перезагружаем топор                           
+        activeWeapon.axeHand.SetActive(false);       
+
+        activeWeapon.reloaring = false;                                 // отключаем режим перезарядки
+        activeWeapon.ToggleActiveWeapon();                              // достаём оружие
+
+        finalSphereAnim.SetTrigger("SphereArise");                      // убиваем зомби рядом
     }
 }
