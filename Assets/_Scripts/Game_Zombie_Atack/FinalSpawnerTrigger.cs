@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class FinalSpawnerTrigger : MonoBehaviour
 {   
-    public GameObject spawnerObject;           // объект со спавнерами
-    public EnemySpawnPointTrigger[] spawners;   // извлекаем из него спавнеры
-    public bool trigDiffReady = false;       // для повышения сложности после входа в триггер
-    public bool afterDelay = false;         // для активации спавнеров после начальной задержки
-    public bool finalTrigStart = false;     // "заряд" для старта 
+    public GameObject spawnerObject;                // объект со спавнерами
+    public EnemySpawnPointTrigger[] spawners;       // извлекаем из него спавнеры
+    public bool trigDiffReady = false;              // для повышения сложности после входа в триггер
+    public bool afterDelay = false;                 // для активации спавнеров после начальной задержки
+    public bool finalTrigStart = false;             // "заряд" для старта 
 
-    public GameObject objectLamps;          // объек с лампами
-    private Animator[] lamps;                // извлекаем аниматоры ламп
+    public GameObject objectLamps;                  // объек с лампами
+    private Animator[] lamps;                       // извлекаем аниматоры ламп
 
     public GameObject spawnPointsFinalGameObject;     // финальные спавнеры
     public GameObject spawnPointsGameobject;          // обычные спавнеры, которые надо вырубить в финале
     private EnemySpawnPoint[] spawnPoints;
     public EnemySpawnPoint[] spawnPointsFinal;
 
-    /*    bool triggerEnter = false;              // вход в триггер
+    /*    bool triggerEnter = false;                  // вход в триггер
 
 
 

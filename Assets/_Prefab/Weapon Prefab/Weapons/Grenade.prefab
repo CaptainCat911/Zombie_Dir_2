@@ -148,7 +148,7 @@ MonoBehaviour:
   pushForce: 0.95
   layerEnemy:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 131328
   explEffect: {fileID: 4314291641531362931, guid: d31674e5c11b99a42bb0d06d59c97aa2,
     type: 3}
   activeWeapon: {fileID: 0}

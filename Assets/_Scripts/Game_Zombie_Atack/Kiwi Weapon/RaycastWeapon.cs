@@ -56,10 +56,12 @@ public class RaycastWeapon : MonoBehaviour
     Quaternion qua1;
     Quaternion qua2;
 
-    public RaycastHit[] m_Results = new RaycastHit[2];      // для прострелов 
+    public RaycastHit[] m_Results = new RaycastHit[3];      // для прострелов 
 
     AudioSource audioSource;                              // аудио источник
 
+    public float recoilX;                                   // разброс по X
+    public float recoilY;                                   // разброс по Y
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
@@ -179,7 +181,7 @@ public class RaycastWeapon : MonoBehaviour
         StartCoroutine(LightDelay());   // делаем задержку для вспышек
 
 
-        if (weaponName == "shotgun")   // Shotgun
+        if (weaponName == "shotgun")   // Дробовик
         {
 
             for (int i = 0; i < 7; i++)
@@ -193,6 +195,11 @@ public class RaycastWeapon : MonoBehaviour
                 //yield return new WaitForSeconds(0.000f);
             }
         }
+
+/*        if (weaponName == "sniper")   // СВД
+        {
+            MakeRayCastAll();
+        }*/
 
         else
         {
@@ -215,10 +222,13 @@ public class RaycastWeapon : MonoBehaviour
             // Настройки для трасеров
         TrailRenderer tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);          // создаем трасер
         tracer.AddPosition(EFFECT_ANCHOR.position);                                                             // начальная позиция 
-
+        
             // Рейкаст
+        float randomBulletX = Random.Range(-recoilX, recoilX);
+        float randomBulletY = Random.Range(-recoilY, recoilY);
+
         ray.origin = PROJECTILE_ANCHOR.position;        // луч из позиции якоря
-        ray.direction = PROJECTILE_ANCHOR.forward;      // луч с направлением вперед
+        ray.direction = PROJECTILE_ANCHOR.forward + new Vector3(randomBulletX, randomBulletY, 0);      // луч с направлением вперед
         //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerIgnore))
         {

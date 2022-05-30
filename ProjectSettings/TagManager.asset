@@ -11,6 +11,7 @@ TagManager:
   - EnemySpawner
   - Enemy
   - Lamp
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - MapObjects
   - Fogs
   - Granate
-  - 
+  - Enemy
   - 
   - 
   - 

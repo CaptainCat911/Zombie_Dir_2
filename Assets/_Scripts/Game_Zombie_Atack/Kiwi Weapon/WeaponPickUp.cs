@@ -5,6 +5,7 @@ public class WeaponPickUp : MonoBehaviour
     public RaycastWeapon weaponPrefab;
     bool triggerEnter = false;
     ActiveWeapon activeWeapon;
+    public bool axe;
 
 
     void Start()
@@ -32,6 +33,14 @@ public class WeaponPickUp : MonoBehaviour
 
     private void Update()
     {
+        if (triggerEnter && axe)
+        {
+            GameManager.instance.player.GetComponent<ActiveWeapon>().getAxe = true;
+            GameManager.instance.player.GetComponent<ActiveWeapon>().axeBack.SetActive(true);
+            Destroy(gameObject);
+            return;
+        }
+
         if (triggerEnter)
         {
             RaycastWeapon newWeapon = Instantiate(weaponPrefab);
@@ -41,6 +50,8 @@ public class WeaponPickUp : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
+            GameManager.instance.player.GetComponent<ActiveWeapon>().getAxe = true;
+            GameManager.instance.player.GetComponent<ActiveWeapon>().axeBack.SetActive(true);
             RaycastWeapon newWeapon = Instantiate(weaponPrefab);
             activeWeapon.GetWeaponUp(newWeapon);
             Destroy(gameObject);

@@ -1317,6 +1317,8 @@ MonoBehaviour:
   layerIgnore:
     serializedVersion: 2
     m_Bits: 0
+  recoilX: 0
+  recoilY: 0
 --- !u!1 &1624331456796449296
 GameObject:
   m_ObjectHideFlags: 0
@@ -73116,7 +73118,7 @@ GameObject:
   - component: {fileID: 1600405212}
   m_Layer: 13
   m_Name: Pulemet
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73211,6 +73213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 5718410196017201910, guid: 4a370a47d49b57c4eb97a356152e122a,
     type: 3}
+  axe: 0
 --- !u!114 &1600405211
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,9 +33,9 @@ public class GameManager : MonoBehaviour
     public bool quest3Compl = false;
     [HideInInspector]
     public bool questFinish = false;            // собраны 3 предмета
-    [HideInInspector]
+    
     public bool questCompl = false;             // тру когда полностью выполнен квест и вызван вертолёт
-    [HideInInspector]
+    
     public bool final = false;                  // для финального ивента (обычные спавнеры останавливаются)
     [HideInInspector]
     public bool lightsOff = false;              // для выключения света в городе 
@@ -282,7 +282,7 @@ public class GameManager : MonoBehaviour
 
         //Debug.Log("Wave!");
         finalSpotLamp.SetActive(true);                          // включаем прожектор вертолёта 
-        yield return new WaitForSeconds(0.5f);                 
+        yield return new WaitForSeconds(1f);                 
         player.FinalWave();                                     // запускаем волну, убивающую зомби (стрельба из вертолёта)
         yield return new WaitForSeconds(15f);
         dialogueTrig.TriggerDialogue(1);
@@ -364,7 +364,7 @@ public class GameManager : MonoBehaviour
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
 
-            spawnPoint.maxZombie = 70;
+            spawnPoint.maxZombie = 50;
 
             spawnPoint.enemyNumberSpawn = 2;
 

@@ -9,7 +9,7 @@ public class Player : Mover
     public Transform pointer;          // прицел       
     public bool aiming = true;    // прицеливание
    
-    int layerMask = 1 << 10;     // маска для прицела, игнорирует всё кроме 10 слоя
+    public LayerMask layerMask;     // маска для прицела
     //int layerMaskCam = 1 << 11;     // маска для прицела, игнорирует всё кроме 11 слоя
 
     // Передвижение
@@ -249,6 +249,10 @@ public class Player : Mover
             lightF.enabled = !lightF.enabled;
         }
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            FinalWave();
+        }
 
 
         if (!isAlive)
@@ -433,7 +437,7 @@ public class Player : Mover
         isAlive = true;
         //activeWeapon.rigController.SetBool("Death_rig", false);       // риг рук возвращаем 
         currentHealth = 50;
-        anim.SetTrigger("Arise");                                       // вкл анимацию обычную
+        anim.SetTrigger("AriseNew");                                    // вкл анимацию обычную
         GameManager.instance.playerDead = false;
         GameManager.instance.playerStop = false;
 

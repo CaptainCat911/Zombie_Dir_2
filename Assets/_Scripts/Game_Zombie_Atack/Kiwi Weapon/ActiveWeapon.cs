@@ -59,6 +59,7 @@ public class ActiveWeapon : MonoBehaviour
 
     public GameObject axeBack;      // топор за спиной
     public GameObject axeHand;      // топор в руках
+    public bool getAxe = false;     // подобрал топор или нет
 
     public GameObject granateBack;      // граната за спиной
     public GameObject granateHand;      // граната в руках
@@ -175,7 +176,7 @@ public class ActiveWeapon : MonoBehaviour
 
 
         // Удар топором
-        if (Input.GetMouseButtonDown(1) && !reloaring)
+        if (Input.GetMouseButtonDown(1) && !reloaring && getAxe)
         {
             playerAnim.SetTrigger("axe_attack");            
         }
@@ -367,7 +368,7 @@ public class ActiveWeapon : MonoBehaviour
         switch (eventName)
         {
             case "start_granate":
-                Debug.Log("Start Granate !");
+                //Debug.Log("Start Granate !");
                 ToggleActiveWeapon();                
                 //granateBack.SetActive(false);
                 granateHand.SetActive(true);
@@ -376,7 +377,7 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "throw_granate":
-                Debug.Log("Throw !");
+                //Debug.Log("Throw !");
                 granateHand.SetActive(false);
                 GameObject go = Instantiate(granateThrow);                                    // Создаём префаб гранаты
                 //go.transform.SetParent(transform, false);                                   // Назначаем этот спавнер родителем
@@ -393,7 +394,7 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "end_granate":
-                Debug.Log("End Granate");
+                //Debug.Log("End Granate");
                 reloaring = false;
                 GameManager.instance.playerStop = false;
                 ToggleActiveWeapon();

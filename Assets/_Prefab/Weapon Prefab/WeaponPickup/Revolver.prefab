@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 1288468620}
   m_Layer: 13
   m_Name: Revolver
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,6 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 7143760499737723971, guid: 071f4fa06fcf81a4c931ebd085d280a6,
     type: 3}
+  axe: 0
 --- !u!114 &1288468616
 MonoBehaviour:
   m_ObjectHideFlags: 0

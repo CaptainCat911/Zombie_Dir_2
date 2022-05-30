@@ -87,6 +87,8 @@ public class Tooltip : MonoBehaviour {
 					previousOutline = null;
 				}
 			}
+
+
 		}
 		else
 		{

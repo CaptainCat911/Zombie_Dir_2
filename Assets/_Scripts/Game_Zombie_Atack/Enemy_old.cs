@@ -69,6 +69,7 @@ public class Enemy_old : Mover
     [HideInInspector]
     public AudioSourses audioSourses;         // ссылка на объект с аудиоисточниками
 
+    public SphereCollider weaponPickUpCollider; // ccылка на колайдер оружия
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -488,6 +489,8 @@ public class Enemy_old : Mover
         selfScript.enabled = false;
 
         audioSourses.death.Play();                  // звук
+
+        weaponPickUpCollider.enabled = true;
 
         dead = true;
     }
