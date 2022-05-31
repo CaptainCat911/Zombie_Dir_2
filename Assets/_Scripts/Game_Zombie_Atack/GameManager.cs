@@ -90,6 +90,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject blackScreen;              // черный экран для начала игры
 
+    public RaycastWeapon weaponPrefab;          // префаб пистолета, чтобы экипировать в начале
+
 
 
 
@@ -121,14 +123,14 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        dialogueTrig = GetComponent<DialogueTrigger>();     // Ссылка на диалог
+        dialogueTrig = GetComponent<DialogueTrigger>();                                     // Ссылка на диалог
         spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>(); 
-        StartCoroutine(StartDiffCor());                         // начальная сложность, задержка
-        //StartCoroutine(DialogePause());                       // ПОТОМ ВКЛЮЧИТЬ
-        //playerStop = true;                                    // ПОТОМ ВКЛЮЧИТЬ
-        tempCam.SetActive(true);                                // для карты
-        tempLight.SetActive(true);                              // для карты
-        StartCoroutine(TempCamDelay());
+        StartCoroutine(StartDiffCor());                                                     // начальная сложность, задержка
+        StartCoroutine(DialogePause());                                                     // ПОТОМ ВКЛЮЧИТЬ
+        playerStop = true;                                                                  // ПОТОМ ВКЛЮЧИТЬ
+        tempCam.SetActive(true);                                                            // для карты
+        tempLight.SetActive(true);                                                          // для карты
+        StartCoroutine(TempCamDelay());                                                     // для карты
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -258,10 +260,6 @@ public class GameManager : MonoBehaviour
 
 
 
-
-
-
-
     IEnumerator TempCamDelay()
     {
         yield return new WaitForSeconds(0.1f);            // задержка для выключения камеры карты
@@ -275,6 +273,8 @@ public class GameManager : MonoBehaviour
     {        
         StartCoroutine(FinalDelay());
     }
+
+
 
     IEnumerator FinalDelay()
     {
@@ -397,6 +397,11 @@ public class GameManager : MonoBehaviour
         playerStop = false;                                     // отдаём контроль
         bars.SetActive(true);                                   // показываем бары
         startCinema = false;                                    // ролик завершён
+
+        RaycastWeapon newWeapon = Instantiate(weaponPrefab);
+        player.activeWeapon.GetWeaponUp(newWeapon);
+
+        //player.activeWeapon.EquipActiveStart();
     }
 
     IEnumerator DialogePauseDeath()

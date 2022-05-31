@@ -77,9 +77,7 @@ public class ActiveWeapon : MonoBehaviour
 
     void Start()
     {
-        RaycastWeapon existingWeapon = GetComponentInChildren<RaycastWeapon>();     // поиск оружия в иерархии
-        if (existingWeapon)
-            Equip(existingWeapon);
+
 
         //listWeaponRifle = new List<RaycastWeapon>();
 
@@ -89,6 +87,14 @@ public class ActiveWeapon : MonoBehaviour
         animationEvents.GranateAnimationEvent.AddListener(OnAnimationEventThrow);    // получаем ивенты от анимации броска гранаты
 
         ammoPack = player.GetComponent<AmmoPack>();
+    }
+
+
+    public void EquipActiveStart()              // не используется
+    {
+        RaycastWeapon existingWeapon = GetComponentInChildren<RaycastWeapon>();     // поиск оружия в иерархии
+        if (existingWeapon)
+            Equip(existingWeapon);
     }
 
 
@@ -108,7 +114,7 @@ public class ActiveWeapon : MonoBehaviour
         {
             return null;
         }
-        return equiped_weapons[index];      // возвращаем из массива оружие с индексом
+        return equiped_weapons[index];                      // возвращаем из массива оружие с индексом
     }
 
 

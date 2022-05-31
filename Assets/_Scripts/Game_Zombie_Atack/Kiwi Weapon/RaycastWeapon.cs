@@ -10,46 +10,44 @@ public class RaycastWeapon : MonoBehaviour
     float animDuration = 0.3f;
 */
     
-    [Header("Weapon Settings")]     // ??? Почему-то не работает
-
-        // Rig
-    public string weaponName; // название оружия для анимаций 
+    [Header("Weapon Settings")]                     // ??? Почему-то не работает        
+    public string weaponName;                       // название оружия для анимаций (Rig)
 
     // Damage struct
     public string textNameWeapon;                   // название оружия для GUI
-    public ActiveWeapon.WeaponSlot weaponSlot;  // внутри перечисление слотов (основное, вторичное оружия) и выбирается в инспекторе префаба
-    public string ammoType;     // тип патронов, указать в инспекторе (потом поменять на список)
-    public int indexNumberWeapon;   // Индекс оружия для переключения между оружиями (Потом поменять на список или использовать weaponSlot[index])
+    public ActiveWeapon.WeaponSlot weaponSlot;      // внутри перечисление слотов (основное, вторичное оружия) и выбирается в инспекторе префаба
+    public string ammoType;                         // тип патронов, указать в инспекторе (потом поменять на список)
+    public int indexNumberWeapon;                   // Индекс оружия для переключения между оружиями (Потом поменять на список или использовать weaponSlot[index])
 
-    public float cooldown = 0.1f;  // 600 выстрелов в секунду 
-    //public float bulletSpeed = 30f;     // скорость пули (не используется)
-    public int rayDamage = 1;   // урон рейкаста
+    public float cooldown = 0.1f;                   // 600 выстрелов в секунду 
+    //public float bulletSpeed = 30f;               // скорость пули (не используется)
+    public int rayDamage = 1;                       // урон рейкаста
     public float pushForce; 
 
-    private float lastSwing;        // для кд
+    private float lastSwing;                        // для кд
 
         // Перезарядка
-    public int allAmmo;     // всего патронов
-    public int clipSize;    // размер магазина 
-    public int ammoCount;   // счетчик в магазине
+    public int allAmmo;                             // всего патронов
+    public int clipSize;                            // размер магазина 
+    public int ammoCount;                           // счетчик в магазине
 
         // Ссылки 
-    Player player;          // ссылка на игрока
-    AmmoPack playerAmmo;    // ссылка на патроны игрока
+    Player player;                                  // ссылка на игрока
+    AmmoPack playerAmmo;                            // ссылка на патроны игрока
     ActiveWeapon activeWeapon;
-    //public GameObject projPrefab;   // префаб снаряда
-    public Transform PROJECTILE_ANCHOR;   // якорь для оружия
-    public Transform EFFECT_ANCHOR;   // якорь для оружия
-    //public GameObject magazine;     // магазин
+    //public GameObject projPrefab;                 // префаб снаряда
+    public Transform PROJECTILE_ANCHOR;             // якорь для оружия
+    public Transform EFFECT_ANCHOR;                 // якорь для оружия
+    //public GameObject magazine;                   // магазин
 
         // Эффекты
-    public ParticleSystem[] muzzleFlash;    // вспышка оружия
-    public ParticleSystem hitEffect;        // попадание в стену
-    public ParticleSystem hitEffectBlood;   // попадание в зомби
-    public TrailRenderer tracerEffect;      // трасер
-    public Light lightEffect;               // вспышка света
+    public ParticleSystem[] muzzleFlash;            // вспышка оружия
+    public ParticleSystem hitEffect;                // попадание в стену
+    public ParticleSystem hitEffectBlood;           // попадание в зомби
+    public TrailRenderer tracerEffect;              // трасер
+    public Light lightEffect;                       // вспышка света
 
-    public LayerMask layerIgnore;           // маска 
+    public LayerMask layerIgnore;                   // маска 
 
     RaycastHit hit;
     Ray ray;
@@ -58,7 +56,7 @@ public class RaycastWeapon : MonoBehaviour
 
     public RaycastHit[] m_Results = new RaycastHit[3];      // для прострелов 
 
-    AudioSource audioSource;                              // аудио источник
+    AudioSource audioSource;                                // аудио источник
 
     public float recoilX;                                   // разброс по X
     public float recoilY;                                   // разброс по Y

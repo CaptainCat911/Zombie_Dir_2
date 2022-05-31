@@ -24,7 +24,7 @@ public class Player : Mover
     private Animator anim;
 
         // Оружие
-    ActiveWeapon activeWeapon;      // ссылка на активное оружие   
+    public ActiveWeapon activeWeapon;      // ссылка на активное оружие   
 
     float stopForce = 0;            // сила замедления от зомби
 
@@ -228,7 +228,7 @@ public class Player : Mover
         }
 
 
-        if (Input.GetKeyDown(KeyCode.L))
+/*        if (Input.GetKeyDown(KeyCode.L))
         {
             boostSpeed = !boostSpeed;
         }
@@ -236,7 +236,7 @@ public class Player : Mover
         if (Input.GetKeyDown(KeyCode.L))
         {
             currentHealth += 100;            
-        }
+        }*/
 
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -251,7 +251,7 @@ public class Player : Mover
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            FinalWave();
+            //FinalWave();
         }
 
 

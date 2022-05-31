@@ -490,7 +490,7 @@ public class Enemy_old : Mover
 
         audioSourses.death.Play();                  // звук
 
-        weaponPickUpCollider.enabled = true;
+        //weaponPickUpCollider.enabled = true;
 
         dead = true;
     }
