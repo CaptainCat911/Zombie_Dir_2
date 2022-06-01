@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     public int startDiffDelay_2;                  // начальная задержка перед спауном зомби
     public int startDiffDelay_3;                  // начальная задержка перед спауном зомби
 
-    public int finalDelay = 60;                  // задержка перед завершением финального ивента
+    public int finalDelay = 60;                  // задержка перед завершением финального ивента (сколько он длится)
     public bool pultActive = false;              // активация пульта
 
     public GameObject finalSpotLamp;            // прожектор вертолёта 
@@ -115,10 +115,9 @@ public class GameManager : MonoBehaviour
         // присваем instance (?) этому обьекту и по ивенту загрузки запускаем функцию загрузки
         instance = this;
         SceneManager.sceneLoaded += LoadState;
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-        
+        SceneManager.sceneLoaded += OnSceneLoaded;        
     }
+
         
 
     public void Start()
@@ -199,14 +198,6 @@ public class GameManager : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-
-        }
-
-
-
-
         // Квест
         if (quest1 && !quest1Compl)             // после выполнения квеста
         {
@@ -248,24 +239,26 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void HidePauseMenu()
+/*    public void HidePauseMenu()
     {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
         playerStop = false;
         pause = false;
-    }
+    }*/
 
 
 
 
 
-    IEnumerator TempCamDelay()
+    IEnumerator TempCamDelay()                      // задержка для выключения камеры карты
     {
-        yield return new WaitForSeconds(0.1f);            // задержка для выключения камеры карты
+        yield return new WaitForSeconds(0.1f);            
         tempCam.SetActive(false);
         tempLight.SetActive(false);
     }
+
+
 
 
 
@@ -273,8 +266,6 @@ public class GameManager : MonoBehaviour
     {        
         StartCoroutine(FinalDelay());
     }
-
-
 
     IEnumerator FinalDelay()
     {
@@ -291,7 +282,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+    //--------------------------------------- Управление сложностью --------------------------------------------------\\
 
 
     IEnumerator StartDiffCor()      // постепенное увеличение сложности
@@ -322,7 +313,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void SetDifficulty()             // увеличение сложности 
+    public void SetDifficulty()                              // увеличение сложности 
     {
         i++;
         //Debug.Log("Set!");
@@ -337,7 +328,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void MaxDifficulty()             // временное увеличение сложности на ивентах
+    public void MaxDifficulty()                             // временное увеличение сложности на ивентах
     {
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
@@ -348,7 +339,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(MaxDiff());
     }
 
-    IEnumerator MaxDiff()           // отключаем повышение сложности через .. секунд
+    IEnumerator MaxDiff()                                   // отключаем повышение сложности через .. секунд
     {
         yield return new WaitForSeconds(60);
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
@@ -359,7 +350,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetFinalDifficulty()            // финальная сложность
+    public void SetFinalDifficulty()                        // финальная сложность
     {
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
@@ -372,7 +363,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetNullDifficulty()
+    public void SetNullDifficulty()                         // сложность обычных спавнеров для финала
     {
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
@@ -384,6 +375,11 @@ public class GameManager : MonoBehaviour
             spawnPoint.cooldown = 1000;
         }
     }
+
+
+
+    //-----------------------------------------------------------------------------------------\\
+
 
 
     IEnumerator DialogePause()
@@ -412,6 +408,9 @@ public class GameManager : MonoBehaviour
     }
 
 
+
+    //------------------------------------Пауза-----------------------------------------------------\\
+
     public void Pause()
     {
         StartCoroutine(PauseDelay());
@@ -429,28 +428,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
     }
-
-
-
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------------\\
-
-
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------------\\
-
-
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------------\\
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------------\\
-
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------\\

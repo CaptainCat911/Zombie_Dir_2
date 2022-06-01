@@ -95,15 +95,12 @@ public class FinalSpawnerTrigger : MonoBehaviour
         GameManager.instance.FinalWave();               // запускаем время последнего ивента
         /* afterDelay = true;                              // окончание начальной задержки для спавнеров */
 
-
-
-
         yield return new WaitForSeconds(1);
 
-        foreach (EnemySpawnPoint spawnPoint in spawnPointsFinal)
+        foreach (EnemySpawnPoint spawnPoint in spawnPointsFinal)        // сложность финальных спавнеров
         {
 
-            spawnPoint.maxZombie = 70;
+            spawnPoint.maxZombie = 60;                              
 
             spawnPoint.enemyNumberSpawn = 1;
 
@@ -125,14 +122,14 @@ public class FinalSpawnerTrigger : MonoBehaviour
 
         foreach (Animator lamp in lamps)
         {
-            lamp.SetBool("LightDamaged", true);     // ломаем 
+            lamp.SetBool("LightDamaged", true);         // ломаем 
         }
 
         yield return new WaitForSeconds(13);
 
         foreach (Animator lamp in lamps)
         {
-            lamp.SetBool("LightOff", true);         // отключаем
+            lamp.SetBool("LightOff", true);             // отключаем
         }        
     }
 }

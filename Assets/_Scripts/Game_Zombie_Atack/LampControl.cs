@@ -34,7 +34,7 @@ public class LampControl : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.N) || GameManager.instance.lightsOff && !finalLamp)
+        if (GameManager.instance.lightsOff && !finalLamp)
         {
             //anim.SetBool("LightOff", true);
             lamp.SetActive(false);
