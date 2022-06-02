@@ -444,6 +444,8 @@ public class Enemy_old : Mover
         if (dead)
             return;
 
+        GameManager.instance.enemyKilledCount += 1;
+
         if (!dontCount)
             GameManager.instance.enemyCount -= 1;
 

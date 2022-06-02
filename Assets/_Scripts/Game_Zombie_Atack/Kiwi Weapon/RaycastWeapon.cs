@@ -228,6 +228,7 @@ public class RaycastWeapon : MonoBehaviour
         ray.origin = PROJECTILE_ANCHOR.position;        // луч из позиции якоря
         ray.direction = PROJECTILE_ANCHOR.forward + new Vector3(randomBulletX, randomBulletY, 0);      // луч с направлением вперед
         //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);
+
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerIgnore))
         {
             //Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);                                   // дебаг, красные линии

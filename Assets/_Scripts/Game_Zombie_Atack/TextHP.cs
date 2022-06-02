@@ -10,12 +10,14 @@ public class TextHP : MonoBehaviour
     public Text allBulletsText;
     public Text currentBulletsText;
     public Text enemyCountText;
+    public Text enemyKilled;
     public Text currentMissionText;
     public Text currentWeaponText;
     public Text GranateText;
     public ActiveWeapon activeWeapon;
     RaycastWeapon weapon;
     int enemyCount;
+    int enemyCountKiled;
 
     
 
@@ -51,6 +53,10 @@ public class TextHP : MonoBehaviour
 
         // Текущая миссия
         currentMissionText.text = GameManager.instance.mission;
+
+        // Всего убито зомби
+        enemyCountKiled = GameManager.instance.enemyKilledCount;
+        enemyKilled.text = enemyCountKiled.ToString("0");
 
     }
 }

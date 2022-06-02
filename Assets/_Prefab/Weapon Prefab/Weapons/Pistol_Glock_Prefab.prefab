@@ -38259,7 +38259,7 @@ MonoBehaviour:
   lightEffect: {fileID: 7143760500524133337}
   layerIgnore:
     serializedVersion: 2
-    m_Bits: 9216
+    m_Bits: 9220
   recoilX: 0.01
   recoilY: 0.01
 --- !u!82 &-5286339521452096212

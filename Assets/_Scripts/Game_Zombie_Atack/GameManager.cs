@@ -92,6 +92,10 @@ public class GameManager : MonoBehaviour
 
     public RaycastWeapon weaponPrefab;          // префаб пистолета, чтобы экипировать в начале
 
+    public GameObject mapPlayerIcon;            // иконка игрока на карте
+
+    public int enemyKilledCount = 0;                // счетчик убийства зомби
+
 
 
 
@@ -125,11 +129,14 @@ public class GameManager : MonoBehaviour
         dialogueTrig = GetComponent<DialogueTrigger>();                                     // Ссылка на диалог
         spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>(); 
         StartCoroutine(StartDiffCor());                                                     // начальная сложность, задержка
-        StartCoroutine(DialogePause());                                                     // ПОТОМ ВКЛЮЧИТЬ
-        playerStop = true;                                                                  // ПОТОМ ВКЛЮЧИТЬ
+        StartCoroutine(DialogePause());                                                     // ПОТОМ ВКЛЮЧИТЬ начальная сложность
+        playerStop = true;                                                                  // ПОТОМ ВКЛЮЧИТЬ вызов диалога
+        blackScreen.SetActive(true);                                                        // включаем черный экран (на ~полсекунды)
         tempCam.SetActive(true);                                                            // для карты
         tempLight.SetActive(true);                                                          // для карты
         StartCoroutine(TempCamDelay());                                                     // для карты
+        mapPlayerIcon.SetActive(true);                                                      // включаем иконку игрока на карте
+
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
