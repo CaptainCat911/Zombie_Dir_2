@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041D\u0430\u0441\u0442\u043E\u0439\u043A\u0438 \n"
+  m_text: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5814c161220d33e4bb6ba3ffc6174d8b, type: 2}
   m_sharedMaterial: {fileID: -5571880255299385413, guid: 5814c161220d33e4bb6ba3ffc6174d8b,
@@ -2128,8 +2128,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.9, y: 10.66}
-  m_SizeDelta: {x: -56.942078, y: -129.49503}
+  m_AnchoredPosition: {x: 8.08, y: 10.66}
+  m_SizeDelta: {x: -22.982376, y: -129.49503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1556096565
 MonoBehaviour:
@@ -2150,7 +2150,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041E\u0445\u0443\u0435\u043D\u043D\u043E\u0441\u0442\u044C \u0438\u0433\u0440\u044B"
+  m_text: "\u041E\u0444\u0438\u0433\u0435\u043D\u043D\u043E\u0441\u0442\u044C \u0438\u0433\u0440\u044B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5814c161220d33e4bb6ba3ffc6174d8b, type: 2}
   m_sharedMaterial: {fileID: -5571880255299385413, guid: 5814c161220d33e4bb6ba3ffc6174d8b,
@@ -2830,7 +2830,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041E\u0445\u0443\u0435\u043D\u043D\u0430\u044F \u0438\u0433\u0440\u0430
+  m_text: "\u041E\u0444\u0438\u0433\u0435\u043D\u043D\u0430\u044F \u0438\u0433\u0440\u0430
     \u043F\u0440\u043E \u0437\u043E\u043C\u0431\u0438"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5814c161220d33e4bb6ba3ffc6174d8b, type: 2}

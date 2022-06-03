@@ -189,8 +189,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.72
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1
+  m_Center: {x: -0.3, y: 0, z: 0.16}
 --- !u!114 &-569861375438605135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 8597786256219775411, guid: 18c4ad458c45ef740993feea20a0bc30,
     type: 3}
-  axe: 0
+  axe: 1
 --- !u!114 &1600405211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0, g: 0.0963881, b: 1, a: 1}
+  outlineColor: {r: 1, g: 0.8691972, b: 0, a: 1}
   outlineWidth: 0
   precomputeOutline: 0
   bakeKeys: []

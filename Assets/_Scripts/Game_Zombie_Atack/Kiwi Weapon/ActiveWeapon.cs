@@ -219,7 +219,7 @@ public class ActiveWeapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            ToggleActiveWeapon();
+            //ToggleActiveWeapon();
         }
 
 

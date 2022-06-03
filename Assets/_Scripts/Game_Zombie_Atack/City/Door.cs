@@ -6,6 +6,7 @@ public class Door : MonoBehaviour
 {
     bool triggerEnter = false;
     bool doorOpen = false;
+    bool readyDoor = true;
     Animator anim;
 
     public void Start()
@@ -28,16 +29,20 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
-        if (triggerEnter && Input.GetKeyDown(KeyCode.E) && !doorOpen)
+        if (triggerEnter && Input.GetKeyDown(KeyCode.E) && !doorOpen && readyDoor)
         {
             anim.SetTrigger("Open");
+            doorOpen = true;
+            readyDoor = false;
             StartCoroutine(OpenDoorDelay());
         }
 
-        if (triggerEnter && Input.GetKeyDown(KeyCode.E) && doorOpen)
+        if (triggerEnter && Input.GetKeyDown(KeyCode.E) && doorOpen && readyDoor)
         {
             anim.SetTrigger("Close");
-            StartCoroutine(CloseDoorDelay());
+            doorOpen = false;
+            readyDoor = false;
+            StartCoroutine(OpenDoorDelay());
         }
     }
 
@@ -46,12 +51,8 @@ public class Door : MonoBehaviour
     IEnumerator OpenDoorDelay()
     {
         yield return new WaitForSeconds(1);
-        doorOpen = true;
+        readyDoor = true;
     }
 
-    IEnumerator CloseDoorDelay()
-    {
-        yield return new WaitForSeconds(1);
-        doorOpen = false;
-    }
+
 }

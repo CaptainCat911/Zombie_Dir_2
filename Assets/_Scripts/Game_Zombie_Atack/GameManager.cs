@@ -246,13 +246,13 @@ public class GameManager : MonoBehaviour
 
 
 
-/*    public void HidePauseMenu()
+    public void HidePauseMenu()          // для кнопки "продолжить" в меню паузы
     {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
         playerStop = false;
         pause = false;
-    }*/
+    }
 
 
 
