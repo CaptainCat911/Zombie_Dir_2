@@ -50,11 +50,11 @@ public class WeaponPickUp : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-/*            GameManager.instance.player.GetComponent<ActiveWeapon>().getAxe = true;
-            GameManager.instance.player.GetComponent<ActiveWeapon>().axeBack.SetActive(true);
+           /* GameManager.instance.player.GetComponent<ActiveWeapon>().getAxe = true;
+            GameManager.instance.player.GetComponent<ActiveWeapon>().axeBack.SetActive(true);*/
             RaycastWeapon newWeapon = Instantiate(weaponPrefab);
             activeWeapon.GetWeaponUp(newWeapon);
-            Destroy(gameObject);*/
+            Destroy(gameObject);
         }
     }
 }

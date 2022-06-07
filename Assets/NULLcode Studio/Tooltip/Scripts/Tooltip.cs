@@ -77,7 +77,7 @@ public class Tooltip : MonoBehaviour {
 				{
 					if (outline != previousOutline)
                     {
-						outline.OutlineWidth = 4f;								// даём ширину линии
+						outline.OutlineWidth = 2f;								// даём ширину линии
 						previousOutline = outline;
                     }
 				}

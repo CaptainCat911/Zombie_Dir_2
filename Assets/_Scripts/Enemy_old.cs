@@ -90,7 +90,7 @@ public class Enemy_old : Mover
         hitbox = GetComponentInChildren<EnemyHitbox>();
         //capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         selfScript = GetComponent<Enemy_old>();
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
         if (test)
             return;
 
@@ -108,6 +108,9 @@ public class Enemy_old : Mover
 
             hitbox.cooldown = 2.5f;                 // кд атаки
             hitbox.attackSpeed = 1.3f;              // скорость атаки
+            maxHealth = 80;
+            currentHealth = maxHealth;
+
             agent.speed = 0.5f;                     // скорость передвижения
             int random2 = Random.Range(1,4);        // случайный выбор типа передвижения зомби
             //Debug.Log(random2);
@@ -131,7 +134,7 @@ public class Enemy_old : Mover
             hitbox.cooldown = 2f;
             hitbox.attackSpeed = 1.6f;
             agent.speed = 2f;
-            maxHealth = 150;
+            maxHealth = 120;
             currentHealth = maxHealth;
             //tempCapColl.SetActive(false);
         }
@@ -143,7 +146,7 @@ public class Enemy_old : Mover
             hitbox.cooldown = 1.5f;
             hitbox.attackSpeed = 2f;
             agent.speed = 6f;
-            maxHealth = 250;
+            maxHealth = 200;
             currentHealth = maxHealth;            
             if (true)        //  они агонируют?
             {

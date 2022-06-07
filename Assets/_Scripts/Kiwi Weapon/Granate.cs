@@ -8,7 +8,7 @@ public class Granate : MonoBehaviour
     public float radius = 4f;               // радиус взрыва
     public float radiusBig = 8f;            // радиус дополнительного взрыва
     public int damage = 300;                // основной урон
-    public int damageBig = 76;              // дополнительный урон
+    public int damageBigRadius = 76;              // дополнительный урон
     public float pushForce = 0.95f;         // останавливающая сила
     public LayerMask layerEnemy;            // маска для нанесения урона
     public GameObject explEffect;           // эффект взрыва
@@ -75,7 +75,7 @@ public class Granate : MonoBehaviour
                 Player player = nearbyObject.GetComponentInParent<Player>();
                 Damage dmg = new Damage()
                 {
-                    damageAmount = damage,
+                    damageAmount = 52,
                     origin = transform.position,
                     pushForce = pushForce
                 };
@@ -106,7 +106,7 @@ public class Granate : MonoBehaviour
                 Enemy_old enemy = nearbyObject.GetComponentInParent<Enemy_old>();
                 Damage dmg = new Damage()
                 {
-                    damageAmount = damageBig,
+                    damageAmount = damageBigRadius,
                     origin = transform.position,
                     pushForce = pushForce
                 };
@@ -119,7 +119,7 @@ public class Granate : MonoBehaviour
                 Player player = nearbyObject.GetComponentInParent<Player>();
                 Damage dmg = new Damage()
                 {
-                    damageAmount = damageBig,
+                    damageAmount = 26,
                     origin = transform.position,
                     pushForce = pushForce
                 };

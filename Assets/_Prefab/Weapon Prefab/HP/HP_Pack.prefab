@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 1842210104}
   m_Layer: 13
   m_Name: HP_Pack
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6f862095774b644b4a689f79c5f32e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpHeal: 25
+  hpHeal: 50
 --- !u!135 &1842210109
 SphereCollider:
   m_ObjectHideFlags: 0

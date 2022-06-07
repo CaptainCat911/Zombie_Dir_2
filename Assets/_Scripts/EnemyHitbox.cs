@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHitbox : Collidable
 {
     // Damage
-    private int damage = 11;                // Урон
+    private int damage = 6;                // Урон
     private float pushForce = 0.95f;        // замедление
     public float cooldown = 0.5f;           // перезардяка атаки
     public float attackSpeed = 1;           // скорость атаки       
@@ -166,7 +166,7 @@ public class EnemyHitbox : Collidable
 
                         Damage dmg = new Damage()
                         {
-                            damageAmount = 6,
+                            damageAmount = 3,
                             origin = transform.position,
                             pushForce = pushForce
                         };

@@ -17,7 +17,7 @@ public class WeaponOutlineClose : MonoBehaviour
 			if (outline != null)
 			{
 
-				outline.OutlineWidth = 4f;                              // даём ширину линии				
+				outline.OutlineWidth = 2f;                              // даём ширину линии				
 				
 			}			
 		}

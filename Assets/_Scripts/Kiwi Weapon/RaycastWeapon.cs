@@ -50,6 +50,7 @@ public class RaycastWeapon : MonoBehaviour
     public LayerMask layerIgnore;                   // маска 
 
     RaycastHit hit;
+    RaycastHit[] hits;
     Ray ray;
     Quaternion qua1;
     Quaternion qua2;
@@ -266,7 +267,65 @@ public class RaycastWeapon : MonoBehaviour
 
 
 
-    public void MakeRayCastAll()                // для прострелов (пока не смог сделать)
+
+    public void MakeRayCastAll()            // полные прострелы снайперки (пока не сделал, hit заменить на hits?)
+    {
+        // Звуки
+        audioSource.Play();
+
+
+        // Настройки для трасеров
+        TrailRenderer tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);          // создаем трасер
+        tracer.AddPosition(EFFECT_ANCHOR.position);                                                             // начальная позиция 
+
+        // Рейкаст
+        float randomBulletX = Random.Range(-recoilX, recoilX);
+        float randomBulletY = Random.Range(-recoilY, recoilY);
+
+        ray.origin = PROJECTILE_ANCHOR.position;        // луч из позиции якоря
+        ray.direction = PROJECTILE_ANCHOR.forward + new Vector3(randomBulletX, randomBulletY, 0);      // луч с направлением вперед
+        //Debug.DrawRay(PROJECTILE_ANCHOR.position, PROJECTILE_ANCHOR.transform.forward * 100f, Color.yellow);        
+
+        hits = Physics.RaycastAll(ray, Mathf.Infinity, layerIgnore);
+        
+            //Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);                                   // дебаг, красные линии
+
+            tracer.transform.position = hit.point;                                                      // конечная позиция трасера пули 
+
+            Enemy_old enemy = hit.collider.GetComponentInParent<Enemy_old>();
+            if (enemy)
+            {
+                Damage dmg = new Damage()
+                {
+                    damageAmount = rayDamage,
+                    origin = transform.position,
+                    pushForce = pushForce
+                };
+                enemy.SendMessage("ReceiveDamage", dmg);
+
+
+                // Эффекты попадания (кровь)
+                hitEffectBlood.transform.position = hit.point;
+                hitEffectBlood.transform.forward = hit.normal;
+                hitEffectBlood.Emit(1);
+
+
+            }
+            else
+            {
+                // Эффекты попадания (искры)
+                hitEffect.transform.position = hit.point;
+                hitEffect.transform.forward = hit.normal;
+                hitEffect.Emit(1);
+            }        
+    }
+
+
+
+
+
+
+    public void MakeRayCastMulti()                // для прострелов (пока не смог сделать)
     {
         // Настройки для трасеров
         TrailRenderer tracer = Instantiate(tracerEffect, EFFECT_ANCHOR.position, Quaternion.identity);
@@ -315,6 +374,9 @@ public class RaycastWeapon : MonoBehaviour
             Debug.Log("Did not hit");
         }
     }
+
+
+
 
 
 /*        if (Physics.Raycast(ray, out hit, Mathf.Infinity))

@@ -41,7 +41,7 @@ public class AmmoPickUp : MonoBehaviour
         //Debug.Log("Trig!");
         if (triggerEnter)  
         {
-            RaycastWeapon weapon = activeWeapon.GetActiveWeapon();
+            RaycastWeapon weapon = activeWeapon.GetActiveWeapon();           
 
             /*            playerAmmo.allAmmo_9 += 60 * ammoSizeMag;
                         playerAmmo.allAmmo_5_56 += 100 * ammoSizeMag;
@@ -76,7 +76,7 @@ public class AmmoPickUp : MonoBehaviour
                     break;
 
             }
-            if (ammoType != "granate")
+            if (ammoType != "granate" && weapon)
                 weapon.TakeAmmo();
 
             Destroy(gameObject);
