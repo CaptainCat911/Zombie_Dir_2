@@ -186,11 +186,13 @@ public class Player : Mover
 
 
         if (boostSpeed)
-        {
-            xSpeed = 20f;
-            ySpeed = 20f;
-            maxSpeed = 20f;
-            currentHealth = 100;
+        {           
+            maxSpeed = 20f;            
+        }
+
+        if (!boostSpeed)
+        {            
+            maxSpeed = 6f;
         }
 
 
@@ -228,15 +230,11 @@ public class Player : Mover
         }
 
 
-        /*        if (Input.GetKeyDown(KeyCode.L))
-                {
-                    boostSpeed = !boostSpeed;
-                }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            boostSpeed = !boostSpeed;
+        }
 
-                if (Input.GetKeyDown(KeyCode.L))
-                {
-                    currentHealth += 100;            
-                }*/
 
 
         if (Input.GetKeyDown(KeyCode.F))

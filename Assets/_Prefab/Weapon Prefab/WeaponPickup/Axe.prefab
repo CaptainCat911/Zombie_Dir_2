@@ -146,7 +146,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8629537969847769382}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 0
@@ -244,6 +244,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8629537969847769403}
     m_Modifications:
+    - target: {fileID: 2177068444705734355, guid: 18c4ad458c45ef740993feea20a0bc30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2913224157417393344, guid: 18c4ad458c45ef740993feea20a0bc30,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -318,6 +323,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: fireaxe_prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336238050871522751, guid: 18c4ad458c45ef740993feea20a0bc30,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18c4ad458c45ef740993feea20a0bc30, type: 3}
