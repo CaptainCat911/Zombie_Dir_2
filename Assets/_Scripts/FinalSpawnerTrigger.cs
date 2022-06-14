@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class FinalSpawnerTrigger : MonoBehaviour
 {   
-    public GameObject spawnerObject;                // объект со спавнерами
-    public EnemySpawnPointTrigger[] spawners;       // извлекаем из него спавнеры
-    public bool trigDiffReady = false;              // для повышения сложности после входа в триггер
-    public bool afterDelay = false;                 // для активации спавнеров после начальной задержки
-    public bool finalTrigStart = false;             // "заряд" для старта 
+    public GameObject spawnerObject;                    // объект со спавнерами
+    public EnemySpawnPointTrigger[] spawners;           // извлекаем из него спавнеры
+    public bool trigDiffReady = false;                  // для повышения сложности после входа в триггер
+    public bool afterDelay = false;                     // для активации спавнеров после начальной задержки
+    public bool finalTrigStart = false;                 // "заряд" для старта 
 
-    public GameObject objectLamps;                  // объек с лампами
-    private Animator[] lamps;                       // извлекаем аниматоры ламп
+    public GameObject objectLamps;                      // объек с лампами
+    private Animator[] lamps;                           // извлекаем аниматоры ламп
 
-    public GameObject spawnPointsFinalGameObject;     // финальные спавнеры
-    public GameObject spawnPointsGameobject;          // обычные спавнеры, которые надо вырубить в финале
+    public GameObject spawnPointsFinalGameObject;       // финальные спавнеры
+    public GameObject spawnPointsGameobject;            // обычные спавнеры, которые надо вырубить в финале
     private EnemySpawnPoint[] spawnPoints;
     public EnemySpawnPoint[] spawnPointsFinal;
 
-    /*    bool triggerEnter = false;                  // вход в триггер
+    /*    bool triggerEnter = false;                    // вход в триггер
 
 
 
@@ -58,19 +58,19 @@ public class FinalSpawnerTrigger : MonoBehaviour
 
     private void Update()
     {     
-        if (afterDelay)         // если начальная задержка прошла 
+        if (afterDelay)                                                  // если начальная задержка прошла 
         {
             foreach (EnemySpawnPointTrigger spawner in spawners)
             {
-                spawner.active = true;                                          // активируем
+                spawner.active = true;                                   // активируем
             }
         }
 
-        if (GameManager.instance.pultActive && !finalTrigStart )    // если квесты выполнены и активировали пульт и этот квест ещё не начат
-        {            
+        if (GameManager.instance.pultActive && !finalTrigStart )         // если квесты выполнены и активировали пульт и этот квест ещё не начат
+        {    
                 Debug.Log("FinalStart");
-                StartCoroutine(finalTrigDelay());           // запускаем коронтин
-                finalTrigStart = true;                      // запускаем квест
+                StartCoroutine(finalTrigDelay());                        // запускаем коронтин
+                finalTrigStart = true;                                   // запускаем квест
         }
     }
 
@@ -78,14 +78,14 @@ public class FinalSpawnerTrigger : MonoBehaviour
     IEnumerator finalTrigDelay()
     {
         spawnPointsFinalGameObject.SetActive(true);
-        //objectLamps.SetActive(true);                 // включаем лампы
+        //objectLamps.SetActive(true);                  // включаем лампы
         foreach (Animator lamp in lamps)
         {
             lamp.SetBool("LightOff", false);         // включаем лампы
         }
 
-        GameManager.instance.SetNullDifficulty();   // ставим сложность 0, чтобы остальные зомби не спавнились (только инстант)     
-        GameManager.instance.final = true;          // чтобы спавнились только обычные зомби
+        GameManager.instance.SetNullDifficulty();       // ставим сложность 0, чтобы остальные зомби не спавнились (только инстант)     
+        GameManager.instance.final = true;              // чтобы спавнились только обычные зомби
         GameManager.instance.mission = "Продержитесь до прибытия вертолёта";
 
         yield return new WaitForSeconds(30);            // начальная задержка (передышка)

@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6f862095774b644b4a689f79c5f32e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpHeal: 50
+  hpHeal: 35
 --- !u!135 &1842210109
 SphereCollider:
   m_ObjectHideFlags: 0

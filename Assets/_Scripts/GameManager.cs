@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     // Enemy spawner
     [HideInInspector]
     public int enemyCount = 0;                  // счетчик зомби
-
+    [HideInInspector]
     public bool inBuilding = false;             // для изменения сферы прозрачности в здании 
 
     // Quest    
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public bool questCompl = false;             // тру когда полностью выполнен квест и вызван вертолёт
     
     public bool final = false;                  // для финального ивента (обычные спавнеры останавливаются)
+
     [HideInInspector]
     public bool lightsOff = false;              // для выключения света в городе 
 
@@ -156,7 +157,7 @@ public class GameManager : MonoBehaviour
             //SaveState();
         }
 
-
+        // Слоумоушион нах
         if (Input.GetKeyDown(KeyCode.U))
         {
             slowMo = !slowMo;
@@ -167,6 +168,7 @@ public class GameManager : MonoBehaviour
         }        
 
 
+        // Пауза
         if (Input.GetKeyDown(KeyCode.Escape) && !playerDead && !startCinema)
         {            
             if (pause)
@@ -187,6 +189,7 @@ public class GameManager : MonoBehaviour
         }
       
 
+        // Карта
         if (Input.GetKeyDown(KeyCode.M))
         {
             if (!player.isAlive || playerStop || startCinema)
@@ -207,7 +210,6 @@ public class GameManager : MonoBehaviour
                 //Time.timeScale = 1f;
             }
         }
-
 
 
         // Квест
@@ -238,6 +240,7 @@ public class GameManager : MonoBehaviour
         }
 
 
+        // Если проиграл
         if (!player.isAlive && !playerDead)
         {
             StartCoroutine(DialogePauseDeath());
@@ -247,50 +250,41 @@ public class GameManager : MonoBehaviour
 
 
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
+    //-------------------------------------------------Начальные ролик и настройки--------------------------------------------------------------------------------------------------\\
 
-
-
-    public void HidePauseMenu()          // для кнопки "продолжить" в меню паузы
-    {
-        Time.timeScale = 1f;
-        pauseMenu.SetActive(false);
-        playerStop = false;
-        pause = false;
-    }
-
-
-
-
-
-    IEnumerator TempCamDelay()                      // задержка для выключения камеры карты
+    IEnumerator TempCamDelay()                                  // задержка для выключения камеры карты
     {
         yield return new WaitForSeconds(0.1f);            
         tempCam.SetActive(false);
         tempLight.SetActive(false);
     }
+    
 
+    IEnumerator DialogePause()                                  // начальный ролик и настройки
+    {
+        yield return new WaitForSeconds(1f);
+        blackScreen.SetActive(false);
+        yield return new WaitForSeconds(11.5f);                 // задержка пока персонаж встаёт     
+        dialogueTrig.TriggerDialogue(0);                        // показываем диалог
+        Pause();                                                // паузу, чтобы было время почитать
+        yield return new WaitForSeconds(1f);
+        playerStop = false;                                     // отдаём контроль
+        bars.SetActive(true);                                   // показываем бары
+        startCinema = false;                                    // ролик завершён
 
+        RaycastWeapon newWeapon = Instantiate(weaponPrefab);
+        player.activeWeapon.GetWeaponUp(newWeapon);
 
-
-
-    public void FinalWave()
-    {        
-        StartCoroutine(FinalDelay());
+        //player.activeWeapon.EquipActiveStart();
     }
 
-    IEnumerator FinalDelay()
-    {
-        yield return new WaitForSeconds(finalDelay);            // сколько длится финальный ивент        
 
-        //Debug.Log("Wave!");
-        finalSpotLamp.SetActive(true);                          // включаем прожектор вертолёта 
-        yield return new WaitForSeconds(1f);                 
-        player.FinalWave();                                     // запускаем волну, убивающую зомби (стрельба из вертолёта)
-        yield return new WaitForSeconds(15f);
-        dialogueTrig.TriggerDialogue(1);
-        Pause();
-        postProcessFinal = true;
+    public void HidePauseMenu()                                 // для кнопки "продолжить" в меню паузы
+    {
+        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
+        playerStop = false;
+        pause = false;
     }
 
 
@@ -324,7 +318,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
     public void SetDifficulty()                              // увеличение сложности 
     {
         i++;
@@ -348,10 +341,10 @@ public class GameManager : MonoBehaviour
             spawnPoint.enemyNumberSpawn += 2;
             spawnPoint.cooldown -= 2;
         }
-        StartCoroutine(MaxDiff());
+        StartCoroutine(MaxDiffOff());
     }
 
-    IEnumerator MaxDiff()                                   // отключаем повышение сложности через .. секунд
+    IEnumerator MaxDiffOff()                                   // отключаем повышение сложности через .. секунд
     {
         yield return new WaitForSeconds(60);
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
@@ -390,27 +383,34 @@ public class GameManager : MonoBehaviour
 
 
 
-    //-----------------------------------------------------------------------------------------\\
+    //-----------------------------------Финальный ивент------------------------------------------------------\\
 
 
 
-    IEnumerator DialogePause()
+    public void FinalWave()                 // запуск финального ивента 
     {
-        yield return new WaitForSeconds(1f);
-        blackScreen.SetActive(false);
-        yield return new WaitForSeconds(11.5f);                 // задержка пока персонаж встаёт     
-        dialogueTrig.TriggerDialogue(0);                        // показываем диалог
-        Pause();                                                // паузу, чтобы было время почитать
-        yield return new WaitForSeconds(1f);
-        playerStop = false;                                     // отдаём контроль
-        bars.SetActive(true);                                   // показываем бары
-        startCinema = false;                                    // ролик завершён
-
-        RaycastWeapon newWeapon = Instantiate(weaponPrefab);
-        player.activeWeapon.GetWeaponUp(newWeapon);
-
-        //player.activeWeapon.EquipActiveStart();
+        StartCoroutine(FinalDelay());
     }
+
+
+    IEnumerator FinalDelay()
+    {
+        yield return new WaitForSeconds(finalDelay);            // сколько длится финальный ивент        
+
+        //Debug.Log("Wave!");
+        finalSpotLamp.SetActive(true);                          // включаем прожектор вертолёта 
+        yield return new WaitForSeconds(1f);
+        player.FinalWave();                                     // запускаем волну, убивающую зомби (стрельба из вертолёта)
+        yield return new WaitForSeconds(15f);
+        dialogueTrig.TriggerDialogue(1);
+        Pause();
+        postProcessFinal = true;
+    }
+
+
+
+    //-----------------------------------При поражении-------------------------------------------------\\
+
 
     IEnumerator DialogePauseDeath()
     {
