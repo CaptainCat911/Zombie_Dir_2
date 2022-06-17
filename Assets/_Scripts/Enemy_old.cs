@@ -66,10 +66,10 @@ public class Enemy_old : Mover
 
     public bool dead = false;               // если убили
 
-    [HideInInspector]
+   // [HideInInspector]
     public AudioSourses audioSourses;         // ссылка на объект с аудиоисточниками
 
-    public SphereCollider weaponPickUpCollider; // ccылка на колайдер оружия
+    //public SphereCollider weaponPickUpCollider; // ccылка на колайдер оружия
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -181,6 +181,8 @@ public class Enemy_old : Mover
         }
 
         tempCapColl.SetActive(false);
+
+        audioSourses.idle.Play();
     }
 
 
@@ -403,6 +405,7 @@ public class Enemy_old : Mover
 
     public void TakeHit()
     {
+        audioSourses.takeDamage.Play();
         if (!dead)
             anim.SetTrigger("Take_Hit");
         if (dead)
@@ -491,9 +494,10 @@ public class Enemy_old : Mover
         agent.ResetPath();
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);
-        selfScript.enabled = false;
 
         audioSourses.death.Play();                  // звук
+
+        selfScript.enabled = false;
 
         //weaponPickUpCollider.enabled = true;
 

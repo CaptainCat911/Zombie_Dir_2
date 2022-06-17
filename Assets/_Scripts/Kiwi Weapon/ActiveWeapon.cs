@@ -321,14 +321,15 @@ public class ActiveWeapon : MonoBehaviour
 
             case "axe_hit":
                 //Debug.Log("Hit !");
+                audioSourses.axeMiss.Play();
                 Collider[] collidersHitbox = Physics.OverlapSphere(hitBox.position, attackRadiusHitBox, layerEnemy);
                 foreach (Collider enObjectBox in collidersHitbox)
                 {
                     if (enObjectBox.tag != "Enemy")
                     {
                         //Debug.Log(enObjectBox.name);
-                        audioSourses.axeMiss.Play();
-                        continue;
+                        //audioSourses.axeMiss.Play();
+                        //continue;
                     }
 
                     if (enObjectBox.tag == "Enemy")
