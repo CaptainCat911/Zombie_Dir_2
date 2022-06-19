@@ -141,11 +141,6 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-
-
-
-
-
         RaycastWeapon weapon = GetWeapon(activeWeaponIndex);        // находим активное оружие и если оно не спрятано - постоянно обновляем 
         if (weapon && !isHolsted)
         {
@@ -179,15 +174,11 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-
-
         // Удар топором
         if (Input.GetMouseButtonDown(1) && !reloaring && getAxe)
         {
             playerAnim.SetTrigger("axe_attack");            
         }
-
-
 
 
 
@@ -209,11 +200,8 @@ public class ActiveWeapon : MonoBehaviour
         }
 
 
-
-
         //Debug.Log(isHolsted);
         //Debug.Log(activeWeaponIndex);
-
 
 
 
@@ -221,7 +209,6 @@ public class ActiveWeapon : MonoBehaviour
         {
             //ToggleActiveWeapon();
         }
-
 
 
 
@@ -311,6 +298,7 @@ public class ActiveWeapon : MonoBehaviour
         switch (eventName)
         {
             case "axe_start":
+                audioSourses.axeMiss.Play();                    // звук замаха топором
                 //Debug.Log("Start !");
                 ToggleActiveWeapon();                           // убираем основное оружие
                 axeBack.SetActive(false);                       // прячем топор за спиной
@@ -320,8 +308,7 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "axe_hit":
-                //Debug.Log("Hit !");
-                audioSourses.axeMiss.Play();
+                //Debug.Log("Hit !");                
                 Collider[] collidersHitbox = Physics.OverlapSphere(hitBox.position, attackRadiusHitBox, layerEnemy);
                 foreach (Collider enObjectBox in collidersHitbox)
                 {
@@ -334,7 +321,7 @@ public class ActiveWeapon : MonoBehaviour
 
                     if (enObjectBox.tag == "Enemy")
                     {
-                        audioSourses.axeAttack.Play();
+                        audioSourses.axeAttack.Play();                                      // звук попадания топором
                         Enemy_old enemy = enObjectBox.GetComponentInParent<Enemy_old>();
                         Damage dmg = new Damage()
                         {

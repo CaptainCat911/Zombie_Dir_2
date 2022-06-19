@@ -71,6 +71,7 @@ public class EnemyHitbox : Collidable
                 enemy.anim.SetFloat("Attack_type", 3);*/
             enemy.anim.SetTrigger("Swing");                     // бьем
 
+            enemy.audioSourses.attack.pitch = enemy.audioPitch;
             enemy.audioSourses.attack.Play();                   // звук атаки
         }
     }
@@ -105,9 +106,7 @@ public class EnemyHitbox : Collidable
         //Debug.Log(eventName);
         switch (eventName)
         {
-            case "hit":
-                
-                
+            case "hit":                             
 
                 Collider[] collidersHitbox = Physics.OverlapSphere(this.transform.position, attackRadiusHitBox, enemy.layerPlayer);
                 foreach (Collider enObjectBox in collidersHitbox)

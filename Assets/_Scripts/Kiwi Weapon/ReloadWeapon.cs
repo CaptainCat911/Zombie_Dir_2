@@ -52,11 +52,12 @@ public class ReloadWeapon : MonoBehaviour
         switch (eventName)
         {
             case "start_reload":
-                activeWeapon.isHolsted = true;                      // оружие не активно
-                activeWeapon.reloaring = true;                      // нельзя сменить оружие                 
+                activeWeapon.isHolsted = true;                              // оружие не активно
+                activeWeapon.reloaring = true;                              // нельзя сменить оружие
+                activeWeapon.audioSourses.reloadStart.Play();               // звук перезарядки
                 break;                
             case "detouch_magazine":
-                activeWeapon.audioSourses.reloadStart.Play();            // звук перезарядки
+                
                 DetouchMagazine();
                 break;
             case "drop_magazine":
@@ -67,7 +68,7 @@ public class ReloadWeapon : MonoBehaviour
                 break;
             case "attach_magazine":
                 AttachMagazine();
-                activeWeapon.audioSourses.reloadEnd.Play();            // звук перезарядки
+                activeWeapon.audioSourses.reloadEnd.Play();             // звук перезарядки
                 break;
             case "stop_reload":
                 activeWeapon.isHolsted = false;

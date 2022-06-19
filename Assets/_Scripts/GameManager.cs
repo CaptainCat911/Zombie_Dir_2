@@ -99,6 +99,8 @@ public class GameManager : MonoBehaviour
 
     public bool test;                           // для режима теста
 
+    public bool mainScene = true;               // для основной сцены
+
 
 
 
@@ -131,7 +133,8 @@ public class GameManager : MonoBehaviour
     {
         dialogueTrig = GetComponent<DialogueTrigger>();                                     // Ссылка на диалог
         spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>(); 
-        StartCoroutine(StartDiffCor());                                                     // начальная сложность, задержка
+        if (mainScene)
+            StartCoroutine(StartDiffCor());                                                     // начальная сложность, задержка
         if (!test)
         {
             StartCoroutine(DialogePause());                                                 // ПОТОМ ВКЛЮЧИТЬ начальная сложность

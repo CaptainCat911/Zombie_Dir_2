@@ -5,15 +5,15 @@ using UnityEngine.AI;
 public class Enemy_old : Mover
 {
     // Logic
-    public float triggerLenght = 5f;   // радиус тригера преследования (в пределах игрок)
-    //public float chaseLenght = 10f;   // радиус преследования (вся зона)
-    public float findPlayerRange = 1f;  // на каком расстоянии остановится перед целью
-    public float grabPlayerRange = 2f;  // на каком расстоянии начать хватать
+    public float triggerLenght = 5f;        // радиус тригера преследования (в пределах игрок)
+    //public float chaseLenght = 10f;       // радиус преследования (вся зона)
+    public float findPlayerRange = 1f;      // на каком расстоянии остановится перед целью
+    public float grabPlayerRange = 2f;      // на каком расстоянии начать хватать
     public float faceingTargetSpeed = 5f;   // скорость поворота возле цели
     public float timeAfterDeath = 10f;      // сколько лежит труп
 
-    public bool weakZombie = false;               // слабый зомби 
-    public bool strongZombie = false;             // сильный зомби
+    public bool weakZombie = false;         // слабый зомби 
+    public bool strongZombie = false;       // сильный зомби
 
     public bool weak = false;
     public bool strong = false;
@@ -24,33 +24,33 @@ public class Enemy_old : Mover
 
     public bool biting = false;
 
-    public float cooldownSlow = 0.5f;     // кулдаун замедления
-    public float lastSlow;              // для замедления
-    public bool slowed = false;         // замедлен
+    public float cooldownSlow = 0.5f;       // кулдаун замедления
+    public float lastSlow;                  // для замедления
+    public bool slowed = false;             // замедлен
 
-    private float maxSpeed = 4f;        // максимальная скорость (не нужна наверное)
+    private float maxSpeed = 4f;            // максимальная скорость (не нужна наверное)
     //private float speed;
-    private bool chasing;           // преследование
+    private bool chasing;                   // преследование
     //private bool returning = false;
-    private bool collidingWithPlayer;   // столкновение с игроком
+    private bool collidingWithPlayer;       // столкновение с игроком
 
-    private Transform playerTransform;  // ссылка на трансформ игрока
-    private Vector3 startingPosition;   // стартовая позиция
-    public LayerMask layerPlayer;       // маска для игрока
+    private Transform playerTransform;              // ссылка на трансформ игрока
+    private Vector3 startingPosition;               // стартовая позиция
+    public LayerMask layerPlayer;                   // маска для игрока
 
     public Animator anim;
     public NavMeshAgent agent;
-    public EnemyHitbox hitbox;      // ссылка на хитбокс
+    public EnemyHitbox hitbox;                      // ссылка на хитбокс
     public CapsuleCollider capsuleCollider;         // коллайдеры для попадания
     public CapsuleCollider capsuleColliderLeftARm;  // коллайдеры рук
-    public CapsuleCollider capsuleColliderRightArm; //
+    public CapsuleCollider capsuleColliderRightArm; 
     //CapsuleCollider[] allCapsCol;
-    private Enemy_old selfScript;       // ссылка на свой скрипт (вроде можно убрать)
+    private Enemy_old selfScript;           // ссылка на свой скрипт (вроде можно убрать)
 
-    public GameObject tempCapColl;      // временный коллайдер для жрущих зомби (пока что отключил)
+    public GameObject tempCapColl;          // временный коллайдер для жрущих зомби (пока что отключил)
 
-    public float tempAgentSpeed = 6;    // скорость к которой вернуться после замедления 
-    float stopForce = 0;                // сила замедления
+    public float tempAgentSpeed = 6;        // скорость к которой вернуться после замедления 
+    float stopForce = 0;                    // сила замедления
 
     public ParticleSystem hitEffectBlood;   // кровь для финала
     public GameObject chest;                // для крови
@@ -66,8 +66,14 @@ public class Enemy_old : Mover
 
     public bool dead = false;               // если убили
 
-   // [HideInInspector]
-    public AudioSourses audioSourses;         // ссылка на объект с аудиоисточниками
+    [HideInInspector]
+    public AudioSourses audioSourses;       // ссылка на объект с аудиоисточниками
+    bool audioPlayingIdle;                  // для остановки idle звука
+    public float audioPitch;
+
+
+
+
 
     //public SphereCollider weaponPickUpCollider; // ccылка на колайдер оружия
 
@@ -79,8 +85,10 @@ public class Enemy_old : Mover
     {
         base.Start();
 
-        audioSourses = FindObjectOfType<AudioSourses>();
-
+        audioSourses = GetComponentInChildren<AudioSourses>();
+        audioPitch = Random.Range(0.8f, 1.2f);
+        audioSourses.death.pitch = audioPitch;
+        audioSourses.idle.pitch = audioPitch;
 
         //hitbox = transform.GetChild(18).GetComponent<BoxCollider>();
         playerTransform = GameManager.instance.player.transform;
@@ -180,9 +188,7 @@ public class Enemy_old : Mover
             medhpBack.SetActive(true);
         }
 
-        tempCapColl.SetActive(false);
-
-        audioSourses.idle.Play();
+        tempCapColl.SetActive(false);        
     }
 
 
@@ -223,23 +229,22 @@ public class Enemy_old : Mover
         else
         {           
                 if (Vector3.Distance(playerTransform.position, startingPosition) < triggerLenght)       // если дистанция до игрока < тригер дистанции
-                {
-                    
-                    chasing = true;             // преследование включено 
-                    if (biting && GameManager.instance.player.isAlive)
+                {                    
+                    chasing = true;                                                                     // преследование включено 
+                    if (biting && GameManager.instance.player.isAlive)                                  // для безумных зомби
                     {                       
-                        anim.SetTrigger("Stop_biting");
+                        anim.SetTrigger("Stop_biting");                                                 // если игрок в тригере - останавливаем безумие
                         FaceTarget();
                         if (currentHealth == maxHealth)
                         {
                             biting = false;
-                            StartCoroutine(ScreamDelay());                            
+                            StartCoroutine(ScreamDelay());                                              // запускаем анимацию крика
                             //tempCapColl.SetActive(false);
                         }
                         if (currentHealth != maxHealth)
                         {                                                        
                             //tempCapColl.SetActive(false);
-                            anim.SetTrigger("Bite_Go");
+                            anim.SetTrigger("Bite_Go");                                                 // если получили урон - сразу преследование игрока
                         }
 
                     }
@@ -248,26 +253,32 @@ public class Enemy_old : Mover
 
                 if (chasing == true)
                 {
-                    if (collidingWithPlayer == false)
+                    if (collidingWithPlayer == false)                                                   // если не достаем до игрока 
                     {
-                        if (hitbox.attacking == true)
+                        if (hitbox.attacking == true)                                                   // если идёт анимация атаки
                         {
-                            agent.ResetPath();
+                            agent.ResetPath();                                                          // стоим на месте
                             FaceTarget();
                         }
-
-                        else
+                                                            
+                        else                                                                            // если анимация атаки не идёт 
                         {
-                            agent.SetDestination(playerTransform.position);
+                            agent.SetDestination(playerTransform.position);                             // следовать к игроку
                         }
                         
                     }
-                    else
+
+                    else                                                                                // если достаем до игрока
                     {                                                   
                         agent.ResetPath();
                         FaceTarget();
                         if (GameManager.instance.player.isAlive)
-                            hitbox.Attack();
+                        {
+                            hitbox.Attack();                                                            // АТАКУЕМ
+                            audioSourses.idle.Stop();
+                            audioPlayingIdle = false;
+                        }
+                        
                         if (!GameManager.instance.player.isAlive)
                             StartCoroutine(BitingDelay());                            
                     }
@@ -281,7 +292,15 @@ public class Enemy_old : Mover
         }
 
 
-        if (currentHealth < maxHealth)
+        if (chasing && !audioPlayingIdle && !dead)
+        {
+            
+            audioSourses.idle.Play();
+            audioPlayingIdle = true;
+            //Debug.Log("Idle playing");
+        }
+
+        if (currentHealth < maxHealth)                                  // если получили урон - преследуем
         {
             triggerLenght = 1000;
         }
@@ -495,6 +514,8 @@ public class Enemy_old : Mover
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);
 
+        audioSourses.idle.Stop();
+        
         audioSourses.death.Play();                  // звук
 
         selfScript.enabled = false;
