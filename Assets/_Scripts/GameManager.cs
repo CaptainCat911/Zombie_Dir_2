@@ -134,18 +134,19 @@ public class GameManager : MonoBehaviour
         dialogueTrig = GetComponent<DialogueTrigger>();                                     // Ссылка на диалог
         spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>(); 
         if (mainScene)
-            StartCoroutine(StartDiffCor());                                                     // начальная сложность, задержка
+            StartCoroutine(StartDiffCor());                                                 // начальная сложность, задержка
+        if (test)
+            StartCoroutine(ActionStart());
         if (!test)
         {
-            StartCoroutine(DialogePause());                                                 // ПОТОМ ВКЛЮЧИТЬ начальная сложность
-            playerStop = true;                                                              // ПОТОМ ВКЛЮЧИТЬ вызов диалога
-            blackScreen.SetActive(true);                                                    // включаем черный экран (на ~полсекунды)
+            playerStop = true;                                                              // забираем контроль
+            StartCoroutine(DialogePause());                                                 // начальный диалог 
         }
+        blackScreen.SetActive(true);                                                        // включаем черный экран (на ~полсекунды)
         tempCam.SetActive(true);                                                            // для карты
         tempLight.SetActive(true);                                                          // для карты
         StartCoroutine(TempCamDelay());                                                     // для карты
         mapPlayerIcon.SetActive(true);                                                      // включаем иконку игрока на карте
-
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -271,14 +272,21 @@ public class GameManager : MonoBehaviour
         dialogueTrig.TriggerDialogue(0);                        // показываем диалог
         Pause();                                                // паузу, чтобы было время почитать
         yield return new WaitForSeconds(1f);
+        StartCoroutine(ActionStart());
+
+        //player.activeWeapon.EquipActiveStart();
+    }
+
+    IEnumerator ActionStart()
+    {
+        yield return new WaitForSeconds(1f);                    
+        blackScreen.SetActive(false);
         playerStop = false;                                     // отдаём контроль
         bars.SetActive(true);                                   // показываем бары
         startCinema = false;                                    // ролик завершён
 
         RaycastWeapon newWeapon = Instantiate(weaponPrefab);
         player.activeWeapon.GetWeaponUp(newWeapon);
-
-        //player.activeWeapon.EquipActiveStart();
     }
 
 
@@ -383,6 +391,92 @@ public class GameManager : MonoBehaviour
             spawnPoint.cooldown = 1000;
         }
     }
+
+
+
+
+    public void SetFinalDifficultyNumber(int diffNumber)                        // сложность для режима выживания
+    {
+        switch (diffNumber)
+        {
+            case 0:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 0;
+
+                    spawnPoint.enemyNumberSpawn = 0;
+
+                    spawnPoint.cooldown = 1000;
+                }
+                break;
+
+            case 1:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 20;
+
+                    spawnPoint.enemyNumberSpawn = 1;
+
+                    spawnPoint.cooldown = 5;
+                }
+                break;
+
+            case 2:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 35;
+
+                    spawnPoint.enemyNumberSpawn = 2;
+
+                    spawnPoint.cooldown = 4;
+                }
+                break;
+
+            case 3:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 50;
+
+                    spawnPoint.enemyNumberSpawn = 3;
+
+                    spawnPoint.cooldown = 2;
+                }
+                break;
+
+            case 10:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 20;
+
+                    spawnPoint.enemyNumberSpawn = 1;
+
+                    spawnPoint.cooldown = 5;
+
+                    spawnPoint.strongZombieChanse = 33;
+                }
+                break;
+
+            case 99:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 60;
+
+                    spawnPoint.enemyNumberSpawn = 3;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.strongZombieChanse = 100;
+                }
+                break;
+        }
+    }
+
 
 
 

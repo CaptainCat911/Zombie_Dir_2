@@ -18,6 +18,10 @@ public class EnemySpawnPoint : MonoBehaviour
 
     public float radius;                    // радиус для спавна зомби за пределеами видимости игрока
 
+    public bool strongZombie;               // сделать зомби сильным
+
+    public int strongZombieChanse;          // шанс сильного зомби
+        
 
 
 
@@ -65,6 +69,15 @@ public class EnemySpawnPoint : MonoBehaviour
         go.transform.SetParent(transform, false);           // Назначаем этот спавнер родителем
         agent = go.GetComponent<NavMeshAgent>();            // Находим НавМешАгент
         agent.Warp(transform.position);                     // Перемещаем префаб к спавнеру
+
+        int randomStrong = Random.Range(1, 101);
+
+        if (randomStrong <= strongZombieChanse || strongZombie)
+        {
+            Enemy_old enemy = go.GetComponent<Enemy_old>();
+            enemy.strongZombie = true;
+            enemy.agony = false;            
+        }
 
         GameManager.instance.enemyCount += 1;    
 

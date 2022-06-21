@@ -14,9 +14,10 @@ public class Enemy_old : Mover
 
     public bool weakZombie = false;         // слабый зомби 
     public bool strongZombie = false;       // сильный зомби
+    public bool agony = true;              // сильный зомби безумен
 
-    public bool weak = false;
-    public bool strong = false;
+   /* public bool weak = false;
+    public bool strong = false;*/
 
     public bool test = false;               // режим тестового зомби
 
@@ -69,7 +70,9 @@ public class Enemy_old : Mover
     [HideInInspector]
     public AudioSourses audioSourses;       // ссылка на объект с аудиоисточниками
     bool audioPlayingIdle;                  // для остановки idle звука
-    public float audioPitch;
+    public float audioPitch;                // установка питч звука
+
+    public GameObject mapIcon;              // иконка для карты 
 
 
 
@@ -84,6 +87,8 @@ public class Enemy_old : Mover
     protected override void Start()
     {
         base.Start();
+
+        mapIcon.SetActive(true);
 
         audioSourses = GetComponentInChildren<AudioSourses>();
         audioPitch = Random.Range(0.8f, 1.2f);
@@ -149,20 +154,20 @@ public class Enemy_old : Mover
 
         else if ((random >= 90 || strongZombie) && !GameManager.instance.final)
         {
-            strong = true;
+            //strong = true;
             hitbox.grabChardge = false;
             hitbox.cooldown = 1.5f;
             hitbox.attackSpeed = 2f;
             agent.speed = 6f;
             maxHealth = 200;
             currentHealth = maxHealth;            
-            if (true)        //  они агонируют?
+            if (agony)                                       // они агонируют?
             {
                 triggerLenght = 6;
-                anim.SetTrigger("Agony");          // агония
+                anim.SetTrigger("Agony");                   // агония
                 biting = true;
 
-                int randomAgony = Random.Range(0, 2);                    // меняем тип агонии (анимацию)
+                int randomAgony = Random.Range(0, 2);       // меняем тип агонии (анимацию)
                 if (randomAgony == 0)
                     anim.SetFloat("Agony_type", 0);
                 if (randomAgony == 1)
@@ -501,9 +506,6 @@ public class Enemy_old : Mover
             medhpBack.SetActive(false);
         }
 
-
-
-
         int random = Random.Range(0, 2);
         if (random == 1)
             anim.SetFloat("Death_type", 1);
@@ -517,6 +519,8 @@ public class Enemy_old : Mover
         audioSourses.idle.Stop();
         
         audioSourses.death.Play();                  // звук
+
+        mapIcon.SetActive(false);                   // убираем иконку
 
         selfScript.enabled = false;
 
@@ -542,6 +546,7 @@ public class Enemy_old : Mover
     {
         if (!dontCount)
             GameManager.instance.enemyCount -= 1;
+        mapIcon.SetActive(false);
         Destroy(gameObject);
     }
 

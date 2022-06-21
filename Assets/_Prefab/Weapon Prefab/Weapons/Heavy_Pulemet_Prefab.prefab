@@ -52121,7 +52121,7 @@ MonoBehaviour:
   layerIgnore:
     serializedVersion: 2
     m_Bits: 9220
-  recoilX: 0.05
+  recoilX: 0.07
   recoilY: 0.03
 --- !u!82 &-7872743969487108873
 AudioSource:

@@ -31,7 +31,7 @@ public class SpawnSphere : MonoBehaviour
         if (other.tag == "EnemySpawner")
             other.GetComponent<EnemySpawnPoint>().active = false;
 
-        if (other.tag == "Enemy" && GameManager.instance.mainScene)
+        if (other.tag == "Enemy")                                           // && GameManager.instance.mainScene
         {
             //Debug.Log("ENEMY !");
             Enemy_old enemy = other.GetComponentInParent<Enemy_old>();              
