@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class Enemy_old : Mover
 {
     // Logic
-    public float triggerLenght = 5f;        // радиус тригера преследования (в пределах игрок)
+    public float triggerLenght = 10f;       // радиус тригера преследования (в пределах игрок)
     //public float chaseLenght = 10f;       // радиус преследования (вся зона)
     public float findPlayerRange = 1f;      // на каком расстоянии остановится перед целью
     public float grabPlayerRange = 2f;      // на каком расстоянии начать хватать
@@ -14,10 +14,10 @@ public class Enemy_old : Mover
 
     public bool weakZombie = false;         // слабый зомби 
     public bool strongZombie = false;       // сильный зомби
-    public bool agony = true;              // сильный зомби безумен
+    public bool agony = true;               // сильный зомби безумен
 
-   /* public bool weak = false;
-    public bool strong = false;*/
+    public bool simpleZombie = false;       // обычный зомби (пока нигде не использую)
+    public bool agonyZombie = false;        // зомби в агонии
 
     public bool test = false;               // режим тестового зомби
 
@@ -74,6 +74,8 @@ public class Enemy_old : Mover
 
     public GameObject mapIcon;              // иконка для карты 
 
+    bool direction;                         // для рандомного направления зомби
+
 
 
 
@@ -108,11 +110,12 @@ public class Enemy_old : Mover
             return;
 
         int random = Random.Range(0, 100);          // разные типы зомби
+        //random = 0;
 
         if ((random <= 84 || weakZombie) && !strongZombie)          // шанс на слабого зомби или сами устанавливаем слабого зомби
         {
-            random = 0;
 
+            simpleZombie = true;                    
             int random3 = Random.Range(0, 2);       // 50% шанс на то, что зомби будет с захватом
             if (random3 == 0)
                 hitbox.grabChardge = false;
@@ -154,14 +157,15 @@ public class Enemy_old : Mover
 
         else if ((random >= 90 || strongZombie) && !GameManager.instance.final)
         {
-            //strong = true;
+            agonyZombie = true;
             hitbox.grabChardge = false;
             hitbox.cooldown = 1.5f;
             hitbox.attackSpeed = 2f;
+            //int randomSpeedStrong = Random.Range(1, 8);
             agent.speed = 6f;
             maxHealth = 200;
             currentHealth = maxHealth;            
-            if (agony)                                       // они агонируют?
+            if (agony)                                      // они агонируют?
             {
                 triggerLenght = 6;
                 anim.SetTrigger("Agony");                   // агония
@@ -232,10 +236,13 @@ public class Enemy_old : Mover
         }
 
         else
-        {           
-                if (Vector3.Distance(playerTransform.position, startingPosition) < triggerLenght)       // если дистанция до игрока < тригер дистанции
+        {
+            
+
+                if (Vector3.Distance(playerTransform.position, transform.position) < triggerLenght)       // если дистанция до игрока < тригер дистанции
                 {                    
                     chasing = true;                                                                     // преследование включено 
+                    direction = false;
                     if (biting && GameManager.instance.player.isAlive)                                  // для безумных зомби
                     {                       
                         anim.SetTrigger("Stop_biting");                                                 // если игрок в тригере - останавливаем безумие
@@ -254,9 +261,14 @@ public class Enemy_old : Mover
 
                     }
                 }
-                
 
-                if (chasing == true)
+/*                else
+                {
+                        agent.SetDestination(new Vector3(0,0,0));
+                }*/
+
+
+                if (chasing)
                 {
                     if (collidingWithPlayer == false)                                                   // если не достаем до игрока 
                     {
@@ -289,11 +301,13 @@ public class Enemy_old : Mover
                     }
                 }           
 
-            else
-            {
-                agent.SetDestination(startingPosition);
-                chasing = false;
-            }
+                if (!chasing && !direction && !agonyZombie && GameManager.instance.zombieFreeWalk)
+                {
+                    //agent.SetDestination(startingPosition);
+                    agent.SetDestination(transform.position + new Vector3 (Random.Range(-100,100), 0, Random.Range(-100, 100)));
+                //chasing = false;
+                    direction = true;
+                }
         }
 
 
@@ -526,6 +540,10 @@ public class Enemy_old : Mover
 
         //weaponPickUpCollider.enabled = true;
 
+        capsuleCollider.enabled = false;
+        capsuleColliderLeftARm.enabled = false;
+        capsuleColliderRightArm.enabled = false;
+
         dead = true;
     }
 
@@ -534,9 +552,6 @@ public class Enemy_old : Mover
     public void NavMeshDisable()
     {
         agent.enabled = false;
-        capsuleCollider.enabled = false;
-        capsuleColliderLeftARm.enabled = false;
-        capsuleColliderRightArm.enabled = false;
     }
 
 
@@ -570,6 +585,7 @@ public class Enemy_old : Mover
         capsuleCollider.enabled = false;
         capsuleColliderLeftARm.enabled = false;
         capsuleColliderRightArm.enabled = false;
+        mapIcon.SetActive(false);
         agent.ResetPath();
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);

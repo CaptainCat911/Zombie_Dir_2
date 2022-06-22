@@ -2529,15 +2529,16 @@ MonoBehaviour:
   pushRecoverySpeed: 0.2
   ySpeed: 0
   xSpeed: 0
-  triggerLenght: 1000
+  triggerLenght: 10
   findPlayerRange: 1.1
   grabPlayerRange: 4
   faceingTargetSpeed: 20
   timeAfterDeath: 30
   weakZombie: 0
   strongZombie: 0
+  agony: 1
   weak: 0
-  strong: 0
+  strongZ: 0
   test: 0
   dontCount: 0
   biting: 0

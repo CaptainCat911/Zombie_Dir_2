@@ -15,6 +15,7 @@ public class WeaponAnimationEvents : MonoBehaviour
     public AnimationEvent WeaponAnimationEvent = new AnimationEvent();          // Для перезарядки
     public AnimationEvent ZombieAnimationEvent = new AnimationEvent();          // Для атаки зомби
     public AnimationEvent ZombieAnimationGrabEvent = new AnimationEvent();      // Для захвата зомби
+    public AnimationEvent HealAnimationEvent = new AnimationEvent();            // Для лечения
 
 
     public void OnMeleeAnimationEvents(string eventName)
@@ -41,5 +42,10 @@ public class WeaponAnimationEvents : MonoBehaviour
     public void OnAnimationEventsZombieGrab(string eventName)
     {
         ZombieAnimationGrabEvent.Invoke(eventName);
+    }
+
+    public void OnAnimationEventsHeal(string eventName)
+    {
+        HealAnimationEvent.Invoke(eventName);
     }
 }

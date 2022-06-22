@@ -101,6 +101,10 @@ public class GameManager : MonoBehaviour
 
     public bool mainScene = true;               // для основной сцены
 
+    public bool noKillSphere;                   // не убивать зомби при их выходе из спавнящей сферы
+
+    public bool zombieFreeWalk;                 // зомби идут в рандомном направлении
+
 
 
 
@@ -408,6 +412,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.enemyNumberSpawn = 0;
 
                     spawnPoint.cooldown = 1000;
+
+                    spawnPoint.strongZombieChanse = 0;
                 }
                 break;
 
@@ -420,6 +426,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.enemyNumberSpawn = 1;
 
                     spawnPoint.cooldown = 5;
+
+                    spawnPoint.strongZombieChanse = 0;
                 }
                 break;
 
@@ -432,6 +440,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.enemyNumberSpawn = 2;
 
                     spawnPoint.cooldown = 4;
+
+                    spawnPoint.strongZombieChanse = 5;
                 }
                 break;
 
@@ -444,6 +454,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.enemyNumberSpawn = 3;
 
                     spawnPoint.cooldown = 2;
+
+                    spawnPoint.strongZombieChanse = 10;
                 }
                 break;
 
@@ -457,7 +469,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.cooldown = 5;
 
-                    spawnPoint.strongZombieChanse = 33;
+                    spawnPoint.strongZombieChanse = 20;
                 }
                 break;
 

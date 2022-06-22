@@ -181,6 +181,14 @@ public class ActiveWeapon : MonoBehaviour
         }
 
 
+        // Лечение
+        if (Input.GetKeyDown(KeyCode.Q) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < 100)
+        {
+            player.Heal(25);
+            ammoPack.HPBox -= 1;
+        }
+
+
 
         // Бросок гранаты
         if (Input.GetKeyDown(KeyCode.G) && !reloaring && !granateInAction && ammoPack.granate > 0)
