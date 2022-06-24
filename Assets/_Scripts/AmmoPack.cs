@@ -15,5 +15,9 @@ public class AmmoPack : MonoBehaviour
     public int granate = 0;
 
     public int HPBox = 0;
+
+    public string message;
+
+    public bool messageReady;
 }
 

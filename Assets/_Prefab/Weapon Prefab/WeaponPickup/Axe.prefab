@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8629537969314614401}
   - component: {fileID: 8629537969314614400}
   - component: {fileID: 8629537969314614415}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: -569861375438605135}
   - component: {fileID: 1600405211}
   - component: {fileID: 1600405212}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Axe
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -203,9 +203,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7bb2742c1aed5744a10cc50c944e3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 1
+  maxHealth: 1
+  pushRecoverySpeed: 0.2
   weaponPrefab: {fileID: 8597786256219775411, guid: 18c4ad458c45ef740993feea20a0bc30,
     type: 3}
   axe: 1
+  message: "\u0422\u043E\u043F\u043E\u0440"
 --- !u!114 &1600405211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +251,7 @@ PrefabInstance:
     - target: {fileID: 2177068444705734355, guid: 18c4ad458c45ef740993feea20a0bc30,
         type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2913224157417393344, guid: 18c4ad458c45ef740993feea20a0bc30,
         type: 3}
@@ -327,7 +331,7 @@ PrefabInstance:
     - target: {fileID: 7336238050871522751, guid: 18c4ad458c45ef740993feea20a0bc30,
         type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18c4ad458c45ef740993feea20a0bc30, type: 3}

@@ -52120,9 +52120,10 @@ MonoBehaviour:
   lightEffect: {fileID: 4473978892120722954}
   layerIgnore:
     serializedVersion: 2
-    m_Bits: 9220
+    m_Bits: 271364
   recoilX: 0.07
   recoilY: 0.03
+  imageWeapon: {fileID: 0}
 --- !u!82 &-7872743969487108873
 AudioSource:
   m_ObjectHideFlags: 0

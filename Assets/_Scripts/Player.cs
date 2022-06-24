@@ -40,9 +40,9 @@ public class Player : Mover
 
     public GameObject rigWeapon;        // вкл/выкл оружия при поражении
 
-    
+    public bool walking = false;        // для ходьбы
 
-
+    public bool inRangeUse;             // если в ренже использования предмета
 
     //public AudioManager audioManager;
 
@@ -106,7 +106,8 @@ public class Player : Mover
 
 
     private void FixedUpdate()
-    {
+    {       
+
         if (!isAlive || GameManager.instance.playerStop)
             return;
 
@@ -135,7 +136,7 @@ public class Player : Mover
           
              
 
-        if ((activeWeapon.attackActive == true && !activeWeapon.isHolsted) || Input.GetKey(KeyCode.LeftControl) || slowed)
+        if ((activeWeapon.attackActive == true && !activeWeapon.isHolsted) || Input.GetKey(KeyCode.LeftControl) || slowed || walking)
         {
             if (xSpeed > 2.5f)
             {
@@ -218,8 +219,28 @@ public class Player : Mover
 
 
 
+
     private void Update()
     {
+
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (!isAlive || GameManager.instance.playerStop)
+            {                
+                return;
+            }
+
+            lightF.enabled = !lightF.enabled;
+        }
+
+
+
+
+
+
+
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
             //transform.Rotate(0, 1, 0, Space.Self);
@@ -236,16 +257,6 @@ public class Player : Mover
         }
 
 
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (!isAlive || GameManager.instance.playerStop)
-            {                
-                return;
-            }
-
-            lightF.enabled = !lightF.enabled;
-        }
 
         if (Input.GetKeyDown(KeyCode.T))
         {

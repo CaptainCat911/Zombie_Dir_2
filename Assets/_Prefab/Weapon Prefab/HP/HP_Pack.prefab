@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1108481134}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone_cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1108538190}
   - component: {fileID: 1109872000}
   - component: {fileID: 1110942408}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: box_cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1108554492}
   - component: {fileID: 1116106958}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: box_med
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108794092}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3fe47bcef97348f4e8fbc0553a357aeb, type: 3}
   m_Controller: {fileID: 9100000, guid: 755db8c220f0dab418ccd01dbdc3057d, type: 2}
   m_CullingMode: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 1108539098}
   - component: {fileID: 1109848934}
   - component: {fileID: 1110916560}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: box_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,8 @@ GameObject:
   - component: {fileID: 1842210109}
   - component: {fileID: 1842210108}
   - component: {fileID: 1842210104}
-  m_Layer: 13
+  - component: {fileID: -7926417996016535912}
+  m_Layer: 18
   m_Name: HP_Pack
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -332,7 +333,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6312526296165264628}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b6f862095774b644b4a689f79c5f32e, type: 3}
   m_Name: 
@@ -382,3 +383,23 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &-7926417996016535912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6312526296165264628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4dea303202f434bb6e74bece1dfbb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 1
+  maxHealth: 1
+  pushRecoverySpeed: 0.2
+  ammoType: HPBox
+  ammoSize: 2
+  activeWeapon: {fileID: 0}
+  animBox: {fileID: 0}
+  textMessage: {fileID: 0}

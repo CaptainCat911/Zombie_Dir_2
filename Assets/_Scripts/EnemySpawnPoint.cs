@@ -64,7 +64,7 @@ public class EnemySpawnPoint : MonoBehaviour
 
         //Debug.Log(GameManager.instance.enemyCount);        
         int ndx = Random.Range(0, prefabEnemies.Length);
-        GameObject go = Instantiate(prefabEnemies[ndx]);// Создаём префаб   
+        GameObject go = Instantiate(prefabEnemies[ndx]);    // Создаём префаб   
 
         go.transform.SetParent(transform, false);           // Назначаем этот спавнер родителем
         agent = go.GetComponent<NavMeshAgent>();            // Находим НавМешАгент

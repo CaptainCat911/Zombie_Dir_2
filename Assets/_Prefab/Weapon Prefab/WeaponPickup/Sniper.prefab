@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4891442208513469194}
   - component: {fileID: 169868915228919869}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: SVD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5111458315570596569}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Russian_sniper_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5974181217366095944}
   - component: {fileID: 171612318251336318}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 343598264132306537}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 606085252825949523}
   - component: {fileID: 7453236913962588384}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +331,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1937461674350563730}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: SVD_rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5998705314228468448}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9102288320109321170}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: SVD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1870103185364373008}
   - component: {fileID: 5410845785724282441}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: lamp_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2384111497801393510}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7095271473861750494}
   - component: {fileID: 2699413244805865780}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: dot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,7 +627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3499336906499840126}
   - component: {fileID: 7066443833445111452}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8982454172286655452}
   - component: {fileID: 8643824282209391056}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 7,62x54
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +799,7 @@ GameObject:
   - component: {fileID: 8629537969314614401}
   - component: {fileID: 8629537969314614400}
   - component: {fileID: 8629537969314614415}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -895,7 +895,7 @@ GameObject:
   - component: {fileID: -569861375438605135}
   - component: {fileID: 2030888779}
   - component: {fileID: 2030888780}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Sniper
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -990,9 +990,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7bb2742c1aed5744a10cc50c944e3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 1
+  maxHealth: 1
+  pushRecoverySpeed: 0.2
   weaponPrefab: {fileID: 5718410196017201910, guid: 4ac5db1c3302c26408c1952270f80472,
     type: 3}
   axe: 0
+  message: "\u0421\u0412\u0414"
 --- !u!114 &2030888779
 MonoBehaviour:
   m_ObjectHideFlags: 0

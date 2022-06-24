@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5756057787295226291}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.024
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 690282781275471174}
   - component: {fileID: 5668756608949404292}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.H
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4242395194181318422}
   - component: {fileID: 5267746311214316043}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.J
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 357564419430132759}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: All_in_one_scopes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 3542517301024786668}
   - component: {fileID: 3701783303708533941}
   - component: {fileID: 70196277689414141}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: dot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 511073783808900927}
   - component: {fileID: 511073783808900921}
   - component: {fileID: 511073783808900920}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 511073785125934194}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: red_dot_e_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 5943165470509668205}
   - component: {fileID: 300035550714974462}
   - component: {fileID: 4136605376793961896}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 4495696637647435179}
   - component: {fileID: 4843879762024435613}
   - component: {fileID: 1154156881265062756}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Scope_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 4525236761613884055}
   - component: {fileID: 4870599450097606817}
   - component: {fileID: 1201142853687581784}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: red_dot_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -711,7 +711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1713351750920458434}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1163341026297379726}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 7339536080224311905}
   - component: {fileID: 8067296826161416482}
   - component: {fileID: 5395261234476773375}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 7894496561350409543}
   - component: {fileID: 5187905832170222919}
   - component: {fileID: 7572648116432454434}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -933,7 +933,7 @@ GameObject:
   - component: {fileID: 3394922156621399008}
   - component: {fileID: 4902692585403241591}
   - component: {fileID: 2140290610928327289}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1010,7 +1010,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6778922636495773817}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,7 +1043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8983742669746756380}
   - component: {fileID: 6253926534173414414}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1140,7 +1140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1538050587465572939}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: lamp_a_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1173,7 +1173,7 @@ GameObject:
   - component: {fileID: 3956893343189817299}
   - component: {fileID: 6481932502068600714}
   - component: {fileID: 2366799672777795077}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: dot.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1251,7 +1251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1623785961543388787}
   - component: {fileID: 1623785961543388786}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Heavy_Pulemet_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1319,6 +1319,7 @@ MonoBehaviour:
     m_Bits: 0
   recoilX: 0
   recoilY: 0
+  imageWeapon: {fileID: 0}
 --- !u!1 &1624331456796449296
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,7 +1331,7 @@ GameObject:
   - component: {fileID: 2469459778486976679}
   - component: {fileID: 2320379032569523454}
   - component: {fileID: 1411217704302262710}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: dot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1408,7 +1409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4018377082855894576}
   - component: {fileID: 2707204916591983414}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.I
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1507,7 +1508,7 @@ GameObject:
   - component: {fileID: 2442444806119949474}
   - component: {fileID: 6682858213744328340}
   - component: {fileID: 1117668172896649837}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: suppressor_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1586,7 +1587,7 @@ GameObject:
   - component: {fileID: 3246858280167964128}
   - component: {fileID: 5788302927126677462}
   - component: {fileID: 245630568601402159}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: red_dot_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1668,7 +1669,7 @@ GameObject:
   - component: {fileID: 3105990939692571085}
   - component: {fileID: 6215447915397784571}
   - component: {fileID: 395540073676922626}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: scope_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1749,7 +1750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3732797815684258582}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1782,7 +1783,7 @@ GameObject:
   - component: {fileID: 2925096461355290570}
   - component: {fileID: 6179784233831806460}
   - component: {fileID: 504271695806286085}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: red_dot_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1863,7 +1864,7 @@ GameObject:
   - component: {fileID: 8262178208538548156}
   - component: {fileID: 1488286874711537626}
   - component: {fileID: 5138385629872121045}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: cam.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1941,7 +1942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8158151499712104777}
   - component: {fileID: 5339946345994317198}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2039,7 +2040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6776846379125700004}
   - component: {fileID: 8510109875371406428}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2138,7 +2139,7 @@ GameObject:
   - component: {fileID: 2672431763529749679}
   - component: {fileID: 2872114895661664009}
   - component: {fileID: 2872666084325761431}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: HitEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6904,7 +6905,7 @@ GameObject:
   - component: {fileID: 2668683229929604583}
   - component: {fileID: 2871585785366582989}
   - component: {fileID: 2872572481809846437}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Decal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11724,7 +11725,7 @@ GameObject:
   - component: {fileID: 2668718588987994107}
   - component: {fileID: 2871110130146135921}
   - component: {fileID: 2872521123520258815}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16328,7 +16329,7 @@ GameObject:
   - component: {fileID: 2668638426799156167}
   - component: {fileID: 2871476511644482707}
   - component: {fileID: 2871886702778129869}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20922,7 +20923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6780514897883805091}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Anchor_Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20954,7 +20955,7 @@ GameObject:
   - component: {fileID: 805619609596014608}
   - component: {fileID: 6934085046725535623}
   - component: {fileID: 4143553044341467529}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21033,7 +21034,7 @@ GameObject:
   - component: {fileID: 4785916456347172758}
   - component: {fileID: 5207695246604299477}
   - component: {fileID: 7885355469039356424}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21111,7 +21112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5536930703046916419}
   - component: {fileID: 5636703514831724274}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.K
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21209,7 +21210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2813735728992465171}
   - component: {fileID: 4061829888047480923}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: M249
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21306,7 +21307,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3773363988529035463}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: machinegun_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21340,7 +21341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6239545905392787156}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21372,7 +21373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3094797097861911577}
   - component: {fileID: 2273984588694479312}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21469,7 +21470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2835470306607683801}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: M249_rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21501,7 +21502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3403907690914272967}
   - component: {fileID: 6100589032486278867}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.I
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21598,7 +21599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652169030795854713}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.028
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21628,7 +21629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4120031354576691648}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Scope_b_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21661,7 +21662,7 @@ GameObject:
   - component: {fileID: 4120031355381308456}
   - component: {fileID: 4120031355381308470}
   - component: {fileID: 4120031355381308457}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21743,7 +21744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7027440282772720142}
   - component: {fileID: 1180705485146777421}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21842,7 +21843,7 @@ GameObject:
   - component: {fileID: 912835208001043514}
   - component: {fileID: 8210075821936739852}
   - component: {fileID: 2507525453705378549}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: red_dot_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21926,7 +21927,7 @@ GameObject:
   - component: {fileID: 589882436602835234}
   - component: {fileID: 8463574646023457556}
   - component: {fileID: 2758491224207849453}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: laser_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22003,7 +22004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4859564765914817341}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22037,7 +22038,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8262615008537730129}
   - component: {fileID: 977498215447293728}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22136,7 +22137,7 @@ GameObject:
   - component: {fileID: 6572937912889164641}
   - component: {fileID: 8653295588085916137}
   - component: {fileID: 5985802509860204611}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22215,7 +22216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6123657146356970690}
   - component: {fileID: 5574580797377327838}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22314,7 +22315,7 @@ GameObject:
   - component: {fileID: 6711029879404734284}
   - component: {fileID: 9080158822291965380}
   - component: {fileID: 6126106612619580526}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22391,7 +22392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8153514516697605817}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: M249
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22425,7 +22426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 787840023690760545}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Anchor_Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22456,7 +22457,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8806071988561582451}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.026
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22487,7 +22488,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7036097496518538705}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22520,7 +22521,7 @@ GameObject:
   - component: {fileID: 5319241575503608282}
   - component: {fileID: 5319241575503608280}
   - component: {fileID: 5319241575503608281}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22601,7 +22602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5319241575965840093}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: red_dot_c_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22634,7 +22635,7 @@ GameObject:
   - component: {fileID: 8959909803318848496}
   - component: {fileID: 75708803727954374}
   - component: {fileID: 5922358488378961215}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Scope_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22718,7 +22719,7 @@ GameObject:
   - component: {fileID: 5637035452940721148}
   - component: {fileID: 5390297344256421021}
   - component: {fileID: 166905507136640561}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22795,7 +22796,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5572388965398574308}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: laser_a_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22828,7 +22829,7 @@ GameObject:
   - component: {fileID: 5270527929396847368}
   - component: {fileID: 4097837054506606286}
   - component: {fileID: 461388478010618992}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullets_5,56x45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22919,7 +22920,7 @@ GameObject:
   - component: {fileID: 6046341580762873573}
   - component: {fileID: 7769733553325174571}
   - component: {fileID: 4082555141514264464}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22997,7 +22998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9209623229530922866}
   - component: {fileID: 6149978456665348312}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.J
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23096,7 +23097,7 @@ GameObject:
   - component: {fileID: 5213761088602114858}
   - component: {fileID: 7744619467246021026}
   - component: {fileID: 4646891873108834312}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23175,7 +23176,7 @@ GameObject:
   - component: {fileID: 4624711208290949402}
   - component: {fileID: 5455810046049698895}
   - component: {fileID: 5166089831664881023}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: dot.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23253,7 +23254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4628446476931883370}
   - component: {fileID: 2244757723660982756}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23352,7 +23353,7 @@ GameObject:
   - component: {fileID: 2589510502379986702}
   - component: {fileID: 78644560502811125}
   - component: {fileID: 8190397862763261409}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23431,7 +23432,7 @@ GameObject:
   - component: {fileID: 8922429604120766426}
   - component: {fileID: 1208694416700567629}
   - component: {fileID: 5295159204191223363}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23510,7 +23511,7 @@ GameObject:
   - component: {fileID: 3645110975277295708}
   - component: {fileID: 4087447170726624031}
   - component: {fileID: 2130938965199773122}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23589,7 +23590,7 @@ GameObject:
   - component: {fileID: 3493731090343494369}
   - component: {fileID: 5236886770014536690}
   - component: {fileID: 3937228938845551883}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: glass.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23668,7 +23669,7 @@ GameObject:
   - component: {fileID: 2081045689469227465}
   - component: {fileID: 1924494565166256925}
   - component: {fileID: 2769743103133661005}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: dot.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23746,7 +23747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8731587439696376991}
   - component: {fileID: 7036067093226649844}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23844,7 +23845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2100691117748694707}
   - component: {fileID: 7481238441050237003}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.H
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23943,7 +23944,7 @@ GameObject:
   - component: {fileID: 17523187162656165}
   - component: {fileID: 4383808215098487828}
   - component: {fileID: 2786051953536029505}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24032,7 +24033,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9127360250858569024}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24063,7 +24064,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7250789158707300569}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: suppressor_c_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24094,7 +24095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1498956435455774139}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24127,7 +24128,7 @@ GameObject:
   - component: {fileID: 5774446034321069691}
   - component: {fileID: 3276917032969432141}
   - component: {fileID: 9098814715464388788}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: lamp_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24206,7 +24207,7 @@ GameObject:
   - component: {fileID: 7419984148926579558}
   - component: {fileID: 7221243298986138122}
   - component: {fileID: 7220736921543597962}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Decal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29026,7 +29027,7 @@ GameObject:
   - component: {fileID: 7420232613146212908}
   - component: {fileID: 7220563310249386636}
   - component: {fileID: 7219864869897139084}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Mist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33783,7 +33784,7 @@ GameObject:
   - component: {fileID: 7414823758984440042}
   - component: {fileID: 7221351370197459344}
   - component: {fileID: 7219448844808492150}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: HitEffectBlood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38554,7 +38555,7 @@ GameObject:
   - component: {fileID: 7415095224781501266}
   - component: {fileID: 7226431018856781292}
   - component: {fileID: 7219881686028065386}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Streaks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43113,7 +43114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7477597595637764994}
   - component: {fileID: 7477597595648328334}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43206,7 +43207,7 @@ GameObject:
   - component: {fileID: 7477597595637764996}
   - component: {fileID: 7477597595622561476}
   - component: {fileID: 7477597595622469476}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Plane4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47999,7 +48000,7 @@ GameObject:
   - component: {fileID: 7477597595637764998}
   - component: {fileID: 7477597595622561478}
   - component: {fileID: 7477597595622469478}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Plane2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52792,7 +52793,7 @@ GameObject:
   - component: {fileID: 7477597595637765000}
   - component: {fileID: 7477597595622561480}
   - component: {fileID: 7477597595622469480}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: WFX_MF 4P RIFLE1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57591,7 +57592,7 @@ GameObject:
   - component: {fileID: 7477597595637765002}
   - component: {fileID: 7477597595622561482}
   - component: {fileID: 7477597595622469482}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Plane3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62384,7 +62385,7 @@ GameObject:
   - component: {fileID: 7477597595637765004}
   - component: {fileID: 7477597595622561484}
   - component: {fileID: 7477597595622469484}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67177,7 +67178,7 @@ GameObject:
   - component: {fileID: 7477597595637765006}
   - component: {fileID: 7477597595622561486}
   - component: {fileID: 7477597595622469486}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71968,7 +71969,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7527094605025785650}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: red_dot_b_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72000,7 +72001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7486749626845546295}
   - component: {fileID: 1149468751230746373}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72098,7 +72099,7 @@ GameObject:
   m_Component:
   - component: {fileID: 121263822152255809}
   - component: {fileID: 4205968435644802719}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72196,7 +72197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7707235047212770962}
   - component: {fileID: 8230920392764704929}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bullet_holder.G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72294,7 +72295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1115168119889763568}
   - component: {fileID: 6427815793595194036}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72392,7 +72393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1472235277153118883}
   - component: {fileID: 6805620185898914370}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.K
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72489,7 +72490,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7918088410032178857}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: red_dot_a_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72520,7 +72521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3513660772948319641}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: reload
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72550,7 +72551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7953364103473970432}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: scope_c_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72583,7 +72584,7 @@ GameObject:
   - component: {fileID: 7953364103552567136}
   - component: {fileID: 7953364103552567138}
   - component: {fileID: 7953364103552567139}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72664,7 +72665,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3117462700230366824}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone.022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72697,7 +72698,7 @@ GameObject:
   - component: {fileID: 4974061010345871509}
   - component: {fileID: 7302912831781218600}
   - component: {fileID: 22438948714629186}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: dot.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72774,7 +72775,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 360902381045727747}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72807,7 +72808,7 @@ GameObject:
   - component: {fileID: 4786488750189230806}
   - component: {fileID: 4554828724266172640}
   - component: {fileID: 7785186624885390361}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: red_dot_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72889,7 +72890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6434352135814042185}
   - component: {fileID: 3696531346046125014}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72986,7 +72987,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6229878149890655472}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73020,7 +73021,7 @@ GameObject:
   - component: {fileID: 8629537969314614401}
   - component: {fileID: 8629537969314614400}
   - component: {fileID: 8629537969314614415}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73116,7 +73117,7 @@ GameObject:
   - component: {fileID: -569861375438605135}
   - component: {fileID: 1600405211}
   - component: {fileID: 1600405212}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Pulemet
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -73211,9 +73212,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7bb2742c1aed5744a10cc50c944e3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 1
+  maxHealth: 1
+  pushRecoverySpeed: 0.2
   weaponPrefab: {fileID: 5718410196017201910, guid: 4a370a47d49b57c4eb97a356152e122a,
     type: 3}
   axe: 0
+  message: "\u041F\u0443\u043B\u0435\u043C\u0435\u0442"
 --- !u!114 &1600405211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73254,7 +73259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8870218296407968466}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Scope_a_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73287,7 +73292,7 @@ GameObject:
   - component: {fileID: 8870218297059116140}
   - component: {fileID: 8870218297059116142}
   - component: {fileID: 8870218297059116141}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73368,7 +73373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8914429152306677414}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: red_dot_d_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73400,7 +73405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5268678932618110488}
   - component: {fileID: 4154676782622337640}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73498,7 +73503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7274255139701317320}
   - component: {fileID: 4104404125956495001}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: 5,56x45.D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73597,7 +73602,7 @@ GameObject:
   - component: {fileID: 2511349314484826531}
   - component: {fileID: 2154584425860237898}
   - component: {fileID: 5329305088628551691}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: aim_cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}

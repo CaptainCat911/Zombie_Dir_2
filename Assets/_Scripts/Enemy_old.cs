@@ -239,77 +239,77 @@ public class Enemy_old : Mover
         {
             
 
-                if (Vector3.Distance(playerTransform.position, transform.position) < triggerLenght)       // если дистанция до игрока < тригер дистанции
-                {                    
-                    chasing = true;                                                                     // преследование включено 
-                    direction = false;
-                    if (biting && GameManager.instance.player.isAlive)                                  // для безумных зомби
-                    {                       
-                        anim.SetTrigger("Stop_biting");                                                 // если игрок в тригере - останавливаем безумие
-                        FaceTarget();
-                        if (currentHealth == maxHealth)
-                        {
-                            biting = false;
-                            StartCoroutine(ScreamDelay());                                              // запускаем анимацию крика
-                            //tempCapColl.SetActive(false);
-                        }
-                        if (currentHealth != maxHealth)
-                        {                                                        
-                            //tempCapColl.SetActive(false);
-                            anim.SetTrigger("Bite_Go");                                                 // если получили урон - сразу преследование игрока
-                        }
-
+            if (Vector3.Distance(playerTransform.position, transform.position) < triggerLenght)       // если дистанция до игрока < тригер дистанции
+            {                    
+                chasing = true;                                                              // преследование включено 
+                direction = false;
+                if (biting && GameManager.instance.player.isAlive)                           // для безумных зомби
+                {                       
+                    anim.SetTrigger("Stop_biting");                                          // если игрок в тригере - останавливаем безумие
+                    FaceTarget();
+                    if (currentHealth == maxHealth)
+                    {
+                        biting = false;
+                        StartCoroutine(ScreamDelay());                                      // запускаем анимацию крика
+                        //tempCapColl.SetActive(false);
                     }
+                    if (currentHealth != maxHealth)
+                    {                                                        
+                        //tempCapColl.SetActive(false);
+                        anim.SetTrigger("Bite_Go");                                         // если получили урон - сразу преследование игрока
+                    }
+
                 }
+            }
 
 /*                else
-                {
-                        agent.SetDestination(new Vector3(0,0,0));
-                }*/
+            {
+                    agent.SetDestination(new Vector3(0,0,0));
+            }*/
 
 
-                if (chasing)
+            if (chasing)                                // если преследуем
+            {
+                if (collidingWithPlayer == false)                                                   // если не достаем до игрока 
                 {
-                    if (collidingWithPlayer == false)                                                   // если не достаем до игрока 
+                    if (hitbox.attacking == true)                                                   // если идёт анимация атаки
                     {
-                        if (hitbox.attacking == true)                                                   // если идёт анимация атаки
-                        {
-                            agent.ResetPath();                                                          // стоим на месте
-                            FaceTarget();
-                        }
-                                                            
-                        else                                                                            // если анимация атаки не идёт 
-                        {
-                            agent.SetDestination(playerTransform.position);                             // следовать к игроку
-                        }
-                        
-                    }
-
-                    else                                                                                // если достаем до игрока
-                    {                                                   
-                        agent.ResetPath();
+                        agent.ResetPath();                                                          // стоим на месте
                         FaceTarget();
-                        if (GameManager.instance.player.isAlive)
-                        {
-                            hitbox.Attack();                                                            // АТАКУЕМ
-                            audioSourses.idle.Stop();
-                            audioPlayingIdle = false;
-                        }
-                        
-                        if (!GameManager.instance.player.isAlive)
-                            StartCoroutine(BitingDelay());                            
                     }
-                }           
-
-                if (!chasing && !direction && !agonyZombie && GameManager.instance.zombieFreeWalk)
-                {
-                    //agent.SetDestination(startingPosition);
-                    agent.SetDestination(transform.position + new Vector3 (Random.Range(-100,100), 0, Random.Range(-100, 100)));
-                //chasing = false;
-                    direction = true;
+                                                            
+                    else                                                                            // если анимация атаки не идёт 
+                    {
+                        agent.SetDestination(playerTransform.position);                             // следовать к игроку
+                    }
+                        
                 }
-        }
 
+                else                                                                                // если достаем до игрока
+                {                                                   
+                    agent.ResetPath();
+                    FaceTarget();
+                    if (GameManager.instance.player.isAlive)
+                    {
+                        hitbox.Attack();                                                            // АТАКУЕМ
+                        audioSourses.idle.Stop();
+                        audioPlayingIdle = false;
+                    }
+                        
+                    if (!GameManager.instance.player.isAlive)
+                        StartCoroutine(BitingDelay());                            
+                }
+            }
+
+            // зомби идут в рандомном направлении
+            if (!chasing && !direction && !agonyZombie && GameManager.instance.zombieFreeWalk)          
+            {
+                //agent.SetDestination(startingPosition);
+                agent.SetDestination(transform.position + new Vector3 (Random.Range(-100,100), 0, Random.Range(-100, 100)));
+                //chasing = false;
+                direction = true;
+            }
+        }
 
         if (chasing && !audioPlayingIdle && !dead)
         {
@@ -468,9 +468,6 @@ public class Enemy_old : Mover
         agent.speed = tempSpeed;        
         anim.SetTrigger("Bite_Go");
     }
-
-
-
 
 
 

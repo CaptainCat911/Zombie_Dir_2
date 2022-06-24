@@ -69,25 +69,34 @@ public class ActiveWeapon : MonoBehaviour
 
     AmmoPack ammoPack;                  // ссылка на скрипт патронов (инвентарь)
 
-    public AudioSourses audioSourses;         // ссылка на объект с аудиоисточниками
+    public AudioSourses audioSourses;   // ссылка на объект с аудиоисточниками
 
     bool granateInAction;               // для правильного броска гранаты
-            
+
+    AmmoPickUpSphere ammoSphere;        // ссылка на скрипт сферы для поднятия патронов
+
+    public LayerMask layerAmmo;         // маска для патронов
 
 
-    void Start()
+    //---------------------------------------------------------------------------------------------\\
+
+
+    void Start()    
     {
-
-
         //listWeaponRifle = new List<RaycastWeapon>();
 
         playerAnim = GetComponent<Animator>();
+        ammoSphere = GetComponentInChildren<AmmoPickUpSphere>();
 
         animationEvents.MeleeAnimationEvent.AddListener(OnAnimationEventAttack);     // получаем ивенты от анимации атаки
         animationEvents.GranateAnimationEvent.AddListener(OnAnimationEventThrow);    // получаем ивенты от анимации броска гранаты
+        animationEvents.HealAnimationEvent.AddListener(OnAnimationEventHeal);    // получаем ивенты от анимации лечения
+        animationEvents.HealAnimationEvent.AddListener(OnAnimationEventUse);    // получаем ивенты от анимации лечения
 
         ammoPack = player.GetComponent<AmmoPack>();
     }
+
+    //---------------------------------------------------------------------------------------------\\
 
 
     public void EquipActiveStart()              // не используется
@@ -96,6 +105,8 @@ public class ActiveWeapon : MonoBehaviour
         if (existingWeapon)
             Equip(existingWeapon);
     }
+
+
 
 
     // Для перезарядки 
@@ -125,8 +136,10 @@ public class ActiveWeapon : MonoBehaviour
     }
 
 
+    //---------------------------------------------------------------------------------------------\\
 
-     void Update()
+
+    void Update()
     {
         if (GameManager.instance.playerStop)            // если playerStop возвращаемся
         {            
@@ -174,6 +187,10 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
+
+
+        //-------------------------------Управление-----------------------------------------\\
+
         // Удар топором
         if (Input.GetMouseButtonDown(1) && !reloaring && getAxe)
         {
@@ -184,16 +201,24 @@ public class ActiveWeapon : MonoBehaviour
         // Лечение
         if (Input.GetKeyDown(KeyCode.Q) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < 100)
         {
-            player.Heal(25);
-            ammoPack.HPBox -= 1;
+            playerAnim.SetTrigger("Heal");
         }
 
+
+        // Использование
+        if (Input.GetKeyDown(KeyCode.E))       //&& player.inRangeUse
+        {
+            PickUpAmmo();
+            //playerAnim.SetTrigger("Use");
+        }
+
+        //Debug.Log(player.inRangeUse);
 
 
         // Бросок гранаты
         if (Input.GetKeyDown(KeyCode.G) && !reloaring && !granateInAction && ammoPack.granate > 0)
         {
-            ammoPack.granate -= 1;
+            
             float dist = Vector3.Distance(transform.position, player.pointer.position);
             if (dist > 5f)
             {
@@ -202,21 +227,20 @@ public class ActiveWeapon : MonoBehaviour
             else
             {
                 playerAnim.SetTrigger("Throw_2");
-            }
-
-                       
+            }                       
         }
-
 
         //Debug.Log(isHolsted);
         //Debug.Log(activeWeaponIndex);
 
-
-
         if (Input.GetKeyDown(KeyCode.X))
         {
-            //ToggleActiveWeapon();
+            ToggleActiveWeapon();
         }
+
+
+
+
 
 
 
@@ -340,9 +364,23 @@ public class ActiveWeapon : MonoBehaviour
                         enemy.TakeHitAxeBlood();                            // эффект крови
                         enemy.SendMessage("ReceiveDamage", dmg);
                     }
+
+
+                    if (enObjectBox.tag == "Weapon")
+                    {
+                        audioSourses.axeAttack.Play();                                      // звук попадания топором
+                        AmmoPickUp ammoBox = enObjectBox.GetComponentInParent<AmmoPickUp>();
+                        Damage dmg = new Damage()
+                        {
+                            damageAmount = damage,
+                            origin = transform.position,
+                            pushForce = pushForce
+                        };
+                        //enemy.TakeHitAxeBlood();                            // эффект крови
+                        ammoBox.SendMessage("ReceiveDamage", dmg);
+                    }
                     collidersHitbox = null;
-                }
-                
+                }                
                 break;
 
             case "axe_stop":
@@ -355,8 +393,6 @@ public class ActiveWeapon : MonoBehaviour
                 break;
         }
     }
-
-
 
 
 
@@ -380,6 +416,7 @@ public class ActiveWeapon : MonoBehaviour
 
             case "throw_granate":
                 //Debug.Log("Throw !");
+                ammoPack.granate -= 1;
                 granateHand.SetActive(false);
                 GameObject go = Instantiate(granateThrow);                                    // Создаём префаб гранаты
                 //go.transform.SetParent(transform, false);                                   // Назначаем этот спавнер родителем
@@ -401,13 +438,92 @@ public class ActiveWeapon : MonoBehaviour
                 GameManager.instance.playerStop = false;
                 ToggleActiveWeapon();
                 break;
+        }
+    }
 
+
+
+    // Ивенты лечения
+    void OnAnimationEventHeal(string eventName)
+    {
+        switch (eventName)
+        {
+            case "start_heal":
+                //Debug.Log("Heal!");
+                ToggleActiveWeapon();
+                player.walking = true;
+                reloaring = true;
+                break;
+
+            case "healed":
+                player.walking = false;
+                reloaring = false;
+                player.Heal(25);
+                ammoPack.HPBox -= 1;
+                playerAnim.SetTrigger("Stop_Heal");
+                ToggleActiveWeapon();
+                break;
         }
     }
 
 
 
 
+    // Ивенты использования
+    void OnAnimationEventUse(string eventName)
+    {
+        switch (eventName)
+        {
+            case "use_start":
+                //Debug.Log("Use!");
+                ToggleActiveWeapon();
+                //player.walking = true;
+                GameManager.instance.playerStop = true;
+                reloaring = true;
+                break;
+
+            case "use_stop":
+                //Debug.Log("Use_Stop!");
+                //player.walking = false;
+                GameManager.instance.playerStop = false;
+                reloaring = false;
+                ammoSphere.ammo.PickUp();
+                ToggleActiveWeapon();
+                break;
+        }
+    }
+
+
+
+    // Подобрать патроны
+    public void PickUpAmmo()
+    {
+        Collider[] collidersHitbox = Physics.OverlapSphere(hitBox.position, 0.3f, layerAmmo);
+        foreach (Collider enObjectBox in collidersHitbox)
+        {
+
+            if (enObjectBox.tag == "Weapon")
+            {
+                //audioSourses.axeAttack.Play();                                      // звук попадания топором
+                AmmoPickUp ammoBox = enObjectBox.GetComponentInParent<AmmoPickUp>();               
+                WeaponPickUp weaponPickUp = enObjectBox.GetComponentInParent<WeaponPickUp>();
+                
+                Damage dmg = new Damage()
+                {
+                    damageAmount = 1,
+                    origin = transform.position,
+                    pushForce = pushForce
+                };
+                //enemy.TakeHitAxeBlood();                            // эффект крови
+                if (ammoBox)
+                    ammoBox.SendMessage("ReceiveDamage", dmg);
+                else
+                {
+                    weaponPickUp.SendMessage("ReceiveDamage", dmg);
+                }
+            }
+        }
+    }
 
 
     // weaponSlotIndex - номер типа оружия 0 - пистолеты , 1 - винотвки

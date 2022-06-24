@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2080793859}
   - component: {fileID: 2089829059}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: box_ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080612503}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3fe47bcef97348f4e8fbc0553a357aeb, type: 3}
   m_Controller: {fileID: 9100000, guid: 755db8c220f0dab418ccd01dbdc3057d, type: 2}
   m_CullingMode: 0
@@ -61,7 +61,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2080795057}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Bone_cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2080772999}
   - component: {fileID: 2083750387}
   - component: {fileID: 2082654305}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: box_cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 2080855875}
   - component: {fileID: 2083771643}
   - component: {fileID: 2082805055}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: box_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 1450022589}
   - component: {fileID: 1450022593}
   - component: {fileID: -2445751279205662362}
-  m_Layer: 13
+  m_Layer: 18
   m_Name: Ammo_Universal_Revolver
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -337,9 +337,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4dea303202f434bb6e74bece1dfbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 1
+  maxHealth: 1
+  pushRecoverySpeed: 0.2
   ammoType: 0.357
   ammoSize: 72
   activeWeapon: {fileID: 0}
+  animBox: {fileID: 0}
+  textMessage: {fileID: 0}
 --- !u!135 &1450022589
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -348,7 +353,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4329375587580981941}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.5
@@ -365,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb0b382d189b0b489ed04e39d52cecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: "\u041F\u0430\u0442\u0440\u043E\u043D\u044B (\u0420\u0435\u0432\u043E\u043B\u044C\u0432\u0435\u0440)"
+  text: "\u042F\u0449\u0438\u043A \u0441 \u0431\u043E\u0435\u043F\u0440\u0438\u043F\u0430\u0441\u0430\u043C\u0438"
 --- !u!114 &-2445751279205662362
 MonoBehaviour:
   m_ObjectHideFlags: 0

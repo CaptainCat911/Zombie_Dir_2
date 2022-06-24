@@ -62,6 +62,8 @@ public class RaycastWeapon : MonoBehaviour
     public float recoilX;                                   // разброс по X
     public float recoilY;                                   // разброс по Y
 
+    public GameObject imageWeapon;                          // рисунок оружия (пока не сделал)
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
     public void Start()
