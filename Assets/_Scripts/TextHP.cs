@@ -30,6 +30,7 @@ public class TextHP : MonoBehaviour
     void Start()
     {
         player = GameManager.instance.player;
+        activeWeapon = player.GetComponent<ActiveWeapon>();
         ammoPack = player.GetComponent<AmmoPack>();
         tempPosMessage = messageText.transform.position;
     }

@@ -302,7 +302,7 @@ public class Enemy_old : Mover
             }
 
             // зомби идут в рандомном направлении
-            if (!chasing && !direction && !agonyZombie && GameManager.instance.zombieFreeWalk)          
+            if (!chasing && !direction && !agony && GameManager.instance.zombieFreeWalk)          
             {
                 //agent.SetDestination(startingPosition);
                 agent.SetDestination(transform.position + new Vector3 (Random.Range(-100,100), 0, Random.Range(-100, 100)));
