@@ -13,10 +13,12 @@ public class Enemy_old : Mover
     public float timeAfterDeath = 10f;      // сколько лежит труп
 
     public bool weakZombie = false;         // слабый зомби 
+    public bool runZombie = false;          // бегущий зомби 
     public bool strongZombie = false;       // сильный зомби
     public bool agony = true;               // сильный зомби безумен
 
     public bool simpleZombie = false;       // обычный зомби (пока нигде не использую)
+    public bool mediumZombie = false;       // средний зомби (пока нигде не использую)
     public bool agonyZombie = false;        // зомби в агонии
 
     public bool test = false;               // режим тестового зомби
@@ -77,6 +79,9 @@ public class Enemy_old : Mover
     bool direction;                         // для рандомного направления зомби
 
 
+    
+
+
 
 
 
@@ -109,10 +114,16 @@ public class Enemy_old : Mover
         if (test)
             return;
 
-        int random = Random.Range(0, 100);          // разные типы зомби
-        //random = 0;
 
-        if ((random <= 84 || weakZombie) && !strongZombie)          // шанс на слабого зомби или сами устанавливаем слабого зомби
+        if (GameManager.instance.survZombie)        // если зомби для режима выживания
+        {
+            triggerLenght = 1000;
+        }
+        
+        int random = Random.Range(0, 100);          // разные типы зомби
+        random = 0;
+
+        if ((random <= 84 || weakZombie) && !strongZombie && !runZombie)          // шанс на слабого зомби или сами устанавливаем слабого зомби
         {
 
             simpleZombie = true;                    
@@ -139,7 +150,7 @@ public class Enemy_old : Mover
             //tempCapColl.SetActive(false);           // временный коллайдер для жрущих зомби (отключаем)
         }
 
-        else if ((random >= 85 && random < 90) && !strongZombie && !weakZombie)
+        else if ((random >= 85 && random < 90) && !strongZombie && !weakZombie || runZombie)
         {
             int random3 = Random.Range(0, 3);
             if (random3 == 0 || random3 == 2)
@@ -162,7 +173,7 @@ public class Enemy_old : Mover
             hitbox.cooldown = 1.5f;
             hitbox.attackSpeed = 2f;
             //int randomSpeedStrong = Random.Range(1, 8);
-            agent.speed = 6f;
+            agent.speed = 5f;
             maxHealth = 200;
             currentHealth = maxHealth;            
             if (agony)                                      // они агонируют?
@@ -197,7 +208,9 @@ public class Enemy_old : Mover
             medhpBack.SetActive(true);
         }
 
-        tempCapColl.SetActive(false);        
+        tempCapColl.SetActive(false);   
+        
+
     }
 
 
@@ -498,7 +511,7 @@ public class Enemy_old : Mover
                 ndx = Random.Range(0, 2);
             }
 
-            if (GameManager.instance.questAmmo)
+            if (GameManager.instance.questAmmo || GameManager.instance.enemyAllAmmo)
             {
                 ndx = Random.Range(0, ammos.Length);
             }

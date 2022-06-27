@@ -2548,7 +2548,7 @@ MonoBehaviour:
   timeAfterDeath: 30
   weakZombie: 0
   strongZombie: 0
-  agony: 1
+  agony: 0
   simpleZombie: 0
   agonyZombie: 0
   test: 0

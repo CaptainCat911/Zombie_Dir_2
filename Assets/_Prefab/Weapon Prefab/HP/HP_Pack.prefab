@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 1842210108}
   - component: {fileID: 1842210104}
   - component: {fileID: -7926417996016535912}
+  - component: {fileID: 2957195224991178561}
   m_Layer: 18
   m_Name: HP_Pack
   m_TagString: Weapon
@@ -272,7 +273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6312526296165264628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 0.71, y: 0.35241002, z: 0.265098}
   m_Children:
   - {fileID: 1108554492}
@@ -403,3 +404,19 @@ MonoBehaviour:
   activeWeapon: {fileID: 0}
   animBox: {fileID: 0}
   textMessage: {fileID: 0}
+--- !u!208 &2957195224991178561
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6312526296165264628}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

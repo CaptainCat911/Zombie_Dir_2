@@ -7,6 +7,8 @@ public class TextHP : MonoBehaviour
 {
     Player player;          //ссылка на игрока
     AmmoPack ammoPack;      // ссылка на скрипт патронов (инвентарь)
+    DiffManager diffManager;
+
 
     public Text Hp;
     public Text allBulletsText;
@@ -18,21 +20,25 @@ public class TextHP : MonoBehaviour
     public Text GranateText;
     public Text MedBoxText;
     public Text messageText;
+    public Text bigMessageText;
     public ActiveWeapon activeWeapon;
     RaycastWeapon weapon;
     int enemyCount;
     int enemyCountKiled;
 
     Vector3 tempPosMessage;
+    Vector3 tempPosBigMessage;
 
     
 
     void Start()
     {
+        diffManager = GameManager.instance.diffManager;
         player = GameManager.instance.player;
         activeWeapon = player.GetComponent<ActiveWeapon>();
         ammoPack = player.GetComponent<AmmoPack>();
         tempPosMessage = messageText.transform.position;
+        tempPosBigMessage = bigMessageText.transform.position;
     }
 
 
@@ -78,7 +84,17 @@ public class TextHP : MonoBehaviour
         }
 
         messageText.transform.position = new Vector3(messageText.transform.position.x, messageText.transform.position.y + 1, messageText.transform.position.z);
-        
+
+
+        if (diffManager.messageReady)
+        {
+            //StartCoroutine(Message(ammoPack.message));
+            bigMessageText.text = diffManager.message;
+            bigMessageText.transform.position = tempPosBigMessage;
+            diffManager.messageReady = false;
+        }
+
+        bigMessageText.transform.position = new Vector3(bigMessageText.transform.position.x, bigMessageText.transform.position.y + 1, bigMessageText.transform.position.z);
     }
 
 /*    IEnumerator Message(string messg)
