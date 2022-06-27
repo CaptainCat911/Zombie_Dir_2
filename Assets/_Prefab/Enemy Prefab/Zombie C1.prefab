@@ -2694,9 +2694,11 @@ MonoBehaviour:
   faceingTargetSpeed: 20
   timeAfterDeath: 30
   weakZombie: 0
+  runZombie: 0
   strongZombie: 0
   agony: 0
   simpleZombie: 0
+  mediumZombie: 0
   agonyZombie: 0
   test: 0
   dontCount: 0

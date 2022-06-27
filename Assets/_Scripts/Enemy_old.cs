@@ -498,10 +498,12 @@ public class Enemy_old : Mover
         if (dead)
             return;
 
-        GameManager.instance.enemyKilledCount += 1;
+        GameManager.instance.enemyKilledCount += 1;             // в счётчик убитых зомби
 
         if (!dontCount)
-            GameManager.instance.enemyCount -= 1;
+            GameManager.instance.enemyCount -= 1;               // из счётчика зомби на карте
+
+        GameManager.instance.player.ammoPack.souls += 1;        // + души
 
             // выпадение патронов        
         if (randomAmmo >= ammoChanse)

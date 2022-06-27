@@ -8,14 +8,17 @@ public class DiffManager : MonoBehaviour
     public int enemyNumberDiff;
     public bool levelGo;                    // волна пошла
     public bool levelStop;                  // волна остановлена
-    public string message;           // сообщение волны
-    public bool messageReady;
+    public string message;                  // сообщение волны
+    public bool messageReady;               // сообщение готово
+
+    public bool start;
 
 
     public void Start()
     {
-        //GameManager.instance.SetFinalDifficultyNumber(0);             // ставим сложность 0 при старте        
-        StartCoroutine(SafeTime(waveNumber));                           // запускаем таймер до волны
+        //GameManager.instance.SetFinalDifficultyNumber(0);             // ставим сложность 0 при старте
+        if (start)
+            StartCoroutine(SafeTime(waveNumber));                           // запускаем таймер до волны
         
     }
 

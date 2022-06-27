@@ -9,18 +9,20 @@ public class TextHP : MonoBehaviour
     AmmoPack ammoPack;      // ссылка на скрипт патронов (инвентарь)
     DiffManager diffManager;
 
+        
+    public Text soulsText;                  // кол-во душ
+    public Text Hp;                         // здоровье
+    public Text allBulletsText;             // всего патронов
+    public Text currentBulletsText;         // патронов в обойме
+    public Text enemyCountText;             // сколько зомби на карте
+    public Text enemyKilled;                // убито зомби
+    public Text currentMissionText;         // текущая миссия
+    public Text currentWeaponText;          // оружие в руках
+    public Text GranateText;                // кол-во гранат
+    public Text MedBoxText;                 // кол-во аптечек
+    public Text messageText;                // сообщение справа (при подъеме патронов)
+    public Text bigMessageText;             // большое сообщение (волна!)
 
-    public Text Hp;
-    public Text allBulletsText;
-    public Text currentBulletsText;
-    public Text enemyCountText;
-    public Text enemyKilled;
-    public Text currentMissionText;
-    public Text currentWeaponText;
-    public Text GranateText;
-    public Text MedBoxText;
-    public Text messageText;
-    public Text bigMessageText;
     public ActiveWeapon activeWeapon;
     RaycastWeapon weapon;
     int enemyCount;
@@ -44,6 +46,9 @@ public class TextHP : MonoBehaviour
 
     void Update()
     {
+        // Души
+        soulsText.text = ammoPack.souls.ToString("0"); 
+        
         // HP
         Hp.text = player.currentHealth.ToString("0");
         
@@ -75,15 +80,14 @@ public class TextHP : MonoBehaviour
         enemyCountKiled = GameManager.instance.enemyKilledCount;
         enemyKilled.text = enemyCountKiled.ToString("0");
 
-        if (ammoPack.messageReady)
+        if (ammoPack.messageReady)                                  // если сообщение готово (в аммопаке)
         {
             //StartCoroutine(Message(ammoPack.message));
-            messageText.text = ammoPack.message;
-            messageText.transform.position = tempPosMessage;
-            ammoPack.messageReady = false;
+            messageText.text = ammoPack.message;                    // берем текст из сообщения в аммопаке
+            messageText.transform.position = tempPosMessage;        // возвращаем сообщение в начальную позицию
+            ammoPack.messageReady = false;                          // сообщение не готово
         }
-
-        messageText.transform.position = new Vector3(messageText.transform.position.x, messageText.transform.position.y + 1, messageText.transform.position.z);
+        messageText.transform.position = new Vector3(messageText.transform.position.x, messageText.transform.position.y + 1, messageText.transform.position.z);             // поднимаем вверх сообщение
 
 
         if (diffManager.messageReady)
@@ -93,7 +97,6 @@ public class TextHP : MonoBehaviour
             bigMessageText.transform.position = tempPosBigMessage;
             diffManager.messageReady = false;
         }
-
         bigMessageText.transform.position = new Vector3(bigMessageText.transform.position.x, bigMessageText.transform.position.y + 1, bigMessageText.transform.position.z);
     }
 

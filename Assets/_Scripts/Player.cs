@@ -44,6 +44,8 @@ public class Player : Mover
 
     public bool inRangeUse;             // если в ренже использования предмета
 
+    public AmmoPack ammoPack;
+
     //public AudioManager audioManager;
 
 
@@ -61,6 +63,7 @@ public class Player : Mover
 
         anim = GetComponent<Animator>();        
         activeWeapon = GetComponent<ActiveWeapon>();
+        ammoPack = GetComponent<AmmoPack>();
         //layerMask = ~layerMask;
         //layerMaskCam = ~ layerMaskCam;
     }
