@@ -113,6 +113,8 @@ public class GameManager : MonoBehaviour
 
     public bool enemyAllAmmo;                   // для всех видов патронов (выживание)
 
+    public GameObject[] menus;                  // все меню
+
 
 
 
@@ -174,6 +176,16 @@ public class GameManager : MonoBehaviour
         {
             //SaveState();
             SetDifficulty();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            foreach (GameObject menu in menus)
+            {
+                menu.SetActive(false);                
+            }
+            player.aiming = true;
+            Time.timeScale = 1f;
         }
 
         // Слоумоушион нах
@@ -285,7 +297,7 @@ public class GameManager : MonoBehaviour
         blackScreen.SetActive(false);
         yield return new WaitForSeconds(11.5f);                 // задержка пока персонаж встаёт     
         dialogueTrig.TriggerDialogue(0);                        // показываем диалог
-        Pause();                                                // паузу, чтобы было время почитать
+        PauseWithDelay();                                                // паузу, чтобы было время почитать
         yield return new WaitForSeconds(1f);
         StartCoroutine(ActionStart());
 
@@ -587,7 +599,7 @@ public class GameManager : MonoBehaviour
         player.FinalWave();                                     // запускаем волну, убивающую зомби (стрельба из вертолёта)
         yield return new WaitForSeconds(15f);
         dialogueTrig.TriggerDialogue(1);
-        Pause();
+        PauseWithDelay();
         postProcessFinal = true;
     }
 
@@ -607,7 +619,7 @@ public class GameManager : MonoBehaviour
 
     //------------------------------------Пауза-----------------------------------------------------\\
 
-    public void Pause()
+    public void PauseWithDelay()
     {
         StartCoroutine(PauseDelay());
     }
@@ -618,10 +630,16 @@ public class GameManager : MonoBehaviour
         player.aiming = true;
         Time.timeScale = 0f;
     }
+    public void Pause()
+    {
+        player.aiming = false;
+        Time.timeScale = 0f;
+    }
 
 
     public void UnPause()
     {
+        player.aiming = true;
         Time.timeScale = 1f;
     }
 

@@ -239,6 +239,7 @@ public class RaycastWeapon : MonoBehaviour
             tracer.transform.position = hit.point;                                                      // конечная позиция трасера пули 
 
             Enemy_old enemy = hit.collider.GetComponentInParent<Enemy_old>();
+            NPC npc = hit.collider.GetComponentInParent<NPC>();
             if (enemy)
             {
                 Damage dmg = new Damage()
@@ -254,9 +255,25 @@ public class RaycastWeapon : MonoBehaviour
                 hitEffectBlood.transform.position = hit.point;
                 hitEffectBlood.transform.forward = hit.normal;
                 hitEffectBlood.Emit(1);
-
-
             }
+
+            else if (npc)
+            {
+                Damage dmg = new Damage()
+                {
+                    damageAmount = rayDamage,
+                    origin = transform.position,
+                    pushForce = pushForce
+                };
+                npc.SendMessage("ReceiveDamage", dmg);
+
+
+                // Эффекты попадания (кровь)
+                hitEffectBlood.transform.position = hit.point;
+                hitEffectBlood.transform.forward = hit.normal;
+                hitEffectBlood.Emit(1);
+            }
+
             else
             {
                 // Эффекты попадания (искры)

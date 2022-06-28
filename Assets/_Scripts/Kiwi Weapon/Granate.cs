@@ -50,7 +50,7 @@ public class Granate : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius, layerEnemy);
         foreach (Collider nearbyObject in colliders)
         {
-            activeWeapon.audioSourses.explosion.Play();                 // хлопок 
+            activeWeapon.audioSourses.explosion.Play();                         // хлопок 
 
             if (nearbyObject == null)
             {
@@ -60,14 +60,29 @@ public class Granate : MonoBehaviour
             if (nearbyObject.tag == "Enemy")
             {
                 Enemy_old enemy = nearbyObject.GetComponentInParent<Enemy_old>();
-                Damage dmg = new Damage()
+                if (enemy)
                 {
-                    damageAmount = damage,
-                    origin = transform.position,
-                    pushForce = pushForce
-                };
-                enemy.TakeHitAxeBlood();
-                enemy.SendMessage("ReceiveDamage", dmg);
+                    Damage dmg = new Damage()
+                    {
+                        damageAmount = damage,
+                        origin = transform.position,
+                        pushForce = pushForce
+                    };
+                    enemy.TakeHitAxeBlood();
+                    enemy.SendMessage("ReceiveDamage", dmg);
+                }
+                NPC npc = nearbyObject.GetComponentInParent<NPC>();
+                if (npc)
+                {
+                    Damage dmg = new Damage()
+                    {
+                        damageAmount = damage,
+                        origin = transform.position,
+                        pushForce = pushForce
+                    };
+                    npc.TakeHitAxeBlood();
+                    npc.SendMessage("ReceiveDamage", dmg);
+                }
             }
 
             if (nearbyObject.tag == "Fighter")

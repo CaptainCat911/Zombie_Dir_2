@@ -42,7 +42,7 @@ public class QuestRadio : MonoBehaviour
             if (!questStart && !GameManager.instance.questFinish)           // если квест не начат и не закончен
             {                                              
                 dialogueTrig.TriggerDialogue(0);
-                GameManager.instance.Pause();
+                GameManager.instance.PauseWithDelay();
 
                 questStart = true;                                          // квест начат
                 GameManager.instance.questAmmo = true;
@@ -59,7 +59,7 @@ public class QuestRadio : MonoBehaviour
             if (GameManager.instance.questFinish)       // если квест закончен (собраны 3 предмета)
             {                
                 dialogueTrig.TriggerDialogue(1);        // запускаем второй диалог
-                GameManager.instance.Pause();
+                GameManager.instance.PauseWithDelay();
                 foreach (GameObject image in images)    // деактивируем иконки предметовы
                 {
                     image.SetActive(false);

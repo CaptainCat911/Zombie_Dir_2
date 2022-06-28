@@ -49,7 +49,7 @@ public class QuestItem : MonoBehaviour
                     {
                         GameManager.instance.pultActive = true;
                         dialogueTrig.TriggerDialogue(0);
-                        GameManager.instance.Pause();
+                        GameManager.instance.PauseWithDelay();
                         Destroy(this);
                     }
                     break;

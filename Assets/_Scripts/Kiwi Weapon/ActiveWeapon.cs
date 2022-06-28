@@ -355,31 +355,31 @@ public class ActiveWeapon : MonoBehaviour
                     {
                         audioSourses.axeAttack.Play();                                      // звук попадания топором
                         Enemy_old enemy = enObjectBox.GetComponentInParent<Enemy_old>();
-                        Damage dmg = new Damage()
+                        NPC npc = enObjectBox.GetComponentInParent<NPC>();
+                        if (enemy)
                         {
-                            damageAmount = damage,
-                            origin = transform.position,
-                            pushForce = pushForce
-                        };
-                        enemy.TakeHitAxeBlood();                            // эффект крови
-                        enemy.SendMessage("ReceiveDamage", dmg);
-                    }
-
-
-                    if (enObjectBox.tag == "Weapon")
-                    {
-                        audioSourses.axeAttack.Play();                                      // звук попадания топором
-                        AmmoPickUp ammoBox = enObjectBox.GetComponentInParent<AmmoPickUp>();
-                        Damage dmg = new Damage()
+                            Damage dmg = new Damage()
+                            {
+                                damageAmount = damage,
+                                origin = transform.position,
+                                pushForce = pushForce
+                            };
+                            enemy.TakeHitAxeBlood();                            // эффект крови
+                            enemy.SendMessage("ReceiveDamage", dmg);
+                        }
+                        else if (npc)
                         {
-                            damageAmount = damage,
-                            origin = transform.position,
-                            pushForce = pushForce
-                        };
-                        //enemy.TakeHitAxeBlood();                            // эффект крови
-                        ammoBox.SendMessage("ReceiveDamage", dmg);
+                            Damage dmg = new Damage()
+                            {
+                                damageAmount = damage,
+                                origin = transform.position,
+                                pushForce = pushForce
+                            };
+                            npc.TakeHitAxeBlood();                            // эффект крови
+                            npc.SendMessage("ReceiveDamage", dmg);
+                        }
+                        collidersHitbox = null;
                     }
-                    collidersHitbox = null;
                 }                
                 break;
 
@@ -516,10 +516,23 @@ public class ActiveWeapon : MonoBehaviour
                 };
                 //enemy.TakeHitAxeBlood();                            // эффект крови
                 if (ammoBox)
+                {
                     ammoBox.SendMessage("ReceiveDamage", dmg);
-                else
+                }
+
+                else if (weaponPickUp)
                 {
                     weaponPickUp.SendMessage("ReceiveDamage", dmg);
+                }
+            }
+
+            if (enObjectBox.tag == "Enemy")
+            {
+                NPC npc = enObjectBox.GetComponentInParent<NPC>();
+                if (npc)
+                {
+                    npc.OpenMagazine();
+                    Debug.Log("Use!");
                 }
             }
         }
