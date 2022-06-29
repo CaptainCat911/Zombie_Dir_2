@@ -22,6 +22,7 @@ public class TextHP : MonoBehaviour
     public Text MedBoxText;                 // кол-во аптечек
     public Text messageText;                // сообщение справа (при подъеме патронов)
     public Text bigMessageText;             // большое сообщение (волна!)
+    public Text WaveText;                    // волна №
 
     public ActiveWeapon activeWeapon;
     RaycastWeapon weapon;
@@ -47,8 +48,11 @@ public class TextHP : MonoBehaviour
     void Update()
     {
         // Души
-        soulsText.text = ammoPack.souls.ToString("0"); 
-        
+        soulsText.text = ammoPack.souls.ToString("0");
+
+        // Волна
+        WaveText.text = GameManager.instance.diffManager.waveNumber.ToString("0");
+
         // HP
         Hp.text = player.currentHealth.ToString("0");
         

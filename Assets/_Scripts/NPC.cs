@@ -174,9 +174,9 @@ public class NPC : Mover
     }
 
 
-    public void SetDestinationNPC()
+    public void SetDestinationNPC(Transform transform)
     {
-        agent.SetDestination(Vector3.up);
+        agent.SetDestination(transform.position);
     }
 
 

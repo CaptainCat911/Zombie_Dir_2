@@ -26,15 +26,28 @@ public class AmmoPack : MonoBehaviour
     int weaponNumber;                       // переменная для выбора оружия
 
     // Стоимость патронов
-    public int pistolAmmoSouls;
+    public int ammoSoulsPistol;
+    public int ammoSoulsAR;
+    public int ammoSoulsShotgun;
+    public int ammoSoulsRevolver;
+    public int ammoSoulsSvd;
+    public int ammoSoulsPulemet;
+    public int ammoSoulsHp;
+    public int ammoSoulsGranate;
 
     // Стоимость оружия
-    public int aRWeaponSouls;
-    public int shotgunWeaponSouls;
+    public int WeaponSoulsAR;
+    public int WeaponSoulsShotgun;
+    public int WeaponSoulsRevolver;
+    public int WeaponSoulsSVD;
+    public int WeaponSoulsPulemet;
 
     // Оружие экипировано
-    bool AR;
-    bool Shotgun;
+    bool aR;
+    bool shotgun;
+    bool revolver;
+    bool svd;
+    bool pulemet;
 
 
 
@@ -49,10 +62,10 @@ public class AmmoPack : MonoBehaviour
         switch (ammoType)
         {
             case "9":
-                if (souls >= pistolAmmoSouls)
+                if (souls >= ammoSoulsPistol)
                 {
-                    allAmmo_9 += 50;
-                    souls -= pistolAmmoSouls;
+                    allAmmo_9 += 40;
+                    souls -= ammoSoulsPistol;
                 }
                 else
                 {
@@ -61,32 +74,108 @@ public class AmmoPack : MonoBehaviour
                 break;
 
             case "5.56":
-                allAmmo_5_56 += 100;                
+                if (souls >= ammoSoulsAR)
+                {
+                    allAmmo_5_56 += 100;
+                    souls -= ammoSoulsAR;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+                break;
+
+
+            case "0.12":
+                if (souls >= ammoSoulsShotgun)
+                {
+                    allAmmo_0_12 += 52;
+                    souls -= ammoSoulsShotgun;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
                 break;
 
             case "0.357":
-                allAmmo_0_357 += 36;                
+                if (souls >= ammoSoulsRevolver)
+                {
+                    allAmmo_0_357 += 36;
+                    souls -= ammoSoulsRevolver;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
                 break;
 
-/*            case "0.12":
-                playerAmmo.allAmmo_0_12 += ammoSize;
-                playerAmmo.message = "+ патроны дробовик";
-                break;
-            case "7.62":
-                playerAmmo.allAmmo_7_62 += ammoSize;
-                playerAmmo.message = "+ патроны пулемет";
-                break;
             case "0.50":
-                playerAmmo.allAmmo_0_50 += ammoSize;
-                playerAmmo.message = "+ патроны СВД";
+                if (souls >= ammoSoulsSvd)
+                {
+                    allAmmo_0_50 += 40;
+                    souls -= ammoSoulsSvd;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
                 break;
-            case "granate":
-                playerAmmo.message = "+ гранаты";
-                playerAmmo.granate += ammoSize;
-                break;*/
-            case "HPBox":                
-                HPBox += 1;
+
+            case "7.62":
+                if (souls >= ammoSoulsPulemet)
+                {
+                    allAmmo_7_62 += 150;
+                    souls -= ammoSoulsPulemet;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
                 break;
+
+            case "hp":
+                if (souls >= ammoSoulsHp)
+                {
+                    HPBox += 1;
+                    souls -= ammoSoulsHp;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+                break;
+
+            case "Granate":
+                if (souls >= ammoSoulsGranate)
+                {
+                    granate += 1;
+                    souls -= ammoSoulsGranate;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+                break;
+
+
+
+                /*            case "0.12":
+                                playerAmmo.allAmmo_0_12 += ammoSize;
+                                playerAmmo.message = "+ патроны дробовик";
+                                break;
+                            case "7.62":
+                                playerAmmo.allAmmo_7_62 += ammoSize;
+                                playerAmmo.message = "+ патроны пулемет";
+                                break;
+                            case "0.50":
+                                playerAmmo.allAmmo_0_50 += ammoSize;
+                                playerAmmo.message = "+ патроны СВД";
+                                break;
+                            case "granate":
+                                playerAmmo.message = "+ гранаты";
+                                playerAmmo.granate += ammoSize;
+                                break;*/
         }
     }
 
@@ -95,16 +184,16 @@ public class AmmoPack : MonoBehaviour
         switch (weapon)
         {
             case "AR":
-                if (AR)                                 // если винтовка уже есть
+                if (aR)                                 // если винтовка уже есть
                 {
                     SendToMessage("Уже куплено !");
                     return;
                 }
-                if (souls >= aRWeaponSouls && !AR)      // если душ больше чем цена оружия и его нет
+                if (souls >= WeaponSoulsAR && !aR)      // если душ больше чем цена оружия и его нет
                 {
                     weaponNumber = 0;                   // номер префаба
-                    AR = true;                          // оружие купили
-                    souls -= aRWeaponSouls;             // забираем цену оружия из общих душ
+                    aR = true;                          // оружие купили
+                    souls -= WeaponSoulsAR;             // забираем цену оружия из общих душ
                 }
                 else
                 {
@@ -114,16 +203,73 @@ public class AmmoPack : MonoBehaviour
                 break;
 
             case "Shotgun":
-                if (Shotgun)
+                if (shotgun)
                 {
                     SendToMessage("Уже куплено !");
                     return;
                 }
-                if (souls >= shotgunWeaponSouls && !Shotgun)
+                if (souls >= WeaponSoulsShotgun && !shotgun)
                 {
                     weaponNumber = 1;
-                    Shotgun = true;
-                    souls -= shotgunWeaponSouls;
+                    shotgun = true;
+                    souls -= WeaponSoulsShotgun;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                    return;
+                }
+                break;
+
+            case "Revolver":
+                if (revolver)
+                {
+                    SendToMessage("Уже куплено !");
+                    return;
+                }
+                if (souls >= WeaponSoulsRevolver && !revolver)
+                {
+                    weaponNumber = 2;
+                    revolver = true;
+                    souls -= WeaponSoulsRevolver;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                    return;
+                }
+                break;
+
+            case "SVD":
+                if (svd)
+                {
+                    SendToMessage("Уже куплено !");
+                    return;
+                }
+                if (souls >= WeaponSoulsSVD && !svd)
+                {
+                    weaponNumber = 3;
+                    svd = true;
+                    souls -= WeaponSoulsSVD;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                    return;
+                }
+                break;
+
+            case "Pulemet":
+                if (pulemet)
+                {
+                    SendToMessage("Уже куплено !");
+                    return;
+                }
+                if (souls >= WeaponSoulsPulemet && !pulemet)
+                {
+                    weaponNumber = 4;
+                    pulemet = true;
+                    souls -= WeaponSoulsPulemet;
                 }
                 else
                 {

@@ -52,10 +52,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject spawnPointsGameobject;    // для управления спавнерами (ссылка на группу спавнеров)
     private EnemySpawnPoint[] spawnPoints;      // тоже 
+    public Transform[] transformSpawnPoints;    // для точек назначения НПС
 
-    public int startDiffDelay_1;                  // начальная задержка перед спауном зомби
-    public int startDiffDelay_2;                  // начальная задержка перед спауном зомби
-    public int startDiffDelay_3;                  // начальная задержка перед спауном зомби
+    public int startDiffDelay_1;                // начальная задержка перед спауном зомби
+    public int startDiffDelay_2;                // начальная задержка перед спауном зомби
+    public int startDiffDelay_3;                // начальная задержка перед спауном зомби
 
     public int finalDelay = 60;                  // задержка перед завершением финального ивента (сколько он длится)
     public bool pultActive = false;              // активация пульта
@@ -109,14 +110,14 @@ public class GameManager : MonoBehaviour
 
     public bool survZombie;                     // зомби для режима выживания (триггер = 1000)
 
+    [HideInInspector]
     public DiffManager diffManager;             // ссылка на диффменеджер
 
     public bool enemyAllAmmo;                   // для всех видов патронов (выживание)
 
     public GameObject[] menus;                  // все меню
 
-
-
+    public NPC npc;                             // ссылка на НПС
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -146,9 +147,13 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         diffManager = GetComponent<DiffManager>();
-
         dialogueTrig = GetComponent<DialogueTrigger>();                                     // Ссылка на диалог
-        spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>(); 
+        spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>();
+        transformSpawnPoints = spawnPointsGameobject.GetComponentsInChildren<Transform>();
+
+        
+
+
         if (mainScene)
             StartCoroutine(StartDiffCor());                                                 // начальная сложность, задержка
         if (test)
@@ -470,15 +475,15 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.maxZombie = 30;
 
-                    spawnPoint.enemyNumberSpawn = 2;
+                    spawnPoint.enemyNumberSpawn = 1;
 
                     spawnPoint.cooldown = 5;
 
                     spawnPoint.mediumZombieChanse = 10;
 
-                    spawnPoint.strongZombieChanse = 0;
+                    spawnPoint.strongZombieChanse = 1;
 
-                    enemyNumberDiff = 50;
+                    enemyNumberDiff = 40;
                 }
                 break;
 
@@ -488,7 +493,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.maxZombie = 40;
 
-                    spawnPoint.enemyNumberSpawn = 3;
+                    spawnPoint.enemyNumberSpawn = 2;
 
                     spawnPoint.cooldown = 4;
 
@@ -514,7 +519,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 6;
 
-                    enemyNumberDiff = 70;
+                    enemyNumberDiff = 60;
                 }
                 break;
 
@@ -532,7 +537,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 10;
 
-                    enemyNumberDiff = 70;
+                    enemyNumberDiff = 60;
                 }
                 break;
 
@@ -554,8 +559,81 @@ public class GameManager : MonoBehaviour
                 }
                 break;
 
-
             case 7:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 50;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 40;
+
+                    spawnPoint.strongZombieChanse = 20;
+
+                    enemyNumberDiff = 70;
+                }
+                break;
+
+            case 8:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 50;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 50;
+
+                    spawnPoint.strongZombieChanse = 25;
+
+                    enemyNumberDiff = 70;
+                }
+                break;
+
+            case 9:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 50;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 70;
+
+                    spawnPoint.strongZombieChanse = 30;
+
+                    enemyNumberDiff = 80;
+                }
+                break;
+
+            case 10:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 50;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 80;
+
+                    spawnPoint.strongZombieChanse = 50;
+
+                    enemyNumberDiff = 90;
+                }
+                break;
+
+
+
+            case 11:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
 
@@ -569,11 +647,10 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 100;
 
-                    enemyNumberDiff = 50;
+                    enemyNumberDiff = 100;
                 }
                 break;
-        }
-        
+        }        
     }
 
 
