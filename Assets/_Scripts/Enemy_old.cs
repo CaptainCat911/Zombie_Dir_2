@@ -221,10 +221,7 @@ public class Enemy_old : Mover
         {
             DeathFinal();
         }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            
-        }
+
 
         if (currentHealth < 50)
         {

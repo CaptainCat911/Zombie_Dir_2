@@ -14,6 +14,6 @@ public class AudioListenerPlayer : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = new Vector3(lookAt.position.x, lookAt.position.y, lookAt.position.z);
+        transform.position = new Vector3(lookAt.position.x, lookAt.position.y + 1, lookAt.position.z);
     }
 }

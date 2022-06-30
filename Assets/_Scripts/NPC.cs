@@ -175,6 +175,14 @@ public class NPC : Mover
         anim.SetFloat("Speed", agent.velocity.magnitude / maxSpeed);
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            SetDestinationNPC(playerTransform.position, false);
+        }
+    }
+
 
     public void SetDestinationNPC(Vector3 position, bool warp)
     {
