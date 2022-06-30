@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     public bool zombieFreeWalk;                 // зомби идут в рандомном направлении
 
-    public int enemyNumberDiff;                 // кол-во зомби для режима выживания
+    public int zombieToKillWaveGM;              // кол-во зомби для режима выживания
 
     public bool survZombie;                     // зомби для режима выживания (триггер = 1000)
 
@@ -447,7 +447,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 0;
 
-                    enemyNumberDiff = 1000;
+                    zombieToKillWaveGM = 999;
                 }
                 break;
 
@@ -465,7 +465,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 0;
 
-                    enemyNumberDiff = 30;
+                    zombieToKillWaveGM = 30;
                 }
                 break;
 
@@ -483,7 +483,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 1;
 
-                    enemyNumberDiff = 40;
+                    zombieToKillWaveGM = 40;
                 }
                 break;
 
@@ -501,7 +501,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 3;
 
-                    enemyNumberDiff = 50;
+                    zombieToKillWaveGM = 50;
                 }
                 break;
 
@@ -519,7 +519,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 6;
 
-                    enemyNumberDiff = 60;
+                    zombieToKillWaveGM = 60;
                 }
                 break;
 
@@ -537,7 +537,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 10;
 
-                    enemyNumberDiff = 60;
+                    zombieToKillWaveGM = 60;
                 }
                 break;
 
@@ -555,7 +555,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 15;
 
-                    enemyNumberDiff = 70;
+                    zombieToKillWaveGM = 70;
                 }
                 break;
 
@@ -573,7 +573,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 20;
 
-                    enemyNumberDiff = 70;
+                    zombieToKillWaveGM = 70;
                 }
                 break;
 
@@ -591,7 +591,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 25;
 
-                    enemyNumberDiff = 70;
+                    zombieToKillWaveGM = 70;
                 }
                 break;
 
@@ -609,7 +609,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 30;
 
-                    enemyNumberDiff = 80;
+                    zombieToKillWaveGM = 80;
                 }
                 break;
 
@@ -627,7 +627,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 50;
 
-                    enemyNumberDiff = 90;
+                    zombieToKillWaveGM = 90;
                 }
                 break;
 
@@ -647,7 +647,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 100;
 
-                    enemyNumberDiff = 100;
+                    zombieToKillWaveGM = 100;
                 }
                 break;
         }        

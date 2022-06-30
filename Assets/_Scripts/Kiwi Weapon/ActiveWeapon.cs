@@ -514,7 +514,7 @@ public class ActiveWeapon : MonoBehaviour
                     origin = transform.position,
                     pushForce = pushForce
                 };
-                //enemy.TakeHitAxeBlood();                            // эффект крови
+                //enemy.TakeHitAxeBlood();                                          // эффект крови
                 if (ammoBox)
                 {
                     ammoBox.SendMessage("ReceiveDamage", dmg);
@@ -532,7 +532,7 @@ public class ActiveWeapon : MonoBehaviour
                 if (npc)
                 {
                     npc.OpenMagazine();
-                    Debug.Log("Use!");
+                    //Debug.Log("Use!");
                 }
             }
         }

@@ -55,6 +55,7 @@ public class NPC : Mover
 
     public GameObject magazine;             // ссылка на магазин (UI)
     public bool magazineOpen;               // магазин открыт
+ 
 
 
 
@@ -81,7 +82,8 @@ public class NPC : Mover
         hitbox = GetComponentInChildren<EnemyHitbox>();
         //capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         selfScript = GetComponent<Enemy_old>();      
-        tempAgentSpeed = agent.speed; 
+        tempAgentSpeed = agent.speed;
+
 
     }
 
@@ -174,10 +176,13 @@ public class NPC : Mover
     }
 
 
-    public void SetDestinationNPC(Transform transform)
+    public void SetDestinationNPC(Vector3 position, bool warp)
     {
-        agent.SetDestination(transform.position);
-    }
+        if (warp)
+            agent.Warp(position);
+        else
+            agent.SetDestination(position);
+    }   
 
 
     // Магазин
