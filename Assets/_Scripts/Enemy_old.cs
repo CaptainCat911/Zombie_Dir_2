@@ -17,6 +17,8 @@ public class Enemy_old : Mover
     public bool strongZombie = false;       // сильный зомби
     public bool agony = true;               // сильный зомби безумен
 
+    public bool darkZombie;                 // темный (усилиненный) зомби
+
     public bool simpleZombie = false;       // обычный зомби (пока нигде не использую)
     public bool mediumZombie = false;       // средний зомби (пока нигде не использую)
     public bool agonyZombie = false;        // зомби в агонии
@@ -78,6 +80,7 @@ public class Enemy_old : Mover
 
     bool direction;                         // для рандомного направления зомби
 
+    public GameObject darkEffect;           // эффект тьмы
 
     
 
@@ -136,6 +139,13 @@ public class Enemy_old : Mover
             hitbox.cooldown = 2.5f;                 // кд атаки
             hitbox.attackSpeed = 1.3f;              // скорость атаки
             maxHealth = 80;
+            if (darkZombie)
+            {
+                maxHealth = 700;
+                cooldownSlow = 0;
+                darkEffect.SetActive(true);
+            }
+
             currentHealth = maxHealth;
 
             agent.speed = 0.5f;                     // скорость передвижения
@@ -162,6 +172,12 @@ public class Enemy_old : Mover
             hitbox.attackSpeed = 1.6f;
             agent.speed = 2f;
             maxHealth = 120;
+            if (darkZombie)
+            {
+                maxHealth = 1000;
+                cooldownSlow = 0.1f;
+                darkEffect.SetActive(true);
+            }
             currentHealth = maxHealth;
             //tempCapColl.SetActive(false);
         }
@@ -175,6 +191,12 @@ public class Enemy_old : Mover
             //int randomSpeedStrong = Random.Range(1, 8);
             agent.speed = 5f;
             maxHealth = 200;
+            if (darkZombie)
+            {
+                maxHealth = 1200;
+                cooldownSlow = 0.2f;
+                darkEffect.SetActive(true);
+            }
             currentHealth = maxHealth;            
             if (agony)                                      // они агонируют?
             {
@@ -189,11 +211,7 @@ public class Enemy_old : Mover
                     anim.SetFloat("Agony_type", 1);
                 //tempCapColl.SetActive(true);
             }
-/*            if (false)
-            {
-                tempCapColl.SetActive(false);
-            }*/
-        }
+        }        
 
         tempAgentSpeed = agent.speed;
 
@@ -203,14 +221,15 @@ public class Enemy_old : Mover
         {
             ammoBack.SetActive(true);
         }
-        if (randomAmmo == 0)
+        if (randomAmmo == 0)                                // шанс выпадения аптечки 1% 
         {
-            medhpBack.SetActive(true);
+            if (Random.Range(0, 2) > 0)                     // шанс выпадения аптечки 0.5% 
+            {
+                medhpBack.SetActive(true);
+            }
         }
 
-        tempCapColl.SetActive(false);   
-        
-
+        tempCapColl.SetActive(false);          
     }
 
 
@@ -505,14 +524,14 @@ public class Enemy_old : Mover
             // выпадение патронов        
         if (randomAmmo >= ammoChanse)
         {            
-            if (!GameManager.instance.questAmmo)
+            if (!GameManager.instance.questAmmo)                // если не начали квест
             {
-                ndx = Random.Range(0, 2);
+                ndx = Random.Range(0, 2);                       // патроны только пистолет и ар 
             }
 
-            if (GameManager.instance.questAmmo || GameManager.instance.enemyAllAmmo)
+            if (GameManager.instance.questAmmo || GameManager.instance.enemyAllAmmo)    // есил взяли квест или все патроны у зомби
             {
-                ndx = Random.Range(0, ammos.Length);
+                ndx = Random.Range(0, ammos.Length);            // все патроны
             }
 
             GameObject go = Instantiate(ammos[ndx]);        // Создаём префаб патронов
@@ -521,12 +540,15 @@ public class Enemy_old : Mover
             ammoBack.SetActive(false);
         }
 
-        if (randomAmmo == 0)
+        if (randomAmmo == 0)                                // шанс выпадения аптечки 1% 
         {
-            GameObject go = Instantiate(medHP);             // Создаём префаб аптечки
-            //go.transform.SetParent(transform, false);     // Назначаем этот спавнер родителем
-            go.transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
-            medhpBack.SetActive(false);
+            if (Random.Range(0, 2) > 0)                     // шанс выпадения аптечки 0.5% 
+            {
+                GameObject go = Instantiate(medHP);             // Создаём префаб аптечки
+                //go.transform.SetParent(transform, false);     // Назначаем этот спавнер родителем
+                go.transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+                medhpBack.SetActive(false);
+            }
         }
 
         int random = Random.Range(0, 2);
@@ -539,10 +561,12 @@ public class Enemy_old : Mover
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);
 
+
         audioSourses.idle.Stop();
         
         audioSourses.death.Play();                  // звук
 
+        //darkEffect.SetActive(false);                // отключаем темный эффект
         mapIcon.SetActive(false);                   // убираем иконку
 
         selfScript.enabled = false;
@@ -552,6 +576,7 @@ public class Enemy_old : Mover
         capsuleCollider.enabled = false;
         capsuleColliderLeftARm.enabled = false;
         capsuleColliderRightArm.enabled = false;
+
 
         dead = true;
     }
@@ -569,8 +594,7 @@ public class Enemy_old : Mover
     public void Kill()
     {
         if (!dontCount)
-            GameManager.instance.enemyCount -= 1;
-        mapIcon.SetActive(false);
+            GameManager.instance.enemyCount -= 1;        
         Destroy(gameObject);
     }
 
@@ -594,7 +618,8 @@ public class Enemy_old : Mover
         capsuleCollider.enabled = false;
         capsuleColliderLeftARm.enabled = false;
         capsuleColliderRightArm.enabled = false;
-        mapIcon.SetActive(false);
+        //darkEffect.SetActive(false);                // отключаем темный эффект
+        mapIcon.SetActive(false);                   // убираем иконку
         agent.ResetPath();
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);

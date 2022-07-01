@@ -465,7 +465,9 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 0;
 
-                    zombieToKillWaveGM = 30;
+                    spawnPoint.darkZombieChanse = 0;
+
+                    zombieToKillWaveGM = 40;
                 }
                 break;
 
@@ -519,6 +521,8 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 6;
 
+                    spawnPoint.darkZombieChanse = 2;
+
                     zombieToKillWaveGM = 60;
                 }
                 break;
@@ -535,7 +539,9 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.mediumZombieChanse = 20;
 
-                    spawnPoint.strongZombieChanse = 10;
+                    spawnPoint.strongZombieChanse = 5;
+
+                    spawnPoint.darkZombieChanse = 5;
 
                     zombieToKillWaveGM = 60;
                 }
@@ -551,11 +557,13 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.cooldown = 2;
 
-                    spawnPoint.mediumZombieChanse = 30;
+                    spawnPoint.mediumZombieChanse = 25;
 
-                    spawnPoint.strongZombieChanse = 15;
+                    spawnPoint.strongZombieChanse = 5;
 
-                    zombieToKillWaveGM = 70;
+                    spawnPoint.darkZombieChanse = 10;
+
+                    zombieToKillWaveGM = 60;
                 }
                 break;
 
@@ -569,13 +577,17 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.cooldown = 2;
 
-                    spawnPoint.mediumZombieChanse = 40;
+                    spawnPoint.mediumZombieChanse = 25;
 
-                    spawnPoint.strongZombieChanse = 20;
+                    spawnPoint.strongZombieChanse = 10;
 
-                    zombieToKillWaveGM = 70;
+                    spawnPoint.darkZombieChanse = 10;
+
+                    zombieToKillWaveGM = 60;
                 }
                 break;
+
+
 
             case 8:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
@@ -587,9 +599,11 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.cooldown = 2;
 
-                    spawnPoint.mediumZombieChanse = 50;
+                    spawnPoint.mediumZombieChanse = 30;
 
-                    spawnPoint.strongZombieChanse = 25;
+                    spawnPoint.strongZombieChanse = 15;
+
+                    spawnPoint.darkZombieChanse = 5;
 
                     zombieToKillWaveGM = 70;
                 }
@@ -605,11 +619,13 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.cooldown = 2;
 
-                    spawnPoint.mediumZombieChanse = 70;
+                    spawnPoint.mediumZombieChanse = 40;
 
-                    spawnPoint.strongZombieChanse = 30;
+                    spawnPoint.strongZombieChanse = 20;
 
-                    zombieToKillWaveGM = 80;
+                    spawnPoint.darkZombieChanse = 7;
+
+                    zombieToKillWaveGM = 70;
                 }
                 break;
 
@@ -623,9 +639,51 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.cooldown = 2;
 
+                    spawnPoint.mediumZombieChanse = 50;
+
+                    spawnPoint.strongZombieChanse = 25;
+
+                    spawnPoint.darkZombieChanse = 5;
+
+                    zombieToKillWaveGM = 70;
+                }
+                break;
+
+            case 11:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 50;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 70;
+
+                    spawnPoint.strongZombieChanse = 30;
+
+                    spawnPoint.darkZombieChanse = 5;
+
+                    zombieToKillWaveGM = 80;
+                }
+                break;
+
+            case 12:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 50;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
                     spawnPoint.mediumZombieChanse = 80;
 
                     spawnPoint.strongZombieChanse = 50;
+
+                    spawnPoint.darkZombieChanse = 5;
 
                     zombieToKillWaveGM = 90;
                 }
@@ -633,7 +691,7 @@ public class GameManager : MonoBehaviour
 
 
 
-            case 11:
+            case 13:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
 
@@ -646,6 +704,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.mediumZombieChanse = 0;
 
                     spawnPoint.strongZombieChanse = 100;
+
+                    spawnPoint.darkZombieChanse = 5;
 
                     zombieToKillWaveGM = 100;
                 }

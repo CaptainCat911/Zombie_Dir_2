@@ -12,7 +12,7 @@ public class EnemySpawnPoint : MonoBehaviour
     public bool active = false;             // активация этого спавнера
     public int maxZombie = 50;              // максимальное кол-во зомби 
     public bool fewZombiesReady = true;     // для вызова нескольких зомби при активации
-    public int enemyNumberSpawn = 1;            // кол-во зомби при активации
+    public int enemyNumberSpawn = 1;        // кол-во зомби при активации
     public float cooldown = 1f;             // перезарядка спауна
     private float lastSpawn;
 
@@ -23,6 +23,7 @@ public class EnemySpawnPoint : MonoBehaviour
 
     public int strongZombieChanse;          // шанс сильного зомби
     public int mediumZombieChanse;          // шанс сильного зомби
+    public int darkZombieChanse;            // шанс темного зомби
         
 
 
@@ -66,31 +67,32 @@ public class EnemySpawnPoint : MonoBehaviour
 
         //Debug.Log(GameManager.instance.enemyCount);        
         int ndx = Random.Range(0, prefabEnemies.Length);
-        GameObject go = Instantiate(prefabEnemies[ndx]);    // Создаём префаб   
+        GameObject go = Instantiate(prefabEnemies[ndx]);            // Создаём префаб   
 
-        go.transform.SetParent(transform, false);           // Назначаем этот спавнер родителем
-        agent = go.GetComponent<NavMeshAgent>();            // Находим НавМешАгент
-        agent.Warp(transform.position);                     // Перемещаем префаб к спавнеру
+        go.transform.SetParent(transform, false);                   // Назначаем этот спавнер родителем
+        agent = go.GetComponent<NavMeshAgent>();                    // Находим НавМешАгент
+        agent.Warp(transform.position);                             // Перемещаем префаб к спавнеру
+        Enemy_old enemy = go.GetComponent<Enemy_old>();             // находим скрипт
 
+        int randomDark = Random.Range(1, 101);                      // шанс темного зомби
+        if (randomDark <= darkZombieChanse)
+        {
+            enemy.darkZombie = true;
+            //enemy.hitbox.damage = 12;
+        }
 
-        int randomMedium = Random.Range(1, 101);
-
+        int randomMedium = Random.Range(1, 101);                    // шанс среднего зомби
         if (randomMedium <= mediumZombieChanse || mediumZombie)
         {
-            Enemy_old enemy = go.GetComponent<Enemy_old>();
-            enemy.runZombie = true;
-            enemy.agony = false;
+            enemy.runZombie = true;            
         }
 
-        int randomStrong = Random.Range(1, 101);
-
+        int randomStrong = Random.Range(1, 101);                    // шанс сильного зомби
         if (randomStrong <= strongZombieChanse || strongZombie)
-        {
-            Enemy_old enemy = go.GetComponent<Enemy_old>();
-            enemy.strongZombie = true;
-            enemy.agony = false;            
+        {            
+            enemy.strongZombie = true;                        
         }
-
+        enemy.agony = false;
         GameManager.instance.enemyCount += 1;    
 
         // Снова вызвать SpawnEnemy
