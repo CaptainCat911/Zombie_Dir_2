@@ -55,6 +55,7 @@ public class NPC : Mover
 
     public GameObject magazine;             // ссылка на магазин (UI)
     public bool magazineOpen;               // магазин открыт
+    bool playerInRange;
  
 
 
@@ -67,7 +68,7 @@ public class NPC : Mover
     {
         base.Start();
 
-        mapIcon.SetActive(true);
+        //mapIcon.SetActive(true);
 
         audioSourses = GetComponentInChildren<AudioSourses>();
         audioPitch = Random.Range(0.8f, 1.2f);
@@ -83,8 +84,6 @@ public class NPC : Mover
         //capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         selfScript = GetComponent<Enemy_old>();      
         tempAgentSpeed = agent.speed;
-
-
     }
 
 
@@ -107,12 +106,31 @@ public class NPC : Mover
 
         // Is the player in range?
         else
-        {           
-            if (Vector3.Distance(playerTransform.position, transform.position) < triggerLenght)       // если дистанция до игрока < тригер дистанции
-            {                    
-                chasing = true;                                                                     // преследование включено 
+        {            
+            if (Vector3.Distance(playerTransform.position, transform.position) < triggerLenght)     // если дистанция до игрока < тригер дистанции
+            {
+                //chasing = true;                                                                   // преследование включено 
+                playerInRange = true;
                 //direction = false;
-               
+
+            }
+            else
+            {
+                playerInRange = false;
+            }
+
+            if (playerInRange && !GameManager.instance.diffManager.levelGo)
+            {
+                if (!GameManager.instance.diffManager.waveStarted)
+                {
+                    GameManager.instance.diffManager.start = true;
+                    GameManager.instance.diffManager.waveStarted = true;
+                }
+                FaceTarget();
+            }
+            else
+            {
+                //GameManager.instance.diffManager.start = false;
             }
 
             if (chasing)                                                                            // если преследуем
@@ -196,6 +214,7 @@ public class NPC : Mover
     // Магазин
     public void OpenMagazine()
     {        
+        FaceTarget();
         if (!magazineOpen)
         {
             magazine.SetActive(true);

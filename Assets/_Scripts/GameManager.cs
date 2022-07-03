@@ -85,14 +85,12 @@ public class GameManager : MonoBehaviour
     bool mapActive = false;                     // вкл/выкл карту
 
     public GameObject deathMenu;                // меню при поражении
-
     public GameObject pauseMenu;                // меню паузы
-
     bool startCinema = true;                    // для начального ролика
-
     public GameObject blackScreen;              // черный экран для начала игры
 
     public RaycastWeapon weaponPrefab;          // префаб пистолета, чтобы экипировать в начале
+    public RaycastWeapon weaponPrefabAxe;       // префаб топора, чтобы экипировать в начале
 
     public GameObject mapPlayerIcon;            // иконка игрока на карте
 
@@ -302,7 +300,7 @@ public class GameManager : MonoBehaviour
         blackScreen.SetActive(false);
         yield return new WaitForSeconds(11.5f);                 // задержка пока персонаж встаёт     
         dialogueTrig.TriggerDialogue(0);                        // показываем диалог
-        PauseWithDelay();                                                // паузу, чтобы было время почитать
+        PauseWithDelay();                                       // паузу, чтобы было время почитать
         yield return new WaitForSeconds(1f);
         StartCoroutine(ActionStart());
 
@@ -317,8 +315,10 @@ public class GameManager : MonoBehaviour
         bars.SetActive(true);                                   // показываем бары
         startCinema = false;                                    // ролик завершён
 
-        RaycastWeapon newWeapon = Instantiate(weaponPrefab);
+        RaycastWeapon newWeapon = Instantiate(weaponPrefab);        
         player.activeWeapon.GetWeaponUp(newWeapon);
+      
+
     }
 
 
@@ -428,9 +428,7 @@ public class GameManager : MonoBehaviour
 
 
     public void SetFinalDifficultyNumber(int diffNumber)                        // сложность для режима выживания
-    {
-        
-
+    {       
         switch (diffNumber)
         {
             case 0:
@@ -467,7 +465,9 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.darkZombieChanse = 0;
 
-                    zombieToKillWaveGM = 40;
+                    zombieToKillWaveGM = 21;
+
+                    diffManager.positionNPC = new Vector3(290, 0, -171);
                 }
                 break;
 
@@ -485,7 +485,9 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 1;
 
-                    zombieToKillWaveGM = 40;
+                    zombieToKillWaveGM = 30;
+
+                    diffManager.positionNPC = new Vector3(190, 0, -140);
                 }
                 break;
 
@@ -503,7 +505,9 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.strongZombieChanse = 3;
 
-                    zombieToKillWaveGM = 50;
+                    zombieToKillWaveGM = 40;
+
+                    diffManager.positionNPC = new Vector3(56, 0, -112);
                 }
                 break;
 
@@ -523,7 +527,9 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.darkZombieChanse = 2;
 
-                    zombieToKillWaveGM = 60;
+                    zombieToKillWaveGM = 50;
+
+                    diffManager.positionNPC = new Vector3(-10, 0, -47);
                 }
                 break;
 
@@ -544,6 +550,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.darkZombieChanse = 5;
 
                     zombieToKillWaveGM = 60;
+
+                    diffManager.positionNPC = new Vector3(24, 0, -167);
                 }
                 break;
 
@@ -564,6 +572,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.darkZombieChanse = 10;
 
                     zombieToKillWaveGM = 60;
+
+                    diffManager.positionNPC = new Vector3(74, 0, -256);
                 }
                 break;
 
@@ -584,6 +594,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.darkZombieChanse = 10;
 
                     zombieToKillWaveGM = 60;
+
+                    diffManager.positionNPC = new Vector3(181, 0, -205);
                 }
                 break;
 
@@ -606,6 +618,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.darkZombieChanse = 5;
 
                     zombieToKillWaveGM = 70;
+
+                    diffManager.positionNPC = new Vector3(257, 0, -273);
                 }
                 break;
 
@@ -626,6 +640,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.darkZombieChanse = 7;
 
                     zombieToKillWaveGM = 70;
+
+                    diffManager.positionNPC = new Vector3(309, 0, -322);
                 }
                 break;
 
@@ -646,6 +662,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.darkZombieChanse = 5;
 
                     zombieToKillWaveGM = 70;
+
+                    diffManager.positionNPC = new Vector3(347, 0, -174);
                 }
                 break;
 
@@ -666,6 +684,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.darkZombieChanse = 5;
 
                     zombieToKillWaveGM = 80;
+
+                    diffManager.positionNPC = new Vector3(264, 0, -45);
                 }
                 break;
 
@@ -686,6 +706,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.darkZombieChanse = 5;
 
                     zombieToKillWaveGM = 90;
+
+                    diffManager.positionNPC = new Vector3(141, 0, -73);
                 }
                 break;
 
@@ -708,6 +730,8 @@ public class GameManager : MonoBehaviour
                     spawnPoint.darkZombieChanse = 5;
 
                     zombieToKillWaveGM = 100;
+
+                    //diffManager.positionNPC = new Vector3(162, 0, -170);
                 }
                 break;
         }        

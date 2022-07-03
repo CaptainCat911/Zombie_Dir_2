@@ -21,7 +21,7 @@ MonoBehaviour:
     x: -51
     y: -191
     width: 759
-    height: 2214
+    height: 2213
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1081,13 +1081,13 @@ VisualEffectResource:
         - m_ExpressionIndex: 2
           m_Value: 0
         - m_ExpressionIndex: 3
-          m_Value: 1
+          m_Value: 0.5
         - m_ExpressionIndex: 4
           m_Value: 0
         - m_ExpressionIndex: 5
           m_Value: 0
         - m_ExpressionIndex: 8
-          m_Value: 2
+          m_Value: 1
         - m_ExpressionIndex: 9
           m_Value: 5
         - m_ExpressionIndex: 10
@@ -1107,11 +1107,11 @@ VisualEffectResource:
         - m_ExpressionIndex: 18
           m_Value: 5
         - m_ExpressionIndex: 20
-          m_Value: 2
+          m_Value: 1.25
         - m_ExpressionIndex: 23
           m_Value: 8
         - m_ExpressionIndex: 29
-          m_Value: 2
+          m_Value: 3
         - m_ExpressionIndex: 30
           m_Value: 1
       m_Vector2f:
@@ -1146,32 +1146,32 @@ VisualEffectResource:
           m_Value:
             serializedVersion: 2
             key0: {r: 0, g: 0, b: 0, a: 0}
-            key1: {r: 0.6981132, g: 0, b: 0.03860316, a: 0.20784314}
-            key2: {r: 0, g: 0, b: 0, a: 0.17254902}
+            key1: {r: 0, g: 0, b: 0, a: 0.27450982}
+            key2: {r: 1, g: 0, b: 0, a: 0.5019608}
             key3: {r: 0, g: 0, b: 0, a: 1}
-            key4: {r: 0, g: 0, b: 0, a: 0}
+            key4: {r: 0, g: 0, b: 0, a: 1}
             key5: {r: 0, g: 0, b: 0, a: 0}
             key6: {r: 0, g: 0, b: 0, a: 0}
             key7: {r: 0, g: 0, b: 0, a: 0}
             ctime0: 6939
             ctime1: 31997
-            ctime2: 48188
-            ctime3: 65535
+            ctime2: 46838
+            ctime3: 53777
             ctime4: 0
             ctime5: 0
             ctime6: 0
             ctime7: 0
             atime0: 0
-            atime1: 5975
-            atime2: 24094
-            atime3: 40285
-            atime4: 64764
-            atime5: 0
+            atime1: 14649
+            atime2: 27371
+            atime3: 37779
+            atime4: 55705
+            atime5: 64764
             atime6: 0
             atime7: 0
             m_Mode: 0
             m_NumColorKeys: 4
-            m_NumAlphaKeys: 5
+            m_NumAlphaKeys: 6
       m_NamedObject:
         m_Array:
         - m_ExpressionIndex: 26
@@ -3303,7 +3303,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 2
+      m_SerializableObject: 3
     m_Space: 2147483647
   m_Property:
     name: B
@@ -3375,14 +3375,13 @@ MonoBehaviour:
   m_InputSlots:
   - {fileID: 8926484042661614626}
   - {fileID: 8926484042661614639}
-  - {fileID: 8926484042661614640}
   - {fileID: 8926484042661614641}
   - {fileID: 8926484042661614642}
   - {fileID: 8926484042661614643}
   - {fileID: 8926484042661614644}
   m_OutputSlots: []
   m_Disabled: 1
-  Mode: 1
+  Mode: 0
   NoiseType: 1
 --- !u!114 &8926484042661614626
 MonoBehaviour:
@@ -4526,7 +4525,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.10588235408067703},{"color":{"r":0.698113203048706,"g":0.0,"b":0.03860316053032875,"a":1.0},"time":0.4882429242134094},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.7353017330169678},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":0.2078431397676468,"time":0.09117265790700913},{"alpha":0.1725490242242813,"time":0.3676508665084839},{"alpha":1.0,"time":0.6147096753120422},{"alpha":0.0,"time":0.9882352948188782}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.10588235408067703},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.4882429242134094},{"color":{"r":1.0,"g":0.0,"b":0.0,"a":1.0},"time":0.7147020697593689},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.8205844163894653}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":0.27450981736183169,"time":0.2235294133424759},{"alpha":0.501960813999176,"time":0.41765469312667849},{"alpha":1.0,"time":0.5764706134796143},{"alpha":1.0,"time":0.8500038385391235},{"alpha":0.0,"time":0.9882352948188782}],"gradientMode":0}'
     m_Space: 2147483647
   m_Property:
     name: Color
@@ -5622,7 +5621,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Vector, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"vector":{"x":0.0,"y":1.0,"z":0.0}}'
+      m_SerializableObject: '{"vector":{"x":0.0,"y":0.5,"z":0.0}}'
     m_Space: 0
   m_Property:
     name: A
@@ -5804,7 +5803,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Vector, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"vector":{"x":0.0,"y":2.0,"z":0.0}}'
+      m_SerializableObject: '{"vector":{"x":0.0,"y":1.0,"z":0.0}}'
     m_Space: 0
   m_Property:
     name: B
@@ -6135,7 +6134,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 2
+      m_SerializableObject: 1.25
     m_Space: 2147483647
   m_Property:
     name: Size

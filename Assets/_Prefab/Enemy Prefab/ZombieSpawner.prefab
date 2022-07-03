@@ -75,7 +75,10 @@ MonoBehaviour:
   cooldown: 0
   radius: 17
   strongZombie: 0
+  mediumZombie: 0
   strongZombieChanse: 0
+  mediumZombieChanse: 0
+  darkZombieChanse: 0
 --- !u!1 &3515902751393021049
 GameObject:
   m_ObjectHideFlags: 0

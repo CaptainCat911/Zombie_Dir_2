@@ -562,8 +562,7 @@ public class Enemy_old : Mover
         Destroy(gameObject, timeAfterDeath);
 
 
-        audioSourses.idle.Stop();
-        
+        audioSourses.idle.Stop();                   // отключаем шипение зомби        
         audioSourses.death.Play();                  // звук
 
         //darkEffect.SetActive(false);                // отключаем темный эффект
@@ -622,6 +621,8 @@ public class Enemy_old : Mover
         mapIcon.SetActive(false);                   // убираем иконку
         agent.ResetPath();
         Invoke("NavMeshDisable", 2);
+        audioSourses.idle.Stop();                   // отключаем шипение зомби        
+        audioSourses.death.Play();                  // звук
         Destroy(gameObject, timeAfterDeath);
         selfScript.enabled = false;        
     }
