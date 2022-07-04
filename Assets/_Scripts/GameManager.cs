@@ -117,6 +117,8 @@ public class GameManager : MonoBehaviour
 
     public NPC npc;                             // ссылка на НПС
 
+    public int delayUp;                         // задержка когда встаёт (для меин сцены 11,5 сек)
+
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
@@ -159,7 +161,7 @@ public class GameManager : MonoBehaviour
         if (!test)
         {
             playerStop = true;                                                              // забираем контроль
-            StartCoroutine(DialogePause());                                                 // начальный диалог 
+            StartCoroutine(DialogePause(delayUp));                                                 // начальный диалог 
         }
         blackScreen.SetActive(true);                                                        // включаем черный экран (на ~полсекунды)
         tempCam.SetActive(true);                                                            // для карты
@@ -294,11 +296,11 @@ public class GameManager : MonoBehaviour
     }
     
 
-    IEnumerator DialogePause()                                  // начальный ролик и настройки
+    IEnumerator DialogePause(int delay)                                  // начальный ролик и настройки
     {
         yield return new WaitForSeconds(1f);
         blackScreen.SetActive(false);
-        yield return new WaitForSeconds(11.5f);                 // задержка пока персонаж встаёт     
+        yield return new WaitForSeconds(delay);                 // задержка пока персонаж встаёт     
         dialogueTrig.TriggerDialogue(0);                        // показываем диалог
         PauseWithDelay();                                       // паузу, чтобы было время почитать
         yield return new WaitForSeconds(1f);
@@ -411,7 +413,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetNullDifficulty()                         // сложность обычных спавнеров для финала
+    public void SetNullDifficulty()                                     // сложность обычных спавнеров для финала
     {
         foreach (EnemySpawnPoint spawnPoint in spawnPoints)
         {
@@ -427,7 +429,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void SetFinalDifficultyNumber(int diffNumber)                        // сложность для режима выживания
+    public void SetFinalDifficultyNumber(int diffNumber)                // сложность для режима выживания
     {       
         switch (diffNumber)
         {
@@ -439,7 +441,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.enemyNumberSpawn = 0;
 
-                    spawnPoint.cooldown = 1000;
+                    spawnPoint.cooldown = 10;
 
                     spawnPoint.mediumZombieChanse = 0;
 

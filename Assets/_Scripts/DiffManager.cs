@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DiffManager : MonoBehaviour
 {
+    Player player;
     NPC npc;                                // сслыка на НПС
     public int waveNumber = 1;              // номер волны
     public int zombieToKillWave;            // кол-во зомби в волне, сколько убить надо
@@ -18,6 +19,7 @@ public class DiffManager : MonoBehaviour
 
     public void Start()
     {
+        player = GameManager.instance.player;
         npc = GameManager.instance.npc;
     }
 
@@ -34,16 +36,15 @@ public class DiffManager : MonoBehaviour
         }
 
         // Конец волны
-        if (GameManager.instance.enemyCount == 0 && levelStop)          // если убили всех врагов
+        if (GameManager.instance.enemyCount < 3 && levelStop)          // если убили всех врагов
         {
             messageReady = true;                                        // запускаем большое сообщение
             message = "Волна окончена !";                               // само сообщение
             waveNumber += 1;                                            // +1 к номеру волны
             GameManager.instance.enemyKilledCount = 0;                  // сбрасываем счётчик убийства зомби
-            npc.SetDestinationNPC(positionNPC, true);                   // портуем НПС к следующей точке
-            npc.mapIcon.SetActive(true);                                // включаем у НПС иконку на карте
             waveStarted = false;                                        // волна не стартовала
             levelStop = false;                                          // волна не остановлена
+            StartCoroutine(NPCdelay(2));
             //start = true;                                               // старт волны
         }
 
@@ -59,9 +60,12 @@ public class DiffManager : MonoBehaviour
 
     IEnumerator SafeTime(int diffLevel)
     {
-        yield return new WaitForSeconds(delayWave);                     // задержка перед волной
+        if (waveNumber == 1)
+            yield return new WaitForSeconds(10);                     // задержка перед волной
+        else
+            yield return new WaitForSeconds(delayWave);                     // задержка перед волной
         GameManager.instance.SetFinalDifficultyNumber(diffLevel);       // устанавливаем сложность
-        message = "Пошла волна №" + waveNumber;
+        message = "Пошла волна №" + waveNumber;                         
         messageReady = true;                                            
         yield return new WaitForSeconds(1);
         levelGo = true;                                                 // волна запущена
@@ -69,7 +73,27 @@ public class DiffManager : MonoBehaviour
         npc.SetDestinationNPC(positionNPC, false);                      // направляем НПС к точке 
         npc.mapIcon.SetActive(false);                                   // отключаем иконку НПС на карте
         //Debug.Log("Wave Go !");
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(5);                             
         npc.SetDestinationNPC(new Vector3(323, 0, -280), true);         // портуем НПС в домик
     }
+
+    IEnumerator NPCdelay(int delayNPC)
+    {
+        if (waveNumber == 2)
+        {
+            yield return new WaitForSeconds(7);
+            /*player.ammoPack.messageReady = true;
+            player.ammoPack.message = "Вы чувствуете странное присутствие";*/
+            GameManager.instance.dialogueTrig.TriggerDialogue(2);       // вызываем диалог торговца
+            GameManager.instance.PauseWithDelay();
+            npc.chasing = true;                                         // направляем НПС к игроку
+        }
+        else
+        {
+            yield return new WaitForSeconds(delayNPC);
+        }
+        npc.SetDestinationNPC(positionNPC, true);                   // портуем НПС к следующей точке
+        npc.mapIcon.SetActive(true);                                // включаем у НПС иконку на карте      
+    }
+
 }

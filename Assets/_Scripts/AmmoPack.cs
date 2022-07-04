@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AmmoPack : MonoBehaviour
 {
+    Player player;                          // сслыка на игрока
+    public RaycastWeapon[] weapons;         // массив оружий
+    int weaponNumber;                       // переменная для выбора оружия
+
     public int souls = 0;
 
     public int allAmmo_9 = 0;
@@ -21,9 +25,6 @@ public class AmmoPack : MonoBehaviour
     public string message;                  // сообщение при подборе патронов
     public bool messageReady;               // сообщение готово
 
-    public RaycastWeapon[] weapons;         // массив оружий
-    Player player;                          // сслыка на игрока
-    int weaponNumber;                       // переменная для выбора оружия
 
     // Стоимость патронов
     public int ammoSoulsPistol;
@@ -281,6 +282,20 @@ public class AmmoPack : MonoBehaviour
 
         RaycastWeapon newWeapon = Instantiate(weapons[weaponNumber]);
         player.activeWeapon.GetWeaponUp(newWeapon);
+    }
+
+    public void UpgradeWeapon(string weapon)
+    {
+        foreach (RaycastWeapon equipedWeapon in player.activeWeapon.equiped_weapons)
+        {
+            if (equipedWeapon.weaponName == weapon)
+            {
+                equipedWeapon.rayDamage = 0;
+            }
+        }
+
+
+        
     }
 
     public void SendToMessage(string messageToSend)

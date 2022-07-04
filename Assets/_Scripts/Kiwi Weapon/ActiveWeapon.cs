@@ -21,7 +21,7 @@ public class ActiveWeapon : MonoBehaviour
     public Animator playerAnim;
     //float animDuration = 0.3f;
 
-    RaycastWeapon[] equiped_weapons = new RaycastWeapon[3];     // массив оружий 
+    public RaycastWeapon[] equiped_weapons = new RaycastWeapon[3];     // массив оружий 
     public List<RaycastWeapon> listWeaponPistol;                // список пистолетов 
     public List<RaycastWeapon> listWeaponRifle;                 // список винтовок
     public List<RaycastWeapon> listWeaponHeavy;                 // список тяжелого оружия
@@ -87,13 +87,15 @@ public class ActiveWeapon : MonoBehaviour
 
         playerAnim = GetComponent<Animator>();
         ammoSphere = GetComponentInChildren<AmmoPickUpSphere>();
+        ammoPack = player.GetComponent<AmmoPack>();                             // ссылка на аммопак (инвентарь)
 
         animationEvents.MeleeAnimationEvent.AddListener(OnAnimationEventAttack);     // получаем ивенты от анимации атаки
         animationEvents.GranateAnimationEvent.AddListener(OnAnimationEventThrow);    // получаем ивенты от анимации броска гранаты
         animationEvents.HealAnimationEvent.AddListener(OnAnimationEventHeal);    // получаем ивенты от анимации лечения
         animationEvents.HealAnimationEvent.AddListener(OnAnimationEventUse);    // получаем ивенты от анимации лечения
 
-        ammoPack = player.GetComponent<AmmoPack>();
+        getAxe = true;                                                          // выдаем топор
+        axeBack.SetActive(true);                                                // топор активен
     }
 
     //---------------------------------------------------------------------------------------------\\

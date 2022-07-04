@@ -20,7 +20,7 @@ public class NPC : Mover
 
     private float maxSpeed = 4f;            // максимальная скорость (не нужна наверное)
     //private float speed;
-    private bool chasing;                   // преследование
+    public bool chasing;                   // преследование
     //private bool returning = false;
     private bool collidingWithPlayer;       // столкновение с игроком
 
@@ -55,7 +55,9 @@ public class NPC : Mover
 
     public GameObject magazine;             // ссылка на магазин (UI)
     public bool magazineOpen;               // магазин открыт
-    bool playerInRange;
+    bool playerInRange;                     // игрок в ренже нпс
+    public bool meatWithPlayer;             // встреча с игроком
+    public bool meatWithPlayerDone;         // встретился с игроком
  
 
 
@@ -110,7 +112,14 @@ public class NPC : Mover
             if (Vector3.Distance(playerTransform.position, transform.position) < triggerLenght)     // если дистанция до игрока < тригер дистанции
             {
                 //chasing = true;                                                                   // преследование включено 
-                playerInRange = true;
+                playerInRange = true;                       // игрок в ренже
+                if (!meatWithPlayerDone)                    // встреча с игроком
+                {
+                    meatWithPlayer = true;
+                    meatWithPlayerDone = true;
+                    GameManager.instance.dialogueTrig.TriggerDialogue(1);       // вызываем диалог торговца
+                    GameManager.instance.PauseWithDelay();
+                }
                 //direction = false;
 
             }
@@ -157,7 +166,7 @@ public class NPC : Mover
                     if (GameManager.instance.player.isAlive)
                     {
                         //hitbox.Attack();                                                            // АТАКУЕМ                      
-                        
+                        chasing = false;
                     }                               
                 }
             }            
