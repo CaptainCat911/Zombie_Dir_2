@@ -6,6 +6,8 @@ public class AmmoPack : MonoBehaviour
 {
     Player player;                          // сслыка на игрока
     public RaycastWeapon[] weapons;         // массив оружий
+             
+
     int weaponNumber;                       // переменная для выбора оружия
 
     public int souls = 0;
@@ -282,20 +284,22 @@ public class AmmoPack : MonoBehaviour
 
         RaycastWeapon newWeapon = Instantiate(weapons[weaponNumber]);
         player.activeWeapon.GetWeaponUp(newWeapon);
+        
     }
 
     public void UpgradeWeapon(string weapon)
-    {
-        foreach (RaycastWeapon equipedWeapon in player.activeWeapon.equiped_weapons)
+    {  
+        Debug.Log(player.activeWeapon.listWeapons);
+        foreach (RaycastWeapon w in player.activeWeapon.listWeapons)
         {
-            if (equipedWeapon.weaponName == weapon)
+            if (w.weaponName == weapon)
             {
-                equipedWeapon.rayDamage = 0;
+                w.rayDamage += 100;
+
+                Debug.Log(w.name);
+                Debug.Log("+ Damage");
             }
         }
-
-
-        
     }
 
     public void SendToMessage(string messageToSend)
@@ -303,5 +307,6 @@ public class AmmoPack : MonoBehaviour
         message = messageToSend;
         messageReady = true;
     }
+
 }
 

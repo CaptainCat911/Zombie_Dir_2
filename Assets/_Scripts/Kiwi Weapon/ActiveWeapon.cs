@@ -77,6 +77,8 @@ public class ActiveWeapon : MonoBehaviour
 
     public LayerMask layerAmmo;         // маска для патронов
 
+    public List<RaycastWeapon> listWeapons;
+
 
     //---------------------------------------------------------------------------------------------\\
 
@@ -398,8 +400,6 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-
-
     // Ивенты броска гранаты
     void OnAnimationEventThrow(string eventName)               
     {
@@ -576,11 +576,12 @@ public class ActiveWeapon : MonoBehaviour
             Equip(newWeapon);
         }
 
-/*        if (newWeapon.indexNumberWeapon == 4)       // Топор
-        {
-            listWeaponMelee.Add(newWeapon);
-            Equip(newWeapon);
-        }*/
+        listWeapons.Add(newWeapon);
+        /*        if (newWeapon.indexNumberWeapon == 4)       // Топор
+                {
+                    listWeaponMelee.Add(newWeapon);
+                    Equip(newWeapon);
+                }*/
     }
 
 
