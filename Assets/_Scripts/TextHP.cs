@@ -13,6 +13,7 @@ public class TextHP : MonoBehaviour
     public Text soulsText;                  // кол-во душ
     public Text soulsTextMagazine;                  // кол-во душ для магазина
     public Text Hp;                         // здоровье
+    public Text armor;                      // броня
     public Text allBulletsText;             // всего патронов
     public Text currentBulletsText;         // патронов в обойме
     public Text enemyCountText;             // сколько зомби на карте
@@ -23,7 +24,7 @@ public class TextHP : MonoBehaviour
     public Text MedBoxText;                 // кол-во аптечек
     public Text messageText;                // сообщение справа (при подъеме патронов)
     public Text bigMessageText;             // большое сообщение (волна!)
-    public Text WaveText;                    // волна №
+    public Text WaveText;                   // волна №
 
     public ActiveWeapon activeWeapon;
     RaycastWeapon weapon;
@@ -57,7 +58,10 @@ public class TextHP : MonoBehaviour
 
         // HP
         Hp.text = player.currentHealth.ToString("0");
-        
+
+        // Броня
+        armor.text = player.armor.ToString("0");
+
         // Granate
         GranateText.text = ammoPack.granate.ToString("0");
 

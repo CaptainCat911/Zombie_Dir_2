@@ -5,18 +5,21 @@ public class Player : Mover
 {
     public bool isAlive = true;
 
+    public AmmoPack ammoPack;               // ссылка на аммопак
+                                            // 
         // Для прицела
-    public Transform pointer;          // прицел       
-    public bool aiming = true;    // прицеливание
+    public Transform pointer;           // прицел       
+    public bool aiming = true;          // прицеливание
    
-    public LayerMask layerMask;     // маска для прицела
+    public LayerMask layerMask;         // маска для прицела
     //int layerMaskCam = 1 << 11;     // маска для прицела, игнорирует всё кроме 11 слоя
 
     // Передвижение
     const float locomationAnimationSmoothTime = .1f; // сглаживание бега
     public Vector3 motorVect;
     public bool slowed = false;     // для замедления от зомби
-                                    // для замедления
+
+    // для замедления
     public float cooldownSlow = 2f;
     public float lastSlow;
 
@@ -24,27 +27,23 @@ public class Player : Mover
     private Animator anim;
 
         // Оружие
-    public ActiveWeapon activeWeapon;      // ссылка на активное оружие   
+    public ActiveWeapon activeWeapon;       // ссылка на активное оружие   
 
-    float stopForce = 0;            // сила замедления от зомби
+    float stopForce = 0;                    // сила замедления от зомби
 
     public float maxSpeed = 6;
        
-    public Animator finalSphereAnim;    // сфера, убивающая зомби, для финального ивента (типо их с пулемета вертолёта расстреляли)
+    public Animator finalSphereAnim;        // сфера, убивающая зомби, для финального ивента (типо их с пулемета вертолёта расстреляли)
 
-    public Light lightF;                 // для управления фонари
+    public Light lightF;                    // для управления фонари
 
-    public GameObject playerChest;      // для зомби
-
-    bool boostSpeed = false;            // Для тестового режима 
-
-    public GameObject rigWeapon;        // вкл/выкл оружия при поражении
-
-    public bool walking = false;        // для ходьбы
-
-    public bool inRangeUse;             // если в ренже использования предмета
-
-    public AmmoPack ammoPack;           // ссылка на аммопак        
+    public GameObject playerChest;          // для зомби
+    bool boostSpeed = false;                // Для тестового режима 
+    public GameObject rigWeapon;            // вкл/выкл оружия при поражении
+    public bool walking = false;            // для ходьбы
+    public bool inRangeUse;                 // если в ренже использования предмета
+    public GameObject armorGameObject;      // броня на персонаже
+    public GameObject armorBlackGameObject;      // броня на персонаже
    
 
     //public AudioManager audioManager;
@@ -98,6 +97,11 @@ public class Player : Mover
         base.ReceiveDamage(dmg);
         stopForce = dmg.pushForce;
         anim.SetTrigger("Take_Hit");
+        if (!armored)
+        {
+            armorGameObject.SetActive(false);
+            armorBlackGameObject.SetActive(false);
+        }
 
         /*GameManager.instance.OnHitpointChange();*/
     }

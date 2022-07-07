@@ -7,9 +7,9 @@ public class Fighter : MonoBehaviour
     // Health
     public int currentHealth;
     public int maxHealth = 100;
-    public int armor;                   // броня
-    public float armorProtection;       // уменьшение урона
-    public bool armored;                // есть ли броня
+    public int armor;                           // броня
+    public float armorProtection = 1;           // уменьшение урона
+    public bool armored;                        // есть ли броня
 
     //public float attackRange = 1f;    
     public float pushRecoverySpeed = 0.2f;
@@ -31,13 +31,14 @@ public class Fighter : MonoBehaviour
     {
             // Damage             
         dmg.damageAmount = Mathf.Clamp(dmg.damageAmount, 0, int.MaxValue);
+        Debug.Log(dmg.damageAmount);
         int takenDamage = Mathf.CeilToInt( dmg.damageAmount / armorProtection);
         Debug.Log(takenDamage);
         currentHealth -= takenDamage;
         armor -= Mathf.CeilToInt(takenDamage / 2);
 
-                // Push (убрал пока что (заменил))
-                //pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
+        // Push (убрал пока что (заменил))
+        //pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
 
         /*   // Text 
@@ -56,6 +57,12 @@ public class Fighter : MonoBehaviour
                 currentHealth = 0;
                 Death();
             }
+        if (armor <= 0)
+        {
+            armor = 0;
+            armorProtection = 1;
+            armored = false;
+        }
         /*}*/
     }
 

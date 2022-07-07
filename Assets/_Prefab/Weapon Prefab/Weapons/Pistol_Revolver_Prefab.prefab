@@ -39945,7 +39945,7 @@ MonoBehaviour:
   ammoType: 0.357
   indexNumberWeapon: 1
   cooldown: 0.3
-  rayDamage: 0
+  rayDamage: 110
   pushForce: 0.95
   allAmmo: 0
   clipSize: 6

@@ -43,6 +43,8 @@ public class AmmoPack : MonoBehaviour
     public int WeaponSoulsShotgun;
     public int WeaponSoulsSVD;
     public int WeaponSoulsPulemet;
+    public int soulsArmor;
+    public int soulsArmorBlack;
 
     // Стоимость апгрейда оружия
     [Header("Стоимость апгрейда оружия")]
@@ -70,6 +72,7 @@ public class AmmoPack : MonoBehaviour
 
     public void GiveAmmo (string ammoType)
     {
+        RaycastWeapon weapon = player.activeWeapon.GetActiveWeapon();
         switch (ammoType)
         {
             case "9":
@@ -188,6 +191,7 @@ public class AmmoPack : MonoBehaviour
                                 playerAmmo.granate += ammoSize;
                                 break;*/
         }
+        weapon.TakeAmmo();
     }
 
     public void GiveWeapon (string weapon)
@@ -412,6 +416,45 @@ public class AmmoPack : MonoBehaviour
             {
                 w.effectSmoke.SetActive(true);
             }
+        }
+    }
+
+
+
+    public void GiveArmor(string armor)
+    {
+        switch (armor)
+        {
+            case "1":
+                if (souls >= soulsArmor)
+                {
+                    player.armor = 100;
+                    player.armorProtection = 1.5f;
+                    player.armored = true;
+                    player.armorGameObject.SetActive(true);
+                    souls -= soulsArmor;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+                break;
+
+            case "2":
+                if (souls >= soulsArmorBlack)
+                {
+                    player.armor = 200;
+                    player.armorProtection = 3f;
+                    player.armored = true;
+                    player.armorGameObject.SetActive(false);
+                    player.armorBlackGameObject.SetActive(true);
+                    souls -= soulsArmor;
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+                break;
         }
     }
 

@@ -736,6 +736,167 @@ public class GameManager : MonoBehaviour
                     //diffManager.positionNPC = new Vector3(162, 0, -170);
                 }
                 break;
+
+
+            case 14:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 60;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 0;
+
+                    spawnPoint.strongZombieChanse = 100;
+
+                    spawnPoint.darkZombieChanse = 10;
+
+                    zombieToKillWaveGM = 100;
+
+                    //diffManager.positionNPC = new Vector3(162, 0, -170);
+                }
+                break;
+
+
+            case 15:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 60;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 0;
+
+                    spawnPoint.strongZombieChanse = 100;
+
+                    spawnPoint.darkZombieChanse = 20;
+
+                    zombieToKillWaveGM = 100;
+
+                    //diffManager.positionNPC = new Vector3(162, 0, -170);
+                }
+                break;
+
+
+            case 16:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 60;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 0;
+
+                    spawnPoint.strongZombieChanse = 100;
+
+                    spawnPoint.darkZombieChanse = 30;
+
+                    zombieToKillWaveGM = 100;
+
+                    //diffManager.positionNPC = new Vector3(162, 0, -170);
+                }
+                break;
+
+
+            case 17:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 60;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 0;
+
+                    spawnPoint.strongZombieChanse = 100;
+
+                    spawnPoint.darkZombieChanse = 40;
+
+                    zombieToKillWaveGM = 100;
+
+                    //diffManager.positionNPC = new Vector3(162, 0, -170);
+                }
+                break;
+
+
+            case 18:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 60;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 0;
+
+                    spawnPoint.strongZombieChanse = 100;
+
+                    spawnPoint.darkZombieChanse = 50;
+
+                    zombieToKillWaveGM = 100;
+
+                    //diffManager.positionNPC = new Vector3(162, 0, -170);
+                }
+                break;
+
+
+            case 19:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 60;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 0;
+
+                    spawnPoint.strongZombieChanse = 100;
+
+                    spawnPoint.darkZombieChanse = 75;
+
+                    zombieToKillWaveGM = 100;
+
+                    //diffManager.positionNPC = new Vector3(162, 0, -170);
+                }
+                break;
+
+
+            case 20:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+
+                    spawnPoint.maxZombie = 60;
+
+                    spawnPoint.enemyNumberSpawn = 4;
+
+                    spawnPoint.cooldown = 2;
+
+                    spawnPoint.mediumZombieChanse = 0;
+
+                    spawnPoint.strongZombieChanse = 100;
+
+                    spawnPoint.darkZombieChanse = 100;
+
+                    zombieToKillWaveGM = 100;
+
+                    //diffManager.positionNPC = new Vector3(162, 0, -170);
+                }
+                break;
         }        
     }
 

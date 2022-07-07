@@ -13,6 +13,7 @@ public class DiffManager : MonoBehaviour
     public string message;                  // сообщение волны
     public bool messageReady;               // сообщение готово
     public bool start;                      // тригер старта волны
+    public int delayFirstWave;              // задержка перед началом первой волны
     public int delayWave;                   // задержка перед началом волны
     public Vector3 positionNPC;             // позиция для НПС
     public bool waveStarted;                // волна началась
@@ -61,9 +62,9 @@ public class DiffManager : MonoBehaviour
     IEnumerator SafeTime(int diffLevel)
     {
         if (waveNumber == 1)
-            yield return new WaitForSeconds(10);                     // задержка перед волной
+            yield return new WaitForSeconds(delayFirstWave);            // задержка перед волной
         else
-            yield return new WaitForSeconds(delayWave);                     // задержка перед волной
+            yield return new WaitForSeconds(delayWave);                 // задержка перед волной
         GameManager.instance.SetFinalDifficultyNumber(diffLevel);       // устанавливаем сложность
         message = "Пошла волна №" + waveNumber;                         
         messageReady = true;                                            

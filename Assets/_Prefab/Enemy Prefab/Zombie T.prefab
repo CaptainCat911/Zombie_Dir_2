@@ -2539,6 +2539,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 1
   maxHealth: 100
+  armor: 0
+  armorProtection: 1
+  armored: 0
   pushRecoverySpeed: 0.2
   ySpeed: 7
   xSpeed: 7
