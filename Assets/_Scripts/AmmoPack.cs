@@ -14,14 +14,11 @@ public class AmmoPack : MonoBehaviour
 
     public int allAmmo_9 = 0;
     public int allAmmo_0_357 = 0;
-
     public int allAmmo_5_56 = 0;
     public int allAmmo_0_12 = 0;
-
     public int allAmmo_7_62 = 0;
     public int allAmmo_0_50 = 0;
     public int granate = 0;
-
     public int HPBox = 0;
 
     public string message;                  // сообщение при подборе патронов
@@ -29,21 +26,32 @@ public class AmmoPack : MonoBehaviour
 
 
     // Стоимость патронов
+    [Header("Стоимость патронов")]
     public int ammoSoulsPistol;
     public int ammoSoulsAR;
-    public int ammoSoulsShotgun;
     public int ammoSoulsRevolver;
+    public int ammoSoulsShotgun;
     public int ammoSoulsSvd;
     public int ammoSoulsPulemet;
     public int ammoSoulsHp;
     public int ammoSoulsGranate;
 
     // Стоимость оружия
+    [Header("Стоимость оружия")]
     public int WeaponSoulsAR;
-    public int WeaponSoulsShotgun;
     public int WeaponSoulsRevolver;
+    public int WeaponSoulsShotgun;
     public int WeaponSoulsSVD;
     public int WeaponSoulsPulemet;
+
+    // Стоимость апгрейда оружия
+    [Header("Стоимость апгрейда оружия")]
+    public int WeaponSoulsPistolUpgreade;
+    public int WeaponSoulsARUpgreade;
+    public int WeaponSoulsRevolverUpgreade;
+    public int WeaponSoulsShotgunUpgreade;
+    public int WeaponSoulsSVDUpgreade;
+    public int WeaponSoulsPulemetUpgreade;
 
     // Оружие экипировано
     bool aR;
@@ -116,7 +124,7 @@ public class AmmoPack : MonoBehaviour
             case "0.50":
                 if (souls >= ammoSoulsSvd)
                 {
-                    allAmmo_0_50 += 40;
+                    allAmmo_0_50 += 30;
                     souls -= ammoSoulsSvd;
                 }
                 else
@@ -128,7 +136,7 @@ public class AmmoPack : MonoBehaviour
             case "7.62":
                 if (souls >= ammoSoulsPulemet)
                 {
-                    allAmmo_7_62 += 150;
+                    allAmmo_7_62 += 100;
                     souls -= ammoSoulsPulemet;
                 }
                 else
@@ -288,19 +296,126 @@ public class AmmoPack : MonoBehaviour
     }
 
     public void UpgradeWeapon(string weapon)
-    {  
-        Debug.Log(player.activeWeapon.listWeapons);
+    {
+        //Debug.Log(player.activeWeapon.listWeapons);
+        foreach (RaycastWeapon w in player.activeWeapon.listWeapons)
+        {
+            // Пистолет
+            if (w.weaponName == weapon && weapon == "pistol")
+            {
+                if (souls >= WeaponSoulsPistolUpgreade)
+                {
+                    w.rayDamage += 8;
+                    w.clipSize += 10;
+                    souls -= WeaponSoulsPistolUpgreade;
+
+                    Debug.Log("Pistol Upgraded");
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+            }
+
+            // AR
+            if (w.weaponName == weapon && weapon == "rifle")
+            {
+                if (souls >= WeaponSoulsARUpgreade)
+                {
+                    w.rayDamage += 10;
+                    w.clipSize += 20;
+                    souls -= WeaponSoulsARUpgreade;
+
+                    Debug.Log("AR Upgraded");
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+            }
+
+            // Револьвер
+            if (w.weaponName == weapon && weapon == "revolver")
+            {
+                if (souls >= WeaponSoulsRevolverUpgreade)
+                {
+                    w.rayDamage += 50;
+                    w.clipSize += 3;
+                    souls -= WeaponSoulsRevolverUpgreade;
+
+                    Debug.Log("Revolver Upgraded");
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+            }
+
+            // Дробовик
+            if (w.weaponName == weapon && weapon == "shotgun")
+            {
+                if (souls >= WeaponSoulsShotgunUpgreade)
+                {
+                    w.rayDamage += 5;
+                    w.clipSize += 8;
+                    souls -= WeaponSoulsShotgunUpgreade;
+
+                    Debug.Log("Shotgun Upgraded");
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+            }
+
+            // СВД
+            if (w.weaponName == weapon && weapon == "sniper")
+            {
+                if (souls >= WeaponSoulsSVDUpgreade)
+                {
+                    w.rayDamage += 150;
+                    w.clipSize += 5;
+                    souls -= WeaponSoulsSVDUpgreade;
+
+                    Debug.Log("SVD Upgraded");
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+            }
+
+            // Пулемет
+            if (w.weaponName == weapon && weapon == "heavy")
+            {
+                if (souls >= WeaponSoulsPulemetUpgreade)
+                {
+                    w.rayDamage += 20;
+                    w.clipSize += 50;
+                    souls -= WeaponSoulsPulemetUpgreade;
+
+                    Debug.Log("Pulemet Upgraded");
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                }
+            }
+        }
+    }
+
+    public void EffectSmokeActivate(string weapon)
+    {
         foreach (RaycastWeapon w in player.activeWeapon.listWeapons)
         {
             if (w.weaponName == weapon)
             {
-                w.rayDamage += 100;
-
-                Debug.Log(w.name);
-                Debug.Log("+ Damage");
+                w.effectSmoke.SetActive(true);
             }
         }
     }
+
+
 
     public void SendToMessage(string messageToSend)
     {

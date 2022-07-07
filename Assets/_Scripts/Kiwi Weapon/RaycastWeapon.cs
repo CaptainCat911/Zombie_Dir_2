@@ -64,6 +64,8 @@ public class RaycastWeapon : MonoBehaviour
 
     public GameObject imageWeapon;                          // рисунок оружия (пока не сделал)
 
+    public GameObject effectSmoke;                          // эффект дыма
+
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
 
     public void Start()

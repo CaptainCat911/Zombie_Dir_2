@@ -11,6 +11,7 @@ public class TextHP : MonoBehaviour
 
         
     public Text soulsText;                  // кол-во душ
+    public Text soulsTextMagazine;                  // кол-во душ для магазина
     public Text Hp;                         // здоровье
     public Text allBulletsText;             // всего патронов
     public Text currentBulletsText;         // патронов в обойме
@@ -49,6 +50,7 @@ public class TextHP : MonoBehaviour
     {
         // Души
         soulsText.text = ammoPack.souls.ToString("0");
+        soulsTextMagazine.text = soulsText.text;
 
         // Волна
         WaveText.text = GameManager.instance.diffManager.waveNumber.ToString("0");

@@ -467,7 +467,7 @@ public class GameManager : MonoBehaviour
 
                     spawnPoint.darkZombieChanse = 0;
 
-                    zombieToKillWaveGM = 21;
+                    zombieToKillWaveGM = 16;
 
                     diffManager.positionNPC = new Vector3(290, 0, -171);
                 }

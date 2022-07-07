@@ -7,19 +7,16 @@ public class Fighter : MonoBehaviour
     // Health
     public int currentHealth;
     public int maxHealth = 100;
+    public int armor;                   // броня
+    public float armorProtection;       // уменьшение урона
+    public bool armored;                // есть ли броня
 
     //public float attackRange = 1f;    
     public float pushRecoverySpeed = 0.2f;
 
-    //Immunity
-    //public float immuneTime = 0f;
-    //protected float lastImmune;
-
     //Push
     protected Vector3 pushDirection;
-
-    Enemy_old enemy;
-
+    
 
 
     void Awake()
@@ -32,32 +29,26 @@ public class Fighter : MonoBehaviour
     // All fighters can ReceiveDamage / Die
     protected virtual void ReceiveDamage(Damage dmg)
     {
- /*       if (Time.time - lastImmune > immuneTime)
-        {
-            lastImmune = Time.time;*/
-
-                // Damage             
-            dmg.damageAmount = Mathf.Clamp(dmg.damageAmount, 0, int.MaxValue);
-            //Debug.Log(dmg.damageAmount);
-            currentHealth -= dmg.damageAmount;
+            // Damage             
+        dmg.damageAmount = Mathf.Clamp(dmg.damageAmount, 0, int.MaxValue);
+        int takenDamage = Mathf.CeilToInt( dmg.damageAmount / armorProtection);
+        Debug.Log(takenDamage);
+        currentHealth -= takenDamage;
+        armor -= Mathf.CeilToInt(takenDamage / 2);
 
                 // Push (убрал пока что (заменил))
-            //pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
-
-        
+                //pushDirection = (transform.position - dmg.origin).normalized * dmg.pushForce;
 
 
-
-
-             /*   // Text 
-            if (this.gameObject.name == "Player")
-            {
-                GameManager.instance.ShowText(dmg.damageAmount.ToString(), 15, Color.red, transform.position, Vector3.up * 30, 0.5f);
-            }
-            else
-            {
-                GameManager.instance.ShowText(dmg.damageAmount.ToString(), 15, Color.white, transform.position, Vector3.up * 30, 0.5f);
-            }*/
+        /*   // Text 
+       if (this.gameObject.name == "Player")
+       {
+           GameManager.instance.ShowText(dmg.damageAmount.ToString(), 15, Color.red, transform.position, Vector3.up * 30, 0.5f);
+       }
+       else
+       {
+           GameManager.instance.ShowText(dmg.damageAmount.ToString(), 15, Color.white, transform.position, Vector3.up * 30, 0.5f);
+       }*/
 
         //Death
         if (currentHealth <= 0)

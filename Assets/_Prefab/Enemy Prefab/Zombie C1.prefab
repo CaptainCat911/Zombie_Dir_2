@@ -2732,7 +2732,7 @@ MonoBehaviour:
   medHP: {fileID: 6312526296165264628, guid: 9567402a43bcb1448affe41b2a2d9c0b, type: 3}
   ammoBack: {fileID: 470506443102077039}
   medhpBack: {fileID: 5438766838632138878}
-  ammoChanse: 96
+  ammoChanse: 98
   dead: 0
   audioSourses: {fileID: 9055749560287394335, guid: 8ba2b58437912884fb9d21b2210248e7,
     type: 3}

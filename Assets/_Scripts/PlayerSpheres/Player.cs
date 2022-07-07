@@ -44,7 +44,8 @@ public class Player : Mover
 
     public bool inRangeUse;             // если в ренже использования предмета
 
-    public AmmoPack ammoPack;
+    public AmmoPack ammoPack;           // ссылка на аммопак        
+   
 
     //public AudioManager audioManager;
 

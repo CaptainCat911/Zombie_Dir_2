@@ -2463,7 +2463,7 @@ MonoBehaviour:
   medHP: {fileID: 6312526296165264628, guid: 9567402a43bcb1448affe41b2a2d9c0b, type: 3}
   ammoBack: {fileID: 5861246011651643544}
   medhpBack: {fileID: 5379984015259738731}
-  ammoChanse: 96
+  ammoChanse: 98
   dead: 0
   audioSourses: {fileID: 0}
   audioPitch: 0
