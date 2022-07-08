@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class Enemy_old : Mover
 {
+    public int damage;
     // Logic
     public float triggerLenght = 10f;       // радиус тригера преследования (в пределах игрок)
     //public float chaseLenght = 10f;       // радиус преследования (вся зона)
@@ -82,10 +83,7 @@ public class Enemy_old : Mover
 
     public GameObject darkEffect;           // эффект тьмы
 
-    
-
-
-
+    public bool granateInRange;    
 
 
     //public SphereCollider weaponPickUpCollider; // ccылка на колайдер оружия
@@ -129,18 +127,20 @@ public class Enemy_old : Mover
         if ((random <= 84 || weakZombie) && !strongZombie && !runZombie)          // шанс на слабого зомби или сами устанавливаем слабого зомби
         {
 
-            simpleZombie = true;                    
+            simpleZombie = true;
             int random3 = Random.Range(0, 2);       // 50% шанс на то, что зомби будет с захватом
             if (random3 == 0)
                 hitbox.grabChardge = false;
             if (random3 == 1)                       // || random3 == 2
                 hitbox.grabChardge = true;
 
+            hitbox.damage = 6;
             hitbox.cooldown = 2.5f;                 // кд атаки
             hitbox.attackSpeed = 1.3f;              // скорость атаки
             maxHealth = 80;
             if (darkZombie)
             {
+                hitbox.damage *= 2;
                 maxHealth = 700;
                 cooldownSlow = 0;
                 darkEffect.SetActive(true);
@@ -168,12 +168,14 @@ public class Enemy_old : Mover
             if (random3 == 1)
                 hitbox.grabChardge = true;
 
+            hitbox.damage = 8;
             hitbox.cooldown = 2f;
             hitbox.attackSpeed = 1.6f;
             agent.speed = 2f;
             maxHealth = 120;
             if (darkZombie)
             {
+                hitbox.damage *= 2;
                 maxHealth = 1000;
                 cooldownSlow = 0.1f;
                 darkEffect.SetActive(true);
@@ -186,6 +188,7 @@ public class Enemy_old : Mover
         {
             agonyZombie = true;
             hitbox.grabChardge = false;
+            hitbox.damage = 10;
             hitbox.cooldown = 1.5f;
             hitbox.attackSpeed = 2f;
             //int randomSpeedStrong = Random.Range(1, 8);
@@ -193,6 +196,7 @@ public class Enemy_old : Mover
             maxHealth = 200;
             if (darkZombie)
             {
+                hitbox.damage *= 2;
                 maxHealth = 1200;
                 cooldownSlow = 0.2f;
                 darkEffect.SetActive(true);
@@ -266,8 +270,6 @@ public class Enemy_old : Mover
 
         else
         {
-            
-
             if (Vector3.Distance(playerTransform.position, transform.position) < triggerLenght)       // если дистанция до игрока < тригер дистанции
             {                    
                 chasing = true;                                                              // преследование включено 
@@ -453,6 +455,11 @@ public class Enemy_old : Mover
         }        
     }
 
+
+    public void SetDestinationZombie(Vector3 position)
+    {
+        agent.SetDestination(position);
+    }
 
     IEnumerator BitingDelay()
     {

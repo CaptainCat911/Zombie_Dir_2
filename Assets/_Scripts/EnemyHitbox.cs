@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyHitbox : Collidable
 {
-    // Damage
-    public int damage = 6;                 // Урон
+    // Damage    
+    public int damage;                             // Урон
     private float pushForce = 0.95f;        // замедление
     public float cooldown = 0.5f;           // перезардяка атаки
     public float attackSpeed = 1;           // скорость атаки       
@@ -33,6 +33,7 @@ public class EnemyHitbox : Collidable
 
         animationEvents.ZombieAnimationEvent.AddListener(EventsZombieAttack);       // получаем ивенты от анимации атаки              
         animationEvents.ZombieAnimationGrabEvent.AddListener(EventsZombieGrab);     // получаем ивенты от анимации захвата                
+        //damage = enemy.damage;
     }
 
 

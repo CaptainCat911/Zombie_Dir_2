@@ -9,10 +9,12 @@ public class Granate : MonoBehaviour
     public float radiusBig = 8f;            // радиус дополнительного взрыва
     public int damage = 300;                // основной урон
     public int damageBigRadius = 76;        // дополнительный урон
+    public int incomeRadius = 1000;         // радиус приманки зомби
     public float pushForce = 0.95f;         // останавливающая сила
     public LayerMask layerEnemy;            // маска для нанесения урона
     public GameObject explEffect;           // эффект взрыва
     public ActiveWeapon activeWeapon;       // ссылка на скрипт (для звука)
+    bool explouded;
 
     //public float force = 700f;
 
@@ -41,7 +43,12 @@ public class Granate : MonoBehaviour
         }
     }
 
-    void Explode()
+    public void FixedUpdate()
+    {
+        ZombieIncome();
+    }
+
+    void Explode()    
     {
         //Debug.Log("BOOM!");
 
@@ -163,15 +170,41 @@ public class Granate : MonoBehaviour
         }
 
         Instantiate(explEffect, transform.position, transform.rotation);
-/*        explEffect.transform.position = transform.position;
-        explEffect.transform.forward = transform.forward;
-        explEffect.Emit(2);*/
-
+        /*        explEffect.transform.position = transform.position;
+                explEffect.transform.forward = transform.forward;
+                explEffect.Emit(2);*/
+        explouded = true;
         Destroy(gameObject);
-
-
-
     }
+
+    public void ZombieIncome()
+    {
+        Collider[] collidersZombie = Physics.OverlapSphere(transform.position, incomeRadius, layerEnemy);
+        foreach (Collider nearbyObject in collidersZombie)
+        {
+            if (nearbyObject == null)
+            {
+                continue;
+            }
+
+            if (nearbyObject.tag == "Enemy")
+            {
+                Enemy_old enemy = nearbyObject.GetComponentInParent<Enemy_old>();
+                if (enemy)
+                {
+                    enemy.granateInRange = true;
+                    enemy.SetDestinationZombie(transform.position);
+                }
+                if (explouded)
+                {
+                    enemy.granateInRange = false;
+                }
+            }
+            collidersZombie = null;
+        }
+    }
+
+
 
     void OnDrawGizmosSelected()
     {

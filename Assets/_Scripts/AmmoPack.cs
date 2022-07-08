@@ -5,8 +5,7 @@ using UnityEngine;
 public class AmmoPack : MonoBehaviour
 {
     Player player;                          // сслыка на игрока
-    public RaycastWeapon[] weapons;         // массив оружий
-             
+    public RaycastWeapon[] weapons;         // массив оружий             
 
     int weaponNumber;                       // переменная для выбора оружия
 
@@ -48,6 +47,7 @@ public class AmmoPack : MonoBehaviour
 
     // Стоимость апгрейда оружия
     [Header("Стоимость апгрейда оружия")]
+    public int WeaponSoulsAxeUpgreade;
     public int WeaponSoulsPistolUpgreade;
     public int WeaponSoulsARUpgreade;
     public int WeaponSoulsRevolverUpgreade;
@@ -377,7 +377,7 @@ public class AmmoPack : MonoBehaviour
             {
                 if (souls >= WeaponSoulsSVDUpgreade)
                 {
-                    w.rayDamage += 150;
+                    w.rayDamage += 200;
                     w.clipSize += 5;
                     souls -= WeaponSoulsSVDUpgreade;
 
@@ -408,6 +408,21 @@ public class AmmoPack : MonoBehaviour
         }
     }
 
+    public void UpgradeAxe()
+    {
+        if (souls >= WeaponSoulsAxeUpgreade)
+        {
+            player.activeWeapon.damage += 300;
+            player.activeWeapon.attackRadiusHitBox += 0.6f;
+            player.activeWeapon.axeEffectSmoke.SetActive(true);
+            souls -= WeaponSoulsAxeUpgreade;
+        }
+        else
+        {
+            SendToMessage("Недостаточно душ");
+        }
+    }
+
     public void EffectSmokeActivate(string weapon)
     {
         foreach (RaycastWeapon w in player.activeWeapon.listWeapons)
@@ -419,20 +434,22 @@ public class AmmoPack : MonoBehaviour
         }
     }
 
-
-
     public void GiveArmor(string armor)
     {
         switch (armor)
         {
             case "1":
-                if (souls >= soulsArmor)
+                if (souls >= soulsArmor && player.armor < 100)
                 {
                     player.armor = 100;
                     player.armorProtection = 1.5f;
                     player.armored = true;
                     player.armorGameObject.SetActive(true);
                     souls -= soulsArmor;
+                }
+                else if (player.armor >= 100)
+                {
+                    SendToMessage("У вас целый бронежилет");
                 }
                 else
                 {
@@ -441,15 +458,19 @@ public class AmmoPack : MonoBehaviour
                 break;
 
             case "2":
-                if (souls >= soulsArmorBlack)
+                if (souls >= soulsArmorBlack && player.armor < 200)
                 {
                     player.armor = 200;
                     player.armorProtection = 3f;
                     player.armored = true;
                     player.armorGameObject.SetActive(false);
                     player.armorBlackGameObject.SetActive(true);
-                    souls -= soulsArmor;
+                    souls -= soulsArmorBlack;
                 }
+                else if (player.armor >= 200)
+                {
+                    SendToMessage("У вас целый бронежилет");
+                }               
                 else
                 {
                     SendToMessage("Недостаточно душ");
@@ -457,8 +478,6 @@ public class AmmoPack : MonoBehaviour
                 break;
         }
     }
-
-
 
     public void SendToMessage(string messageToSend)
     {

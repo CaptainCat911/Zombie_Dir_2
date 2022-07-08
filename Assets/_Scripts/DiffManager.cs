@@ -9,7 +9,7 @@ public class DiffManager : MonoBehaviour
     public int waveNumber = 1;              // номер волны
     public int zombieToKillWave;            // кол-во зомби в волне, сколько убить надо
     public bool levelGo;                    // волна пошла
-    bool levelStop;                         // волна остановлена
+    public bool levelStop;                  // волна остановлена
     public string message;                  // сообщение волны
     public bool messageReady;               // сообщение готово
     public bool start;                      // тригер старта волны
@@ -29,7 +29,7 @@ public class DiffManager : MonoBehaviour
         // Почти конец волны
         if (GameManager.instance.enemyKilledCount >= zombieToKillWave && levelGo)    // если убили больше .. зомби и волна запущена
         {
-            GameManager.instance.SetFinalDifficultyNumber(0);           // ставим сложность 0
+            GameManager.instance.SetDifficultyNumber(0);                // ставим сложность 0
             levelGo = false;                                            // волна не запущена
             levelStop = true;                                           // волна остановлена
             GameManager.instance.noKillSphere = true;                   // спаунсфера не убивает зомби за пределами
@@ -62,11 +62,15 @@ public class DiffManager : MonoBehaviour
     IEnumerator SafeTime(int diffLevel)
     {
         if (waveNumber == 1)
-            yield return new WaitForSeconds(delayFirstWave);            // задержка перед волной
+            yield return new WaitForSeconds(delayFirstWave);            // задержка перед первой волной
         else
             yield return new WaitForSeconds(delayWave);                 // задержка перед волной
-        GameManager.instance.SetFinalDifficultyNumber(diffLevel);       // устанавливаем сложность
-        message = "Пошла волна №" + waveNumber;                         
+
+        GameManager.instance.SetDifficultyNumber(diffLevel);            // устанавливаем сложность
+        if (waveNumber == 21)
+            message = "Пошла волна финальная волна";                       
+        else
+            message = "Пошла волна №" + waveNumber;                         
         messageReady = true;                                            
         yield return new WaitForSeconds(1);
         levelGo = true;                                                 // волна запущена
@@ -75,7 +79,8 @@ public class DiffManager : MonoBehaviour
         npc.mapIcon.SetActive(false);                                   // отключаем иконку НПС на карте
         //Debug.Log("Wave Go !");
         yield return new WaitForSeconds(5);                             
-        npc.SetDestinationNPC(new Vector3(323, 0, -280), true);         // портуем НПС в домик
+        npc.SetDestinationNPC(new Vector3(322, 0, -281), true);         // портуем НПС в домик
+        npc.anim.SetTrigger("Dance!");
     }
 
     IEnumerator NPCdelay(int delayNPC)
@@ -93,8 +98,9 @@ public class DiffManager : MonoBehaviour
         {
             yield return new WaitForSeconds(delayNPC);
         }
+        npc.anim.SetTrigger("Stop_Dance!");
+        Debug.Log(positionNPC);
         npc.SetDestinationNPC(positionNPC, true);                   // портуем НПС к следующей точке
         npc.mapIcon.SetActive(true);                                // включаем у НПС иконку на карте      
     }
-
 }

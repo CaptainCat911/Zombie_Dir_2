@@ -9,9 +9,11 @@ public class TextHP : MonoBehaviour
     AmmoPack ammoPack;      // ссылка на скрипт патронов (инвентарь)
     DiffManager diffManager;
 
+    public ActiveWeapon activeWeapon;
+    RaycastWeapon weapon;
         
     public Text soulsText;                  // кол-во душ
-    public Text soulsTextMagazine;                  // кол-во душ для магазина
+    public Text soulsTextMagazine;          // кол-во душ для магазина
     public Text Hp;                         // здоровье
     public Text armor;                      // броня
     public Text allBulletsText;             // всего патронов
@@ -25,14 +27,15 @@ public class TextHP : MonoBehaviour
     public Text messageText;                // сообщение справа (при подъеме патронов)
     public Text bigMessageText;             // большое сообщение (волна!)
     public Text WaveText;                   // волна №
+    public GameObject armorBar;             // бар армора
 
-    public ActiveWeapon activeWeapon;
-    RaycastWeapon weapon;
     int enemyCount;
     int enemyCountKiled;
 
     Vector3 tempPosMessage;
     Vector3 tempPosBigMessage;
+
+    Animator animHP;
 
     
 
@@ -44,6 +47,7 @@ public class TextHP : MonoBehaviour
         ammoPack = player.GetComponent<AmmoPack>();
         tempPosMessage = messageText.transform.position;
         tempPosBigMessage = bigMessageText.transform.position;
+        animHP = Hp.GetComponent<Animator>();
     }
 
 
@@ -58,9 +62,19 @@ public class TextHP : MonoBehaviour
 
         // HP
         Hp.text = player.currentHealth.ToString("0");
+        if (player.currentHealth <= 25)
+            animHP.SetBool("HPlow", true);
+        else
+            animHP.SetBool("HPlow", false);
 
         // Броня
         armor.text = player.armor.ToString("0");
+        if (player.armor > 0)
+            armorBar.SetActive(true);
+        else
+            armorBar.SetActive(false);
+
+
 
         // Granate
         GranateText.text = ammoPack.granate.ToString("0");

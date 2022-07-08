@@ -115,10 +115,10 @@ public class NPC : Mover
                 playerInRange = true;                       // игрок в ренже
                 if (!meatWithPlayerDone)                    // встреча с игроком
                 {
-                    meatWithPlayer = true;
-                    meatWithPlayerDone = true;
+                    meatWithPlayer = true;                  // встретили игрока
+                    meatWithPlayerDone = true;              // встреча произошла
                     GameManager.instance.dialogueTrig.TriggerDialogue(1);       // вызываем диалог торговца
-                    GameManager.instance.PauseWithDelay();
+                    GameManager.instance.PauseWithDelay();                      // пауза с задержкой
                 }
                 //direction = false;
 
@@ -128,13 +128,13 @@ public class NPC : Mover
                 playerInRange = false;
             }
 
-            if (playerInRange && !GameManager.instance.diffManager.levelGo)
+            if (playerInRange && !GameManager.instance.diffManager.levelGo)     // если игрок в ренже и волна не идёт
             {
-                if (!GameManager.instance.diffManager.waveStarted)
+                if (!GameManager.instance.diffManager.waveStarted && !GameManager.instance.diffManager.levelStop)       // если волна не запущена и уровень остановлен
                 {
-                    GameManager.instance.diffManager.start = true;
-                    GameManager.instance.diffManager.waveStarted = true;
-                }
+                    GameManager.instance.diffManager.start = true;              // стартуем волну
+                    GameManager.instance.diffManager.waveStarted = true;        // волна запущена
+                }   
                 FaceTarget();
             }
             else

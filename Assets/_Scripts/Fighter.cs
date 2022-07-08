@@ -31,9 +31,9 @@ public class Fighter : MonoBehaviour
     {
             // Damage             
         dmg.damageAmount = Mathf.Clamp(dmg.damageAmount, 0, int.MaxValue);
-        Debug.Log(dmg.damageAmount);
+        //Debug.Log(dmg.damageAmount);
         int takenDamage = Mathf.CeilToInt( dmg.damageAmount / armorProtection);
-        Debug.Log(takenDamage);
+        //Debug.Log(takenDamage);
         currentHealth -= takenDamage;
         armor -= Mathf.CeilToInt(takenDamage / 2);
 

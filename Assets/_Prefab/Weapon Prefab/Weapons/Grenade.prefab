@@ -241,8 +241,9 @@ MonoBehaviour:
   delay: 3
   radius: 4
   radiusBig: 6
-  damage: 300
-  damageBig: 56
+  damage: 610
+  damageBigRadius: 76
+  incomeRadius: 10
   pushForce: 0.95
   layerEnemy:
     serializedVersion: 2

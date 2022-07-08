@@ -52,7 +52,7 @@ public class ActiveWeapon : MonoBehaviour
 
     public float attackRadiusHitBox = 1;    // радиус хитбокса
     public LayerMask layerEnemy;       // маска для зомби
-    public int damage;                // урон
+    public int damage;                // урон топора
     public float pushForce;           // замедление
 
     public Transform hitBox;        // хитбокс (где будет создаваться сфера для урона)
@@ -77,7 +77,10 @@ public class ActiveWeapon : MonoBehaviour
 
     public LayerMask layerAmmo;         // маска для патронов
 
-    public List<RaycastWeapon> listWeapons;
+    public List<RaycastWeapon> listWeapons;     // список всех оружий
+
+    public GameObject axeEffectSmoke;           // эффект дыма для топора
+    public GameObject axeEffectAttack;          // эффект дыма для топора во время удара
 
 
     //---------------------------------------------------------------------------------------------\\
@@ -89,15 +92,15 @@ public class ActiveWeapon : MonoBehaviour
 
         playerAnim = GetComponent<Animator>();
         ammoSphere = GetComponentInChildren<AmmoPickUpSphere>();
-        ammoPack = player.GetComponent<AmmoPack>();                             // ссылка на аммопак (инвентарь)
+        ammoPack = player.GetComponent<AmmoPack>();                                     // ссылка на аммопак (инвентарь)
 
-        animationEvents.MeleeAnimationEvent.AddListener(OnAnimationEventAttack);     // получаем ивенты от анимации атаки
-        animationEvents.GranateAnimationEvent.AddListener(OnAnimationEventThrow);    // получаем ивенты от анимации броска гранаты
-        animationEvents.HealAnimationEvent.AddListener(OnAnimationEventHeal);    // получаем ивенты от анимации лечения
-        animationEvents.HealAnimationEvent.AddListener(OnAnimationEventUse);    // получаем ивенты от анимации лечения
+        animationEvents.MeleeAnimationEvent.AddListener(OnAnimationEventAttack);        // получаем ивенты от анимации атаки
+        animationEvents.GranateAnimationEvent.AddListener(OnAnimationEventThrow);       // получаем ивенты от анимации броска гранаты
+        animationEvents.HealAnimationEvent.AddListener(OnAnimationEventHeal);           // получаем ивенты от анимации лечения
+        animationEvents.HealAnimationEvent.AddListener(OnAnimationEventUse);            // получаем ивенты от анимации лечения
 
-        getAxe = true;                                                          // выдаем топор
-        axeBack.SetActive(true);                                                // топор активен
+        getAxe = true;                                  // выдаем топор
+        axeBack.SetActive(true);                        // топор активен
     }
 
     //---------------------------------------------------------------------------------------------\\
@@ -239,14 +242,8 @@ public class ActiveWeapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            ToggleActiveWeapon();
+            //ToggleActiveWeapon();
         }
-
-
-
-
-
-
 
 
         if (reloaring)
@@ -322,11 +319,6 @@ public class ActiveWeapon : MonoBehaviour
 
 
 
-
-
-
-
-
     // Ивенты удара топора
     void OnAnimationEventAttack(string eventName)              
     {
@@ -334,7 +326,8 @@ public class ActiveWeapon : MonoBehaviour
         switch (eventName)
         {
             case "axe_start":
-                audioSourses.axeMiss.Play();                    // звук замаха топором
+                //axeEffectAttack.SetActive(true);
+                audioSourses.axeMiss.Play();                    // звук замаха топором                
                 //Debug.Log("Start !");
                 ToggleActiveWeapon();                           // убираем основное оружие
                 axeBack.SetActive(false);                       // прячем топор за спиной
@@ -389,6 +382,7 @@ public class ActiveWeapon : MonoBehaviour
 
             case "axe_stop":
                 //Debug.Log("Stop");
+                //axeEffectAttack.SetActive(false);
                 reloaring = false;
                 GameManager.instance.playerStop = false;
                 axeBack.SetActive(true);
@@ -430,8 +424,7 @@ public class ActiveWeapon : MonoBehaviour
                     dist = 7.5f;
                 //Debug.Log(dist);
                 Vector3 vec3 = new Vector3(0, 0.3f, 0) + transform.forward;         // чтобы летела вперед и чуть вверх
-                rb.AddForce(vec3 * dist, ForceMode.Impulse);                        // бросаем её с учетом дистанции до прицела
-
+                rb.AddForce(vec3 * dist, ForceMode.Impulse);                        // бросаем её с учетом дистанции до прицела 
                 break;
 
             case "end_granate":
