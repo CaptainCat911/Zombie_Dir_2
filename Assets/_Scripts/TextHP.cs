@@ -27,6 +27,7 @@ public class TextHP : MonoBehaviour
     public Text messageText;                // сообщение справа (при подъеме патронов)
     public Text bigMessageText;             // большое сообщение (волна!)
     public Text WaveText;                   // волна №
+    public Text mutationNumberText;         // мутация №
     public GameObject armorBar;             // бар армора
 
     int enemyCount;
@@ -58,7 +59,10 @@ public class TextHP : MonoBehaviour
         soulsTextMagazine.text = soulsText.text;
 
         // Волна
-        WaveText.text = GameManager.instance.diffManager.waveNumber.ToString("0");
+        WaveText.text = GameManager.instance.diffManager.waveN.ToString("0");
+
+        // Мутация
+        mutationNumberText.text = GameManager.instance.mutationNumber.ToString("0");
 
         // HP
         Hp.text = player.currentHealth.ToString("0");

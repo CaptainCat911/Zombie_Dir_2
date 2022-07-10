@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class Enemy_old : Mover
 {
-    public int damage;
+    public int damage = 6;
     // Logic
     public float triggerLenght = 10f;       // радиус тригера преследования (в пределах игрок)
     //public float chaseLenght = 10f;       // радиус преследования (вся зона)
@@ -17,7 +17,6 @@ public class Enemy_old : Mover
     public bool runZombie = false;          // бегущий зомби 
     public bool strongZombie = false;       // сильный зомби
     public bool agony = true;               // сильный зомби безумен
-
     public bool darkZombie;                 // темный (усилиненный) зомби
 
     public bool simpleZombie = false;       // обычный зомби (пока нигде не использую)
@@ -25,10 +24,8 @@ public class Enemy_old : Mover
     public bool agonyZombie = false;        // зомби в агонии
 
     public bool test = false;               // режим тестового зомби
-
-    public bool dontCount = false;
-
-    public bool biting = false;
+    public bool dontCount = false;          // если не нужно считать убитым
+    public bool biting = false;             // жрёт
 
     public float cooldownSlow = 0.5f;       // кулдаун замедления
     public float lastSlow;                  // для замедления
@@ -52,7 +49,6 @@ public class Enemy_old : Mover
     public CapsuleCollider capsuleColliderRightArm; 
     //CapsuleCollider[] allCapsCol;
     private Enemy_old selfScript;           // ссылка на свой скрипт (вроде можно убрать)
-
     public GameObject tempCapColl;          // временный коллайдер для жрущих зомби (пока что отключил)
 
     public float tempAgentSpeed = 6;        // скорость к которой вернуться после замедления 
@@ -67,7 +63,6 @@ public class Enemy_old : Mover
     public GameObject medhpBack;            // аптечка за спиной
     private int randomAmmo;                 // для вероятности выпадения патронов и аптечек
     int ndx;                                // индекс для выбора типа патронов
-
     public int ammoChanse = 98;             // шанс выпадения патронов
 
     public bool dead = false;               // если убили
@@ -78,12 +73,9 @@ public class Enemy_old : Mover
     public float audioPitch;                // установка питч звука
 
     public GameObject mapIcon;              // иконка для карты 
-
     bool direction;                         // для рандомного направления зомби
-
     public GameObject darkEffect;           // эффект тьмы
-
-    public bool granateInRange;    
+    public bool granateInRange;             // для следования за гранатой (пока не используется)
 
 
     //public SphereCollider weaponPickUpCollider; // ccылка на колайдер оружия
@@ -134,14 +126,14 @@ public class Enemy_old : Mover
             if (random3 == 1)                       // || random3 == 2
                 hitbox.grabChardge = true;
 
-            hitbox.damage = 6;
+            hitbox.damage = damage;                 // урон
             hitbox.cooldown = 2.5f;                 // кд атаки
             hitbox.attackSpeed = 1.3f;              // скорость атаки
-            maxHealth = 80;
+            
             if (darkZombie)
             {
                 hitbox.damage *= 2;
-                maxHealth = 700;
+                maxHealth *= 8;
                 cooldownSlow = 0;
                 darkEffect.SetActive(true);
             }
@@ -168,15 +160,15 @@ public class Enemy_old : Mover
             if (random3 == 1)
                 hitbox.grabChardge = true;
 
-            hitbox.damage = 8;
+            hitbox.damage = damage + 2;
             hitbox.cooldown = 2f;
             hitbox.attackSpeed = 1.6f;
             agent.speed = 2f;
-            maxHealth = 120;
+            maxHealth = maxHealth + 40;
             if (darkZombie)
             {
                 hitbox.damage *= 2;
-                maxHealth = 1000;
+                maxHealth *= 8;
                 cooldownSlow = 0.1f;
                 darkEffect.SetActive(true);
             }
@@ -188,16 +180,16 @@ public class Enemy_old : Mover
         {
             agonyZombie = true;
             hitbox.grabChardge = false;
-            hitbox.damage = 10;
+            hitbox.damage = damage + 4;
             hitbox.cooldown = 1.5f;
             hitbox.attackSpeed = 2f;
             //int randomSpeedStrong = Random.Range(1, 8);
             agent.speed = 5f;
-            maxHealth = 200;
+            maxHealth = maxHealth + 120;
             if (darkZombie)
             {
                 hitbox.damage *= 2;
-                maxHealth = 1200;
+                maxHealth *= 6;
                 cooldownSlow = 0.2f;
                 darkEffect.SetActive(true);
             }

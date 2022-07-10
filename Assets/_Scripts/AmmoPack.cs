@@ -5,7 +5,7 @@ using UnityEngine;
 public class AmmoPack : MonoBehaviour
 {
     Player player;                          // сслыка на игрока
-    public RaycastWeapon[] weapons;         // массив оружий             
+    public RaycastWeapon[] weapons;         // массив оружий           
 
     int weaponNumber;                       // переменная для выбора оружия
 
@@ -22,9 +22,7 @@ public class AmmoPack : MonoBehaviour
 
     public string message;                  // сообщение при подборе патронов
     public bool messageReady;               // сообщение готово
-
-
-    // Стоимость патронов
+    
     [Header("Стоимость патронов")]
     public int ammoSoulsPistol;
     public int ammoSoulsAR;
@@ -34,8 +32,7 @@ public class AmmoPack : MonoBehaviour
     public int ammoSoulsPulemet;
     public int ammoSoulsHp;
     public int ammoSoulsGranate;
-
-    // Стоимость оружия
+    
     [Header("Стоимость оружия")]
     public int WeaponSoulsAR;
     public int WeaponSoulsRevolver;
@@ -44,8 +41,7 @@ public class AmmoPack : MonoBehaviour
     public int WeaponSoulsPulemet;
     public int soulsArmor;
     public int soulsArmorBlack;
-
-    // Стоимость апгрейда оружия
+    
     [Header("Стоимость апгрейда оружия")]
     public int WeaponSoulsAxeUpgreade;
     public int WeaponSoulsPistolUpgreade;
@@ -68,7 +64,6 @@ public class AmmoPack : MonoBehaviour
     {
         player = GameManager.instance.player;
     }
-
 
     public void GiveAmmo (string ammoType)
     {
@@ -313,7 +308,7 @@ public class AmmoPack : MonoBehaviour
                     w.clipSize += 10;
                     souls -= WeaponSoulsPistolUpgreade;
 
-                    Debug.Log("Pistol Upgraded");
+                    //Debug.Log("Pistol Upgraded");
                 }
                 else
                 {
@@ -330,7 +325,7 @@ public class AmmoPack : MonoBehaviour
                     w.clipSize += 20;
                     souls -= WeaponSoulsARUpgreade;
 
-                    Debug.Log("AR Upgraded");
+                    //Debug.Log("AR Upgraded");
                 }
                 else
                 {
@@ -347,7 +342,7 @@ public class AmmoPack : MonoBehaviour
                     w.clipSize += 3;
                     souls -= WeaponSoulsRevolverUpgreade;
 
-                    Debug.Log("Revolver Upgraded");
+                    //Debug.Log("Revolver Upgraded");
                 }
                 else
                 {
@@ -364,7 +359,7 @@ public class AmmoPack : MonoBehaviour
                     w.clipSize += 8;
                     souls -= WeaponSoulsShotgunUpgreade;
 
-                    Debug.Log("Shotgun Upgraded");
+                    //Debug.Log("Shotgun Upgraded");
                 }
                 else
                 {
@@ -381,7 +376,7 @@ public class AmmoPack : MonoBehaviour
                     w.clipSize += 5;
                     souls -= WeaponSoulsSVDUpgreade;
 
-                    Debug.Log("SVD Upgraded");
+                    //Debug.Log("SVD Upgraded");
                 }
                 else
                 {
@@ -398,7 +393,7 @@ public class AmmoPack : MonoBehaviour
                     w.clipSize += 50;
                     souls -= WeaponSoulsPulemetUpgreade;
 
-                    Debug.Log("Pulemet Upgraded");
+                    //Debug.Log("Pulemet Upgraded");
                 }
                 else
                 {
@@ -484,6 +479,5 @@ public class AmmoPack : MonoBehaviour
         message = messageToSend;
         messageReady = true;
     }
-
 }
 

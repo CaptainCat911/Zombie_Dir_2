@@ -24,6 +24,8 @@ public class EnemySpawnPoint : MonoBehaviour
     public int strongZombieChanse;          // шанс сильного зомби
     public int mediumZombieChanse;          // шанс сильного зомби
     public int darkZombieChanse;            // шанс темного зомби
+    
+    
         
 
 
@@ -74,11 +76,18 @@ public class EnemySpawnPoint : MonoBehaviour
         agent.Warp(transform.position);                             // Перемещаем префаб к спавнеру
         Enemy_old enemy = go.GetComponent<Enemy_old>();             // находим скрипт
 
+
+        if (GameManager.instance.mutation)
+        {
+            enemy.damage *= GameManager.instance.mutationNumber; 
+            enemy.maxHealth *= GameManager.instance.mutationNumber; 
+        }
+
+
         int randomDark = Random.Range(1, 101);                      // шанс темного зомби
         if (randomDark <= darkZombieChanse)
         {
             enemy.darkZombie = true;
-            //enemy.hitbox.damage = 12;
         }
 
         int randomMedium = Random.Range(1, 101);                    // шанс среднего зомби

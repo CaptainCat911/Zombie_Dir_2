@@ -2527,13 +2527,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 1
-  maxHealth: 100
+  maxHealth: 80
   armor: 0
   armorProtection: 1
   armored: 0
   pushRecoverySpeed: 0.2
   ySpeed: 0
   xSpeed: 0
+  damage: 6
   triggerLenght: 9
   findPlayerRange: 1.1
   grabPlayerRange: 4
@@ -2582,6 +2583,7 @@ MonoBehaviour:
   audioPitch: 0
   mapIcon: {fileID: 5258260262616182011}
   darkEffect: {fileID: 1235001871423691272}
+  granateInRange: 0
 --- !u!114 &361542548
 MonoBehaviour:
   m_ObjectHideFlags: 0

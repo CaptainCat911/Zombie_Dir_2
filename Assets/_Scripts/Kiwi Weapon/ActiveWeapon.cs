@@ -223,9 +223,8 @@ public class ActiveWeapon : MonoBehaviour
 
 
         // Бросок гранаты
-        if (Input.GetKeyDown(KeyCode.G) && !reloaring && !granateInAction && ammoPack.granate > 0)
-        {
-            
+        if ((Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.Mouse2)) && !reloaring && !granateInAction && ammoPack.granate > 0)
+        {            
             float dist = Vector3.Distance(transform.position, player.pointer.position);
             if (dist > 5f)
             {
