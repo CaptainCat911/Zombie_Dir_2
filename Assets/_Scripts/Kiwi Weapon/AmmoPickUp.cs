@@ -81,36 +81,43 @@ public class AmmoPickUp : Fighter
             {
                 case "9":
                     playerAmmo.allAmmo_9 += ammoSize;
-                    playerAmmo.message = "+ патроны пистолет";
-                    break;
+                playerAmmo.message = "Пистолет + " + ammoSize + " патронов";
+                break;
+
                 case "0.357":
                     playerAmmo.allAmmo_0_357 += ammoSize;
-                    playerAmmo.message = "+ патроны револьвер";
-                    break;
+                    playerAmmo.message = "Револьвер + " + ammoSize + " патронов";
+                break;
+
                 case "5.56":
                     playerAmmo.allAmmo_5_56 += ammoSize;
-                    playerAmmo.message = "Винтовка + 150 патронов";
-                    break;
+                    playerAmmo.message = "Винтовка + " + ammoSize + " патронов";
+                break;
+
                 case "0.12":
                     playerAmmo.allAmmo_0_12 += ammoSize;
-                    playerAmmo.message = "+ патроны дробовик";
-                    break;
+                    playerAmmo.message = "Дробовик + " + ammoSize + " патронов";
+                break;
+
                 case "7.62":
                     playerAmmo.allAmmo_7_62 += ammoSize;
-                    playerAmmo.message = "+ патроны пулемет";
-                    break;
+                    playerAmmo.message = "Пулемет + " + ammoSize + " патронов";
+                break;
+
                 case "0.50":
                     playerAmmo.allAmmo_0_50 += ammoSize;
-                    playerAmmo.message = "+ патроны СВД";
-                    break;
+                    playerAmmo.message = "СВД + " + ammoSize + " патронов";
+                break;
+
                 case "granate":
-                    playerAmmo.message = "+ 2 гранаты";
                     playerAmmo.granate += ammoSize;
+                    playerAmmo.message = "+ " + ammoSize + " гранаты";
                     break;
+
                 case "HPBox":
-                    playerAmmo.message = "+ 2 аптечки";
                     playerAmmo.HPBox += ammoSize;
-                    break;
+                    playerAmmo.message = "+ " + ammoSize + " аптечки";
+                break;
         }
 
         if (ammoType != "granate" && weapon)

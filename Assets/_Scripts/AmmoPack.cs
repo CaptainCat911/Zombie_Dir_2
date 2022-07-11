@@ -58,6 +58,53 @@ public class AmmoPack : MonoBehaviour
     bool svd;
     bool pulemet;
 
+    // Кнопки
+    [Header("Кнопки пистолет")]
+    public GameObject buttonUp_2_Pistol;
+    public GameObject buttonUp_3_Pistol;
+    public GameObject buttonUpgradedPistol;
+    int nPistol;
+
+    [Header("Кнопки АР")]
+    public GameObject buttonBuyAr;
+    public GameObject buttonUp_2_Ar;
+    public GameObject buttonUp_3_Ar;
+    public GameObject buttonUpgradedAr;
+    int nAr;
+
+    [Header("Кнопки револьвер")]
+    public GameObject buttonBuyRevolver;
+    public GameObject buttonUp_2_Revolver;
+    public GameObject buttonUp_3_Revolver;
+    public GameObject buttonUpgradedRevolver;
+    int nRevolver;
+
+    [Header("Кнопки дробовик")]
+    public GameObject buttonBuyShotgun;
+    public GameObject buttonUp_2_Shotgun;
+    public GameObject buttonUp_3_Shotgun;
+    public GameObject buttonUpgradedShotgun;
+    int nShotgun;
+
+    [Header("Кнопки СВД")]
+    public GameObject buttonBuySVD;
+    public GameObject buttonUp_2_SVD;
+    public GameObject buttonUp_3_SVD;
+    public GameObject buttonUpgradedSVD;
+    int nSVD;
+
+    [Header("Кнопки пулемет")]
+    public GameObject buttonBuyPulemet;
+    public GameObject buttonUp_2_Pulemet;
+    public GameObject buttonUp_3_Pulemet;
+    public GameObject buttonUpgradedPulemet;
+    int nPulemet;
+
+    [Header("Кнопки топор")]
+    public GameObject buttonAxeUp_2;
+    public GameObject buttonAxeUpgraded;
+
+
 
 
     public void Start()
@@ -204,25 +251,8 @@ public class AmmoPack : MonoBehaviour
                     weaponNumber = 0;                   // номер префаба
                     aR = true;                          // оружие купили
                     souls -= WeaponSoulsAR;             // забираем цену оружия из общих душ
-                }
-                else
-                {
-                    SendToMessage("Недостаточно душ");
-                    return;
-                }
-                break;
-
-            case "Shotgun":
-                if (shotgun)
-                {
-                    SendToMessage("Уже куплено !");
-                    return;
-                }
-                if (souls >= WeaponSoulsShotgun && !shotgun)
-                {
-                    weaponNumber = 1;
-                    shotgun = true;
-                    souls -= WeaponSoulsShotgun;
+                    buttonBuyAr.SetActive(false);
+                    buttonUp_2_Ar.SetActive(true);
                 }
                 else
                 {
@@ -242,6 +272,8 @@ public class AmmoPack : MonoBehaviour
                     weaponNumber = 2;
                     revolver = true;
                     souls -= WeaponSoulsRevolver;
+                    buttonBuyRevolver.SetActive(false);
+                    buttonUp_2_Revolver.SetActive(true);
                 }
                 else
                 {
@@ -249,6 +281,28 @@ public class AmmoPack : MonoBehaviour
                     return;
                 }
                 break;
+
+            case "Shotgun":
+                if (shotgun)
+                {
+                    SendToMessage("Уже куплено !");
+                    return;
+                }
+                if (souls >= WeaponSoulsShotgun && !shotgun)
+                {
+                    weaponNumber = 1;
+                    shotgun = true;
+                    souls -= WeaponSoulsShotgun;
+                    buttonBuyShotgun.SetActive(false);
+                    buttonUp_2_Shotgun.SetActive(true);
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                    return;
+                }
+                break;
+
 
             case "SVD":
                 if (svd)
@@ -261,6 +315,8 @@ public class AmmoPack : MonoBehaviour
                     weaponNumber = 3;
                     svd = true;
                     souls -= WeaponSoulsSVD;
+                    buttonBuySVD.SetActive(false);
+                    buttonUp_2_SVD.SetActive(true);
                 }
                 else
                 {
@@ -280,6 +336,8 @@ public class AmmoPack : MonoBehaviour
                     weaponNumber = 4;
                     pulemet = true;
                     souls -= WeaponSoulsPulemet;
+                    buttonBuyPulemet.SetActive(false);
+                    buttonUp_2_Pulemet.SetActive(true);
                 }
                 else
                 {
@@ -308,6 +366,18 @@ public class AmmoPack : MonoBehaviour
                     w.clipSize += 10;
                     souls -= WeaponSoulsPistolUpgreade;
 
+                    nPistol++;
+                    if (nPistol == 1)
+                    {
+                        buttonUp_2_Pistol.SetActive(false);
+                        buttonUp_3_Pistol.SetActive(true);
+                    }
+                    if (nPistol == 2)
+                    {
+                        buttonUp_3_Pistol.SetActive(false);
+                        buttonUpgradedPistol.SetActive(true);
+                    }
+
                     //Debug.Log("Pistol Upgraded");
                 }
                 else
@@ -324,6 +394,19 @@ public class AmmoPack : MonoBehaviour
                     w.rayDamage += 10;
                     w.clipSize += 20;
                     souls -= WeaponSoulsARUpgreade;
+
+                    nAr++;
+                    if (nAr == 1) 
+                    {
+                        buttonUp_2_Ar.SetActive(false);
+                        buttonUp_3_Ar.SetActive(true);
+                    }
+                    if (nAr == 2)
+                    {
+                        buttonUp_3_Ar.SetActive(false);
+                        buttonUpgradedAr.SetActive(true);
+                    }
+
 
                     //Debug.Log("AR Upgraded");
                 }
@@ -342,6 +425,18 @@ public class AmmoPack : MonoBehaviour
                     w.clipSize += 3;
                     souls -= WeaponSoulsRevolverUpgreade;
 
+                    nRevolver++;
+                    if (nRevolver == 1)
+                    {
+                        buttonUp_2_Revolver.SetActive(false);
+                        buttonUp_3_Revolver.SetActive(true);
+                    }
+                    if (nRevolver == 2)
+                    {
+                        buttonUp_3_Revolver.SetActive(false);
+                        buttonUpgradedRevolver.SetActive(true);
+                    }
+
                     //Debug.Log("Revolver Upgraded");
                 }
                 else
@@ -358,6 +453,18 @@ public class AmmoPack : MonoBehaviour
                     w.rayDamage += 5;
                     w.clipSize += 8;
                     souls -= WeaponSoulsShotgunUpgreade;
+
+                    nShotgun++;
+                    if (nShotgun == 1)
+                    {
+                        buttonUp_2_Shotgun.SetActive(false);
+                        buttonUp_3_Shotgun.SetActive(true);
+                    }
+                    if (nShotgun == 2)
+                    {
+                        buttonUp_3_Shotgun.SetActive(false);
+                        buttonUpgradedShotgun.SetActive(true);
+                    }
 
                     //Debug.Log("Shotgun Upgraded");
                 }
@@ -376,6 +483,19 @@ public class AmmoPack : MonoBehaviour
                     w.clipSize += 5;
                     souls -= WeaponSoulsSVDUpgreade;
 
+                    nSVD++;
+                    if (nSVD == 1)
+                    {
+                        buttonUp_2_SVD.SetActive(false);
+                        buttonUp_3_SVD.SetActive(true);
+                    }
+                    if (nSVD == 2)
+                    {
+                        buttonUp_3_SVD.SetActive(false);
+                        buttonUpgradedSVD.SetActive(true);
+                    }
+
+
                     //Debug.Log("SVD Upgraded");
                 }
                 else
@@ -392,6 +512,18 @@ public class AmmoPack : MonoBehaviour
                     w.rayDamage += 20;
                     w.clipSize += 50;
                     souls -= WeaponSoulsPulemetUpgreade;
+
+                    nPulemet++;
+                    if (nPulemet == 1)
+                    {
+                        buttonUp_2_Pulemet.SetActive(false);
+                        buttonUp_3_Pulemet.SetActive(true);
+                    }
+                    if (nPulemet == 2)
+                    {
+                        buttonUp_3_Pulemet.SetActive(false);
+                        buttonUpgradedPulemet.SetActive(true);
+                    }
 
                     //Debug.Log("Pulemet Upgraded");
                 }
@@ -411,6 +543,9 @@ public class AmmoPack : MonoBehaviour
             player.activeWeapon.attackRadiusHitBox += 0.6f;
             player.activeWeapon.axeEffectSmoke.SetActive(true);
             souls -= WeaponSoulsAxeUpgreade;
+
+            buttonAxeUp_2.SetActive(false);
+            buttonAxeUpgraded.SetActive(true);
         }
         else
         {

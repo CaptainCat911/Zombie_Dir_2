@@ -340,9 +340,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 1
   maxHealth: 1
+  armor: 0
+  armorProtection: 0
+  armored: 0
   pushRecoverySpeed: 0.2
   ammoType: 0.12
-  ammoSize: 72
+  ammoSize: 56
   activeWeapon: {fileID: 0}
   animBox: {fileID: 0}
   textMessage: {fileID: 0}

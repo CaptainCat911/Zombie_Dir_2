@@ -154,9 +154,7 @@ public class GameManager : MonoBehaviour
         diffManager = GetComponent<DiffManager>();
         dialogueTrig = GetComponent<DialogueTrigger>();                                     // Ссылка на диалог
         spawnPoints = spawnPointsGameobject.GetComponentsInChildren<EnemySpawnPoint>();
-        transformSpawnPoints = spawnPointsGameobject.GetComponentsInChildren<Transform>();
-
-        
+        transformSpawnPoints = spawnPointsGameobject.GetComponentsInChildren<Transform>();        
 
 
         if (mainScene)
@@ -166,7 +164,7 @@ public class GameManager : MonoBehaviour
         if (!test)
         {
             playerStop = true;                                                              // забираем контроль
-            StartCoroutine(DialogePause(delayUp));                                                 // начальный диалог 
+            StartCoroutine(DialogePause(delayUp));                                          // начальный диалог 
         }
         blackScreen.SetActive(true);                                                        // включаем черный экран (на ~полсекунды)
         tempCam.SetActive(true);                                                            // для карты
@@ -185,7 +183,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             //SaveState();
-            SetDifficulty();
+            //SetDifficulty();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -303,12 +301,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DialogePause(int delay)                         // начальный ролик и настройки
     {
-        yield return new WaitForSeconds(1f);
-        blackScreen.SetActive(false);
+        yield return new WaitForSeconds(1f);                    // задержка для черного экрана
+        blackScreen.SetActive(false);                           // отключаем чёрный экран
         yield return new WaitForSeconds(delay);                 // задержка пока персонаж встаёт     
         dialogueTrig.TriggerDialogue(0);                        // показываем диалог
         PauseWithDelay();                                       // паузу, чтобы было время почитать
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
         StartCoroutine(ActionStart());
 
         //player.activeWeapon.EquipActiveStart();

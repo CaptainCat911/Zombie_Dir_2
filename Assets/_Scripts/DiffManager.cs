@@ -88,7 +88,7 @@ public class DiffManager : MonoBehaviour
     // старт волны с задержкой
     IEnumerator SafeTime(int diffLevel)                               
     {
-        if (waveNumber == 1 && !GameManager.instance.mutation)
+        if (waveN == 1 && !GameManager.instance.mutation)
             yield return new WaitForSeconds(delayFirstWave);            // задержка перед первой волной
         else
             yield return new WaitForSeconds(delayWave);                 // задержка перед волной
