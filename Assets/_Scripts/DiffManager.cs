@@ -70,11 +70,11 @@ public class DiffManager : MonoBehaviour
         // Начало волны
         if (start) 
         {
-            if (testDiff)
+/*            if (testDiff)
             {
                 waveNumber = 99;
                 waveN = 99;
-            }
+            }*/
             StartCoroutine(SafeTime(waveNumber));                       // запускаем таймер до следующей
             start = false;                                              // сбрасываем старт            
             GameManager.instance.noKillSphere = false;                  // спаунсфера убивает зомби за пределами

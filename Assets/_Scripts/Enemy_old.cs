@@ -519,8 +519,10 @@ public class Enemy_old : Mover
             GameManager.instance.enemyCount -= 1;               // из счётчика зомби на карте
 
         GameManager.instance.player.ammoPack.souls += 1;        // + души
+        if (darkZombie)
+            GameManager.instance.player.ammoPack.souls += 1;    // + ещё душа, если зомби тёмный
 
-            // выпадение патронов        
+        // выпадение патронов        
         if (randomAmmo >= ammoChanse)
         {            
             if (!GameManager.instance.questAmmo)                // если не начали квест

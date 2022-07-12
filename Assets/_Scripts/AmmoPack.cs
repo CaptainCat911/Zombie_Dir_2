@@ -105,8 +105,6 @@ public class AmmoPack : MonoBehaviour
     public GameObject buttonAxeUpgraded;
 
 
-
-
     public void Start()
     {
         player = GameManager.instance.player;
@@ -120,7 +118,7 @@ public class AmmoPack : MonoBehaviour
             case "9":
                 if (souls >= ammoSoulsPistol)
                 {
-                    allAmmo_9 += 40;
+                    allAmmo_9 += 100;
                     souls -= ammoSoulsPistol;
                 }
                 else
@@ -145,7 +143,7 @@ public class AmmoPack : MonoBehaviour
             case "0.12":
                 if (souls >= ammoSoulsShotgun)
                 {
-                    allAmmo_0_12 += 52;
+                    allAmmo_0_12 += 36;
                     souls -= ammoSoulsShotgun;
                 }
                 else
@@ -391,7 +389,7 @@ public class AmmoPack : MonoBehaviour
             {
                 if (souls >= WeaponSoulsARUpgreade)
                 {
-                    w.rayDamage += 10;
+                    w.rayDamage += 12;
                     w.clipSize += 20;
                     souls -= WeaponSoulsARUpgreade;
 
@@ -450,8 +448,8 @@ public class AmmoPack : MonoBehaviour
             {
                 if (souls >= WeaponSoulsShotgunUpgreade)
                 {
-                    w.rayDamage += 5;
-                    w.clipSize += 8;
+                    w.rayDamage += 12;
+                    w.clipSize += 4;
                     souls -= WeaponSoulsShotgunUpgreade;
 
                     nShotgun++;
@@ -479,7 +477,7 @@ public class AmmoPack : MonoBehaviour
             {
                 if (souls >= WeaponSoulsSVDUpgreade)
                 {
-                    w.rayDamage += 200;
+                    w.rayDamage += 300;
                     w.clipSize += 5;
                     souls -= WeaponSoulsSVDUpgreade;
 
@@ -509,7 +507,7 @@ public class AmmoPack : MonoBehaviour
             {
                 if (souls >= WeaponSoulsPulemetUpgreade)
                 {
-                    w.rayDamage += 20;
+                    w.rayDamage += 26;
                     w.clipSize += 50;
                     souls -= WeaponSoulsPulemetUpgreade;
 

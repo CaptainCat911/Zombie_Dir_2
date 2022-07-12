@@ -48285,7 +48285,7 @@ MonoBehaviour:
   ammoType: 0.50
   indexNumberWeapon: 3
   cooldown: 0.3
-  rayDamage: 210
+  rayDamage: 300
   pushForce: 0.9
   allAmmo: 0
   clipSize: 15
@@ -48367,7 +48367,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
