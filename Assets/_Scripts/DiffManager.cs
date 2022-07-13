@@ -108,7 +108,7 @@ public class DiffManager : MonoBehaviour
         if (!testDiff)
             npc.SetDestinationNPC(positionNPC, false);                  // направляем НПС к точке 
         //Debug.Log("Wave Go !");
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(12);                            // за это время происходят телепортации
 
         if (!testDiff)
             npc.SetDestinationNPC(new Vector3(322, 0, -281), true);     // портуем НПС в домик

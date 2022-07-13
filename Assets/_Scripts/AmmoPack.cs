@@ -390,7 +390,7 @@ public class AmmoPack : MonoBehaviour
                 if (souls >= WeaponSoulsARUpgreade)
                 {
                     w.rayDamage += 12;
-                    w.clipSize += 20;
+                    w.clipSize += 15;
                     souls -= WeaponSoulsARUpgreade;
 
                     nAr++;

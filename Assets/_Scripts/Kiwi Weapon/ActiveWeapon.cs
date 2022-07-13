@@ -45,37 +45,37 @@ public class ActiveWeapon : MonoBehaviour
     //int iMelee = -1;
 
 
-    private float lastThrow;        // для кд топора
+    private float lastThrow;                // для кд топора
     //public float cooldownGranate = 2f;  // кд ударов
 
     public WeaponAnimationEvents animationEvents;
 
     public float attackRadiusHitBox = 1;    // радиус хитбокса
-    public LayerMask layerEnemy;       // маска для зомби
-    public int damage;                // урон топора
-    public float pushForce;           // замедление
+    public LayerMask layerEnemy;            // маска для зомби
+    public int damage;                      // урон топора
+    public float pushForce;                 // замедление
 
-    public Transform hitBox;        // хитбокс (где будет создаваться сфера для урона)
+    public Transform hitBox;                // хитбокс (где будет создаваться сфера для урона)
 
-    public GameObject axeBack;      // топор за спиной
-    public GameObject axeHand;      // топор в руках
-    public bool getAxe = false;     // подобрал топор или нет
+    public GameObject axeBack;              // топор за спиной
+    public GameObject axeHand;              // топор в руках
+    public bool getAxe = false;             // подобрал топор или нет
 
-    public GameObject granateBack;      // граната за спиной
-    public GameObject granateHand;      // граната в руках
-    public GameObject granateThrow;     // граната, которую бросают в руках
-    public Transform rightHand;         // трансформ правой руки для броска гранаты
-    public int granateForce;            // сила броска гранаты
+    public GameObject granateBack;          // граната за спиной
+    public GameObject granateHand;          // граната в руках
+    public GameObject granateThrow;         // граната, которую бросают в руках
+    public Transform rightHand;             // трансформ правой руки для броска гранаты
+    public int granateForce;                // сила броска гранаты
 
-    AmmoPack ammoPack;                  // ссылка на скрипт патронов (инвентарь)
+    AmmoPack ammoPack;                      // ссылка на скрипт патронов (инвентарь)
 
-    public AudioSourses audioSourses;   // ссылка на объект с аудиоисточниками
+    public AudioSourses audioSourses;       // ссылка на объект с аудиоисточниками
 
-    bool granateInAction;               // для правильного броска гранаты
+    bool granateInAction;                   // для правильного броска гранаты
 
-    AmmoPickUpSphere ammoSphere;        // ссылка на скрипт сферы для поднятия патронов
+    AmmoPickUpSphere ammoSphere;            // ссылка на скрипт сферы для поднятия патронов
 
-    public LayerMask layerAmmo;         // маска для патронов
+    public LayerMask layerAmmo;             // маска для патронов
 
     public List<RaycastWeapon> listWeapons;     // список всех оружий
 

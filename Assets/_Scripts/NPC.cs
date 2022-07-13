@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class NPC : Mover
 {
@@ -58,8 +59,12 @@ public class NPC : Mover
     bool playerInRange;                     // игрок в ренже нпс
     public bool meatWithPlayer;             // встреча с игроком
     public bool meatWithPlayerDone;         // встретился с игроком
- 
 
+    public VisualEffect effectSmoke;        // эффект дыма
+    float xSize = 1.7f;                     // размер дыма
+    public GameObject closes;               // одежда
+    bool effectIncrise;                     // увеличивать дым
+    bool effectDecrise;                     // уменьшать дым
 
 
 
@@ -109,7 +114,7 @@ public class NPC : Mover
         // Is the player in range?
         else
         {            
-            if (Vector3.Distance(playerTransform.position, transform.position) < triggerLenght)     // если дистанция до игрока < тригер дистанции
+            if (Vector3.Distance(playerTransform.position, transform.position) < triggerLenght && !GameManager.instance.diffManager.testDiff)     // если дистанция до игрока < тригер дистанции
             {
                 //chasing = true;                                                                   // преследование включено 
                 playerInRange = true;                       // игрок в ренже
@@ -199,7 +204,33 @@ public class NPC : Mover
 
         //Debug.Log(collidingWithPlayer);
        
-        anim.SetFloat("Speed", agent.velocity.magnitude / maxSpeed);
+        anim.SetFloat("Speed", agent.velocity.magnitude / maxSpeed);        // установка параметра скорости в аниматоре
+
+
+
+        // Эффект дыма
+        if (effectIncrise)
+        {
+            xSize += 0.02f;
+            effectSmoke.SetFloat("EffectSize", xSize);
+            if (xSize > 6)
+            {
+                effectIncrise = false;
+                closes.SetActive(false);
+                effectDecrise = true;
+            }
+        }
+
+        if (effectDecrise)
+        {
+            xSize -= 0.04f;
+            effectSmoke.SetFloat("EffectSize", xSize);
+            if (xSize < 0.1f)
+            {
+                effectDecrise = false;
+            }
+        }
+
     }
 
     public void Update()
@@ -208,15 +239,34 @@ public class NPC : Mover
         {
             SetDestinationNPC(playerTransform.position, false);
         }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            xSize += 0.1f;
+            effectSmoke.SetFloat("EffectSize", xSize);
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            xSize -= 0.1f;
+            effectSmoke.SetFloat("EffectSize", xSize);
+        }
     }
 
 
     public void SetDestinationNPC(Vector3 position, bool warp)
     {
         if (warp)
+        {
             agent.Warp(position);
+            effectSmoke.SetFloat("EffectSize", 1.7f);
+            closes.SetActive(true);
+        }
         else
+        {
             agent.SetDestination(position);
+            effectIncrise = true;
+        }
     }   
 
 
@@ -260,10 +310,6 @@ public class NPC : Mover
         hitEffectBlood.transform.forward = transform.forward;
         hitEffectBlood.Emit(1);
     }
-
-
-
-
 
 
     void FaceTarget()
