@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     int i = 0;                                  // счетчик для сложности
 
     bool pause = false;                          // для паузы
-    bool slowMo = false;                        // для слоумоушен
+    //bool slowMo = false;                        // для слоумоушен
         
     public bool playerDead = false;             // заряд для диалога при поражении
 
@@ -192,23 +192,24 @@ public class GameManager : MonoBehaviour
             {
                 menu.SetActive(false);                
             }
+            npc.CloseMagazine();
             player.aiming = true;
             Time.timeScale = 1f;
         }
 
         // Слоумоушион нах
-        if (Input.GetKeyDown(KeyCode.U))
+/*        if (Input.GetKeyDown(KeyCode.U))
         {
             slowMo = !slowMo;
             if (slowMo)
                 Time.timeScale = 0.3f;
             if (!slowMo)
                 Time.timeScale = 1f;
-        }        
+        }  */      
 
 
         // Пауза
-        if (Input.GetKeyDown(KeyCode.Escape) && !playerDead && !startCinema)
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerDead && !startCinema && !npc.magazineOpen)
         {            
             if (pause)
             {
@@ -803,6 +804,22 @@ public class GameManager : MonoBehaviour
                     zombieToKillWaveGM = 1000000;
                     diffManager.positionNPC = pointsNPC[20].position;
 
+                    //diffManager.positionNPC = new Vector3(162, 0, -170);
+                }
+                break;
+
+            case 101:
+                foreach (EnemySpawnPoint spawnPoint in spawnPoints)
+                {
+                    spawnPoint.maxZombie = 60;
+                    spawnPoint.enemyNumberSpawn = 5;
+                    spawnPoint.cooldown = 2;
+                    spawnPoint.mediumZombieChanse = 0;
+                    spawnPoint.strongZombieChanse = 100;
+                    spawnPoint.darkZombieChanse = 100;
+                    zombieToKillWaveGM = 1000000;
+
+                    //diffManager.positionNPC = pointsNPC[20].position;
                     //diffManager.positionNPC = new Vector3(162, 0, -170);
                 }
                 break;

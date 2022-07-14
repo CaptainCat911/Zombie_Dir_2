@@ -8,7 +8,7 @@ public class DiffManager : MonoBehaviour
     NPC npc;                                // сслыка на НПС
 
     public int waveNumber = 1;              // номер волны
-    public int waveN = 1;              // счётчик волны
+    public int waveN = 1;                   // счётчик волны
 
     public int zombieToKillWave;            // кол-во зомби в волне, сколько убить надо
 
@@ -98,7 +98,7 @@ public class DiffManager : MonoBehaviour
 /*        if (waveNumber == 21)
             message = "Пошла финальная волна";                       
         else*/
-        message = "Пошла волна №" + waveN;                         
+        message = "Волна №" + waveN;                              
         messageReady = true;                       
         yield return new WaitForSeconds(1);
         
@@ -108,7 +108,7 @@ public class DiffManager : MonoBehaviour
         if (!testDiff)
             npc.SetDestinationNPC(positionNPC, false);                  // направляем НПС к точке 
         //Debug.Log("Wave Go !");
-        yield return new WaitForSeconds(12);                            // за это время происходят телепортации
+        yield return new WaitForSeconds(9);                            // за это время происходит телепортация
 
         if (!testDiff)
             npc.SetDestinationNPC(new Vector3(322, 0, -281), true);     // портуем НПС в домик

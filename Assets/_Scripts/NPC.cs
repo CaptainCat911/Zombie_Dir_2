@@ -66,6 +66,14 @@ public class NPC : Mover
     bool effectIncrise;                     // увеличивать дым
     bool effectDecrise;                     // уменьшать дым
 
+    private bool timerStart;                // таймер стартовал
+    private bool timerGone;                 // таймер завершён
+    private float timerStarted;             // начало отсчёта
+    public float timerTimeDelay = 5;        // сколько ждать
+    private bool magazineOpened;
+    
+
+
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -113,7 +121,14 @@ public class NPC : Mover
 
         // Is the player in range?
         else
-        {            
+        {
+            if (timerGone)       // если волна не запущена и уровень остановлен    (!GameManager.instance.diffManager.waveStarted && !GameManager.instance.diffManager.levelStop && timerGone) ||
+            {
+                GameManager.instance.diffManager.start = true;              // стартуем волну
+                GameManager.instance.diffManager.waveStarted = true;        // волна запущена
+                timerGone = false;
+            }
+
             if (Vector3.Distance(playerTransform.position, transform.position) < triggerLenght && !GameManager.instance.diffManager.testDiff)     // если дистанция до игрока < тригер дистанции
             {
                 //chasing = true;                                                                   // преследование включено 
@@ -135,11 +150,6 @@ public class NPC : Mover
 
             if (playerInRange && !GameManager.instance.diffManager.levelGo)     // если игрок в ренже и волна не идёт
             {
-                if (!GameManager.instance.diffManager.waveStarted && !GameManager.instance.diffManager.levelStop)       // если волна не запущена и уровень остановлен
-                {
-                    GameManager.instance.diffManager.start = true;              // стартуем волну
-                    GameManager.instance.diffManager.waveStarted = true;        // волна запущена
-                }   
                 FaceTarget();
             }
             else
@@ -177,7 +187,15 @@ public class NPC : Mover
             }            
         }
 
-        
+        // Таймер
+        if (timerStart && !magazineOpened)
+        {            
+            if (Time.time - timerStarted > timerTimeDelay)
+            {
+                timerStart = false;
+                timerGone = true;
+            }            
+        }
 
 
         //---------------------------- Проверяем столкновение с игроком ----------------------------\\
@@ -272,19 +290,31 @@ public class NPC : Mover
 
     // Магазин
     public void OpenMagazine()
-    {        
-        FaceTarget();
+    {                
         if (!magazineOpen)
         {
             magazine.SetActive(true);
-            GameManager.instance.Pause();
+            magazineOpened = true;
+            GameManager.instance.playerStop = true;
+
+            //GameManager.instance.Pause();
         }
         if (magazineOpen)
         {
-            magazine.SetActive(false);
-            GameManager.instance.UnPause();
+            CloseMagazine();
+
+            //GameManager.instance.UnPause();
         }
         magazineOpen = !magazineOpen;
+    }
+
+    public void CloseMagazine()
+    {        
+        magazine.SetActive(false);
+        magazineOpened = false;
+        GameManager.instance.playerStop = false;
+        timerStarted = Time.time;
+        timerStart = true;
     }
 
 

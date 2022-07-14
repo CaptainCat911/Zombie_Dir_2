@@ -148,6 +148,15 @@ public class ActiveWeapon : MonoBehaviour
 
     void Update()
     {
+        // Использование
+        if (Input.GetKeyDown(KeyCode.E))       //&& player.inRangeUse
+        {
+            PickUpAmmo();
+            //playerAnim.SetTrigger("Use");
+        }
+
+        //Debug.Log(player.inRangeUse);
+
         if (GameManager.instance.playerStop)            // если playerStop возвращаемся
         {            
             return;
@@ -212,14 +221,7 @@ public class ActiveWeapon : MonoBehaviour
         }
 
 
-        // Использование
-        if (Input.GetKeyDown(KeyCode.E))       //&& player.inRangeUse
-        {
-            PickUpAmmo();
-            //playerAnim.SetTrigger("Use");
-        }
 
-        //Debug.Log(player.inRangeUse);
 
 
         // Бросок гранаты
@@ -523,7 +525,7 @@ public class ActiveWeapon : MonoBehaviour
             if (enObjectBox.tag == "Enemy")
             {
                 NPC npc = enObjectBox.GetComponentInParent<NPC>();
-                if (npc)
+                if (npc && !GameManager.instance.diffManager.levelGo)           // если есть НПС и волна ещё не началась
                 {
                     npc.OpenMagazine();
                     //Debug.Log("Use!");
