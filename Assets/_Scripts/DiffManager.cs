@@ -62,7 +62,8 @@ public class DiffManager : MonoBehaviour
             GameManager.instance.enemyKilledCount = 0;                  // сбрасываем счётчик убийства зомби
             waveStarted = false;                                        // волна не стартовала
             levelStop = false;                                          // сбрасываем остановку волны
-            StartCoroutine(NPCdelay(3));                                // вызываем задержку перед вызовом НПС
+            if (!npc.dead)
+                StartCoroutine(NPCdelay(3));                                // вызываем задержку перед вызовом НПС
 
             //start = true;                                               // старт волны
         }
@@ -70,11 +71,16 @@ public class DiffManager : MonoBehaviour
         // Начало волны
         if (start) 
         {
-/*            if (testDiff)
+            /*            if (testDiff)
+                        {
+                            waveNumber = 99;
+                            waveN = 99;
+                        }*/
+            if (npc.dead)
             {
-                waveNumber = 99;
-                waveN = 99;
-            }*/
+                waveNumber = 101;
+                waveN = 101;
+            }
             StartCoroutine(SafeTime(waveNumber));                       // запускаем таймер до следующей
             start = false;                                              // сбрасываем старт            
             GameManager.instance.noKillSphere = false;                  // спаунсфера убивает зомби за пределами
@@ -95,24 +101,26 @@ public class DiffManager : MonoBehaviour
 
         //Debug.Log("Cor !");
         GameManager.instance.SetDifficultyNumber(diffLevel);            // устанавливаем сложность
-/*        if (waveNumber == 21)
-            message = "Пошла финальная волна";                       
-        else*/
-        message = "Волна №" + waveN;                              
+        if (waveNumber == 101)
+            message = "Волна № ???";
+        else
+            message = "Волна №" + waveN;                              
         messageReady = true;                       
         yield return new WaitForSeconds(1);
         
         levelGo = true;                                                 // волна запущена
         zombieToKillWave = GameManager.instance.zombieToKillWaveGM;     // устанавливаем кол-во зомби для завершения волны
-        npc.mapIcon.SetActive(false);                                   // отключаем иконку НПС на карте
-        if (!testDiff)
+        if (!npc.dead)
+            npc.mapIcon.SetActive(false);                                   // отключаем иконку НПС на карте
+        if (!testDiff && !npc.dead)
             npc.SetDestinationNPC(positionNPC, false);                  // направляем НПС к точке 
         //Debug.Log("Wave Go !");
         yield return new WaitForSeconds(9);                            // за это время происходит телепортация
 
-        if (!testDiff)
+        if (!testDiff && !npc.dead)
             npc.SetDestinationNPC(new Vector3(322, 0, -281), true);     // портуем НПС в домик
-        npc.anim.SetTrigger("Dance!");
+        if (!npc.dead)
+            npc.anim.SetTrigger("Dance!");
     }
 
 

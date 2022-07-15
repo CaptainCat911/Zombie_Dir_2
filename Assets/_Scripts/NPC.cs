@@ -55,7 +55,9 @@ public class NPC : Mover
     public GameObject mapIcon;              // иконка для карты 
 
     public GameObject magazine;             // ссылка на магазин (UI)
-    public bool magazineOpen;               // магазин открыт
+    public bool magazineOpen;               // магазин открыт (для открытия закрытия магазина)
+    private Animator animMagazine;
+
     bool playerInRange;                     // игрок в ренже нпс
     public bool meatWithPlayer;             // встреча с игроком
     public bool meatWithPlayerDone;         // встретился с игроком
@@ -70,7 +72,7 @@ public class NPC : Mover
     private bool timerGone;                 // таймер завершён
     private float timerStarted;             // начало отсчёта
     public float timerTimeDelay = 5;        // сколько ждать
-    private bool magazineOpened;
+    private bool magazineOpened;            // магазин открыт (для отключения управления и отсрочку старта)
     
 
 
@@ -96,6 +98,7 @@ public class NPC : Mover
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         hitbox = GetComponentInChildren<EnemyHitbox>();
+        animMagazine = magazine.GetComponentInChildren<Animator>();
         //capsuleCollider = GetComponentInChildren<CapsuleCollider>();
         selfScript = GetComponent<Enemy_old>();      
         tempAgentSpeed = agent.speed;
@@ -111,6 +114,29 @@ public class NPC : Mover
 
     private void FixedUpdate()
     {
+        // Эффект дыма
+        if (effectIncrise)
+        {
+            xSize += 0.02f;
+            effectSmoke.SetFloat("EffectSize", xSize);
+            if (xSize > 6)
+            {
+                effectIncrise = false;
+                closes.SetActive(false);
+                effectDecrise = true;
+            }
+        }
+
+        if (effectDecrise)
+        {
+            xSize -= 0.04f;
+            effectSmoke.SetFloat("EffectSize", xSize);
+            if (xSize < 0.1f)
+            {
+                effectDecrise = false;
+            }
+        }
+
         if (dead)
             return;
 
@@ -226,28 +252,7 @@ public class NPC : Mover
 
 
 
-        // Эффект дыма
-        if (effectIncrise)
-        {
-            xSize += 0.02f;
-            effectSmoke.SetFloat("EffectSize", xSize);
-            if (xSize > 6)
-            {
-                effectIncrise = false;
-                closes.SetActive(false);
-                effectDecrise = true;
-            }
-        }
 
-        if (effectDecrise)
-        {
-            xSize -= 0.04f;
-            effectSmoke.SetFloat("EffectSize", xSize);
-            if (xSize < 0.1f)
-            {
-                effectDecrise = false;
-            }
-        }
 
     }
 
@@ -258,7 +263,7 @@ public class NPC : Mover
             SetDestinationNPC(playerTransform.position, false);
         }
 
-        if (Input.GetKeyDown(KeyCode.V))
+/*        if (Input.GetKeyDown(KeyCode.V))
         {
             xSize += 0.1f;
             effectSmoke.SetFloat("EffectSize", xSize);
@@ -268,7 +273,7 @@ public class NPC : Mover
         {
             xSize -= 0.1f;
             effectSmoke.SetFloat("EffectSize", xSize);
-        }
+        }*/
     }
 
 
@@ -290,10 +295,10 @@ public class NPC : Mover
 
     // Магазин
     public void OpenMagazine()
-    {                
+    {   
         if (!magazineOpen)
         {
-            magazine.SetActive(true);
+            animMagazine.SetBool("Open", true);
             magazineOpened = true;
             GameManager.instance.playerStop = true;
 
@@ -309,8 +314,8 @@ public class NPC : Mover
     }
 
     public void CloseMagazine()
-    {        
-        magazine.SetActive(false);
+    {
+        animMagazine.SetBool("Open", false);
         magazineOpened = false;
         GameManager.instance.playerStop = false;
         timerStarted = Time.time;
@@ -354,30 +359,24 @@ public class NPC : Mover
     protected override void Death()
     {
         if (dead)
-            return;   
+            return;
 
-                
-        int random = Random.Range(0, 2);
-        if (random == 1)
-            anim.SetFloat("Death_type", 1);
+        GameManager.instance.diffManager.start = true;              // стартуем волну
+        GameManager.instance.diffManager.waveStarted = true;        // волна запущена
+
+        effectIncrise = true;
         anim.SetTrigger("Death");
         //tempCapColl.SetActive(false);
        
         agent.ResetPath();
         Invoke("NavMeshDisable", 2);
-        Destroy(gameObject, timeAfterDeath);
-
-        audioSourses.idle.Stop();
-        
-        audioSourses.death.Play();                  // звук
+        Destroy(gameObject, timeAfterDeath);        
 
         mapIcon.SetActive(false);                   // убираем иконку
 
-        //selfScript.enabled = false;        
+        //selfScript.enabled = false;       
 
-        capsuleCollider.enabled = false;
-        //capsuleColliderLeftARm.enabled = false;
-        //capsuleColliderRightArm.enabled = false;
+        capsuleCollider.enabled = false;    
 
         dead = true;
     }
