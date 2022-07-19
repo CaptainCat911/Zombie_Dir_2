@@ -345,7 +345,7 @@ MonoBehaviour:
   armored: 0
   pushRecoverySpeed: 0.2
   ammoType: 5.56
-  ammoSize: 150
+  ammoSize: 100
   activeWeapon: {fileID: 0}
   animBox: {fileID: 0}
   textMessage: {fileID: 0}

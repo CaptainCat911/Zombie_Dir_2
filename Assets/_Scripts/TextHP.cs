@@ -30,6 +30,9 @@ public class TextHP : MonoBehaviour
     public Text mutationNumberText;         // мутация №
     public GameObject armorBar;             // бар армора
 
+    bool hPLow;
+    bool hPmessageCharge = true;
+
     int enemyCount;
     int enemyCountKiled;
 
@@ -61,15 +64,28 @@ public class TextHP : MonoBehaviour
         // Волна
         WaveText.text = GameManager.instance.diffManager.waveN.ToString("0");
 
-        // Мутация
+        // Мутация 
         mutationNumberText.text = GameManager.instance.mutationNumber.ToString("0");
 
         // HP
         Hp.text = player.currentHealth.ToString("0");
         if (player.currentHealth <= 25)
+        {
             animHP.SetBool("HPlow", true);
+            hPLow = true;
+        }
         else
+        {
             animHP.SetBool("HPlow", false);
+            hPLow = false;
+            hPmessageCharge = true;
+        }
+
+        if (hPLow && hPmessageCharge)
+        {
+            SendLittleMessage("Низкий уровень здоровья !");
+            hPmessageCharge = false;
+        }
 
         // Броня
         armor.text = player.armor.ToString("0");
@@ -114,6 +130,7 @@ public class TextHP : MonoBehaviour
             messageText.text = ammoPack.message;                    // берем текст из сообщения в аммопаке
             messageText.transform.position = tempPosMessage;        // возвращаем сообщение в начальную позицию
             ammoPack.messageReady = false;                          // сообщение не готово
+            messageText.color = Color.white;
         }
         messageText.transform.position = new Vector3(messageText.transform.position.x, messageText.transform.position.y + 1, messageText.transform.position.z);             // поднимаем вверх сообщение
 
@@ -127,6 +144,14 @@ public class TextHP : MonoBehaviour
         }
         bigMessageText.transform.position = new Vector3(bigMessageText.transform.position.x, bigMessageText.transform.position.y + 1, bigMessageText.transform.position.z);
     }
+
+    public void SendLittleMessage(string message)
+    {
+        ammoPack.message = message;                             // текст сообщения
+        ammoPack.messageReady = true;                           // сообщение готово
+        messageText.color = Color.red;
+    }
+
 
 /*    IEnumerator Message(string messg)
     {

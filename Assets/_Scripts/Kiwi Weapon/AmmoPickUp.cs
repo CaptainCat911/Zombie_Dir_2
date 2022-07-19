@@ -81,32 +81,32 @@ public class AmmoPickUp : Fighter
             {
                 case "9":
                     playerAmmo.allAmmo_9 += ammoSize;
-                playerAmmo.message = "Пистолет + " + ammoSize + " патронов";
+                playerAmmo.message = "+ " + ammoSize + " патронов (пистолет)";
                 break;
 
                 case "0.357":
                     playerAmmo.allAmmo_0_357 += ammoSize;
-                    playerAmmo.message = "Револьвер + " + ammoSize + " патронов";
+                    playerAmmo.message = "+ " + ammoSize + " патронов (револьвер)";
                 break;
 
                 case "5.56":
                     playerAmmo.allAmmo_5_56 += ammoSize;
-                    playerAmmo.message = "Винтовка + " + ammoSize + " патронов";
+                    playerAmmo.message = "+ " + ammoSize + " патронов (винтовка)";
                 break;
 
                 case "0.12":
                     playerAmmo.allAmmo_0_12 += ammoSize;
-                    playerAmmo.message = "Дробовик + " + ammoSize + " патронов";
+                    playerAmmo.message = "+ " + ammoSize + " патронов (дробовик)";
                 break;
 
                 case "7.62":
                     playerAmmo.allAmmo_7_62 += ammoSize;
-                    playerAmmo.message = "Пулемет + " + ammoSize + " патронов";
+                    playerAmmo.message = "+ " + ammoSize + " патронов (пулемет)";
                 break;
 
                 case "0.50":
                     playerAmmo.allAmmo_0_50 += ammoSize;
-                    playerAmmo.message = "СВД + " + ammoSize + " патронов";
+                    playerAmmo.message = "+ " + ammoSize + " патронов (СВД)";
                 break;
 
                 case "granate":

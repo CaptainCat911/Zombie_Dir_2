@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
 
     public bool mutation;                       // мутация
     public int mutationNumber = 1;              // номер мутации
+    public GameObject textMutation;             // бар мутации
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -186,6 +187,7 @@ public class GameManager : MonoBehaviour
             //SetDifficulty();
         }
 
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             foreach (GameObject menu in menus)
@@ -195,17 +197,7 @@ public class GameManager : MonoBehaviour
             npc.CloseMagazine();
             player.aiming = true;
             Time.timeScale = 1f;
-        }
-
-        // Слоумоушион нах
-/*        if (Input.GetKeyDown(KeyCode.U))
-        {
-            slowMo = !slowMo;
-            if (slowMo)
-                Time.timeScale = 0.3f;
-            if (!slowMo)
-                Time.timeScale = 1f;
-        }  */      
+        }      
 
 
         // Пауза
@@ -227,7 +219,18 @@ public class GameManager : MonoBehaviour
                 pause = true;
             }
         }
-      
+
+
+        // Слоумоушион нах
+        /*        if (Input.GetKeyDown(KeyCode.U))
+                {
+                    slowMo = !slowMo;
+                    if (slowMo)
+                        Time.timeScale = 0.3f;
+                    if (!slowMo)
+                        Time.timeScale = 1f;
+                }  */
+
 
         // Карта
         if (Input.GetKeyDown(KeyCode.M))
@@ -790,6 +793,7 @@ public class GameManager : MonoBehaviour
             case 22:
                 mutation = true;                                            // включаем мутацию
                 mutationNumber += 1;                                        // добавляем номер мутации
+                textMutation.SetActive(true);
                 break;
 
             case 99:

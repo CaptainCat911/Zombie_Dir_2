@@ -71,6 +71,7 @@ public class DiffManager : MonoBehaviour
         // Начало волны
         if (start) 
         {
+            npc.currentHealth = 10000;
             /*            if (testDiff)
                         {
                             waveNumber = 99;

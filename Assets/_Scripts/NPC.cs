@@ -65,6 +65,7 @@ public class NPC : Mover
     public VisualEffect effectSmoke;        // эффект дыма
     float xSize = 1.7f;                     // размер дыма
     public GameObject closes;               // одежда
+    [SerializeField]
     bool effectIncrise;                     // увеличивать дым
     bool effectDecrise;                     // уменьшать дым
 
@@ -249,11 +250,6 @@ public class NPC : Mover
         //Debug.Log(collidingWithPlayer);
        
         anim.SetFloat("Speed", agent.velocity.magnitude / maxSpeed);        // установка параметра скорости в аниматоре
-
-
-
-
-
     }
 
     public void Update()
@@ -301,16 +297,16 @@ public class NPC : Mover
             animMagazine.SetBool("Open", true);
             magazineOpened = true;
             GameManager.instance.playerStop = true;
+            magazineOpen = true;
 
             //GameManager.instance.Pause();
         }
-        if (magazineOpen)
+        else
         {
             CloseMagazine();
 
             //GameManager.instance.UnPause();
-        }
-        magazineOpen = !magazineOpen;
+        }        
     }
 
     public void CloseMagazine()
@@ -320,6 +316,7 @@ public class NPC : Mover
         GameManager.instance.playerStop = false;
         timerStarted = Time.time;
         timerStart = true;
+        magazineOpen = false;
     }
 
 
@@ -361,15 +358,13 @@ public class NPC : Mover
         if (dead)
             return;
 
-        GameManager.instance.diffManager.start = true;              // стартуем волну
-        GameManager.instance.diffManager.waveStarted = true;        // волна запущена
-
         effectIncrise = true;
         anim.SetTrigger("Death");
         //tempCapColl.SetActive(false);
        
         agent.ResetPath();
-        Invoke("NavMeshDisable", 2);
+        agent.enabled = false;
+        Invoke("WaveXstart", 6);
         Destroy(gameObject, timeAfterDeath);        
 
         mapIcon.SetActive(false);                   // убираем иконку
@@ -377,13 +372,13 @@ public class NPC : Mover
         //selfScript.enabled = false;       
 
         capsuleCollider.enabled = false;    
-
         dead = true;
     }
 
 
-    public void NavMeshDisable()
-    {
-        agent.enabled = false;
+    public void WaveXstart()
+    {        
+        GameManager.instance.diffManager.start = true;              // стартуем волну
+        GameManager.instance.diffManager.waveStarted = true;        // волна запущена
     }
 }
