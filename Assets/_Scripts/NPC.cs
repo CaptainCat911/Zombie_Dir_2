@@ -197,8 +197,7 @@ public class NPC : Mover
                     else                                                                            // если анимация атаки не идёт 
                     {
                         agent.SetDestination(playerTransform.position);                             // следовать к игроку
-                    }
-                        
+                    }                        
                 }
 
                 else                                                                                // если достаем до игрока
