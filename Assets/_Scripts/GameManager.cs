@@ -194,7 +194,8 @@ public class GameManager : MonoBehaviour
             {
                 menu.SetActive(false);                
             }
-            npc.CloseMagazine();
+            if (npc.magazineOpen)
+                npc.CloseMagazine();
             player.aiming = true;
             Time.timeScale = 1f;
         }      

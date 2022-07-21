@@ -255,7 +255,7 @@ public class NPC : Mover
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
-            SetDestinationNPC(playerTransform.position, false);
+            //SetDestinationNPC(playerTransform.position, false);
         }
 
 /*        if (Input.GetKeyDown(KeyCode.V))

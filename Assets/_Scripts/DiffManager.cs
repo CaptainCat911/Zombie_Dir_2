@@ -63,7 +63,7 @@ public class DiffManager : MonoBehaviour
             waveStarted = false;                                        // волна не стартовала
             levelStop = false;                                          // сбрасываем остановку волны
             if (!npc.dead)
-                StartCoroutine(NPCdelay(3));                                // вызываем задержку перед вызовом НПС
+                StartCoroutine(NPCdelay(3));                            // вызываем задержку перед вызовом НПС
 
             //start = true;                                               // старт волны
         }

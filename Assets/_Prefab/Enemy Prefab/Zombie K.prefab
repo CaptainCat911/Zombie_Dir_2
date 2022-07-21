@@ -3017,6 +3017,7 @@ GameObject:
   - component: {fileID: 6928197542805550078}
   - component: {fileID: 6312416581324132585}
   - component: {fileID: 7728485725472256260}
+  - component: {fileID: 7150653249467450716}
   m_Layer: 14
   m_Name: Enemy_Quad_Map
   m_TagString: Untagged
@@ -3099,6 +3100,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!111 &7150653249467450716
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258260262616182011}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 5385e7fb3c94be74fb94abeeab437b67, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 5385e7fb3c94be74fb94abeeab437b67, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6050872750376892019
 GameObject:
   m_ObjectHideFlags: 0
@@ -3566,15 +3583,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba9168de14c65bf4e877348032350800, type: 3}
---- !u!198 &6432700745916039422 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7277550444990453796, guid: ba9168de14c65bf4e877348032350800,
-    type: 3}
-  m_PrefabInstance: {fileID: 4448015660879124698}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6598988538634946948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7363059598760530270, guid: ba9168de14c65bf4e877348032350800,
+    type: 3}
+  m_PrefabInstance: {fileID: 4448015660879124698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6432700745916039422 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7277550444990453796, guid: ba9168de14c65bf4e877348032350800,
     type: 3}
   m_PrefabInstance: {fileID: 4448015660879124698}
   m_PrefabAsset: {fileID: 0}

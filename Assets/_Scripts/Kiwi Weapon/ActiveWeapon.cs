@@ -82,6 +82,7 @@ public class ActiveWeapon : MonoBehaviour
     public GameObject axeEffectSmoke;           // эффект дыма для топора
     public GameObject axeEffectAttack;          // эффект дыма для топора во время удара
 
+    public GameObject bottleCola;
 
     //---------------------------------------------------------------------------------------------\\
 
@@ -449,6 +450,7 @@ public class ActiveWeapon : MonoBehaviour
                 ToggleActiveWeapon();
                 player.walking = true;
                 reloaring = true;
+                bottleCola.SetActive(true);
                 break;
 
             case "healed":
@@ -458,6 +460,7 @@ public class ActiveWeapon : MonoBehaviour
                 ammoPack.HPBox -= 1;
                 playerAnim.SetTrigger("Stop_Heal");
                 ToggleActiveWeapon();
+                bottleCola.SetActive(false);
                 break;
         }
     }

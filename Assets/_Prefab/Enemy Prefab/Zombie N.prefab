@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 6610912394307555496}
   - component: {fileID: 5987500113563004689}
   - component: {fileID: 9184669360543201224}
+  - component: {fileID: 2696426816279941829}
   m_Layer: 14
   m_Name: Enemy_Quad_Map
   m_TagString: Untagged
@@ -387,6 +388,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!111 &2696426816279941829
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791429506304041245}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 5385e7fb3c94be74fb94abeeab437b67, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 5385e7fb3c94be74fb94abeeab437b67, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &2118455992289356366
 GameObject:
   m_ObjectHideFlags: 0
