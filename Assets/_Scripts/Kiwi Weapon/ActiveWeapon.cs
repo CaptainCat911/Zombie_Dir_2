@@ -100,8 +100,8 @@ public class ActiveWeapon : MonoBehaviour
         animationEvents.HealAnimationEvent.AddListener(OnAnimationEventHeal);           // получаем ивенты от анимации лечения
         animationEvents.HealAnimationEvent.AddListener(OnAnimationEventUse);            // получаем ивенты от анимации лечения
 
-        getAxe = true;                                  // выдаем топор
-        axeBack.SetActive(true);                        // топор активен
+/*        getAxe = true;                                  // выдаем топор
+        axeBack.SetActive(true);                        // топор активен*/
     }
 
     //---------------------------------------------------------------------------------------------\\

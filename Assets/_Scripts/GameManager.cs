@@ -181,14 +181,24 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && diffManager.waveN < 21)
         {
-            //SaveState();
-            //SetDifficulty();
+            diffManager.waveN += 1;
+            diffManager.waveNumber += 1;
+            diffManager.start = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            player.ammoPack.souls += 100;
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !startCinema)
         {
             foreach (GameObject menu in menus)
             {
@@ -324,9 +334,10 @@ public class GameManager : MonoBehaviour
         playerStop = false;                                     // отдаём контроль
         bars.SetActive(true);                                   // показываем бары
         startCinema = false;                                    // ролик завершён
+        npc.OpenMagazine();                                     // открываем магазин для начального закупа
 
-        RaycastWeapon newWeapon = Instantiate(weaponPrefab);        
-        player.activeWeapon.GetWeaponUp(newWeapon);
+        /*RaycastWeapon newWeapon = Instantiate(weaponPrefab);        
+        player.activeWeapon.GetWeaponUp(newWeapon);*/
       
 
     }

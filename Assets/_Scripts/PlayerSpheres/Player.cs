@@ -465,5 +465,7 @@ public class Player : Mover
         activeWeapon.ToggleActiveWeapon();                              // достаём оружие
 
         finalSphereAnim.SetTrigger("SphereArise");                      // убиваем зомби рядом
+
+        activeWeapon.ToggleActiveWeapon();
     }
 }

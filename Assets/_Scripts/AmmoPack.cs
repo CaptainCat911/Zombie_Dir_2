@@ -34,11 +34,13 @@ public class AmmoPack : MonoBehaviour
     public int ammoSoulsGranate;
     
     [Header("Стоимость оружия")]
+    public int WeaponSoulsPistol;
     public int WeaponSoulsAR;
     public int WeaponSoulsRevolver;
     public int WeaponSoulsShotgun;
     public int WeaponSoulsSVD;
     public int WeaponSoulsPulemet;
+    public int WeaponSoulsAxe;
     public int soulsArmor;
     public int soulsArmorBlack;
     
@@ -52,6 +54,7 @@ public class AmmoPack : MonoBehaviour
     public int WeaponSoulsPulemetUpgreade;
 
     // Оружие экипировано
+    bool pistol;
     bool aR;
     bool shotgun;
     bool revolver;
@@ -60,6 +63,7 @@ public class AmmoPack : MonoBehaviour
 
     // Кнопки
     [Header("Кнопки пистолет")]
+    public GameObject buttonBuyPistol;
     public GameObject buttonUp_2_Pistol;
     public GameObject buttonUp_3_Pistol;
     public GameObject buttonUpgradedPistol;
@@ -101,6 +105,7 @@ public class AmmoPack : MonoBehaviour
     int nPulemet;
 
     [Header("Кнопки топор")]
+    public GameObject buttonAxe;
     public GameObject buttonAxeUp_2;
     public GameObject buttonAxeUpgraded;
 
@@ -238,6 +243,27 @@ public class AmmoPack : MonoBehaviour
     {        
         switch (weapon)
         {
+            case "Pistol":
+                if (pistol)
+                {
+                    SendToMessage("Уже куплено !");
+                    return;
+                }
+                if (souls >= WeaponSoulsPistol && !pistol)
+                {
+                    weaponNumber = 5;
+                    pistol = true;
+                    souls -= WeaponSoulsPistol;
+                    buttonBuyPistol.SetActive(false);
+                    buttonUp_2_Pistol.SetActive(true);
+                }
+                else
+                {
+                    SendToMessage("Недостаточно душ");
+                    return;
+                }
+                break;
+
             case "AR":
                 if (aR)                                 // если винтовка уже есть
                 {
@@ -258,6 +284,8 @@ public class AmmoPack : MonoBehaviour
                     return;
                 }
                 break;
+
+
 
             case "Revolver":
                 if (revolver)
@@ -530,6 +558,20 @@ public class AmmoPack : MonoBehaviour
                     SendToMessage("Недостаточно душ");
                 }
             }
+        }
+    }
+
+    public void GetAxe()
+    {
+        if (souls >= WeaponSoulsAxe)
+        {
+            souls -= WeaponSoulsAxe;
+            player.activeWeapon.getAxe = true;                                  // выдаем топор
+            player.activeWeapon.axeBack.SetActive(true);                        // топор активен
+            buttonAxe.SetActive(false);
+            buttonAxeUp_2.SetActive(true);
+            
+
         }
     }
 
