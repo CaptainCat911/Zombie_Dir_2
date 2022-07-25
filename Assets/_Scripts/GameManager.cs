@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     public GameObject deathMenu;                // меню при поражении
     public GameObject pauseMenu;                // меню паузы
     bool startCinema = true;                    // для начального ролика
-    public GameObject blackScreen;              // черный экран для начала игры
+    //public GameObject blackScreen;              // черный экран для начала игры
 
     public RaycastWeapon weaponPrefab;          // префаб пистолета, чтобы экипировать в начале
     public RaycastWeapon weaponPrefabAxe;       // префаб топора, чтобы экипировать в начале
@@ -120,10 +120,10 @@ public class GameManager : MonoBehaviour
     public int delayUp;                         // задержка когда встаёт (для меин сцены 11,5 сек)
 
     public Transform[] pointsNPC;               // точки для спауна НПС
-
     public bool mutation;                       // мутация
     public int mutationNumber = 1;              // номер мутации
     public GameObject textMutation;             // бар мутации
+
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -165,13 +165,14 @@ public class GameManager : MonoBehaviour
         if (!test)
         {
             playerStop = true;                                                              // забираем контроль
-            StartCoroutine(DialogePause(delayUp));                                          // начальный диалог 
+            //StartCoroutine(DialogePause(delayUp));                                          // начальный диалог 
         }
-        blackScreen.SetActive(true);                                                        // включаем черный экран (на ~полсекунды)
+        //blackScreen.SetActive(true);                                                        // включаем черный экран (на ~полсекунды)
         tempCam.SetActive(true);                                                            // для карты
         tempLight.SetActive(true);                                                          // для карты
         StartCoroutine(TempCamDelay());                                                     // для карты
         mapPlayerIcon.SetActive(true);                                                      // включаем иконку игрока на карте
+        //Pause();
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -317,7 +318,7 @@ public class GameManager : MonoBehaviour
     IEnumerator DialogePause(int delay)                         // начальный ролик и настройки
     {
         yield return new WaitForSeconds(1f);                    // задержка для черного экрана
-        blackScreen.SetActive(false);                           // отключаем чёрный экран
+        //blackScreen.SetActive(false);                           // отключаем чёрный экран
         yield return new WaitForSeconds(delay);                 // задержка пока персонаж встаёт     
         dialogueTrig.TriggerDialogue(0);                        // показываем диалог
         PauseWithDelay();                                       // паузу, чтобы было время почитать
@@ -330,7 +331,7 @@ public class GameManager : MonoBehaviour
     IEnumerator ActionStart()
     {
         yield return new WaitForSeconds(1f);                    
-        blackScreen.SetActive(false);
+        //blackScreen.SetActive(false);
         playerStop = false;                                     // отдаём контроль
         bars.SetActive(true);                                   // показываем бары
         startCinema = false;                                    // ролик завершён
@@ -351,6 +352,34 @@ public class GameManager : MonoBehaviour
         pause = false;
     }
 
+
+    // Выбор персонажа
+    public void SetCharacter(int numberCharacter)
+    {
+        switch (numberCharacter)
+        {
+            case 1:
+                player.maxHealth = 150;
+                player.currentHealth = 150;
+                player.ammoPack.GiveWeapon("Pistol");
+                player.ammoPack.GiveWeapon("AR");
+                player.ammoPack.GiveArmor("1");
+                player.ammoPack.granate = 3;
+                player.ammoPack.souls = 0;
+                break;
+
+            case 2:
+                player.maxHealth = 150;
+                player.currentHealth = 150;
+                player.ammoPack.GiveWeapon("Pistol");
+                player.ammoPack.GiveWeapon("AR");
+                player.ammoPack.GiveArmor("1");
+                player.ammoPack.granate = 3;
+                player.ammoPack.souls = 0;
+                break;
+        }
+        StartCoroutine(DialogePause(delayUp));
+    }
 
     //--------------------------------------- Управление сложностью --------------------------------------------------\\
 

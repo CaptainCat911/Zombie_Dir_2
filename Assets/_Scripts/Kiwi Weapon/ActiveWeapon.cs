@@ -81,8 +81,11 @@ public class ActiveWeapon : MonoBehaviour
 
     public GameObject axeEffectSmoke;           // эффект дыма для топора
     public GameObject axeEffectAttack;          // эффект дыма для топора во время удара
+    public GameObject bottleCola;               // для "аптечки"
 
-    public GameObject bottleCola;
+    //public Animation animationReload;
+
+    //AnimationClip animationReload;
 
     //---------------------------------------------------------------------------------------------\\
 
@@ -100,11 +103,35 @@ public class ActiveWeapon : MonoBehaviour
         animationEvents.HealAnimationEvent.AddListener(OnAnimationEventHeal);           // получаем ивенты от анимации лечения
         animationEvents.HealAnimationEvent.AddListener(OnAnimationEventUse);            // получаем ивенты от анимации лечения
 
-/*        getAxe = true;                                  // выдаем топор
-        axeBack.SetActive(true);                        // топор активен*/
+        
+
+        //animationReload = FindAnimation(playerAnim, "weapon_anim_reload_pistol");
+        
+
+/*        foreach (AnimationState state in animationReload)
+        {
+            state.speed = 0.5f;
+        }*/
+
+        /*        getAxe = true;                                  // выдаем топор
+                axeBack.SetActive(true);                        // топор активен*/
     }
 
     //---------------------------------------------------------------------------------------------\\
+
+
+    public AnimationClip FindAnimation(Animator animator, string name)
+    {
+        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == name)
+            {
+                return clip;
+            }
+        }
+
+        return null;
+    }
 
 
     public void EquipActiveStart()              // не используется
@@ -208,12 +235,24 @@ public class ActiveWeapon : MonoBehaviour
 
         //-------------------------------Управление-----------------------------------------\\
 
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            rigController.speed += 0.5f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            rigController.speed -= 0.5f;
+        }
+
         // Удар топором
         if (Input.GetMouseButtonDown(1) && !reloaring && getAxe)
         {
             playerAnim.SetTrigger("axe_attack");            
         }
 
+        
 
         // Лечение
         if (Input.GetKeyDown(KeyCode.Q) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < 100)
