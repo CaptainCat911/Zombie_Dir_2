@@ -248,7 +248,7 @@ public class RaycastWeapon : MonoBehaviour
                 {
                     damageAmount = rayDamage,
                     origin = transform.position,
-                    pushForce = pushForce
+                    stopForce = pushForce
                 };
                 enemy.SendMessage("ReceiveDamage", dmg);
 
@@ -265,7 +265,7 @@ public class RaycastWeapon : MonoBehaviour
                 {
                     damageAmount = rayDamage,
                     origin = transform.position,
-                    pushForce = pushForce
+                    stopForce = pushForce
                 };
                 npc.SendMessage("ReceiveDamage", dmg);
 
@@ -320,7 +320,7 @@ public class RaycastWeapon : MonoBehaviour
                 {
                     damageAmount = rayDamage,
                     origin = transform.position,
-                    pushForce = pushForce
+                    stopForce = pushForce
                 };
                 enemy.SendMessage("ReceiveDamage", dmg);
 
@@ -369,7 +369,7 @@ public class RaycastWeapon : MonoBehaviour
                 {
                     damageAmount = rayDamage,
                     origin = transform.position,
-                    pushForce = pushForce
+                    stopForce = pushForce
                 };
                 enemy.SendMessage("ReceiveDamage", dmg);
 

@@ -22,7 +22,7 @@ public class PostProcessManager : MonoBehaviour
    
     void FixedUpdate()
     {
-        if (!GameManager.instance.postProcessFinal)                 // если не финал, повышаем гамму до нормы 
+        if (!GameManager.instance.postProcessFinal && GameManager.instance.postProcessStart)                 // если не финал, повышаем гамму до нормы 
         {
             if (x > 0)
             {

@@ -24,7 +24,7 @@ public class Player : Mover
     public float lastSlow;
 
     // Animation Info    
-    private Animator anim;
+    public Animator anim;
 
         // Оружие
     public ActiveWeapon activeWeapon;       // ссылка на активное оружие   
@@ -44,6 +44,7 @@ public class Player : Mover
     public bool inRangeUse;                 // если в ренже использования предмета
     public GameObject armorGameObject;      // броня на персонаже
     public GameObject armorBlackGameObject;      // броня на персонаже
+    public bool lightOn = true;
    
 
     //public AudioManager audioManager;
@@ -95,7 +96,7 @@ public class Player : Mover
             return;
 
         base.ReceiveDamage(dmg);
-        stopForce = dmg.pushForce;
+        stopForce = dmg.stopForce;
         anim.SetTrigger("Take_Hit");
         if (!armored)
         {
@@ -194,13 +195,13 @@ public class Player : Mover
         //Debug.Log(xSpeed);
 
 
-        if (boostSpeed)
-        {           
-            maxSpeed = 20f;            
+        if (boostSpeed && GameManager.instance.test)
+        {
+            maxSpeed = 20f;
         }
 
-        if (!boostSpeed)
-        {            
+        if (!boostSpeed && GameManager.instance.test)
+        {
             maxSpeed = 6f;
         }
 
@@ -232,7 +233,7 @@ public class Player : Mover
     {
 
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && lightOn)
         {
             if (!isAlive || GameManager.instance.playerStop)
             {                
@@ -259,9 +260,9 @@ public class Player : Mover
         }*/
 
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L) && GameManager.instance.test)
         {
-            //boostSpeed = !boostSpeed;
+            boostSpeed = !boostSpeed;
         }
 
 

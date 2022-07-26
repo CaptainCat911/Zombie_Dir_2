@@ -94,14 +94,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject mapPlayerIcon;            // иконка игрока на карте
 
-    public int enemyKilledCount = 0;            // счетчик убийства зомби
+    public int enemyKilledCount = 0;            // счетчик убийства зомби (используется для сложности)
+    public int enemyKilledStatistic;            // счетчик убийства зомби (используется для сложности)
 
     public bool test;                           // для режима теста
-
     public bool mainScene = true;               // для основной сцены
 
     public bool noKillSphere;                   // не убивать зомби при их выходе из спавнящей сферы
-
     public bool zombieFreeWalk;                 // зомби идут в рандомном направлении
 
     public int zombieToKillWaveGM;              // кол-во зомби для режима выживания
@@ -123,6 +122,10 @@ public class GameManager : MonoBehaviour
     public bool mutation;                       // мутация
     public int mutationNumber = 1;              // номер мутации
     public GameObject textMutation;             // бар мутации
+    public bool postProcessStart;               // старт оттемнения
+
+    public GameObject[] closes;                 // одежда
+    int personTypeNumber;
 
 
 
@@ -172,6 +175,7 @@ public class GameManager : MonoBehaviour
         tempLight.SetActive(true);                                                          // для карты
         StartCoroutine(TempCamDelay());                                                     // для карты
         mapPlayerIcon.SetActive(true);                                                      // включаем иконку игрока на карте
+        PauseWithDelay();
         //Pause();
     }
 
@@ -313,16 +317,77 @@ public class GameManager : MonoBehaviour
         tempCam.SetActive(false);
         tempLight.SetActive(false);
     }
-    
 
-    IEnumerator DialogePause(int delay)                         // начальный ролик и настройки
+
+
+    // Выбор персонажа
+    public void SetCharacter(int numberCharacter)
+    {
+        switch (numberCharacter)
+        {
+            case 1:
+                closes[0].SetActive(true);                  // выбор одежды
+                personTypeNumber = 4;                       // выбор диалога
+                player.maxHealth = 150;
+                player.currentHealth = 150;
+                player.ammoPack.GiveWeapon("Pistol");
+                player.ammoPack.allAmmo_9 = 300;
+                player.ammoPack.GiveWeapon("AR");
+                player.ammoPack.allAmmo_5_56 = 200;
+                player.ammoPack.GiveArmor("1");
+                player.ammoPack.allAmmo_7_62 = 300;
+                player.ammoPack.granate = 3;
+                player.ammoPack.HPBox = 3;
+                break;
+
+            case 2:
+                closes[1].SetActive(true);
+                personTypeNumber = 5;
+                player.xSpeed = 7;
+                player.ySpeed = 7;
+                player.maxSpeed = 7;
+                player.cooldownSlow = 0.1f;                 // быстрее выходит из замедления
+                player.activeWeapon.lifeSteal = true;
+                player.ammoPack.GetAxe();
+                player.ammoPack.GiveWeapon("Shotgun");
+                player.ammoPack.allAmmo_0_12 = 56;
+                player.activeWeapon.lifeSteal = true;
+                player.ammoPack.HPBox = 1;
+                break;
+
+            case 3:
+                closes[2].SetActive(true);
+                personTypeNumber = 6;
+                player.ammoPack.GiveWeapon("Revolver");
+                player.ammoPack.allAmmo_0_357 = 96;
+                player.ammoPack.granate = 1;
+                player.ammoPack.HPBox = 1;
+                player.activeWeapon.rigController.speed = 2;
+                break;
+
+            case 4:
+                closes[3].SetActive(true);
+                personTypeNumber = 7;
+                player.anim.SetTrigger("down");
+                player.currentHealth = 49;
+                player.lightOn = false;
+                break;
+        }
+        player.ammoPack.souls = 0;
+        UnPause();
+        StartCoroutine(DialogePause(delayUp, personTypeNumber));        // запускаем начальный диалог с задержкой и номером персонажа
+    }
+
+    IEnumerator DialogePause(int delay, int personNumber)       // начальный ролик и настройки
     {
         yield return new WaitForSeconds(1f);                    // задержка для черного экрана
-        //blackScreen.SetActive(false);                           // отключаем чёрный экран
-        yield return new WaitForSeconds(delay);                 // задержка пока персонаж встаёт     
+        postProcessStart = true;                                // начинаем оттенение        
+        yield return new WaitForSeconds(delay);                 // задержка пока персонаж встаёт
+        dialogueTrig.TriggerDialogue(personNumber);             // показываем диалог  
+        PauseWithDelay();  
+        yield return new WaitForSeconds(1f);
         dialogueTrig.TriggerDialogue(0);                        // показываем диалог
         PauseWithDelay();                                       // паузу, чтобы было время почитать
-        //yield return new WaitForSeconds(1f);
         StartCoroutine(ActionStart());
 
         //player.activeWeapon.EquipActiveStart();
@@ -335,7 +400,7 @@ public class GameManager : MonoBehaviour
         playerStop = false;                                     // отдаём контроль
         bars.SetActive(true);                                   // показываем бары
         startCinema = false;                                    // ролик завершён
-        npc.OpenMagazine();                                     // открываем магазин для начального закупа
+        //npc.OpenMagazine();                                     // открываем магазин для начального закупа
 
         /*RaycastWeapon newWeapon = Instantiate(weaponPrefab);        
         player.activeWeapon.GetWeaponUp(newWeapon);*/
@@ -353,33 +418,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // Выбор персонажа
-    public void SetCharacter(int numberCharacter)
-    {
-        switch (numberCharacter)
-        {
-            case 1:
-                player.maxHealth = 150;
-                player.currentHealth = 150;
-                player.ammoPack.GiveWeapon("Pistol");
-                player.ammoPack.GiveWeapon("AR");
-                player.ammoPack.GiveArmor("1");
-                player.ammoPack.granate = 3;
-                player.ammoPack.souls = 0;
-                break;
-
-            case 2:
-                player.maxHealth = 150;
-                player.currentHealth = 150;
-                player.ammoPack.GiveWeapon("Pistol");
-                player.ammoPack.GiveWeapon("AR");
-                player.ammoPack.GiveArmor("1");
-                player.ammoPack.granate = 3;
-                player.ammoPack.souls = 0;
-                break;
-        }
-        StartCoroutine(DialogePause(delayUp));
-    }
 
     //--------------------------------------- Управление сложностью --------------------------------------------------\\
 
@@ -516,7 +554,7 @@ public class GameManager : MonoBehaviour
                     spawnPoint.maxZombie = 25;
                     spawnPoint.enemyNumberSpawn = 1;
                     spawnPoint.cooldown = 6;
-                    spawnPoint.mediumZombieChanse = 7;
+                    spawnPoint.mediumZombieChanse = 10;
                     spawnPoint.strongZombieChanse = 0;
                     zombieToKillWaveGM = 25;
                     diffManager.positionNPC = pointsNPC[2].position;
@@ -529,7 +567,7 @@ public class GameManager : MonoBehaviour
                     spawnPoint.maxZombie = 30;
                     spawnPoint.enemyNumberSpawn = 1;
                     spawnPoint.cooldown = 5;
-                    spawnPoint.mediumZombieChanse = 10;
+                    spawnPoint.mediumZombieChanse = 13;
                     spawnPoint.strongZombieChanse = 3;
                     spawnPoint.darkZombieChanse = 0;
                     zombieToKillWaveGM = 35;
@@ -924,7 +962,7 @@ public class GameManager : MonoBehaviour
     IEnumerator PauseDelay()
     {
         yield return new WaitForSeconds(0.5f);
-        player.aiming = true;
+        player.aiming = false;
         Time.timeScale = 0f;
     }
 

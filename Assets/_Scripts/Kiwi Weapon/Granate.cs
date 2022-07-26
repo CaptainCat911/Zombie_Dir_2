@@ -73,7 +73,7 @@ public class Granate : MonoBehaviour
                     {
                         damageAmount = damage,
                         origin = transform.position,
-                        pushForce = pushForce
+                        stopForce = pushForce
                     };
                     enemy.TakeHitAxeBlood();
                     enemy.SendMessage("ReceiveDamage", dmg);
@@ -86,7 +86,7 @@ public class Granate : MonoBehaviour
                     {
                         damageAmount = damage,
                         origin = transform.position,
-                        pushForce = pushForce
+                        stopForce = pushForce
                     };
                     npc.TakeHitAxeBlood();
                     npc.SendMessage("ReceiveDamage", dmg);
@@ -100,7 +100,7 @@ public class Granate : MonoBehaviour
                 {
                     damageAmount = 52,
                     origin = transform.position,
-                    pushForce = pushForce
+                    stopForce = pushForce
                 };
                 //enemy.TakeHitAxeBlood();
                 player.SendMessage("ReceiveDamage", dmg);
@@ -133,7 +133,7 @@ public class Granate : MonoBehaviour
                     {
                         damageAmount = damageBigRadius,
                         origin = transform.position,
-                        pushForce = pushForce
+                        stopForce = pushForce
                     };
                     enemy.TakeHitAxeBlood();
                     enemy.SendMessage("ReceiveDamage", dmg);
@@ -146,7 +146,7 @@ public class Granate : MonoBehaviour
                     {
                         damageAmount = damage,
                         origin = transform.position,
-                        pushForce = pushForce
+                        stopForce = pushForce
                     };
                     npc.TakeHitAxeBlood();
                     npc.SendMessage("ReceiveDamage", dmg);
@@ -160,7 +160,7 @@ public class Granate : MonoBehaviour
                 {
                     damageAmount = 26,
                     origin = transform.position,
-                    pushForce = pushForce
+                    stopForce = pushForce
                 };
                 //enemy.TakeHitAxeBlood();
                 player.SendMessage("ReceiveDamage", dmg);

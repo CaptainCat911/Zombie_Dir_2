@@ -53,6 +53,8 @@ public class ActiveWeapon : MonoBehaviour
     public float attackRadiusHitBox = 1;    // радиус хитбокса
     public LayerMask layerEnemy;            // маска для зомби
     public int damage;                      // урон топора
+    public int damageHand;                  // урон рукой
+    public int lifeStealHp;                 // сколько хп восстанавливает
     public float pushForce;                 // замедление
 
     public Transform hitBox;                // хитбокс (где будет создаваться сфера для урона)
@@ -82,10 +84,8 @@ public class ActiveWeapon : MonoBehaviour
     public GameObject axeEffectSmoke;           // эффект дыма для топора
     public GameObject axeEffectAttack;          // эффект дыма для топора во время удара
     public GameObject bottleCola;               // для "аптечки"
+    public bool lifeSteal;                      // для лайфстила топором
 
-    //public Animation animationReload;
-
-    //AnimationClip animationReload;
 
     //---------------------------------------------------------------------------------------------\\
 
@@ -118,20 +118,6 @@ public class ActiveWeapon : MonoBehaviour
     }
 
     //---------------------------------------------------------------------------------------------\\
-
-
-    public AnimationClip FindAnimation(Animator animator, string name)
-    {
-        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
-        {
-            if (clip.name == name)
-            {
-                return clip;
-            }
-        }
-
-        return null;
-    }
 
 
     public void EquipActiveStart()              // не используется
@@ -185,16 +171,10 @@ public class ActiveWeapon : MonoBehaviour
 
         //Debug.Log(player.inRangeUse);
 
-        if (GameManager.instance.playerStop)            // если playerStop возвращаемся
+        if (GameManager.instance.playerStop || !GameManager.instance.player.isAlive)            // если playerStop возвращаемся
         {            
             return;
-        }
-
-        if (!GameManager.instance.player.isAlive)       // если убили 
-        {
-            //rigController.SetBool("Death_rig", true);                     // добавил чтобы руки правильно анимировались при поражении, но это можно убрать
-            return;
-        }
+        } 
 
 
 
@@ -236,14 +216,10 @@ public class ActiveWeapon : MonoBehaviour
         //-------------------------------Управление-----------------------------------------\\
 
 
-        if (Input.GetKeyDown(KeyCode.N))
+        // Удар рукой
+        if (Input.GetMouseButtonDown(1) && !reloaring && !getAxe)
         {
-            rigController.speed += 0.5f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            rigController.speed -= 0.5f;
+            playerAnim.SetTrigger("hand_attack");
         }
 
         // Удар топором
@@ -255,7 +231,7 @@ public class ActiveWeapon : MonoBehaviour
         
 
         // Лечение
-        if (Input.GetKeyDown(KeyCode.Q) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < 100)
+        if (Input.GetKeyDown(KeyCode.Q) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < player.maxHealth)
         {
             playerAnim.SetTrigger("Heal");
         }
@@ -400,8 +376,12 @@ public class ActiveWeapon : MonoBehaviour
                             {
                                 damageAmount = damage,
                                 origin = transform.position,
-                                pushForce = pushForce
+                                stopForce = pushForce
                             };
+                            if (lifeSteal)
+                            {
+                                player.Heal(lifeStealHp);
+                            }
                             enemy.TakeHitAxeBlood();                            // эффект крови
                             enemy.SendMessage("ReceiveDamage", dmg);
                         }
@@ -411,7 +391,7 @@ public class ActiveWeapon : MonoBehaviour
                             {
                                 damageAmount = damage,
                                 origin = transform.position,
-                                pushForce = pushForce
+                                stopForce = pushForce
                             };
                             npc.TakeHitAxeBlood();                            // эффект крови
                             npc.SendMessage("ReceiveDamage", dmg);
@@ -419,7 +399,7 @@ public class ActiveWeapon : MonoBehaviour
                         collidersHitbox = null;
                     }
                 }                
-                break;
+                break;            
 
             case "axe_stop":
                 //Debug.Log("Stop");
@@ -430,6 +410,68 @@ public class ActiveWeapon : MonoBehaviour
                 axeHand.SetActive(false);
                 ToggleActiveWeapon();
                 break;
+
+
+
+            case "hand_start":
+                
+                //audioSourses.axeMiss.Play();                    // звук замаха топором                
+                ToggleActiveWeapon();                           // убираем основное оружие
+                reloaring = true;                               // перезарядка (для запрета других действий)
+                GameManager.instance.playerStop = true;         // останавливаем игрока
+                break;
+
+            case "hand_hit":                
+                Collider[] collidersHitboxHand = Physics.OverlapSphere(hitBox.position, attackRadiusHitBox, layerEnemy);
+                foreach (Collider enObjectBox in collidersHitboxHand)
+                {
+                    if (enObjectBox.tag != "Enemy")
+                    {
+                        //Debug.Log(enObjectBox.name);
+                        //audioSourses.axeMiss.Play();
+                        //continue;
+                    }
+
+                    if (enObjectBox.tag == "Enemy")
+                    {
+                        //audioSourses.axeAttack.Play();                                      // звук попадания топором
+                        Enemy_old enemy = enObjectBox.GetComponentInParent<Enemy_old>();
+                        NPC npc = enObjectBox.GetComponentInParent<NPC>();
+                        if (enemy)
+                        {
+                            Damage dmg = new Damage()
+                            {
+                                damageAmount = damageHand,
+                                origin = transform.position,
+                                stopForce = pushForce
+                            };
+                            //enemy.TakeHitAxeBlood();                            // эффект крови
+                            enemy.SendMessage("ReceiveDamage", dmg);
+                        }
+                        else if (npc)
+                        {
+                            Damage dmg = new Damage()
+                            {
+                                damageAmount = damageHand,
+                                origin = transform.position,
+                                stopForce = pushForce
+                            };
+                            //npc.TakeHitAxeBlood();                            // эффект крови
+                            npc.SendMessage("ReceiveDamage", dmg);
+                        }
+                        collidersHitbox = null;
+                    }
+                }
+                break;
+
+            case "hand_stop":
+                //Debug.Log("Stop");
+                //axeEffectAttack.SetActive(false);
+                reloaring = false;
+                GameManager.instance.playerStop = false;
+                ToggleActiveWeapon();
+                break;
+
         }
     }
 
@@ -550,7 +592,7 @@ public class ActiveWeapon : MonoBehaviour
                 {
                     damageAmount = 1,
                     origin = transform.position,
-                    pushForce = pushForce
+                    stopForce = pushForce
                 };
                 //enemy.TakeHitAxeBlood();                                          // эффект крови
                 if (ammoBox)

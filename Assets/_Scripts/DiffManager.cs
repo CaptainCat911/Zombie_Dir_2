@@ -56,7 +56,7 @@ public class DiffManager : MonoBehaviour
             if (waveNumber == 22)
             {
                 StartCoroutine(AllWaveEndDelay());
-                waveNumber = 1;
+                waveNumber = 6;
             }
 
             GameManager.instance.enemyKilledCount = 0;                  // сбрасываем счётчик убийства зомби
@@ -85,7 +85,7 @@ public class DiffManager : MonoBehaviour
             StartCoroutine(SafeTime(waveNumber));                       // запускаем таймер до следующей
             start = false;                                              // сбрасываем старт            
             GameManager.instance.noKillSphere = false;                  // спаунсфера убивает зомби за пределами
-            Debug.Log("Wave Starting in " + delayWave + " seconds");
+            //Debug.Log("Wave Starting in " + delayWave + " seconds");
         }
     }
 

@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
             {
                 damageAmount = bulletDamage,
                 origin = transform.position,
-                pushForce = 0
+                stopForce = 0
             };
 
             coll.SendMessage("ReceiveDamage", dmg);

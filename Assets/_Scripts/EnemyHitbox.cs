@@ -131,7 +131,7 @@ public class EnemyHitbox : Collidable
                         {
                             damageAmount = damage,
                             origin = transform.position,
-                            pushForce = pushForce
+                            stopForce = pushForce
                         };
                         enObjectBox.SendMessage("ReceiveDamage", dmg);
                     }
@@ -168,7 +168,7 @@ public class EnemyHitbox : Collidable
                         {
                             damageAmount = 3,
                             origin = transform.position,
-                            pushForce = pushForce
+                            stopForce = pushForce
                         };
                         enObjectBox.SendMessage("ReceiveDamage", dmg);
                     }

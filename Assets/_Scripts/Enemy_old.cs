@@ -463,7 +463,7 @@ public class Enemy_old : Mover
     protected override void ReceiveDamage(Damage dmg)
     {        
         base.ReceiveDamage(dmg);
-        stopForce = dmg.pushForce;
+        stopForce = dmg.stopForce;
         TakeHit();
     }
 
@@ -513,6 +513,7 @@ public class Enemy_old : Mover
         if (dead)
             return;
 
+        GameManager.instance.enemyKilledStatistic += 1;         // в счётчик убитых зомби для статистики
         GameManager.instance.enemyKilledCount += 1;             // в счётчик убитых зомби
 
         if (!dontCount)
