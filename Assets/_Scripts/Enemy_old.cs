@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class Enemy_old : Mover
 {
@@ -77,6 +78,9 @@ public class Enemy_old : Mover
     public GameObject darkEffect;           // эффект тьмы
     public bool granateInRange;             // для следования за гранатой (пока не используется)
 
+    public VisualEffect effectSmoke;        // эффект дыма
+    float xSize = 1.7f;                     // размер дыма
+    public bool effectDecrise;              // для уменьшения дыма
 
     //public SphereCollider weaponPickUpCollider; // ccылка на колайдер оружия
 
@@ -238,6 +242,17 @@ public class Enemy_old : Mover
         }
 
 
+        if (effectDecrise)
+        {            
+            xSize -= 0.04f;
+            effectSmoke.SetFloat("EffectSize", xSize);
+            if (xSize < 0.1f)
+            {
+                effectDecrise = false;
+                darkEffect.SetActive(false);
+            }
+        }
+
         if (currentHealth < 50)
         {
             hitbox.grabChardge = false;
@@ -254,6 +269,9 @@ public class Enemy_old : Mover
 
     private void FixedUpdate()
     {
+        if (dead)
+            return;
+
         // Is the player in range?
         if (playerTransform == null)
         {            
@@ -512,6 +530,7 @@ public class Enemy_old : Mover
     {
         if (dead)
             return;
+        
 
         GameManager.instance.enemyKilledStatistic += 1;         // в счётчик убитых зомби для статистики
         GameManager.instance.enemyKilledCount += 1;             // в счётчик убитых зомби
@@ -521,7 +540,10 @@ public class Enemy_old : Mover
 
         GameManager.instance.player.ammoPack.souls += 1;        // + души
         if (darkZombie)
+        {            
+            effectDecrise = true;
             GameManager.instance.player.ammoPack.souls += 1;    // + ещё душа, если зомби тёмный
+        }
 
         // выпадение патронов        
         if (randomAmmo >= ammoChanse)
@@ -563,21 +585,18 @@ public class Enemy_old : Mover
         Invoke("NavMeshDisable", 2);
         Destroy(gameObject, timeAfterDeath);
 
-
+        
         audioSourses.idle.Stop();                   // отключаем шипение зомби        
         audioSourses.death.Play();                  // звук
-
         //darkEffect.SetActive(false);                // отключаем темный эффект
         mapIcon.SetActive(false);                   // убираем иконку
-
-        selfScript.enabled = false;
+        //selfScript.enabled = false;
 
         //weaponPickUpCollider.enabled = true;
 
         capsuleCollider.enabled = false;
         capsuleColliderLeftARm.enabled = false;
         capsuleColliderRightArm.enabled = false;
-
 
         dead = true;
     }

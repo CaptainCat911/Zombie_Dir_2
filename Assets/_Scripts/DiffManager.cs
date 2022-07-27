@@ -80,7 +80,7 @@ public class DiffManager : MonoBehaviour
             if (npc.dead)
             {
                 waveNumber = 101;
-                waveN = 101;
+                waveN = 999;
             }
             StartCoroutine(SafeTime(waveNumber));                       // запускаем таймер до следующей
             start = false;                                              // сбрасываем старт            

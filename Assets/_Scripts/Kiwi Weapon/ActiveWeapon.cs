@@ -219,6 +219,16 @@ public class ActiveWeapon : MonoBehaviour
         // Удар рукой
         if (Input.GetMouseButtonDown(1) && !reloaring && !getAxe)
         {
+            int random = Random.Range(0, 3);
+            if (random == 0)
+                playerAnim.SetFloat("melee_type", 0);
+            if (random == 1)
+                playerAnim.SetFloat("melee_type", 1);
+            if (random == 2)
+                playerAnim.SetFloat("melee_type", 2);
+/*            if (random == 3)
+                playerAnim.SetFloat("melee_type", 3);*/
+
             playerAnim.SetTrigger("hand_attack");
         }
 
@@ -534,7 +544,7 @@ public class ActiveWeapon : MonoBehaviour
                 bottleCola.SetActive(true);
                 break;
 
-            case "healed":
+            case "stop_heal":
                 player.walking = false;
                 reloaring = false;
                 player.Heal(25);
