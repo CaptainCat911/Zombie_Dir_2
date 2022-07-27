@@ -2605,6 +2605,8 @@ MonoBehaviour:
   mapIcon: {fileID: 8893511975769706230}
   darkEffect: {fileID: 4190132140956378684}
   granateInRange: 0
+  effectSmoke: {fileID: 4190132140586225205}
+  effectDecrise: 0
 --- !u!114 &361542548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3668,6 +3670,12 @@ GameObject:
 --- !u!4 &4190132140956378685 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6589967471430561937, guid: c37eafdd90e951947b0f7664ad28f354,
+    type: 3}
+  m_PrefabInstance: {fileID: 7012687890741827244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &4190132140586225205 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 6589967471595182233, guid: c37eafdd90e951947b0f7664ad28f354,
     type: 3}
   m_PrefabInstance: {fileID: 7012687890741827244}
   m_PrefabAsset: {fileID: 0}

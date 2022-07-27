@@ -238,7 +238,7 @@ public class Enemy_old : Mover
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            DeathFinal();
+            Death();
         }
 
 

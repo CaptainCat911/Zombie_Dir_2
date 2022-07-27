@@ -2612,6 +2612,8 @@ MonoBehaviour:
   mapIcon: {fileID: 1145178598765829300}
   darkEffect: {fileID: 4598695909174108905}
   granateInRange: 0
+  effectSmoke: {fileID: 4598695909544250080}
+  effectDecrise: 0
 --- !u!114 &361542548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3570,6 +3572,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7252375469270635129}
   m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &4598695909544250080 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 6589967471595182233, guid: c37eafdd90e951947b0f7664ad28f354,
+    type: 3}
+  m_PrefabInstance: {fileID: 7252375469270635129}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8635327092736126757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3659,15 +3667,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba9168de14c65bf4e877348032350800, type: 3}
---- !u!4 &1294801989220253307 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7363059598760530270, guid: ba9168de14c65bf4e877348032350800,
-    type: 3}
-  m_PrefabInstance: {fileID: 8635327092736126757}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &1380869710466496257 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7277550444990453796, guid: ba9168de14c65bf4e877348032350800,
+    type: 3}
+  m_PrefabInstance: {fileID: 8635327092736126757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1294801989220253307 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7363059598760530270, guid: ba9168de14c65bf4e877348032350800,
     type: 3}
   m_PrefabInstance: {fileID: 8635327092736126757}
   m_PrefabAsset: {fileID: 0}

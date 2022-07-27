@@ -2564,7 +2564,7 @@ MonoBehaviour:
   capsuleColliderLeftARm: {fileID: 6110045527160046294}
   capsuleColliderRightArm: {fileID: 7184383275469015053}
   tempCapColl: {fileID: 6050872750376892019}
-  tempAgentSpeed: 0.5
+  tempAgentSpeed: 6
   hitEffectBlood: {fileID: 6432700745916039422}
   chest: {fileID: 2445738619677373653}
   ammos:
@@ -2584,6 +2584,8 @@ MonoBehaviour:
   mapIcon: {fileID: 5258260262616182011}
   darkEffect: {fileID: 1235001871423691272}
   granateInRange: 0
+  effectSmoke: {fileID: 1235001871724638721}
+  effectDecrise: 0
 --- !u!114 &361542548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3583,15 +3585,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba9168de14c65bf4e877348032350800, type: 3}
---- !u!4 &6598988538634946948 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7363059598760530270, guid: ba9168de14c65bf4e877348032350800,
-    type: 3}
-  m_PrefabInstance: {fileID: 4448015660879124698}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &6432700745916039422 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7277550444990453796, guid: ba9168de14c65bf4e877348032350800,
+    type: 3}
+  m_PrefabInstance: {fileID: 4448015660879124698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6598988538634946948 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7363059598760530270, guid: ba9168de14c65bf4e877348032350800,
     type: 3}
   m_PrefabInstance: {fileID: 4448015660879124698}
   m_PrefabAsset: {fileID: 0}
@@ -3688,6 +3690,12 @@ GameObject:
 --- !u!4 &1235001871423691273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6589967471430561937, guid: c37eafdd90e951947b0f7664ad28f354,
+    type: 3}
+  m_PrefabInstance: {fileID: 5356995647437908632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &1235001871724638721 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 6589967471595182233, guid: c37eafdd90e951947b0f7664ad28f354,
     type: 3}
   m_PrefabInstance: {fileID: 5356995647437908632}
   m_PrefabAsset: {fileID: 0}
