@@ -231,8 +231,6 @@ public class Player : Mover
 
     private void Update()
     {
-
-
         if (Input.GetKeyDown(KeyCode.F) && lightOn)
         {
             if (!isAlive || GameManager.instance.playerStop)
@@ -245,19 +243,14 @@ public class Player : Mover
 
 
 
-
-
-
-
-
-/*        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && GameManager.instance.test)
         {
             //transform.Rotate(0, 1, 0, Space.Self);
             if (aiming == false)
                 aiming = true;
             else
                 aiming = false;
-        }*/
+        }
 
 
         if (Input.GetKeyDown(KeyCode.L) && GameManager.instance.test)
