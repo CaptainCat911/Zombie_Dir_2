@@ -85,6 +85,7 @@ public class ActiveWeapon : MonoBehaviour
     public GameObject axeEffectAttack;          // эффект дыма для топора во время удара
     public GameObject bottleCola;               // для "аптечки"
     public bool lifeSteal;                      // для лайфстила топором
+    public bool weaponToggled;
 
 
     //---------------------------------------------------------------------------------------------\\
@@ -162,6 +163,13 @@ public class ActiveWeapon : MonoBehaviour
 
     void Update()
     {
+
+        Debug.Log(switching);
+        if (!GameManager.instance.player.isAlive)             
+        {            
+            return;
+        } 
+
         // Использование
         if (Input.GetKeyDown(KeyCode.E))       //&& player.inRangeUse
         {
@@ -171,10 +179,6 @@ public class ActiveWeapon : MonoBehaviour
 
         //Debug.Log(player.inRangeUse);
 
-        if (GameManager.instance.playerStop || !GameManager.instance.player.isAlive)            // если playerStop возвращаемся
-        {            
-            return;
-        } 
 
 
 
@@ -186,7 +190,7 @@ public class ActiveWeapon : MonoBehaviour
         
         if (activeWeaponIndex == 1 || activeWeaponIndex == 2)       // тут индекс оружия из которого стрелять (ПОМЕНЯТЬ ПОТОМ)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && !GameManager.instance.playerStop)
             {
                 attackActive = true;
             }
@@ -198,7 +202,7 @@ public class ActiveWeapon : MonoBehaviour
 
         if (activeWeaponIndex == 0)                             // СДЕЛАТЬ ПРАВИЛЬНЫЕ ВЫСТРЕЛЫ ПИСТОЛЕТОМ ! (Пистолеты)
         {            
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && !GameManager.instance.playerStop)
             {
                 attackActive = true;
             }
@@ -209,6 +213,11 @@ public class ActiveWeapon : MonoBehaviour
         }
 
 
+        if (reloaring || GameManager.instance.playerStop)
+        {
+            return;
+        }        
+
 
 
 
@@ -217,8 +226,10 @@ public class ActiveWeapon : MonoBehaviour
 
 
         // Удар рукой
-        if (Input.GetMouseButtonDown(1) && !reloaring && !getAxe)
-        {
+        if (Input.GetMouseButtonDown(1) && !reloaring && !getAxe && !switching)
+        {   
+            if (isHolsted)
+                ToggleActiveWeapon();
             int random = Random.Range(0, 3);
             if (random == 0)
                 playerAnim.SetFloat("melee_type", 0);
@@ -233,16 +244,20 @@ public class ActiveWeapon : MonoBehaviour
         }
 
         // Удар топором
-        if (Input.GetMouseButtonDown(1) && !reloaring && getAxe)
+        if (Input.GetMouseButtonDown(1) && !reloaring && getAxe && !switching)
         {
+            if (isHolsted)
+                ToggleActiveWeapon();
             playerAnim.SetTrigger("axe_attack");            
         }
 
         
 
         // Лечение
-        if (Input.GetKeyDown(KeyCode.Q) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < player.maxHealth)
+        if (Input.GetKeyDown(KeyCode.Q) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < player.maxHealth && !switching)
         {
+            if (isHolsted)
+                ToggleActiveWeapon();
             playerAnim.SetTrigger("Heal");
         }
 
@@ -251,8 +266,10 @@ public class ActiveWeapon : MonoBehaviour
 
 
         // Бросок гранаты
-        if ((Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.Mouse2)) && !reloaring && !granateInAction && ammoPack.granate > 0)
-        {            
+        if ((Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.Mouse2)) && !reloaring && !granateInAction && ammoPack.granate > 0 && !switching)
+        {
+            if (isHolsted)
+                ToggleActiveWeapon();
             float dist = Vector3.Distance(transform.position, player.pointer.position);
             if (dist > 5f)
             {
@@ -269,14 +286,9 @@ public class ActiveWeapon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            //ToggleActiveWeapon();
+            ToggleActiveWeapon();
         }
 
-
-        if (reloaring)
-        {
-            return;
-        }        
 
 
         // Смена оружия
@@ -481,7 +493,6 @@ public class ActiveWeapon : MonoBehaviour
                 GameManager.instance.playerStop = false;
                 ToggleActiveWeapon();
                 break;
-
         }
     }
 
@@ -680,7 +691,7 @@ public class ActiveWeapon : MonoBehaviour
     public void Equip(RaycastWeapon newWeapon)
     {
         //Debug.Log("Equip !");
-        switching = true;
+        
         int weaponSlotIndex = (int)newWeapon.weaponSlot;    // weaponSlot - это основное, дополнительное, тяжелое, мили 
         var weapon = GetWeapon(weaponSlotIndex);    //  получаем оружие с нашим индексом оружия
 
@@ -706,6 +717,8 @@ public class ActiveWeapon : MonoBehaviour
         {
             return;
         }
+        
+        
         bool isHolsted = rigController.GetBool("holster_weapon");
         if (isHolsted)
         {
@@ -726,6 +739,7 @@ public class ActiveWeapon : MonoBehaviour
         {
             return;
         }
+        switching = true;
         int holsterIndex = activeWeaponIndex;
         int activateIndex = (int)weaponSlot;
 
@@ -787,8 +801,9 @@ public class ActiveWeapon : MonoBehaviour
         }
         if (weapon)
             weapon.TakeAmmo();
+        //yield return new WaitForSeconds(1.1f);      // ПЕРЕДЕЛАТЬ !
         isHolsted = false;
-        switching = true;
+        switching = false;
     }
 
     void OnDrawGizmosSelected()

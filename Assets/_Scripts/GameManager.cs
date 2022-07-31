@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
     public int enemyKilledStatistic;            // счетчик убийства зомби (используется для сложности)
 
     public bool test;                           // для режима теста
-    public bool mainScene = true;               // для основной сцены
+    //public bool mainScene;               // для основной сцены
 
     public bool noKillSphere;                   // не убивать зомби при их выходе из спавнящей сферы
     public bool zombieFreeWalk;                 // зомби идут в рандомном направлении
@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] closes;                 // одежда
     int personTypeNumber;
 
+    public Terrain terrain;
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -161,8 +162,8 @@ public class GameManager : MonoBehaviour
         transformSpawnPoints = spawnPointsGameobject.GetComponentsInChildren<Transform>();        
 
 
-        if (mainScene)
-            StartCoroutine(StartDiffCor());                                                 // начальная сложность, задержка
+/*        if (mainScene)
+            StartCoroutine(StartDiffCor());                                                 // начальная сложность, задержка*/
         if (test)
             StartCoroutine(ActionStart());
         if (!test)
@@ -173,8 +174,9 @@ public class GameManager : MonoBehaviour
         //blackScreen.SetActive(true);                                                        // включаем черный экран (на ~полсекунды)
         tempCam.SetActive(true);                                                            // для карты
         tempLight.SetActive(true);                                                          // для карты
+        terrain.treeDistance = 300;
         StartCoroutine(TempCamDelay());                                                     // для карты
-        mapPlayerIcon.SetActive(true);                                                      // включаем иконку игрока на карте
+        mapPlayerIcon.SetActive(true);                                                      // включаем иконку игрока на карте        
         PauseWithDelay();
         //Pause();
     }
@@ -202,7 +204,7 @@ public class GameManager : MonoBehaviour
 
 
 
-
+/*
         if (Input.GetKeyDown(KeyCode.Escape) && !startCinema)
         {
             foreach (GameObject menu in menus)
@@ -213,20 +215,28 @@ public class GameManager : MonoBehaviour
                 npc.CloseMagazine();
             player.aiming = true;
             Time.timeScale = 1f;
-        }      
+        }  */    
 
 
         // Пауза
-        if (Input.GetKeyDown(KeyCode.Escape) && !playerDead && !startCinema && !npc.magazineOpen)
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerDead && !startCinema)
         {            
-            if (pause)
+            if (pause && !npc.magazineOpen)
             {
                 Time.timeScale = 1f;
                 pauseMenu.SetActive(false);
                 playerStop = false;
                 pause = false;
+                player.aiming = true;
+                foreach (GameObject menu in menus)
+                {
+                    menu.SetActive(false);
+                }
+            }            
+            else if (npc.magazineOpen)
+            {
+                npc.CloseMagazine();
             }
-                
             else
             {
                 Time.timeScale = 0f;
@@ -249,7 +259,7 @@ public class GameManager : MonoBehaviour
 
 
         // Карта
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Tab))
         {
             if (!player.isAlive || playerStop || startCinema)
             {
@@ -291,7 +301,6 @@ public class GameManager : MonoBehaviour
             SetDifficulty();
             quest3Compl = true;
         }
-
         if (quest1 && quest2 && quest3)
         {
             //SetDifficulty();
@@ -316,6 +325,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);            
         tempCam.SetActive(false);
         tempLight.SetActive(false);
+        terrain.treeDistance = 30;
     }
 
 
@@ -383,9 +393,12 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);                    // задержка для черного экрана
         postProcessStart = true;                                // начинаем оттенение        
         yield return new WaitForSeconds(delay);                 // задержка пока персонаж встаёт
-        dialogueTrig.TriggerDialogue(personNumber);             // показываем диалог  
+        playerStop = false;                                     // отдаём контроль
+        startCinema = false;                                    // ролик завершён
+        dialogueTrig.TriggerDialogue(personNumber);             // показываем диалог                                           
         PauseWithDelay();  
         yield return new WaitForSeconds(1f);
+
         dialogueTrig.TriggerDialogue(0);                        // показываем диалог
         PauseWithDelay();                                       // паузу, чтобы было время почитать
         StartCoroutine(ActionStart());
@@ -395,11 +408,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ActionStart()
     {
-        yield return new WaitForSeconds(1f);                    
+        yield return new WaitForSeconds(1f);
         //blackScreen.SetActive(false);
-        playerStop = false;                                     // отдаём контроль
-        bars.SetActive(true);                                   // показываем бары
+        playerStop = false;
         startCinema = false;                                    // ролик завершён
+        bars.SetActive(true);                                   // показываем бары
         //npc.OpenMagazine();                                     // открываем магазин для начального закупа
 
         /*RaycastWeapon newWeapon = Instantiate(weaponPrefab);        
@@ -787,7 +800,7 @@ public class GameManager : MonoBehaviour
             case 17:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 55;
+                    spawnPoint.maxZombie = 50;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 40;
@@ -804,7 +817,7 @@ public class GameManager : MonoBehaviour
             case 18:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 55;
+                    spawnPoint.maxZombie = 50;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 43;
@@ -821,7 +834,7 @@ public class GameManager : MonoBehaviour
             case 19:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 55;
+                    spawnPoint.maxZombie = 50;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 45;
@@ -838,7 +851,7 @@ public class GameManager : MonoBehaviour
             case 20:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 60;
+                    spawnPoint.maxZombie = 50;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 47;
@@ -855,7 +868,7 @@ public class GameManager : MonoBehaviour
             case 21:                                                     
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 60;
+                    spawnPoint.maxZombie = 50;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 50;
@@ -867,7 +880,6 @@ public class GameManager : MonoBehaviour
                     //diffManager.positionNPC = new Vector3(162, 0, -170);
                 }
                 break;
-
 
             case 22:
                 mutation = true;                                            // включаем мутацию
@@ -963,6 +975,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         player.aiming = false;
+        playerStop = true;
         Time.timeScale = 0f;
     }
 
@@ -974,6 +987,8 @@ public class GameManager : MonoBehaviour
 
     public void UnPause()
     {
+        if (!startCinema)
+            playerStop = false;
         player.aiming = true;
         Time.timeScale = 1f;
     }
