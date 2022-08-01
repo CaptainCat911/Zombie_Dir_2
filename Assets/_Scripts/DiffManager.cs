@@ -119,9 +119,9 @@ public class DiffManager : MonoBehaviour
         yield return new WaitForSeconds(9);                            // за это время происходит телепортация
 
         if (!testDiff && !npc.dead)
-            npc.SetDestinationNPC(new Vector3(322, 0, -281), true);     // портуем НПС в домик
-        if (!npc.dead)
-            npc.anim.SetTrigger("Dance!");
+            npc.SetDestinationNPC(new Vector3(125, 0, -352), true);     // портуем НПС в домик
+/*        if (!npc.dead)
+            npc.anim.SetTrigger("Dance!");*/
     }
 
 
@@ -143,7 +143,7 @@ public class DiffManager : MonoBehaviour
         {
             yield return new WaitForSeconds(delayNPC);
         }
-        npc.anim.SetTrigger("Stop_Dance!");
+        /*npc.anim.SetTrigger("Stop_Dance!");*/
         //Debug.Log(positionNPC);
         npc.SetDestinationNPC(positionNPC, true);                   // портуем НПС к следующей точке
         npc.mapIcon.SetActive(true);                                // включаем у НПС иконку на карте      

@@ -164,7 +164,8 @@ public class ActiveWeapon : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(switching);
+        //Debug.Log(switching);
+
         if (!GameManager.instance.player.isAlive)             
         {            
             return;
@@ -216,7 +217,7 @@ public class ActiveWeapon : MonoBehaviour
         if (reloaring || GameManager.instance.playerStop)
         {
             return;
-        }        
+        }
 
 
 
@@ -225,71 +226,10 @@ public class ActiveWeapon : MonoBehaviour
         //-------------------------------Управление-----------------------------------------\\
 
 
-        // Удар рукой
-        if (Input.GetMouseButtonDown(1) && !reloaring && !getAxe && !switching)
-        {   
-            if (isHolsted)
-                ToggleActiveWeapon();
-            int random = Random.Range(0, 3);
-            if (random == 0)
-                playerAnim.SetFloat("melee_type", 0);
-            if (random == 1)
-                playerAnim.SetFloat("melee_type", 1);
-            if (random == 2)
-                playerAnim.SetFloat("melee_type", 2);
-/*            if (random == 3)
-                playerAnim.SetFloat("melee_type", 3);*/
-
-            playerAnim.SetTrigger("hand_attack");
-        }
-
-        // Удар топором
-        if (Input.GetMouseButtonDown(1) && !reloaring && getAxe && !switching)
-        {
-            if (isHolsted)
-                ToggleActiveWeapon();
-            playerAnim.SetTrigger("axe_attack");            
-        }
-
-        
-
-        // Лечение
-        if (Input.GetKeyDown(KeyCode.Q) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < player.maxHealth && !switching)
-        {
-            if (isHolsted)
-                ToggleActiveWeapon();
-            playerAnim.SetTrigger("Heal");
-        }
-
-
-
-
-
-        // Бросок гранаты
-        if ((Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.Mouse2)) && !reloaring && !granateInAction && ammoPack.granate > 0 && !switching)
-        {
-            if (isHolsted)
-                ToggleActiveWeapon();
-            float dist = Vector3.Distance(transform.position, player.pointer.position);
-            if (dist > 5f)
-            {
-                playerAnim.SetTrigger("Throw");
-            }
-            else
-            {
-                playerAnim.SetTrigger("Throw_2");
-            }                       
-        }
-
-        //Debug.Log(isHolsted);
-        //Debug.Log(activeWeaponIndex);
-
         if (Input.GetKeyDown(KeyCode.X))
         {
             ToggleActiveWeapon();
         }
-
-
 
         // Смена оружия
         if (Input.GetKeyDown(KeyCode.Alpha1))                               // || (Input.GetAxis("Mouse ScrollWheel") > 0 && activeWeaponIndex == 1) || (Input.GetAxis("Mouse ScrollWheel") < 0 && activeWeaponIndex == 2)
@@ -349,10 +289,76 @@ public class ActiveWeapon : MonoBehaviour
                 Equip(listWeaponHeavy[0]);
         }
 
-/*        if (Input.GetKeyDown(KeyCode.Alpha4))
+        /*        if (Input.GetKeyDown(KeyCode.Alpha4))
+                {
+                    Equip(listWeaponMelee[0]);
+                }*/
+
+
+
+
+        if (switching)
         {
-            Equip(listWeaponMelee[0]);
-        }*/
+            return;
+        }
+
+
+
+        // Удар рукой
+        if (Input.GetMouseButtonDown(1) && !reloaring && !getAxe)
+        {
+            if (isHolsted)
+                ToggleActiveWeapon();
+            int random = Random.Range(0, 3);
+            if (random == 0)
+                playerAnim.SetFloat("melee_type", 0);
+            if (random == 1)
+                playerAnim.SetFloat("melee_type", 1);
+            if (random == 2)
+                playerAnim.SetFloat("melee_type", 2);
+            /*            if (random == 3)
+                            playerAnim.SetFloat("melee_type", 3);*/
+
+            playerAnim.SetTrigger("hand_attack");
+        }
+
+
+        // Удар топором
+        if (Input.GetMouseButtonDown(1) && !reloaring && getAxe)
+        {
+            if (isHolsted)
+                ToggleActiveWeapon();
+            playerAnim.SetTrigger("axe_attack");
+        }
+
+
+        // Лечение
+        if (Input.GetKeyDown(KeyCode.Q) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < player.maxHealth)
+        {
+            if (isHolsted)
+                ToggleActiveWeapon();
+            playerAnim.SetTrigger("Heal");
+        }
+
+
+        // Бросок гранаты
+        if ((Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.Mouse2)) && !reloaring && !granateInAction && ammoPack.granate > 0)
+        {
+            if (isHolsted)
+                ToggleActiveWeapon();
+            float dist = Vector3.Distance(transform.position, player.pointer.position);
+            if (dist > 5f)
+            {
+                playerAnim.SetTrigger("Throw");
+            }
+            else
+            {
+                playerAnim.SetTrigger("Throw_2");
+            }
+        }
+
+        //Debug.Log(isHolsted);
+        //Debug.Log(activeWeaponIndex);
     }
 
 
@@ -376,7 +382,8 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "axe_hit":
-                //Debug.Log("Hit !");                
+                //Debug.Log("Hit !");
+                GameManager.instance.axeAttackStatistic += 1;
                 Collider[] collidersHitbox = Physics.OverlapSphere(hitBox.position, attackRadiusHitBox, layerEnemy);
                 foreach (Collider enObjectBox in collidersHitbox)
                 {
@@ -443,7 +450,8 @@ public class ActiveWeapon : MonoBehaviour
                 GameManager.instance.playerStop = true;         // останавливаем игрока
                 break;
 
-            case "hand_hit":                
+            case "hand_hit":
+                GameManager.instance.handAttackStatistic += 1;
                 Collider[] collidersHitboxHand = Physics.OverlapSphere(hitBox.position, attackRadiusHitBox, layerEnemy);
                 foreach (Collider enObjectBox in collidersHitboxHand)
                 {
@@ -516,6 +524,7 @@ public class ActiveWeapon : MonoBehaviour
 
             case "throw_granate":
                 //Debug.Log("Throw !");
+                GameManager.instance.granateStatistic += 1;
                 ammoPack.granate -= 1;
                 granateHand.SetActive(false);
                 GameObject go = Instantiate(granateThrow);                                    // Создаём префаб гранаты
@@ -556,6 +565,7 @@ public class ActiveWeapon : MonoBehaviour
                 break;
 
             case "stop_heal":
+                GameManager.instance.hpBoxStatistic += 1;
                 player.walking = false;
                 reloaring = false;
                 player.Heal(25);
@@ -693,14 +703,14 @@ public class ActiveWeapon : MonoBehaviour
         //Debug.Log("Equip !");
         
         int weaponSlotIndex = (int)newWeapon.weaponSlot;    // weaponSlot - это основное, дополнительное, тяжелое, мили 
-        var weapon = GetWeapon(weaponSlotIndex);    //  получаем оружие с нашим индексом оружия
+        var weapon = GetWeapon(weaponSlotIndex);            // получаем оружие с нашим индексом оружия
 
 /*        if (weapon)
         {
             
         }*/
 
-        weapon = newWeapon;     // присваиваем переменной weapon подобранное оружие
+        weapon = newWeapon;                                 // присваиваем переменной weapon подобранное оружие
         weapon.transform.SetParent(weaponSlots[weaponSlotIndex], false);     // ??? выбираем родителя по номеру слота (основное, дополнительное)
         /*weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;       */ 
@@ -761,8 +771,9 @@ public class ActiveWeapon : MonoBehaviour
     }
 
     IEnumerator HolsterWeapon (int index)       
-    {        
+    {
         //Debug.Log("Holsted !");
+        switching = true;
         isHolsted = true;
         RaycastWeapon weapon = GetWeapon(index);
         if (true)

@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     public GameObject mapPlayerIcon;            // иконка игрока на карте
 
     public int enemyKilledCount = 0;            // счетчик убийства зомби (используется для сложности)
-    public int enemyKilledStatistic;            // счетчик убийства зомби (используется для сложности)
+    
 
     public bool test;                           // для режима теста
     //public bool mainScene;               // для основной сцены
@@ -125,9 +125,19 @@ public class GameManager : MonoBehaviour
     public bool postProcessStart;               // старт оттемнения
 
     public GameObject[] closes;                 // одежда
-    int personTypeNumber;
+    int personTypeNumber;                       // для выбора одежды персонажа
 
-    public Terrain terrain;
+    public Terrain terrain;                     // ссылка на террейн
+
+    // Статистика
+    public int enemyKilledStatistic;            // счетчик убийства зомби (статистика)
+    public int rayCastsStatistic;               // счетчик выстрелов
+    public int granateStatistic;                // счетчик гранат
+    public int hpBoxStatistic;                  // счетчик аптечек
+    public int axeAttackStatistic;              // счетчик атак топором
+    public int handAttackStatistic;             // счетчик атак врукопашную
+     
+
 
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------\\
@@ -390,18 +400,19 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DialogePause(int delay, int personNumber)       // начальный ролик и настройки
     {
-        yield return new WaitForSeconds(1f);                    // задержка для черного экрана
+        yield return new WaitForSeconds(1f);                    // задержка для черного экрана (убрал)
         postProcessStart = true;                                // начинаем оттенение        
         yield return new WaitForSeconds(delay);                 // задержка пока персонаж встаёт
         playerStop = false;                                     // отдаём контроль
         startCinema = false;                                    // ролик завершён
+
         dialogueTrig.TriggerDialogue(personNumber);             // показываем диалог                                           
         PauseWithDelay();  
         yield return new WaitForSeconds(1f);
 
         dialogueTrig.TriggerDialogue(0);                        // показываем диалог
         PauseWithDelay();                                       // паузу, чтобы было время почитать
-        StartCoroutine(ActionStart());
+        StartCoroutine(ActionStart());                          
 
         //player.activeWeapon.EquipActiveStart();
     }
@@ -410,7 +421,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         //blackScreen.SetActive(false);
-        playerStop = false;
+        playerStop = false;                                     // отдаём контроль (в тестовом режиме)
         startCinema = false;                                    // ролик завершён
         bars.SetActive(true);                                   // показываем бары
         //npc.OpenMagazine();                                     // открываем магазин для начального закупа
@@ -973,7 +984,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PauseDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         player.aiming = false;
         playerStop = true;
         Time.timeScale = 0f;

@@ -30,6 +30,15 @@ public class TextHP : MonoBehaviour
     public Text mutationNumberText;         // мутация №
     public GameObject armorBar;             // бар армора
 
+    [Header("Статистика")]
+    public Text killsText;                  
+    public Text rayCastText;
+    public Text granateStText;
+    public Text hpboxStText;                  
+    public Text axeText;                  
+    public Text handText;                  
+
+
     bool hPLow;
     bool hPmessageCharge = true;
 
@@ -57,6 +66,15 @@ public class TextHP : MonoBehaviour
 
     void Update()
     {
+        // Статистика
+        killsText.text = GameManager.instance.enemyKilledStatistic.ToString("0");
+        rayCastText.text = GameManager.instance.rayCastsStatistic.ToString("0");
+        granateStText.text = GameManager.instance.granateStatistic.ToString("0");
+        hpboxStText.text = GameManager.instance.hpBoxStatistic.ToString("0");
+        axeText.text = GameManager.instance.axeAttackStatistic.ToString("0");
+        handText.text = GameManager.instance.hpBoxStatistic.ToString("0");
+
+
         // Души
         soulsText.text = ammoPack.souls.ToString("0");
         soulsTextMagazine.text = soulsText.text;

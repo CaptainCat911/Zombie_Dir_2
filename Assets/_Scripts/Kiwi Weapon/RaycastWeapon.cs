@@ -136,10 +136,17 @@ public class RaycastWeapon : MonoBehaviour
 
     public void AttackRange()
     {
+        if (ammoCount <= 0 && allAmmo <= 0)
+        {
+            playerAmmo.message = "Нет патронов !";                  // текст сообщения
+            playerAmmo.messageReady = true;                         // сообщение готово
+        }
+
         if (ammoCount <= 0)         // Если нет патронов
         {
             return;
         }
+        GameManager.instance.rayCastsStatistic += 1;                // для статистики
 
         ammoCount--;    // - патрон за каждый выстрел
 
