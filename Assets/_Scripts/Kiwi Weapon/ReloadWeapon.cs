@@ -21,7 +21,7 @@ public class ReloadWeapon : MonoBehaviour
     void Update()
     {
         RaycastWeapon weapon = activeWeapon.GetActiveWeapon();
-        if (weapon && weapon.allAmmo > 0)       // перезаряжаемся только если есть оружие и всего патронов больше 0
+        if (weapon && weapon.allAmmo > 0 && !activeWeapon.reloaring)       // перезаряжаемся только если есть оружие и всего патронов больше 0 и не идёт другой анимации (перезарядка или удар)
         {          
             if (Input.GetKeyDown(KeyCode.R) && (weapon.ammoCount != weapon.clipSize))
             {

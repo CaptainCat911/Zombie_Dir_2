@@ -82,6 +82,9 @@ public class Enemy_old : Mover
     float xSize = 1.7f;                     // размер дыма
     public bool effectDecrise;              // для уменьшения дыма
 
+    public GameObject m_Renderer;
+    //public Renderer rendererForCam;
+
     //public SphereCollider weaponPickUpCollider; // ccылка на колайдер оружия
 
 
@@ -91,6 +94,10 @@ public class Enemy_old : Mover
     protected override void Start()
     {
         base.Start();
+
+        //m_Renderer = GetComponentInChildren<Renderer>();
+        //m_Renderer.SetActive(false);
+        
 
         mapIcon.SetActive(true);
 
@@ -241,6 +248,17 @@ public class Enemy_old : Mover
             Death();
         }
 
+
+/*        if (rendererForCam.isVisible)
+        {
+            m_Renderer.SetActive(true);
+            //Debug.Log("Object is visible");
+        }
+        else
+        {
+            m_Renderer.SetActive(false);
+            //Debug.Log("Object is no longer visible");
+        }*/
 
         if (effectDecrise)
         {            

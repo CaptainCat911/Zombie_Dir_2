@@ -72,7 +72,7 @@ public class TextHP : MonoBehaviour
         granateStText.text = GameManager.instance.granateStatistic.ToString("0");
         hpboxStText.text = GameManager.instance.hpBoxStatistic.ToString("0");
         axeText.text = GameManager.instance.axeAttackStatistic.ToString("0");
-        handText.text = GameManager.instance.hpBoxStatistic.ToString("0");
+        handText.text = GameManager.instance.handAttackStatistic.ToString("0");
 
 
         // Души
