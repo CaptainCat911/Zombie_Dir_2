@@ -188,16 +188,17 @@ public class NPC : Mover
             {
                 if (collidingWithPlayer == false)                                                   // если не достаем до игрока 
                 {
-                    if (hitbox.attacking == true)                                                   // если идёт анимация атаки
-                    {
-                        agent.ResetPath();                                                          // стоим на месте
-                        FaceTarget();
-                    }
-                                                            
-                    else                                                                            // если анимация атаки не идёт 
-                    {
-                        agent.SetDestination(playerTransform.position);                             // следовать к игроку
-                    }                        
+                    agent.SetDestination(playerTransform.position);                             // следовать к игроку
+                    /*                    if (hitbox.attacking == true)                                                   // если идёт анимация атаки
+                                        {
+                                            agent.ResetPath();                                                          // стоим на месте
+                                            FaceTarget();
+                                        }
+
+                                        else                                                                            // если анимация атаки не идёт 
+                                        {
+                                            agent.SetDestination(playerTransform.position);                             // следовать к игроку
+                                        }*/
                 }
 
                 else                                                                                // если достаем до игрока

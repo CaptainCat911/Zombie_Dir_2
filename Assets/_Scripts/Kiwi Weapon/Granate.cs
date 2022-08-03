@@ -13,7 +13,10 @@ public class Granate : MonoBehaviour
     public float pushForce = 0.95f;         // останавливающая сила
     public LayerMask layerEnemy;            // маска для нанесения урона
     public GameObject explEffect;           // эффект взрыва
-    public ActiveWeapon activeWeapon;       // ссылка на скрипт (для звука)
+    //public ActiveWeapon activeWeapon;       // ссылка на скрипт 
+    public AudioSourses audioSourses;       // ссылка на аудиоисточник
+    public GameObject sphereOutline;
+    Renderer render;
     bool explouded;
 
     //public float force = 700f;
@@ -24,12 +27,14 @@ public class Granate : MonoBehaviour
     void Start()
     {
         countdown = delay;
+        render = GetComponent<Renderer>();
 
-        activeWeapon = GameManager.instance.player.GetComponent<ActiveWeapon>();
+        //activeWeapon = GameManager.instance.player.GetComponent<ActiveWeapon>();
 
-/*        explEffect.transform.position = transform.position;
-        explEffect.transform.forward = transform.forward;
-        explEffect.Emit(1);*/
+
+        /*        explEffect.transform.position = transform.position;
+                explEffect.transform.forward = transform.forward;
+                explEffect.Emit(1);*/
     }
 
     
@@ -51,14 +56,10 @@ public class Granate : MonoBehaviour
     void Explode()    
     {
         //Debug.Log("BOOM!");
-
-
-
+        audioSourses.explosion.Play();                                      // хлопок 
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius, layerEnemy);
         foreach (Collider nearbyObject in colliders)
-        {
-            activeWeapon.audioSourses.explosion.Play();                         // хлопок 
-
+        {           
             if (nearbyObject == null)
             {
                 continue;
@@ -174,7 +175,9 @@ public class Granate : MonoBehaviour
                 explEffect.transform.forward = transform.forward;
                 explEffect.Emit(2);*/
         explouded = true;
-        Destroy(gameObject);
+        render.enabled = false;
+        sphereOutline.SetActive(false);
+        Destroy(gameObject, 1);
     }
 
     public void ZombieIncome()

@@ -7,8 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;         // инстанс (объект одиночка ?)
 
-    // References
+    [Header("Ссылки")]
     public Player player;                       // ссылка на игрока
+    public Terrain terrain;                     // ссылка на террейн
+    public PostProcessManager postProcessManager;
 
     // Enemy spawner
     [HideInInspector]
@@ -17,18 +19,13 @@ public class GameManager : MonoBehaviour
     public bool inBuilding = false;             // для изменения сферы прозрачности в здании 
 
     // Quest    
-    [HideInInspector]
-    public bool questAmmo = false;              // для выпадения патронов на все оружия
-    [HideInInspector]
-    public bool quest1 = false;                 // для выполненых квестов 
-    [HideInInspector]
-    public bool quest2 = false;
-    [HideInInspector]
-    public bool quest3 = false;
-    [HideInInspector]
-    public bool quest1Compl = false;
-    [HideInInspector]
-    public bool quest2Compl = false;
+    [HideInInspector] public bool questAmmo = false;              // для выпадения патронов на все оружия
+    [HideInInspector] public bool quest1 = false;                 // для выполненых квестов 
+    [HideInInspector] public bool quest2 = false;
+    [HideInInspector] public bool quest3 = false;
+    [HideInInspector] public bool quest1Compl = false;
+    [HideInInspector] public bool quest2Compl = false;
+
     [HideInInspector]
     public bool quest3Compl = false;
     [HideInInspector]
@@ -127,7 +124,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] closes;                 // одежда
     int personTypeNumber;                       // для выбора одежды персонажа
 
-    public Terrain terrain;                     // ссылка на террейн
+
 
     // Статистика
     public int enemyKilledStatistic;            // счетчик убийства зомби (статистика)
@@ -394,6 +391,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
         player.ammoPack.souls = 0;
+        postProcessManager.SetGammaMinus();
         UnPause();
         StartCoroutine(DialogePause(delayUp, personTypeNumber));        // запускаем начальный диалог с задержкой и номером персонажа
     }
@@ -713,10 +711,10 @@ public class GameManager : MonoBehaviour
                     spawnPoint.maxZombie = 50;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
-                    spawnPoint.mediumZombieChanse = 30;
+                    spawnPoint.mediumZombieChanse = 25;
                     spawnPoint.strongZombieChanse = 15;
-                    spawnPoint.darkZombieChanse = 13;
-                    zombieToKillWaveGM = 80;
+                    spawnPoint.darkZombieChanse = 10;
+                    zombieToKillWaveGM = 82;
                     diffManager.positionNPC = pointsNPC[11].position;
 
                     //diffManager.positionNPC = new Vector3(264, 0, -45);
@@ -730,10 +728,10 @@ public class GameManager : MonoBehaviour
                     spawnPoint.maxZombie = 50;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
-                    spawnPoint.mediumZombieChanse = 25;
-                    spawnPoint.strongZombieChanse = 15;
-                    spawnPoint.darkZombieChanse = 15;
-                    zombieToKillWaveGM = 80;
+                    spawnPoint.mediumZombieChanse = 20;
+                    spawnPoint.strongZombieChanse = 20;
+                    spawnPoint.darkZombieChanse = 10;
+                    zombieToKillWaveGM = 84;
                     diffManager.positionNPC = pointsNPC[12].position;
 
                     //diffManager.positionNPC = new Vector3(141, 0, -73);
@@ -764,7 +762,7 @@ public class GameManager : MonoBehaviour
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 30;
-                    spawnPoint.strongZombieChanse = 15;
+                    spawnPoint.strongZombieChanse = 20;
                     spawnPoint.darkZombieChanse = 15;
                     zombieToKillWaveGM = 90;
                     diffManager.positionNPC = pointsNPC[14].position;
@@ -780,10 +778,10 @@ public class GameManager : MonoBehaviour
                     spawnPoint.maxZombie = 50;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
-                    spawnPoint.mediumZombieChanse = 0;
-                    spawnPoint.strongZombieChanse = 100;
+                    spawnPoint.mediumZombieChanse = 50;
+                    spawnPoint.strongZombieChanse = 80;
                     spawnPoint.darkZombieChanse = 0;
-                    zombieToKillWaveGM = 100;
+                    zombieToKillWaveGM = 101;
                     diffManager.positionNPC = pointsNPC[15].position;
 
                     //diffManager.positionNPC = new Vector3(162, 0, -170);
@@ -816,7 +814,7 @@ public class GameManager : MonoBehaviour
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 40;
                     spawnPoint.strongZombieChanse = 25;
-                    spawnPoint.darkZombieChanse = 23;
+                    spawnPoint.darkZombieChanse = 25;
                     zombieToKillWaveGM = 120;
                     diffManager.positionNPC = pointsNPC[17].position;
 
@@ -834,7 +832,7 @@ public class GameManager : MonoBehaviour
                     spawnPoint.mediumZombieChanse = 43;
                     spawnPoint.strongZombieChanse = 27;
                     spawnPoint.darkZombieChanse = 25;
-                    zombieToKillWaveGM = 130;
+                    zombieToKillWaveGM = 131;
                     diffManager.positionNPC = pointsNPC[18].position;
 
                     //diffManager.positionNPC = new Vector3(162, 0, -170);

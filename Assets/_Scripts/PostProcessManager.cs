@@ -14,7 +14,7 @@ public class PostProcessManager : MonoBehaviour
 
         if (volume.profile.TryGet<LiftGammaGain>(out gamma))
         {
-            gamma.lift.value = new Vector4(0f, 0f, 0f, -1f);        // задаём сначала темноту (гамма = -1)
+            //gamma.lift.value = new Vector4(0f, 0f, 0f, 0f);        
         }
             //bloom.intensity.value = 100f;
     }
@@ -46,5 +46,10 @@ public class PostProcessManager : MonoBehaviour
 
 
         gamma.lift.value = new Vector4(0f, 0f, 0f, x);              // устанавливаем гамму
+    }
+
+    public void SetGammaMinus()
+    {
+        gamma.lift.value = new Vector4(0f, 0f, 0f, -1f);        // задаём темноту (гамма = -1)
     }
 }
