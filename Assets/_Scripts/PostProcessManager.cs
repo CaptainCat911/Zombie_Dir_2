@@ -14,7 +14,7 @@ public class PostProcessManager : MonoBehaviour
 
         if (volume.profile.TryGet<LiftGammaGain>(out gamma))
         {
-            //gamma.lift.value = new Vector4(0f, 0f, 0f, 0f);        
+            gamma.lift.value = new Vector4(0f, 0f, 0f, 0f);        
         }
             //bloom.intensity.value = 100f;
     }

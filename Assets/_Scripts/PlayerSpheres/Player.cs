@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 
 public class Player : Mover
@@ -6,11 +7,11 @@ public class Player : Mover
     public bool isAlive = true;
 
     public AmmoPack ammoPack;               // ссылка на аммопак
-                                            // 
-        // Для прицела
+    public NavMeshAgent agent;
+
+    // Для прицела
     public Transform pointer;           // прицел       
-    public bool aiming = true;          // прицеливание
-   
+    public bool aiming = true;          // прицеливание   
     public LayerMask layerMask;         // маска для прицела
     //int layerMaskCam = 1 << 11;     // маска для прицела, игнорирует всё кроме 11 слоя
 
@@ -43,7 +44,7 @@ public class Player : Mover
     public bool walking = false;            // для ходьбы
     public bool inRangeUse;                 // если в ренже использования предмета
     public GameObject armorGameObject;      // броня на персонаже
-    public GameObject armorBlackGameObject;      // броня на персонаже
+    public GameObject armorBlackGameObject; // броня на персонаже
     public bool lightOn = true;
    
 
@@ -60,8 +61,8 @@ public class Player : Mover
         
         pointer = transform.Find("Sphere_Aim").gameObject.GetComponent<Transform>();
         //finalSphere = transform.Find("Final Sphere").gameObject.GetComponent<FinalSphere>();
-        
 
+        agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();        
         activeWeapon = GetComponent<ActiveWeapon>();
         ammoPack = GetComponent<AmmoPack>();

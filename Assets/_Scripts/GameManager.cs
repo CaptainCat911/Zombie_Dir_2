@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
         terrain.treeDistance = 300;
         StartCoroutine(TempCamDelay());                                                     // для карты
         mapPlayerIcon.SetActive(true);                                                      // включаем иконку игрока на карте        
-        PauseWithDelay();
+        //PauseWithDelay();
         //Pause();
     }
 
@@ -355,6 +355,7 @@ public class GameManager : MonoBehaviour
                 player.ammoPack.allAmmo_7_62 = 300;
                 player.ammoPack.granate = 3;
                 player.ammoPack.HPBox = 3;
+                player.agent.Warp(new Vector3(73, 0, -113));
                 break;
 
             case 2:
@@ -370,6 +371,7 @@ public class GameManager : MonoBehaviour
                 player.ammoPack.allAmmo_0_12 = 56;
                 player.activeWeapon.lifeSteal = true;
                 player.ammoPack.HPBox = 1;
+                player.agent.Warp(new Vector3(34.5f, 0, -257f));
                 break;
 
             case 3:
@@ -380,6 +382,7 @@ public class GameManager : MonoBehaviour
                 player.ammoPack.granate = 1;
                 player.ammoPack.HPBox = 1;
                 player.activeWeapon.rigController.speed = 2;
+                player.agent.Warp(new Vector3(290, 0, -170));
                 break;
 
             case 4:
@@ -388,11 +391,13 @@ public class GameManager : MonoBehaviour
                 player.anim.SetTrigger("down");
                 player.currentHealth = 49;
                 player.lightOn = false;
+                player.agent.Warp(new Vector3(302, 0, -311));
                 break;
         }
         player.ammoPack.souls = 0;
-        postProcessManager.SetGammaMinus();
-        UnPause();
+        postProcessManager.SetGammaMinus();         // затемняем полностью
+        diffManager.start = true;                   // запускаем уровень
+        //UnPause();
         StartCoroutine(DialogePause(delayUp, personTypeNumber));        // запускаем начальный диалог с задержкой и номером персонажа
     }
 
@@ -401,12 +406,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);                    // задержка для черного экрана (убрал)
         postProcessStart = true;                                // начинаем оттенение        
         yield return new WaitForSeconds(delay);                 // задержка пока персонаж встаёт
-        playerStop = false;                                     // отдаём контроль
-        startCinema = false;                                    // ролик завершён
 
         dialogueTrig.TriggerDialogue(personNumber);             // показываем диалог                                           
         PauseWithDelay();  
         yield return new WaitForSeconds(1f);
+
+        playerStop = false;                                     // отдаём контроль
+        startCinema = false;                                    // ролик завершён
 
         dialogueTrig.TriggerDialogue(0);                        // показываем диалог
         PauseWithDelay();                                       // паузу, чтобы было время почитать
