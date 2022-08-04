@@ -7,14 +7,14 @@ public class PostProcessManager : MonoBehaviour
     public Volume volume;           // ссылка на волюмэ (сам построцесс)
     LiftGammaGain gamma;            // для гаммы
     //Bloom bloom;
-    float x = -1;                   // переменная для установки гаммы
+    float x = 0;                   // переменная для установки гаммы
 
     void Start()
     {
 
         if (volume.profile.TryGet<LiftGammaGain>(out gamma))
         {
-            gamma.lift.value = new Vector4(0f, 0f, 0f, 0f);        
+            //gamma.lift.value = new Vector4(0f, 0f, 0f, 0f);        
         }
             //bloom.intensity.value = 100f;
     }
@@ -50,6 +50,6 @@ public class PostProcessManager : MonoBehaviour
 
     public void SetGammaMinus()
     {
-        gamma.lift.value = new Vector4(0f, 0f, 0f, -1f);        // задаём темноту (гамма = -1)
+        x = -1;        // задаём темноту (гамма = -1)
     }
 }

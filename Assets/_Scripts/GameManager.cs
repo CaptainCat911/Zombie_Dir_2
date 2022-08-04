@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
     public GameObject deathMenu;                // меню при поражении
     public GameObject pauseMenu;                // меню паузы
     bool startCinema = true;                    // для начального ролика
-    //public GameObject blackScreen;              // черный экран для начала игры
+    public GameObject blackScreen;              // черный экран для начала игры
 
     public RaycastWeapon weaponPrefab;          // префаб пистолета, чтобы экипировать в начале
     public RaycastWeapon weaponPrefabAxe;       // префаб топора, чтобы экипировать в начале
@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
             playerStop = true;                                                              // забираем контроль
             //StartCoroutine(DialogePause(delayUp));                                          // начальный диалог 
         }
-        //blackScreen.SetActive(true);                                                        // включаем черный экран (на ~полсекунды)
+        
         tempCam.SetActive(true);                                                            // для карты
         tempLight.SetActive(true);                                                          // для карты
         terrain.treeDistance = 300;
@@ -395,15 +395,18 @@ public class GameManager : MonoBehaviour
                 break;
         }
         player.ammoPack.souls = 0;
+        blackScreen.SetActive(true);                                                        // включаем черный экран (на ~полсекунды)
         postProcessManager.SetGammaMinus();         // затемняем полностью
-        diffManager.start = true;                   // запускаем уровень
+        if (!test)
+            diffManager.start = true;                   // запускаем уровень
         //UnPause();
         StartCoroutine(DialogePause(delayUp, personTypeNumber));        // запускаем начальный диалог с задержкой и номером персонажа
     }
 
     IEnumerator DialogePause(int delay, int personNumber)       // начальный ролик и настройки
     {
-        yield return new WaitForSeconds(1f);                    // задержка для черного экрана (убрал)
+        yield return new WaitForSeconds(1f);                    // задержка для черного экрана
+        blackScreen.SetActive(false);                           // включаем черный экран (на ~полсекунды)
         postProcessStart = true;                                // начинаем оттенение        
         yield return new WaitForSeconds(delay);                 // задержка пока персонаж встаёт
 

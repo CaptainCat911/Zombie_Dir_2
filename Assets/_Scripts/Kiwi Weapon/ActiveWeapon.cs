@@ -640,7 +640,7 @@ public class ActiveWeapon : MonoBehaviour
             if (enObjectBox.tag == "Enemy")
             {
                 NPC npc = enObjectBox.GetComponentInParent<NPC>();
-                if (npc && !GameManager.instance.diffManager.levelGo)           // если есть НПС и волна ещё не началась
+                if (npc && !GameManager.instance.diffManager.waveStarted)           // если есть НПС и волна ещё не началась
                 {
                     npc.OpenMagazine();
                     //Debug.Log("Use!");

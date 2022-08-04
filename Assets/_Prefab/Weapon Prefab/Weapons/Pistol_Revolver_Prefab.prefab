@@ -39940,7 +39940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: revolver
-  textNameWeapon: "\u0420\u0435\u0432\u043E\u043B\u044C\u0432\u0435\u0440 SW"
+  textNameWeapon: "\u0420\u0435\u0432\u043E\u043B\u044C\u0432\u0435\u0440 S&W"
   weaponSlot: 0
   ammoType: 0.357
   indexNumberWeapon: 1
