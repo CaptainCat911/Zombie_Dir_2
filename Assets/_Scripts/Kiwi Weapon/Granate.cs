@@ -197,8 +197,9 @@ public class Granate : MonoBehaviour
                 {
                     enemy.granateInRange = true;
                     enemy.SetDestinationZombie(transform.position);
+
                 }
-                if (explouded)
+                if (explouded && enemy)
                 {
                     enemy.granateInRange = false;
                 }

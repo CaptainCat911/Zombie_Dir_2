@@ -355,7 +355,7 @@ public class GameManager : MonoBehaviour
                 player.ammoPack.allAmmo_7_62 = 300;
                 player.ammoPack.granate = 3;
                 player.ammoPack.HPBox = 3;
-                player.agent.Warp(new Vector3(73, 0, -113));
+                player.agent.Warp(new Vector3(73.8f, 0, -113));
                 break;
 
             case 2:
