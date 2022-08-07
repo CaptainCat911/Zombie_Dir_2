@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   colorMode: 3
-  topLeft: {r: 1, g: 1, b: 1, a: 1}
-  topRight: {r: 1, g: 1, b: 1, a: 1}
-  bottomLeft: {r: 0, g: 0, b: 0, a: 1}
-  bottomRight: {r: 0, g: 0, b: 0, a: 1}
+  topLeft: {r: 0.81218004, g: 1, b: 0, a: 1}
+  topRight: {r: 1, g: 0, b: 0.083632946, a: 1}
+  bottomLeft: {r: 0, g: 1, b: 0.5345168, a: 1}
+  bottomRight: {r: 1, g: 1, b: 1, a: 1}

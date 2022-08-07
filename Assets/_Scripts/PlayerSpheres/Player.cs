@@ -453,14 +453,17 @@ public class Player : Mover
         GameManager.instance.playerDead = false;
         GameManager.instance.playerStop = false;
 
-        activeWeapon.axeBack.SetActive(true);                           // перезагружаем топор                           
+        activeWeapon.axeBack.SetActive(true);                           // перезагружаем топор                       
         activeWeapon.axeHand.SetActive(false);       
-
-        activeWeapon.reloaring = false;                                 // отключаем режим перезарядки
-        activeWeapon.ToggleActiveWeapon();                              // достаём оружие
-
+        activeWeapon.reloaring = false;                                 // отключаем режим перезарядки  
         finalSphereAnim.SetTrigger("SphereArise");                      // убиваем зомби рядом
-
-        activeWeapon.ToggleActiveWeapon();
+        Invoke("Toggle", 0.5f);           
+        
     }
+
+    public void Toggle()
+    {
+        activeWeapon.ToggleActiveWeapon();                              // достаём оружие
+    }
+
 }

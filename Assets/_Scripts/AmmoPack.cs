@@ -21,6 +21,7 @@ public class AmmoPack : MonoBehaviour
     public int HPBox = 0;
 
     public string message;                  // сообщение при подборе патронов
+    public Color colorText = Color.yellow;  // цвет текста
     public bool messageReady;               // сообщение готово
     
     [Header("Стоимость патронов")]
@@ -653,6 +654,7 @@ public class AmmoPack : MonoBehaviour
     {
         message = messageToSend;
         messageReady = true;
+        colorText = Color.yellow;
     }
 }
 

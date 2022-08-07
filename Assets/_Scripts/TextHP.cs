@@ -148,7 +148,7 @@ public class TextHP : MonoBehaviour
             messageText.text = ammoPack.message;                    // берем текст из сообщения в аммопаке
             messageText.transform.position = tempPosMessage;        // возвращаем сообщение в начальную позицию
             ammoPack.messageReady = false;                          // сообщение не готово
-            messageText.color = Color.white;
+            messageText.color = ammoPack.colorText;
         }
         messageText.transform.position = new Vector3(messageText.transform.position.x, messageText.transform.position.y + 1, messageText.transform.position.z);             // поднимаем вверх сообщение
 
@@ -167,7 +167,7 @@ public class TextHP : MonoBehaviour
     {
         ammoPack.message = message;                             // текст сообщения
         ammoPack.messageReady = true;                           // сообщение готово
-        messageText.color = Color.red;
+        ammoPack.colorText = Color.red;
     }
 
 

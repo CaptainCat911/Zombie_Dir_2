@@ -81,6 +81,7 @@ public class Enemy_old : Mover
     public VisualEffect effectSmoke;        // эффект дыма
     float xSize = 1.7f;                     // размер дыма
     public bool effectDecrise;              // для уменьшения дыма
+    bool medBox;
 
     public GameObject m_Renderer;
     //public Renderer rendererForCam;
@@ -232,6 +233,7 @@ public class Enemy_old : Mover
         {
             if (Random.Range(0, 2) > 0)                     // шанс выпадения аптечки 0.5% 
             {
+                medBox = true;
                 medhpBack.SetActive(true);
             }
         }
@@ -582,15 +584,12 @@ public class Enemy_old : Mover
             ammoBack.SetActive(false);
         }
 
-        if (randomAmmo == 0)                                // шанс выпадения аптечки 1% 
+        if (medBox)                                         // если с аптечкой
         {
-            if (Random.Range(0, 2) > 0)                     // шанс выпадения аптечки 0.5% 
-            {
-                GameObject go = Instantiate(medHP);             // Создаём префаб аптечки
-                //go.transform.SetParent(transform, false);     // Назначаем этот спавнер родителем
-                go.transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
-                medhpBack.SetActive(false);
-            }
+            GameObject go = Instantiate(medHP);             // Создаём префаб аптечки
+            //go.transform.SetParent(transform, false);     // Назначаем этот спавнер родителем
+            go.transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+            medhpBack.SetActive(false);            
         }
 
         int random = Random.Range(0, 2);

@@ -79,7 +79,7 @@ public class DiffManager : MonoBehaviour
                         }*/
             if (npc.dead)
             {
-                waveNumber = 101;
+                waveNumber = 999;
                 waveN = 999;
             }
             StartCoroutine(SafeTime(waveNumber));                       // запускаем таймер до следующей
@@ -102,8 +102,8 @@ public class DiffManager : MonoBehaviour
 
         //Debug.Log("Cor !");
         GameManager.instance.SetDifficultyNumber(diffLevel);            // устанавливаем сложность
-        if (waveNumber == 101)
-            message = "Волна № ???";
+        if (waveNumber == 999)
+            message = "Не стоило этого делать";
         else
             message = "Волна №" + waveN;                              
         messageReady = true;                       
@@ -112,7 +112,7 @@ public class DiffManager : MonoBehaviour
         levelGo = true;                                                 // волна запущена
         zombieToKillWave = GameManager.instance.zombieToKillWaveGM;     // устанавливаем кол-во зомби для завершения волны
         if (!npc.dead)
-            npc.mapIcon.SetActive(false);                                   // отключаем иконку НПС на карте
+            npc.mapIcon.SetActive(false);                               // отключаем иконку НПС на карте
         if (!testDiff && !npc.dead)
             npc.SetDestinationNPC(positionNPC, false);                  // направляем НПС к точке 
         //Debug.Log("Wave Go !");

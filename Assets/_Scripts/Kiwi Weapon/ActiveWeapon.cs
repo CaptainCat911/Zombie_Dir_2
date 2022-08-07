@@ -333,7 +333,7 @@ public class ActiveWeapon : MonoBehaviour
 
 
         // Лечение
-        if (Input.GetKeyDown(KeyCode.Q) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < player.maxHealth)
+        if ((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.Y)) && !reloaring && ammoPack.HPBox > 0 && player.currentHealth < player.maxHealth)
         {
             if (isHolsted)
                 ToggleActiveWeapon();

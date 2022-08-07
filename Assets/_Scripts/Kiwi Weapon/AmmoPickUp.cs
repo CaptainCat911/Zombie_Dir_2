@@ -122,6 +122,7 @@ public class AmmoPickUp : Fighter
 
         if (ammoType != "granate" && weapon)
             weapon.TakeAmmo();
+        playerAmmo.colorText = Color.yellow;
         playerAmmo.messageReady = true;             // чтобы запустилось сообщение
         tooltipText.text = "Пусто";                 // после открытия пишем пусто в подсказке
         Destroy(tooltipText, 0);

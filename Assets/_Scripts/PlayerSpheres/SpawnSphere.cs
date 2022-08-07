@@ -14,7 +14,16 @@ public class SpawnSphere : MonoBehaviour
             EnemySpawnPoint sp = other.GetComponent<EnemySpawnPoint>();
             sp.active = true;                   
         }
-        
+
+        if (other.tag == "Enemy" && GameManager.instance.startCinema)
+        {
+            //Debug.Log("ENEMY !");
+            Enemy_old enemy = other.GetComponentInParent<Enemy_old>();
+            if (enemy)
+                enemy.Kill();
+
+        }
+
 
 
         /*        if (other.tag == "Enemy")

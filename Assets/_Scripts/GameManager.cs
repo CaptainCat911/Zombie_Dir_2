@@ -11,12 +11,11 @@ public class GameManager : MonoBehaviour
     public Player player;                       // ссылка на игрока
     public Terrain terrain;                     // ссылка на террейн
     public PostProcessManager postProcessManager;
+    [HideInInspector] public DiffManager diffManager;             // ссылка на диффменеджер
 
     // Enemy spawner
-    [HideInInspector]
-    public int enemyCount = 0;                  // счетчик зомби
-    [HideInInspector]
-    public bool inBuilding = false;             // для изменения сферы прозрачности в здании 
+    [HideInInspector] public int enemyCount = 0;                  // счетчик зомби
+    [HideInInspector] public bool inBuilding = false;             // для изменения сферы прозрачности в здании 
 
     // Quest    
     [HideInInspector] public bool questAmmo = false;              // для выпадения патронов на все оружия
@@ -83,7 +82,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject deathMenu;                // меню при поражении
     public GameObject pauseMenu;                // меню паузы
-    bool startCinema = true;                    // для начального ролика
+    public bool startCinema = true;             // для начального ролика
     public GameObject blackScreen;              // черный экран для начала игры
 
     public RaycastWeapon weaponPrefab;          // префаб пистолета, чтобы экипировать в начале
@@ -99,13 +98,10 @@ public class GameManager : MonoBehaviour
 
     public bool noKillSphere;                   // не убивать зомби при их выходе из спавнящей сферы
     public bool zombieFreeWalk;                 // зомби идут в рандомном направлении
-
     public int zombieToKillWaveGM;              // кол-во зомби для режима выживания
-
     public bool survZombie;                     // зомби для режима выживания (триггер = 1000)
 
-    [HideInInspector]
-    public DiffManager diffManager;             // ссылка на диффменеджер
+
 
     public bool enemyAllAmmo;                   // для всех видов патронов (выживание)
 
@@ -123,6 +119,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] closes;                 // одежда
     int personTypeNumber;                       // для выбора одежды персонажа
+    public bool camFollowPlayer;                // следовать камере за игроком или нет
+    public GameObject startScene;               // стартовая сцена
+    public GameObject loadScreen;               // экран загрузки
+    //public AudioListenerPlayer listner;
+
 
 
 
@@ -183,7 +184,8 @@ public class GameManager : MonoBehaviour
         tempLight.SetActive(true);                                                          // для карты
         terrain.treeDistance = 300;
         StartCoroutine(TempCamDelay());                                                     // для карты
-        mapPlayerIcon.SetActive(true);                                                      // включаем иконку игрока на карте        
+        mapPlayerIcon.SetActive(true);                                                      // включаем иконку игрока на карте
+        loadScreen.SetActive(true);
         //PauseWithDelay();
         //Pause();
     }
@@ -329,7 +331,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator TempCamDelay()                                  // задержка для выключения камеры карты
     {
-        yield return new WaitForSeconds(0.1f);            
+        yield return new WaitForSeconds(5f);
+        loadScreen.SetActive(false);
         tempCam.SetActive(false);
         tempLight.SetActive(false);
         terrain.treeDistance = 30;
@@ -395,10 +398,13 @@ public class GameManager : MonoBehaviour
                 break;
         }
         player.ammoPack.souls = 0;
-        blackScreen.SetActive(true);                                                        // включаем черный экран (на ~полсекунды)
-        postProcessManager.SetGammaMinus();         // затемняем полностью
+        startScene.SetActive(false);                                    // убираем всю стартовую сцену
+        enemyCount = 0;                                                 // сбрасываем счётчик зомби на карте
+        camFollowPlayer = true;                                         // камера следует за игроком
+        blackScreen.SetActive(true);                                    // включаем черный экран (на ~полсекунды)
+        postProcessManager.SetGammaMinus();                             // затемняем полностью
         if (!test)
-            diffManager.start = true;                   // запускаем уровень
+            diffManager.start = true;                                   // запускаем уровень
         //UnPause();
         StartCoroutine(DialogePause(delayUp, personTypeNumber));        // запускаем начальный диалог с задержкой и номером персонажа
     }
@@ -595,7 +601,7 @@ public class GameManager : MonoBehaviour
             case 3:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 31;
+                    spawnPoint.maxZombie = 30;
                     spawnPoint.enemyNumberSpawn = 1;
                     spawnPoint.cooldown = 5;
                     spawnPoint.mediumZombieChanse = 13;
@@ -609,7 +615,7 @@ public class GameManager : MonoBehaviour
             case 4:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 30;
+                    spawnPoint.maxZombie = 31;
                     spawnPoint.enemyNumberSpawn = 1;
                     spawnPoint.cooldown = 5;
                     spawnPoint.mediumZombieChanse = 15;
@@ -623,7 +629,7 @@ public class GameManager : MonoBehaviour
             case 5:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 32;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 0;
@@ -637,7 +643,7 @@ public class GameManager : MonoBehaviour
             case 6:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 41;
+                    spawnPoint.maxZombie = 33;
                     spawnPoint.enemyNumberSpawn = 3;
                     spawnPoint.cooldown = 3;
                     spawnPoint.mediumZombieChanse = 20;
@@ -651,7 +657,7 @@ public class GameManager : MonoBehaviour
             case 7:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 41;
+                    spawnPoint.maxZombie = 34;
                     spawnPoint.enemyNumberSpawn = 3;
                     spawnPoint.cooldown = 3;
                     spawnPoint.mediumZombieChanse = 20;
@@ -669,7 +675,7 @@ public class GameManager : MonoBehaviour
             case 8:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 40;
+                    spawnPoint.maxZombie = 35;
                     spawnPoint.enemyNumberSpawn = 3;
                     spawnPoint.cooldown = 3;
                     spawnPoint.mediumZombieChanse = 22;
@@ -685,7 +691,7 @@ public class GameManager : MonoBehaviour
             case 9:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 40;
+                    spawnPoint.maxZombie = 36;
                     spawnPoint.enemyNumberSpawn = 3;
                     spawnPoint.cooldown = 3;
                     spawnPoint.mediumZombieChanse = 23;
@@ -717,7 +723,7 @@ public class GameManager : MonoBehaviour
             case 11:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 25;
@@ -734,7 +740,7 @@ public class GameManager : MonoBehaviour
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
 
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 20;
@@ -750,7 +756,7 @@ public class GameManager : MonoBehaviour
             case 13:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 60;
@@ -767,7 +773,7 @@ public class GameManager : MonoBehaviour
             case 14:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 30;
@@ -784,7 +790,7 @@ public class GameManager : MonoBehaviour
             case 15:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 50;
@@ -801,7 +807,7 @@ public class GameManager : MonoBehaviour
             case 16:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 35;
@@ -818,7 +824,7 @@ public class GameManager : MonoBehaviour
             case 17:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 40;
@@ -835,7 +841,7 @@ public class GameManager : MonoBehaviour
             case 18:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 43;
@@ -852,7 +858,7 @@ public class GameManager : MonoBehaviour
             case 19:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 45;
@@ -869,7 +875,7 @@ public class GameManager : MonoBehaviour
             case 20:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 47;
@@ -886,7 +892,7 @@ public class GameManager : MonoBehaviour
             case 21:                                                     
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 50;
+                    spawnPoint.maxZombie = 40;
                     spawnPoint.enemyNumberSpawn = 4;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 50;
@@ -921,10 +927,10 @@ public class GameManager : MonoBehaviour
                 }
                 break;
 
-            case 101:
+            case 999:
                 foreach (EnemySpawnPoint spawnPoint in spawnPoints)
                 {
-                    spawnPoint.maxZombie = 60;
+                    spawnPoint.maxZombie = 50;
                     spawnPoint.enemyNumberSpawn = 5;
                     spawnPoint.cooldown = 2;
                     spawnPoint.mediumZombieChanse = 0;

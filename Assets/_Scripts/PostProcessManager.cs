@@ -39,10 +39,10 @@ public class PostProcessManager : MonoBehaviour
             }
         }
 
-        if (GameManager.instance.postProcessFinal)                  // если финал, засветляем экран
+/*        if (GameManager.instance.postProcessFinal)                  // если финал, засветляем экран
         {
             x += 0.002f;                                            // скорость засветления
-        }
+        }*/
 
 
         gamma.lift.value = new Vector4(0f, 0f, 0f, x);              // устанавливаем гамму

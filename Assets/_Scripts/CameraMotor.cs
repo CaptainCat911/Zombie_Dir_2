@@ -16,6 +16,9 @@ public class CameraMotor : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!GameManager.instance.camFollowPlayer)
+            return;
+
         Vector3 delta = Vector3.zero;
 
         float deltaX = lookAt.position.x - transform.position.x;
