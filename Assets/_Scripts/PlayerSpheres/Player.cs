@@ -441,7 +441,8 @@ public class Player : Mover
     {
         isAlive = false;
         activeWeapon.ToggleActiveWeapon();
-        anim.SetTrigger("Death");                                       // вкл анимацию поражения          
+        anim.SetTrigger("Death");                                       // вкл анимацию поражения
+        GameManager.instance.canvasMap.SetActive(false);
     }
 
     public void Arise()
