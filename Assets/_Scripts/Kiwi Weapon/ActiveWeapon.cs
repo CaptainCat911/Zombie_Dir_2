@@ -226,11 +226,11 @@ public class ActiveWeapon : MonoBehaviour
         //-------------------------------Управление-----------------------------------------\\
 
 
-        if (Input.GetKeyDown(KeyCode.X))
+/*        if (Input.GetKeyDown(KeyCode.X))
         {
             ToggleActiveWeapon();
         }
-
+*/
         // Смена оружия
         if (Input.GetKeyDown(KeyCode.Alpha1))                               // || (Input.GetAxis("Mouse ScrollWheel") > 0 && activeWeaponIndex == 1) || (Input.GetAxis("Mouse ScrollWheel") < 0 && activeWeaponIndex == 2)
         {

@@ -129,7 +129,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
                 break;
 
@@ -141,7 +141,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
                 break;
 
@@ -154,7 +154,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
                 break;
 
@@ -166,7 +166,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
                 break;
 
@@ -178,7 +178,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
                 break;
 
@@ -190,7 +190,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
                 break;
 
@@ -202,7 +202,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
                 break;
 
@@ -214,7 +214,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
                 break;
 
@@ -260,7 +260,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                     return;
                 }
                 break;
@@ -281,7 +281,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                     return;
                 }
                 break;
@@ -304,7 +304,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                     return;
                 }
                 break;
@@ -325,7 +325,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                     return;
                 }
                 break;
@@ -347,7 +347,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                     return;
                 }
                 break;
@@ -368,7 +368,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                     return;
                 }
                 break;
@@ -409,7 +409,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
             }
 
@@ -439,7 +439,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
             }
 
@@ -468,7 +468,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
             }
 
@@ -497,7 +497,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
             }
 
@@ -527,7 +527,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
             }
 
@@ -556,7 +556,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
             }
         }
@@ -590,7 +590,7 @@ public class AmmoPack : MonoBehaviour
         }
         else
         {
-            SendToMessage("Недостаточно душ");
+            SendToMessage("Недостаточно убийств");
         }
     }
 
@@ -624,7 +624,7 @@ public class AmmoPack : MonoBehaviour
                 }
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
                 break;
 
@@ -644,7 +644,7 @@ public class AmmoPack : MonoBehaviour
                 }               
                 else
                 {
-                    SendToMessage("Недостаточно душ");
+                    SendToMessage("Недостаточно убийств");
                 }
                 break;
         }

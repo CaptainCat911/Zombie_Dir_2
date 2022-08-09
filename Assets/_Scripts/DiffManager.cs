@@ -138,6 +138,7 @@ public class DiffManager : MonoBehaviour
             GameManager.instance.dialogueTrig.TriggerDialogue(2);       // вызываем диалог торговца
             GameManager.instance.PauseWithDelay();
             npc.chasing = true;                                         // направляем НПС к игроку
+            yield return new WaitForSeconds(1);
         }
         else
         {
