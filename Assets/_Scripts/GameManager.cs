@@ -125,8 +125,6 @@ public class GameManager : MonoBehaviour
     //public AudioListenerPlayer listner;
 
 
-
-
     // Статистика
     public int enemyKilledStatistic;            // счетчик убийства зомби (статистика)
     public int rayCastsStatistic;               // счетчик выстрелов
@@ -158,9 +156,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;        
-    }
-
-        
+    }        
 
     public void Start()
     {
@@ -185,7 +181,8 @@ public class GameManager : MonoBehaviour
         terrain.treeDistance = 300;
         StartCoroutine(TempCamDelay());                                                     // для карты
         mapPlayerIcon.SetActive(true);                                                      // включаем иконку игрока на карте
-        loadScreen.SetActive(true);
+        //loadScreen.SetActive(true);             // загрузочный экран
+
         //PauseWithDelay();
         //Pause();
     }
@@ -208,10 +205,6 @@ public class GameManager : MonoBehaviour
         {
             player.ammoPack.souls += 100;
         }
-
-
-
-
 
 /*
         if (Input.GetKeyDown(KeyCode.Escape) && !startCinema)
@@ -407,6 +400,7 @@ public class GameManager : MonoBehaviour
             diffManager.start = true;                                   // запускаем уровень
         //UnPause();
         StartCoroutine(DialogePause(delayUp, personTypeNumber));        // запускаем начальный диалог с задержкой и номером персонажа
+        //StartCoroutine(ActionStart());
     }
 
     IEnumerator DialogePause(int delay, int personNumber)       // начальный ролик и настройки
@@ -432,10 +426,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ActionStart()
     {
-        yield return new WaitForSeconds(1f);
-        //blackScreen.SetActive(false);
+        yield return new WaitForSeconds(1f);        
         playerStop = false;                                     // отдаём контроль (в тестовом режиме)
         startCinema = false;                                    // ролик завершён
+        postProcessStart = true;                                // начинаем оттенение 
+        blackScreen.SetActive(false);                           
         bars.SetActive(true);                                   // показываем бары
         //npc.OpenMagazine();                                     // открываем магазин для начального закупа
 
