@@ -124,6 +124,8 @@ public class GameManager : MonoBehaviour
     public GameObject loadScreen;               // экран загрузки
     //public AudioListenerPlayer listner;
 
+    public Transform spawn;
+
 
     // Статистика
     public int enemyKilledStatistic;            // счетчик убийства зомби (статистика)
@@ -168,13 +170,13 @@ public class GameManager : MonoBehaviour
 
 /*        if (mainScene)
             StartCoroutine(StartDiffCor());                                                 // начальная сложность, задержка*/
-        if (test)
+   /*     if (test)
             StartCoroutine(ActionStart());
         if (!test)
         {
             playerStop = true;                                                              // забираем контроль
             //StartCoroutine(DialogePause(delayUp));                                          // начальный диалог 
-        }
+        }*/
         
         tempCam.SetActive(true);                                                            // для карты
         tempLight.SetActive(true);                                                          // для карты
@@ -351,7 +353,8 @@ public class GameManager : MonoBehaviour
                 player.ammoPack.allAmmo_7_62 = 300;
                 player.ammoPack.granate = 3;
                 player.ammoPack.HPBox = 3;
-                player.agent.Warp(new Vector3(73.8f, 0, -113));
+                player.ammoPack.GetAxe();
+                player.agent.Warp(spawn.position);
                 break;
 
             case 2:
@@ -399,8 +402,8 @@ public class GameManager : MonoBehaviour
         if (!test)
             diffManager.start = true;                                   // запускаем уровень
         //UnPause();
-        StartCoroutine(DialogePause(delayUp, personTypeNumber));        // запускаем начальный диалог с задержкой и номером персонажа
-        //StartCoroutine(ActionStart());
+        //StartCoroutine(DialogePause(delayUp, personTypeNumber));        // запускаем начальный диалог с задержкой и номером персонажа
+        StartCoroutine(ActionStart());
     }
 
     IEnumerator DialogePause(int delay, int personNumber)       // начальный ролик и настройки
