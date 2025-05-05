@@ -1,0 +1,119 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class EnemySpawnPoint : MonoBehaviour
+    
+{
+    //public float enemySpawnPerSecond;
+    public GameObject[] prefabEnemies;      // массив префабов с зомби
+    NavMeshAgent agent;
+    public bool active = false;             // активация этого спавнера
+    public int maxZombie = 50;              // максимальное кол-во зомби 
+    public bool fewZombiesReady = true;     // для вызова нескольких зомби при активации
+    public int enemyNumberSpawn = 1;        // кол-во зомби при активации
+    public float cooldown = 1f;             // перезарядка спауна
+    private float lastSpawn;
+
+    public float radius;                    // радиус для спавна зомби за пределеами видимости игрока
+
+    public bool strongZombie;               // сделать зомби сильным
+    public bool mediumZombie;               // сделать зомби сильным
+
+    public int strongZombieChanse;          // шанс сильного зомби
+    public int mediumZombieChanse;          // шанс сильного зомби
+    public int darkZombieChanse;            // шанс темного зомби
+    
+    
+        
+
+
+
+
+    private void Update()
+    {
+        if (active && fewZombiesReady)
+        {
+            for (int i = 0; i < enemyNumberSpawn; i++)
+            {
+                SpawnEnemy();
+            }
+            fewZombiesReady = false;
+        }
+
+        if (!active)
+            fewZombiesReady = true;
+
+        if (active && Time.time - lastSpawn > cooldown)
+        {
+            float dist = Vector3.Distance(transform.position, GameManager.instance.player.transform.position);  
+            if (dist > radius)
+            {            
+                SpawnEnemy();                
+            }
+        }
+    }
+
+
+
+
+    public void SpawnEnemy()
+    {
+        if (GameManager.instance.enemyCount >= maxZombie)
+        {
+            return;
+        }
+
+        lastSpawn = Time.time;
+
+        //Debug.Log(GameManager.instance.enemyCount);        
+        int ndx = Random.Range(0, prefabEnemies.Length);
+        GameObject go = Instantiate(prefabEnemies[ndx]);            // Создаём префаб   
+
+        go.transform.SetParent(transform, false);                   // Назначаем этот спавнер родителем
+        agent = go.GetComponent<NavMeshAgent>();                    // Находим НавМешАгент
+        agent.Warp(transform.position);                             // Перемещаем префаб к спавнеру
+        Enemy_old enemy = go.GetComponent<Enemy_old>();             // находим скрипт
+
+
+        if (GameManager.instance.mutation)
+        {
+            enemy.damage *= GameManager.instance.mutationNumber; 
+            enemy.maxHealth *= GameManager.instance.mutationNumber; 
+        }
+
+
+        int randomDark = Random.Range(1, 101);                      // шанс темного зомби
+        if (randomDark <= darkZombieChanse)
+        {
+            enemy.darkZombie = true;
+        }
+
+        int randomMedium = Random.Range(1, 101);                    // шанс среднего зомби
+        if (randomMedium <= mediumZombieChanse || mediumZombie)
+        {
+            enemy.runZombie = true;            
+        }
+
+        int randomStrong = Random.Range(1, 101);                    // шанс сильного зомби
+        if (randomStrong <= strongZombieChanse || strongZombie)
+        {            
+            enemy.strongZombie = true;                        
+        }
+        enemy.agony = false;
+        GameManager.instance.enemyCount += 1;    
+
+        // Снова вызвать SpawnEnemy
+/*        if (active)
+            Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);*/ 
+    }
+
+
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radius);
+    }
+}
